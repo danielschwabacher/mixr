@@ -10,17 +10,3 @@ Template.homeCover.onCreated(function helloOnCreated() {
   this.counter = new ReactiveVar(0);
   console.log("homeCover actually created")
 });
-/*
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 100);
-  },
-});
-*/
