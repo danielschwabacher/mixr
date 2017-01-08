@@ -1,46 +1,55 @@
+<template name="navbar">
+	{{> yield }}
+	{{#if currentUser}}
+		{{> navbarActive}}
+	{{else}}
+		{{> navbarInactive}}
+	{{/if}}
+</template>
+
 <template name="navbarInactive">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">mixr</a>
-      </div>
-      <ul class="nav navbar-nav">
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li onclick="signUpModal.show()"><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
-        <li onclick="loginModal.show()"><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Login</a></li>
-      </ul>
-    </div>
-  </nav>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
+			</div>
+			<ul class="nav navbar-nav">
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+	    		<li><a href="{{pathFor 'signup'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
+	    		<li onclick="loginModal.show()"><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Login</a></li>
+	  		</ul>
+		</div>
+	</nav>
 </template>
 
 <template name="navbarActive">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="{{pathFor 'events'}}">Events around me</a></li>
-      </ul>
-      <ul class="nav navbar-nav nb-center">
-          <form action="" class="navbar-form navbar-right">
-              <div class="input-group">
-                  <a href ={{pathFor 'events'}}><input type="Search" placeholder="Search event tags..." class="form-control"/></a>
-                  <div class="input-group-btn">
-                      <button class="btn btn-info search-btn">
-                          <span class="glyphicon glyphicon-search"></span>
-                      </button>
-                  </div>
-              </div>
-          </form>
-          <li><a href="{{pathFor 'settings'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
-          <li onclick="createEventModal.show()"><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{pathFor 'settings'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
-        <li><a onclick="Meteor.call('safeLogout');"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
-      </ul>
-    </div>
-  </nav>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="{{pathFor 'events'}}">Events around me</a></li>
+			</ul>
+			<ul class="nav navbar-nav nb-center">
+				<form action="" class="navbar-form navbar-right">
+					<div class="input-group">
+						<a href ={{pathFor 'events'}}><input type="Search" placeholder="Search event tags..." class="form-control"/></a>
+						<div class="input-group-btn">
+							<button class="btn btn-info search-btn">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+				</form>
+				<li><a href="{{pathFor 'settings'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
+				<li onclick="createEventModal.show()"><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="{{pathFor 'settings'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
+				<li><a onclick="Meteor.call('safeLogout');"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
+			</ul>
+		</div>
+	</nav>
 </template>

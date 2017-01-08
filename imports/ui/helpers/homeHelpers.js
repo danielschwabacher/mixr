@@ -6,7 +6,5 @@ import '../templates/home.html';
 document.title = "mixr";
 
 Template.homeCover.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
   console.log("homeCover actually created")
 });

@@ -4,5 +4,5 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../templates/navbars.html';
 
 Template.navbarInactive.onCreated(function helloOnCreated() {
-  console.log("navbarinactive actually created")
+  console.log("navbarInactive created")
 });
