@@ -1,4 +1,7 @@
 <template name="mixrEventMap">
-	<div class="container-fluid padDown">
-	</div>
+        <div class="container-fluid">
+            <div id="fullMapDiv">
+				{{> googleMap name="mixrMap" options=initMapOptions}}
+			</div>
+		</div>
 </template>

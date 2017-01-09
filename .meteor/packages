@@ -27,3 +27,5 @@ accounts-ui
 accounts-password
 iron:router
 peppelg:bootstrap-3-modal
+dburles:google-maps
+mdg:geolocation
