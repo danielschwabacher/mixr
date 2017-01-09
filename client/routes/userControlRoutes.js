@@ -17,6 +17,7 @@ Router.route('/signup', {
 });
 
 // if user is not already logged in, go to the login page
+//TODO: fix route dispatch not rendered.
 Router.route('/login', {
 	onBeforeAction: function () {
 		if (!Meteor.user()) {
