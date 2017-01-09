@@ -1,5 +1,5 @@
 import '../templates/loginPage.html';
-import '../templates/modals.html';
+import '../templates/notificationModals.html';
 Template.loginPage.events({
 	'submit .loginForm'(event, template) {
 		event.preventDefault()

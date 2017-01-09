@@ -1,4 +1,5 @@
 import '../templates/signupPage.html';
+import '../templates/notificationModals.html';
 
 //TODO: Implement email verification
 Template.signupPage.events({
@@ -30,11 +31,12 @@ Template.signupPage.events({
 createNewMixrAccount = function(userData){
 	var newUserCreated = Accounts.createUser(userData, function(err){
 		if (err) {
-			console.log("Account creation failed. ")
-			alert("Account could not be created.")
+			alert("Error: account could not be created.")
 			return;
 		}
-		alert("Account created!")
+		else{
+			Modal.show('signupSuccessModal')
+		}
 		return;
 	});
 }

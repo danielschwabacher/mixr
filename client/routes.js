@@ -3,26 +3,59 @@ import '../imports/ui/helpers/navbarHelpers.js';
 import '../imports/ui/helpers/signupHelpers.js';
 import '../imports/ui/helpers/loginHelpers.js';
 
+// "global" route so the navbar appears on every page
 Router.configure({
   layoutTemplate: 'navbar'
+});
+
+// default index route
+Router.route('/', function(){
+	this.render('homeCover')
 });
 
 Router.route('/home', function(){
 	this.render('homeCover')
 });
 
-Router.route('/', function(){
-	this.render('homeCover')
+// if user is not already logged in, go to the signup page
+Router.route('/signup', {
+	onBeforeAction: function () {
+		if (!Meteor.user()) {
+			if (!Meteor.loggingIn()){
+				this.render('signupPage');
+			}
+		}
+		else{
+			Router.go('home')
+		}
+	}
 });
 
-Router.route('/signup', function(){
-	this.render('signupPage')
+// if user is not already logged in, go to the login page
+Router.route('/login', {
+	onBeforeAction: function () {
+		if (!Meteor.user()) {
+			if (!Meteor.loggingIn()){
+				this.render('loginPage');
+			}
+		}
+		else{
+			Router.go('home')
+		}
+	}
 });
 
-Router.route('/login', function(){
-	this.render('loginPage')
-});
-
-Router.route('/logout', function(){
-	this.render('homeCover')
+Router.route('/logout', {
+	onBeforeAction: function(){
+		if (Meteor.user()){
+			Meteor.logout(function(err){
+				if (err){
+					console.log("could not sign out user, error: " + err)
+				}
+			});
+		}
+	},
+	onAfterAction: function(){
+		Router.go('home')
+	}
 });

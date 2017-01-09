@@ -12,11 +12,7 @@ Template.navbarInactive.events({
 // Active (logged in user handlers)
 Template.navbarActive.events({
 	'click .navbar-signout'(event) {
-		Meteor.logout(function(err){
-			if (err){
-				console.log("could not sign out user, error: " + err)
-			}
-		});
+		Router.go('logout')
 	}
 });
 
