@@ -8,7 +8,6 @@ Template.loginPage.events({
 		var loginAttempt = attemptLoginClient(loginEmail, loginPassword)
 		if (loginAttempt){
 			console.log("logged in")
-			this.render('homeCover')
 		}
 	}
 });

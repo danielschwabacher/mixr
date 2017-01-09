@@ -32,7 +32,9 @@ createNewMixrAccount = function(userData){
 		if (err) {
 			console.log("Account creation failed. ")
 			alert("Account could not be created.")
+			return;
 		}
 		alert("Account created!")
+		return;
 	});
 }
