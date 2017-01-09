@@ -1,7 +1,7 @@
 import '../imports/ui/helpers/homeHelpers.js';
 import '../imports/ui/helpers/navbarHelpers.js';
-import '../imports/ui/helpers/signup.js';
-import '../imports/ui/helpers/login.js';
+import '../imports/ui/helpers/signupHelpers.js';
+import '../imports/ui/helpers/loginHelpers.js';
 
 Router.configure({
   layoutTemplate: 'navbar'
