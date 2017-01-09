@@ -16,8 +16,8 @@
 			<ul class="nav navbar-nav">
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-	    		<li><a href="{{pathFor 'signup'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
-	    		<li onclick="loginModal.show()"><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Login</a></li>
+	    		<li><a href="{{pathFor 'signup'}}"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
+	    		<li><a href="{{pathFor 'login'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login</a></li>
 	  		</ul>
 		</div>
 	</nav>
@@ -48,7 +48,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="{{pathFor 'settings'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
-				<li><a onclick="Meteor.call('safeLogout');"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
+				<li class="navbar-signout"><a><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
 			</ul>
 		</div>
 	</nav>
