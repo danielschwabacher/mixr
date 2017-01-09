@@ -4,7 +4,7 @@ Router.route('/events', {
 	onBeforeAction: function () {
 		if (!Meteor.user()) {
 			if (!Meteor.loggingIn()){
-				this.render('signupPage');
+				Router.go('signup');
 			}
 		}
 		else{
