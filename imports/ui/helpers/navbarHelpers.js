@@ -9,8 +9,6 @@ Template.navbarInactive.events({
 });
 
 
-
-
 // Active (logged in user handlers)
 Template.navbarActive.events({
 	'click .navbar-signout'(event) {

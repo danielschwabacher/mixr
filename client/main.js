@@ -22,3 +22,7 @@ Router.route('/signup', function(){
 Router.route('/login', function(){
 	this.render('loginPage')
 });
+
+Router.route('/logout', function(){
+	this.render('homeCover')
+});

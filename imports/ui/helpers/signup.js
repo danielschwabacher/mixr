@@ -1,9 +1,6 @@
 import '../templates/signupPage.html';
 
-Template.signupPage.onCreated(function helloOnCreated() {
-	console.log("signup page created")
-});
-
+//TODO: Implement email verification
 Template.signupPage.events({
 	'submit .registerForm'(event, template) {
 		event.preventDefault();
@@ -21,28 +18,21 @@ Template.signupPage.events({
       			last_name : lastName,
   			}
 		};
-		createNewMixrAccount(userProfileData)
-		sendVerificationLink()
+		if (password == passwordConfirm){
+			createNewMixrAccount(userProfileData)
+		}
+		else{
+			alert("Passwords do not match")
+		}
 	},
 });
 
-// This method verifies user emails but doesn't force them
-// to verify before logging in.
-sendVerificationLink = function() {
-	let userID = Meteor.userId();
-	if (userID) {
-		return Accounts.sendVerificationEmail(userID);
-	}
-	console.log("email sent?")
-}
 createNewMixrAccount = function(userData){
 	var newUserCreated = Accounts.createUser(userData, function(err){
 		if (err) {
 			console.log("Account creation failed. ")
+			alert("Account could not be created.")
 		}
-		else {
-			console.log("account created.")
-		}
+		alert("Account created!")
 	});
-	console.log("new account info: " + newUserCreated)
 }
