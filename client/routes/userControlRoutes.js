@@ -1,6 +1,7 @@
 import '../../imports/ui/helpers/navbarHelpers.js';
 import '../../imports/ui/helpers/signupHelpers.js';
 import '../../imports/ui/helpers/loginHelpers.js';
+import './eventRoutes.js'
 
 // if user is not already logged in, go to the signup page
 Router.route('/signup', {
@@ -26,7 +27,7 @@ Router.route('/login', {
 			}
 		}
 		else{
-			Router.go('home')
+			Router.go('events')
 		}
 	}
 });
