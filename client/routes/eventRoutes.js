@@ -1,4 +1,4 @@
-import '../../imports/ui/helpers/eventHelpers.js';
+import '../../imports/ui/helpers/mixrPrimaryMapHelpers.js';
 import '../../imports/ui/helpers/createEventHelpers.js';
 import '../../imports/ui/helpers/pickLocationHelpers.js';
 

@@ -1,4 +1,4 @@
-import '../templates/events.html';
+import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/initMap.js'
 
 Template.mixrEventMap.onCreated(function(){
