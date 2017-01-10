@@ -8,7 +8,12 @@ Template.pickLocationPage.onCreated(function(){
 			position: new google.maps.LatLng(latLng.lat, latLng.lng),
 			map: map.instance
 		});
+		console.log("defined: "+ GoogleMaps.maps.mixrPickLocationMap.instance)
+		GoogleMaps.maps.mixrPickLocationMap.instance.addListener('click', function(event) {
+			console.log("map clicked")
+		});
 	});
+
 });
 
 Template.pickLocationPage.helpers({
