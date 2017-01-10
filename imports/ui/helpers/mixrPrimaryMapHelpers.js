@@ -9,8 +9,17 @@ Template.mixrEventMap.onCreated(function(){
 			map: map.instance
 		});
 	});
-	Meteor.subscribe('events');
-
+	var self = this
+	Meteor.subscribe("events", function() {
+		self.autorun(function() {
+			 var client_collection = EventCollection.findOne();
+			 console.log("data source changed.")
+			 console.log("collection: " + JSON.stringify(client_collection))
+		});
+	});
+	//handle = Meteor.subscribe('events');
+	//console.log(handle)
+	//console.log("EventCollection: on client: " + EventCollection.findOne())
 });
 
 Template.mixrEventMap.helpers({

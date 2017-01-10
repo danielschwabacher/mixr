@@ -1,6 +1,5 @@
 import '../templates/notificationModals.html';
 import './pickLocationHelpers.js'
-import '../../api/DatabaseWrappers/EventWrapper.js'
 
 Template.confirmEventModal.helpers({
 	returnEventName: function() {
