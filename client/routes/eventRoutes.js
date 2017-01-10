@@ -41,7 +41,7 @@ Router.route('/pickLocation', {
 				this.render('pickLocationPage')
 			}
 			else{
-				alert("You need to create an event first.")
+				//ALERT
 				Router.go('create')
 			}
 		}

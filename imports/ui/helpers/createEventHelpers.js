@@ -12,10 +12,11 @@ Template.createEventPage.events({
 		var eventLocation = event.target.eventLocation.value;
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
-		clientCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime)
+		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime)
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
 		// used to confirm route in IronRouter
 		Session.set('hasCachedEvent', true)
+		Session.set('clientMinimumCachedEvent', clientTempCachedEvent)
 		Router.go('pickLocation')
 	}
 });
