@@ -9,16 +9,20 @@ Template.mixrEventMap.onCreated(function(){
 			map: map.instance
 		});
 	});
+	Meteor.subscribe('events');
+
 });
 
 Template.mixrEventMap.helpers({
-	initMapOptions: function() {
+	initPrimaryEventMapOptions: function() {
 		var latLng = Geolocation.latLng();
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
 			return {
+				draggable: false,
+				scrollwheel: false,
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
-				zoom: 8
+				zoom: 15
 			};
 		}
 	}

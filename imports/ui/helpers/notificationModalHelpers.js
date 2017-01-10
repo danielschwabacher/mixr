@@ -22,9 +22,7 @@ Template.confirmEventModal.helpers({
 
 Template.confirmEventModal.events({
 	'click .confirmEventButton'(event, template) {
-		//TODO: ADD TO DATABASE -- TEST
-		clientEventWrapper = new EventWrapper(fullEventToConfirm)
-		clientEventWrapper.insertEvent()
+		Meteor.call("insertEvent", fullEventToConfirm)
 		Router.go('home')
 		Session.set('hasCachedEvent', false)
 		Session.set('clientMinimumCachedEvent', null)
