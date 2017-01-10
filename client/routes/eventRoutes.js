@@ -37,7 +37,13 @@ Router.route('/pickLocation', {
 			}
 		}
 		else {
-			this.render('pickLocationPage')
+			if (Session.get('hasCachedEvent')){
+				this.render('pickLocationPage')
+			}
+			else{
+				alert("You need to create an event first.")
+				Router.go('create')
+			}
 		}
 	}
 });

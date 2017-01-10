@@ -13,9 +13,9 @@ Template.createEventPage.events({
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
 		clientCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime)
-		// TODO: VALIDATE INPUT
+		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
+		// used to confirm route in IronRouter
+		Session.set('hasCachedEvent', true)
 		Router.go('pickLocation')
-		console.log("event: " + clientCachedEvent)
-		console.log("event JSON: " + JSON.stringify(clientCachedEvent))
 	}
 });
