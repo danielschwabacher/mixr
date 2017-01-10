@@ -33,3 +33,25 @@
         </div>
     </div>
 </template>
+
+<template name="confirmEventModal">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Confirm Event</h4>
+				</div>
+				<div class="modal-body">
+					<h3 id="eventNameConfirmation">Event Name: {{returnEventName}}</h3>
+					<h3 id="eventLocationConfirmation">Event Location: {{returnLocation}}</h3>
+					<h3 id="eventDescriptionConfirmation">Event Description: {{returnDescription}}</h3>
+					<h3 id="eventDateTimeConfirmation">Event Date and Time: {{returnDateTime}}</h3>
+					<h3 id="eventDateTimeConfirmation">Event Coordinates: {{returnCoordinates}}</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success confirmEventButton" data-dismiss="modal">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
