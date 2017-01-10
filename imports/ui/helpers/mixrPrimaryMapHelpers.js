@@ -10,17 +10,20 @@ Template.mixrEventMap.onCreated(function(){
 		});
 	});
 	var self = this
-	Meteor.subscribe("events", function() {
-		self.autorun(function() {
-			 var client_collection = EventCollection.findOne();
-			 console.log("data source changed.")
-			 console.log("collection: " + JSON.stringify(client_collection))
+	self.autorun(function() {
+		Meteor.subscribe("events", function() {
+			 var client_collection = EventCollection.find();
+			 client_collection.forEach(function(currentEvent){
+				 console.log("Cursor Element: " + JSON.stringify(currentEvent));
+			 });
 		});
 	});
-	//handle = Meteor.subscribe('events');
-	//console.log(handle)
-	//console.log("EventCollection: on client: " + EventCollection.findOne())
 });
+
+Template.mixrEventMap.onDestroyed(function(){
+	// stop subscription
+});
+
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
