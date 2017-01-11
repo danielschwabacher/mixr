@@ -35,9 +35,6 @@ Template.confirmEventModal.events({
 		Session.set('clientMinimumCachedEvent', null)
 		fullEventToConfirm = null
 	},
-	'click .pickDifferentLocationButton'(event, template){
-		console.log("pick different location.")
-	},
 	'click .cancelEventButton'(event, template){
 		Router.go('create')
 		Session.set('hasCachedEvent', false)
