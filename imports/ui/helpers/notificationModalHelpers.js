@@ -37,3 +37,18 @@ Template.confirmEventModal.events({
 		fullEventToConfirm = null
 	}
 });
+
+Template.eventInformationModal.helpers({
+	getMarkerEventName: function(){
+		return this.event_name
+	},
+	getMarkerEventLocation: function(){
+		return this.event_location
+	},
+	getMarkerEventDescription: function(){
+		return this.event_description
+	},
+	getMarkerEventDateTime: function(){
+		return this.event_dateTime
+	}
+});

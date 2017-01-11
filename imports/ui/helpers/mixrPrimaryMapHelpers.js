@@ -1,5 +1,5 @@
 import '../templates/mixrPrimaryMap.html';
-import '../../api/mapHandlers/initMap.js'
+import '../../api/mapHandlers/mainMap.js'
 
 Template.mixrEventMap.onCreated(function(){
 	GoogleMaps.ready('mixrMap', function(map) {
@@ -8,14 +8,12 @@ Template.mixrEventMap.onCreated(function(){
 			position: new google.maps.LatLng(latLng.lat, latLng.lng),
 			map: map.instance
 		});
-	});
-	var self = this
-	self.autorun(function() {
 		Meteor.subscribe("events", function() {
-			 var client_collection = EventCollection.find();
-			 client_collection.forEach(function(currentEvent){
-				 console.log("Cursor Element: " + JSON.stringify(currentEvent));
-			 });
+			var client_collection = EventCollection.find();
+			client_collection.forEach(function(currentEvent){
+				console.log("Working on event: " + currentEvent);
+				createMarker(map.instance, currentEvent)
+			});
 		});
 	});
 });
