@@ -38,6 +38,7 @@ Template.confirmEventModal.events({
 	}
 });
 
+// data context is now the database collection
 Template.eventInformationModal.helpers({
 	getMarkerEventName: function(){
 		return this.event_name

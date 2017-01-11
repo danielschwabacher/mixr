@@ -6,10 +6,6 @@ Template.pickLocationPage.onCreated(function(){
 	markerArray = []
 	GoogleMaps.ready('mixrPickLocationMap', function(map) {
 		var latLng = Geolocation.latLng();
-		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(latLng.lat, latLng.lng),
-			map: map.instance
-		});
 		GoogleMaps.maps.mixrPickLocationMap.instance.addListener('click', function(marker) {
 			placeMarker(marker.latLng, map.instance);
 			fullEventToConfirm = createFullCachedEvent(Session.get('clientMinimumCachedEvent'), marker.latLng)
