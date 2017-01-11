@@ -1,4 +1,5 @@
 import '../templates/notificationModals.html';
+import './eventResponseModalHelpers.js'
 import './pickLocationHelpers.js'
 
 Template.confirmEventModal.helpers({
@@ -21,12 +22,12 @@ Template.confirmEventModal.helpers({
 
 Template.confirmEventModal.events({
 	'click .confirmEventButton'(event, template){
-		Meteor.call("insertEvent", fullEventToConfirm, function (err, response){
-			if (response){
-				alert("Event inserted")
+		Meteor.call("insertEvent", fullEventToConfirm, function (err, didInsert){
+			if (didInsert){
+				Modal.show('eventCreatedSuccessModal')
 			}
 			else{
-				alert("not inserted")
+				Modal.show('eventNotCreatedModal')
 			}
 		});
 		Router.go('home')
@@ -50,10 +51,16 @@ Template.eventInformationModal.events({
 		Modal.hide()
 	},
 	'click .registerEventButton'(event, template){
-		var didRegister = Meteor.call("registerEvent", this)
-		if (!didRegister){
-			alert("already registered.")
-		}
+		Meteor.call("registerEvent", this, function(err, didRegister){
+			if (didRegister){
+				console.log("registered.")
+				Modal.show("eventDidRegisterModal")
+			}
+			else{
+				console.log("NOT registered.")
+				Modal.show("eventAlreadyRegisteredModal")
+			}
+		});
 	}
 });
 
