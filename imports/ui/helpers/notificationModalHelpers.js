@@ -47,17 +47,12 @@ Template.confirmEventModal.events({
 });
 
 Template.eventInformationModal.events({
-	'click .notInterestedInEventButton'(event, template){
-		Modal.hide()
-	},
 	'click .registerEventButton'(event, template){
 		Meteor.call("registerEvent", this, function(err, didRegister){
 			if (didRegister){
-				console.log("registered.")
 				Modal.show("eventDidRegisterModal")
 			}
 			else{
-				console.log("NOT registered.")
 				Modal.show("eventAlreadyRegisteredModal")
 			}
 		});
