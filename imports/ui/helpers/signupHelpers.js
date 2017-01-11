@@ -23,7 +23,7 @@ Template.signupPage.events({
 			createNewMixrAccount(userProfileData)
 		}
 		else{
-			alert("Passwords do not match")
+			Modal.show('passwordsDoNotMatchModal')
 		}
 	},
 });
@@ -31,7 +31,7 @@ Template.signupPage.events({
 createNewMixrAccount = function(userData){
 	var newUserCreated = Accounts.createUser(userData, function(err){
 		if (err) {
-			alert("Error: account could not be created.")
+			Modal.show('signupFailedModal')
 			return;
 		}
 		else{

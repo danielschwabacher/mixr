@@ -45,9 +45,7 @@ Meteor.methods({
 			}
 		)
 		if (!isRegistered){
-			console.log("not registered.")
 			// Increment the number of users attending the associatve event
-			// TODO: Check for error in callback
 			EventCollection.update(
 				{_id: eventToUpdate._id},
 				{

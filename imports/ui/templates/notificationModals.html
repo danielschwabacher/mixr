@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login Failed</h4>
+                    <h3 class="modal-title">Login Failed</h3>
                 </div>
                 <div class="modal-body">
                     <p>Invalid email or password</p>
@@ -21,7 +21,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Account created successfully</h4>
+                    <h3 class="modal-title">Account created successfully</h3>
                 </div>
                 <div class="modal-body">
                     <p>Welcome to the mixr beta!</p>
@@ -33,6 +33,37 @@
         </div>
     </div>
 </template>
+
+<template name="signupFailedModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Account could not be created, email in use.</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="passwordsDoNotMatchModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Passwords do not match.</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 
 <template name="confirmEventModal">
 	<div class="modal fade">
