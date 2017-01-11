@@ -1,5 +1,6 @@
 // This file contains intermediate methods between in client memory
 // Event objects and the Events database collection.
+//userEvents collection
 Meteor.methods({
 	"insertEvent": function(eventToInsert){
 		EventCollection.insert({
@@ -9,23 +10,76 @@ Meteor.methods({
 			event_description: eventToInsert.eventDescription,
 			event_dateTime: eventToInsert.eventDateTime,
 			event_position: eventToInsert.coordinates,
-			number_of_users_attending: 1,
-			usersIds_attending: [Meteor.userId()]
+			number_of_users_attending: 1
 		}, function(err, eventId){
 			if (err){
-				console.log("error inserting event.")
+				return 0;
+			}
+			else{
+				// Update the cross reference table if inserted
+				// Creator owns event
+				UserEventsCrossReferenceCollection.update(
+					{user: Meteor.userId()},
+					{$push: {events:
+						{
+							eventId: eventId,
+							owned: true
+						}
+					}},
+					{upsert: true}, function(err, eventId){
+						if (err){
+							return 0;
+						}
+					}
+				)
 			}
 		});
+		return 1;
 	},
-	"updateAttendances": function(eventToUpdate, idToAdd){
-		console.log("updating the event collection for event: " + eventToUpdate.event_name)
-		//TODO: check if user already registered for event
-		EventCollection.update(
-			{_id: eventToUpdate._id},
+	"registerEvent": function(eventToUpdate){
+		// if the user has not already registered
+		var isRegistered = UserEventsCrossReferenceCollection.findOne(
 			{
-				$inc: {number_of_users_attending: 1},
-				$push: {usersIds_attending: idToAdd}
+				user: Meteor.userId(),
+				'events.eventId': eventToUpdate._id
 			}
-		);
+		)
+		if (!isRegistered){
+			console.log("not registered.")
+			// Increment the number of users attending the associatve event
+			// TODO: Check for error in callback
+			EventCollection.update(
+				{_id: eventToUpdate._id},
+				{
+					$inc: {number_of_users_attending: 1},
+				},
+				function(err, eventId){
+					if (err){
+						return 0;
+					}
+				}
+			);
+			// add the eventId to the user's table
+			// owned: false
+			UserEventsCrossReferenceCollection.update(
+				{user: Meteor.userId()},
+				{$push: {events:
+					{
+						eventId: eventToUpdate._id,
+						owned: false
+					}
+				}},
+				{upsert: true},
+				function(err, eventId){
+					if (err){
+						return 0;
+					}
+				}
+			)
+			return 1;
+		}
+		else{
+			return 0
+		}
 	}
 });

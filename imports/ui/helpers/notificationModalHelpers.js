@@ -20,8 +20,15 @@ Template.confirmEventModal.helpers({
 });
 
 Template.confirmEventModal.events({
-	'click .confirmEventButton'(event, template) {
-		Meteor.call("insertEvent", fullEventToConfirm)
+	'click .confirmEventButton'(event, template){
+		Meteor.call("insertEvent", fullEventToConfirm, function (err, response){
+			if (response){
+				alert("Event inserted")
+			}
+			else{
+				alert("not inserted")
+			}
+		});
 		Router.go('home')
 		Session.set('hasCachedEvent', false)
 		Session.set('clientMinimumCachedEvent', null)
@@ -43,8 +50,10 @@ Template.eventInformationModal.events({
 		Modal.hide()
 	},
 	'click .registerEventButton'(event, template){
-		console.log("clicked register")
-		Meteor.call("updateAttendances", this, Meteor.userId())
+		var didRegister = Meteor.call("registerEvent", this)
+		if (!didRegister){
+			alert("already registered.")
+		}
 	}
 });
 
