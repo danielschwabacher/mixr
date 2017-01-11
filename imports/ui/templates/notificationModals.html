@@ -67,14 +67,15 @@
 					<h4 class="modal-title">Event Details</h4>
 				</div>
 				<div class="modal-body">
-					<h3 id="eventNameConfirmation">Event Name: {{getMarkerEventName}}</h3>
-					<h3 id="eventNameConfirmation">Event Location: {{getMarkerEventLocation}}</h3>
-					<h3 id="eventNameConfirmation">Event Description: {{getMarkerEventDescription}}</h3>
-					<h3 id="eventNameConfirmation">Event Date and Time: {{getMarkerEventDateTime}}</h3>
+					<h3>Event Name: {{getMarkerEventName}}</h3>
+					<h3>Event Location: {{getMarkerEventLocation}}</h3>
+					<h3>Event Description: {{getMarkerEventDescription}}</h3>
+					<h3>Event Date and Time: {{getMarkerEventDateTime}}</h3>
+					<h3>Number of People Registered: {{getMarkerEventNumberRegistered}}</h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger cancelEventButton" data-dismiss="modal">I'm not interested</button>
-					<button type="button" class="btn btn-success confirmEventButton" data-dismiss="modal">Register for this event!</button>
+					<button type="button" class="btn btn-danger notInterestedInEventButton" data-dismiss="modal">I'm not interested</button>
+					<button type="button" class="btn btn-success registerEventButton" data-dismiss="modal">Register for this event!</button>
 				</div>
 			</div>
 		</div>

@@ -38,6 +38,17 @@ Template.confirmEventModal.events({
 	}
 });
 
+Template.eventInformationModal.events({
+	'click .notInterestedInEventButton'(event, template){
+		Modal.hide()
+	},
+	'click .registerEventButton'(event, template){
+		console.log("clicked register")
+		Meteor.call("updateAttendances", this, Meteor.userId())
+	}
+});
+
+
 // data context is now the database collection
 Template.eventInformationModal.helpers({
 	getMarkerEventName: function(){
@@ -51,5 +62,8 @@ Template.eventInformationModal.helpers({
 	},
 	getMarkerEventDateTime: function(){
 		return this.event_dateTime
+	},
+	getMarkerEventNumberRegistered: function(){
+		return this.number_of_users_attending
 	}
 });

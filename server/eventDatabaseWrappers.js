@@ -10,11 +10,22 @@ Meteor.methods({
 			event_dateTime: eventToInsert.eventDateTime,
 			event_position: eventToInsert.coordinates,
 			number_of_users_attending: 1,
-			users_attending: []
+			usersIds_attending: [Meteor.userId()]
 		}, function(err, eventId){
 			if (err){
 				console.log("error inserting event.")
 			}
 		});
+	},
+	"updateAttendances": function(eventToUpdate, idToAdd){
+		console.log("updating the event collection for event: " + eventToUpdate.event_name)
+		//TODO: check if user already registered for event
+		EventCollection.update(
+			{_id: eventToUpdate._id},
+			{
+				$inc: {number_of_users_attending: 1},
+				$push: {usersIds_attending: idToAdd}
+			}
+		);
 	}
 });
