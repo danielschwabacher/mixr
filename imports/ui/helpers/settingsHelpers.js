@@ -26,6 +26,12 @@ Template.mapSettingsPanel.onCreated(function(){
 });
 
 Template.manageEventsPanel.onCreated(function(){
+	console.log(UserEventsCrossReferenceCollection.findOne())
+	Meteor.subscribe("ownedEvents", function() {
+		console.log("after subscribed: ")
+		var client_cross_reference = UserEventsCrossReferenceCollection.find();
+		console.log(UserEventsCrossReferenceCollection.findOne())
+	});
 });
 
 setManageEvents = function(){
