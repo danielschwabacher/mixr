@@ -9,7 +9,6 @@
 
 <template name="leftSettingsPane">
 	<div class="navbar navbar-inverse navbar-fixed-left settings-pane-left">
-		<a class="navbar-brand" href="#"></a>
 		<ul class="nav navbar-nav">
 			<li class="mapSettingsLink"><a href="#">Map Settings</a></li>
 			<li class="manageEventsLink"><a href="#">Manage my events</a></li>
@@ -32,7 +31,14 @@
 	<div class="activeDiv">
 		<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 		<div class="row">
-			on manage events
+			My Created Events:
+			{{#each events}}
+				{{> singularEvent}}
+			{{/each}}
 		</div>
 	</div>
+</template>
+
+<template name="singularEvent">
+	<li>{{text}}</li>
 </template>

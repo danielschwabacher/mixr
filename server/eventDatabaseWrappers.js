@@ -60,7 +60,7 @@ Meteor.methods({
 			// add the eventId to the user's registered section
 			UserEventsCrossReferenceCollection.update(
 				{user: Meteor.userId()},
-				{$push: {
+				{$addToSet: {
 					registered_events:
 					{
 						eventId: eventToUpdate._id,
