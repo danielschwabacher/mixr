@@ -20,10 +20,10 @@ Meteor.methods({
 				// Creator owns event
 				UserEventsCrossReferenceCollection.update(
 					{user: Meteor.userId()},
-					{$push: {events:
+					{$push: {
+						owned_events:
 						{
 							eventId: eventId,
-							owned: true
 						}
 					}},
 					{upsert: true}, function(err, eventId){
@@ -57,14 +57,13 @@ Meteor.methods({
 					}
 				}
 			);
-			// add the eventId to the user's table
-			// owned: false
+			// add the eventId to the user's registered section
 			UserEventsCrossReferenceCollection.update(
 				{user: Meteor.userId()},
-				{$push: {events:
+				{$push: {
+					registered_events:
 					{
 						eventId: eventToUpdate._id,
-						owned: false
 					}
 				}},
 				{upsert: true},
