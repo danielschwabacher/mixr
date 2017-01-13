@@ -1,4 +1,5 @@
 <template name="settingsPage">
+	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 	{{> leftSettingsPane}}
 	{{> activeContent}}
 </template>
@@ -19,7 +20,6 @@
 
 <template name="mapSettingsPanel">
 	<div class="activeDiv">
-		<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 		<div class="row">
 			On map settings
 		</div>
@@ -29,10 +29,15 @@
 
 <template name="manageEventsPanel">
 	<div class="activeDiv">
-		<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 		<div class="row">
 			My Created Events:
-			{{#each events}}
+			{{#each getAssociatedEventNames getOwnedEventIds}}
+				{{> singularEvent}}
+			{{/each}}
+		</div>
+		<div class="row">
+			My Registered Events:
+			{{#each getAssociatedEventNames getRegisteredEventIds}}
 				{{> singularEvent}}
 			{{/each}}
 		</div>
@@ -40,5 +45,5 @@
 </template>
 
 <template name="singularEvent">
-	<li>{{text}}</li>
+	<a><li>{{eventName}}</li></a>
 </template>
