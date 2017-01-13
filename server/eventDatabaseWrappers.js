@@ -78,5 +78,37 @@ Meteor.methods({
 		else{
 			return 0
 		}
+	},
+	// unregistering an event
+	// decrease the number attending by 1 in bigEvents table
+	// remove reference to event in user's crossReference table
+	'unregisterEvent': function(eventId){
+		console.log("unregistering eventId: " + eventId)
+		EventCollection.update(
+			{_id: eventId},
+			{
+				$inc: {number_of_users_attending: -1},
+			},
+			function(err, eventId){
+				if (err){
+					return 0;
+				}
+			}
+		)
+		UserEventsCrossReferenceCollection.update(
+			{user: Meteor.userId()},
+			{$pull: {
+				registered_events:
+				{
+					eventId: eventId,
+				}
+			}},
+			function(err, eventId){
+				if (err){
+					return 0;
+				}
+			}
+		)
+		return 1
 	}
 });

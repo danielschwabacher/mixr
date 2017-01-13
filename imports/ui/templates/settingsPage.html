@@ -32,18 +32,41 @@
 		<div class="row">
 			My Created Events:
 			{{#each getAssociatedEventNames getOwnedEventIds}}
-				{{> singularEvent}}
+				{{> eventNameHolder}}
 			{{/each}}
 		</div>
 		<div class="row">
 			My Registered Events:
 			{{#each getAssociatedEventNames getRegisteredEventIds}}
-				{{> singularEvent}}
+				{{> eventNameHolder}}
 			{{/each}}
 		</div>
 	</div>
 </template>
 
-<template name="singularEvent">
-	<a><li>{{eventName}}</li></a>
+<template name="eventNameHolder">
+	<a class="nameLink"><li>{{ eventName }}</li></a>
+</template>
+
+<template name="dynamicModalRegistered">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Event Details</h4>
+				</div>
+				<div class="modal-body">
+					<h3>Event Name: {{returnContextualEventName}}</h3>
+					<h3>Event Location: {{returnContextualEventLocation}}</h3>
+					<h3>Event Description: {{returnContextualEventDescription}}</h3>
+					<h3>Event Date and Time: {{returnContextualEventDateTime}}</h3>
+					<h3>Number of People Registered: {{returnContextualNumberAttending}}</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" data-dismiss="modal">Nevermind</button>
+					<button type="button" class="btn btn-danger unregisterDynamicRegisterModal" data-dismiss="modal">Unregister</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

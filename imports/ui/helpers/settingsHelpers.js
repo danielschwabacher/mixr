@@ -26,8 +26,8 @@ Template.mapSettingsPanel.onCreated(function(){
 });
 
 Template.manageEventsPanel.onCreated(function(){
-	//console.log("first owned event: " + JSON.stringify(client_users_events['owned_events'][0]['eventId']))
 });
+
 Template.manageEventsPanel.helpers({
 	'getOwnedEventIds': function(){
 		var userEventsOwned = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'owned_events.eventId': 1}})
@@ -45,7 +45,6 @@ Template.manageEventsPanel.helpers({
 	'getRegisteredEventIds': function(){
 		var usersEventsRegistered = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'registered_events.eventId': 1}})
 		if (usersEventsRegistered.registered_events){
-			console.log("should not be here")
 			registeredEventIds = []
 			for (i = 0; i < usersEventsRegistered['registered_events'].length; i++){
 				registeredEventIds.push({eventId: usersEventsRegistered['registered_events'][i].eventId})
@@ -68,7 +67,7 @@ Template.manageEventsPanel.helpers({
 				{ fields: {event_name: 1} }
 			)
 			eventNamesObj.forEach(function(item){
-				eventNames.push({eventName: item.event_name})
+				eventNames.push( {eventName: item.event_name, eventId: item._id} )
 			});
 			return eventNames
 		}
@@ -78,6 +77,44 @@ Template.manageEventsPanel.helpers({
 	}
 });
 
+Template.eventNameHolder.events({
+	'click .nameLink'(event, template){
+		context = this
+		eventInfo = EventCollection.findOne({_id: context.eventId})
+		if (eventInfo){
+			Modal.show('dynamicModalRegistered', eventInfo)
+		}
+	}
+});
+
+Template.dynamicModalRegistered.events({
+	'click .unregisterDynamicRegisterModal'(event, template){
+		self = this
+		Meteor.call('unregisterEvent', self._id)
+	}
+});
+
+
+Template.dynamicModalRegistered.helpers({
+	returnContextualEventName: function(){
+			return this.event_name
+	},
+	returnContextualEventLocation: function(){
+		return this.event_location
+	},
+	returnContextualEventLocation: function(){
+		return this.event_location
+	},
+	returnContextualEventDescription: function(){
+		return this.event_description
+	},
+	returnContextualEventDateTime: function(){
+		return this.event_dateTime
+	},
+	returnContextualNumberAttending: function(){
+		return this.number_of_users_attending
+	}
+});
 
 setManageEvents = function(){
 	Session.set('default', false)
