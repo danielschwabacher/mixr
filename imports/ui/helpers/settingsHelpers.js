@@ -1,4 +1,5 @@
 import '../templates/settingsPage.html'
+import './settingPageModals.js'
 import './changePasswordModalHelpers.js'
 Template.settingsPage.onCreated(function () {
 	Session.set('default', true)
@@ -20,12 +21,6 @@ Template.activeContent.helpers({
   	getCurrentFocus: function(){
  		return Session.get('default') ? 'mapSettingsPanel' : 'manageEventsPanel'
   	}
-});
-
-Template.mapSettingsPanel.onCreated(function(){
-});
-
-Template.manageEventsPanel.onCreated(function(){
 });
 
 Template.manageEventsPanel.helpers({
@@ -56,6 +51,7 @@ Template.manageEventsPanel.helpers({
 		}
 	},
 	'getAssociatedEventNames': function(eventIdsObj){
+		eventIdsObjWithOwned = eventIdsObj
 		eventIds = []
 		eventNames = []
 		if (eventIdsObj){
@@ -64,7 +60,7 @@ Template.manageEventsPanel.helpers({
 			}
 			eventNamesObj = EventCollection.find(
 				{ _id: { $in: eventIds} },
-				{ fields: {event_name: 1} }
+				{ fields: {event_name: 1, owned: 1} }
 			)
 			eventNamesObj.forEach(function(item){
 				eventNames.push( {eventName: item.event_name, eventId: item._id} )
@@ -74,45 +70,6 @@ Template.manageEventsPanel.helpers({
 		else{
 			return [{eventName: "You have no events"}]
 		}
-	}
-});
-
-Template.eventNameHolder.events({
-	'click .nameLink'(event, template){
-		context = this
-		eventInfo = EventCollection.findOne({_id: context.eventId})
-		if (eventInfo){
-			Modal.show('dynamicModalRegistered', eventInfo)
-		}
-	}
-});
-
-Template.dynamicModalRegistered.events({
-	'click .unregisterDynamicRegisterModal'(event, template){
-		self = this
-		Meteor.call('unregisterEvent', self._id)
-	}
-});
-
-
-Template.dynamicModalRegistered.helpers({
-	returnContextualEventName: function(){
-			return this.event_name
-	},
-	returnContextualEventLocation: function(){
-		return this.event_location
-	},
-	returnContextualEventLocation: function(){
-		return this.event_location
-	},
-	returnContextualEventDescription: function(){
-		return this.event_description
-	},
-	returnContextualEventDateTime: function(){
-		return this.event_dateTime
-	},
-	returnContextualNumberAttending: function(){
-		return this.number_of_users_attending
 	}
 });
 

@@ -37,14 +37,24 @@ Meteor.methods({
 		return 1;
 	},
 	"registerEvent": function(eventToUpdate){
+		// REGISTER CONDITIONS:
+		// User must not own event and must not already be registered
 		// if the user has not already registered
+		// is true if user owns event
+		var isOwner = UserEventsCrossReferenceCollection.findOne(
+			{
+				user: Meteor.userId(),
+				'owned_events.eventId': eventToUpdate._id
+			}
+		)
+		// is true if owner is already registered to event
 		var isRegistered = UserEventsCrossReferenceCollection.findOne(
 			{
 				user: Meteor.userId(),
-				'events.eventId': eventToUpdate._id
+				'registered_events.eventId': eventToUpdate._id
 			}
 		)
-		if (!isRegistered){
+		if (!isOwner && !isRegistered){
 			// Increment the number of users attending the associatve event
 			EventCollection.update(
 				{_id: eventToUpdate._id},
@@ -83,7 +93,6 @@ Meteor.methods({
 	// decrease the number attending by 1 in bigEvents table
 	// remove reference to event in user's crossReference table
 	'unregisterEvent': function(eventId){
-		console.log("unregistering eventId: " + eventId)
 		EventCollection.update(
 			{_id: eventId},
 			{
@@ -99,6 +108,35 @@ Meteor.methods({
 			{user: Meteor.userId()},
 			{$pull: {
 				registered_events:
+				{
+					eventId: eventId,
+				}
+			}},
+			function(err, eventId){
+				if (err){
+					return 0;
+				}
+			}
+		)
+		return 1
+	},
+	// deleting an event
+	// remove event from big events collection
+	// remove EVERY reference to event in every users collection
+	'deleteEvent': function(eventId){
+		EventCollection.remove(
+			{_id: eventId},
+		)
+		UserEventsCrossReferenceCollection.update(
+			{},
+			{$pull: {
+				registered_events:
+				{
+					eventId: eventId,
+				}
+			}},
+			{$pull: {
+				owned_events:
 				{
 					eventId: eventId,
 				}
