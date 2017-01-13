@@ -22,18 +22,18 @@ Template.eventCreatedNameHolder.events({
 
 Template.dynamicModalRegistered.events({
 	'click .unregisterEventRegisteredModal'(event, template){
-		self = this
+		var self = this
 		Meteor.call('unregisterEvent', self._id)
 	}
 });
 
 Template.dynamicModalCreated.events({
 	'click .deleteEventCreatedModal'(event, template){
-		self = this
+		var self = this
 		Meteor.call('deleteEvent', self._id)
 	},
 	'click .unregisterEventCreatedModal'(event, template){
-		self = this
+		var self = this
 		Meteor.call('unregisterEvent', self._id)
 	},
 });
