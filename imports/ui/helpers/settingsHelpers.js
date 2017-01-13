@@ -30,11 +30,11 @@ Template.manageEventsPanel.onCreated(function(){
 });
 Template.manageEventsPanel.helpers({
 	'getOwnedEventIds': function(){
-		users_events = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'owned_events.eventId': 1}})
-		if (users_events){
+		var userEventsOwned = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'owned_events.eventId': 1}})
+		if (userEventsOwned.owned_events){
 			ownedEventsId = []
-			for (i = 0; i < users_events['owned_events'].length; i++){
-				ownedEventsId.push({eventId: users_events['owned_events'][i].eventId})
+			for (i = 0; i < userEventsOwned['owned_events'].length; i++){
+				ownedEventsId.push({eventId: userEventsOwned['owned_events'][i].eventId})
 			}
 			return ownedEventsId
 		}
@@ -43,15 +43,16 @@ Template.manageEventsPanel.helpers({
 		}
     },
 	'getRegisteredEventIds': function(){
-		users_events = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'registered_events.eventId': 1}})
-		if (users_events){
+		var usersEventsRegistered = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'registered_events.eventId': 1}})
+		if (usersEventsRegistered.registered_events){
+			console.log("should not be here")
 			registeredEventIds = []
-			for (i = 0; i < users_events['registered_events'].length; i++){
-				registeredEventIds.push({eventId: users_events['registered_events'][i].eventId})
+			for (i = 0; i < usersEventsRegistered['registered_events'].length; i++){
+				registeredEventIds.push({eventId: usersEventsRegistered['registered_events'][i].eventId})
 			}
 			return registeredEventIds
 		}
-		else{
+		else {
 			return 0
 		}
 	},
