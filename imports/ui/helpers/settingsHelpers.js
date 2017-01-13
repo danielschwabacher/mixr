@@ -68,7 +68,7 @@ Template.manageEventsPanel.helpers({
 			return eventNames
 		}
 		else{
-			return [{eventName: "You have no events"}]
+			return []
 		}
 	}
 });

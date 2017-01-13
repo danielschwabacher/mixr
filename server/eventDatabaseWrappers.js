@@ -133,14 +133,13 @@ Meteor.methods({
 				registered_events:
 				{
 					eventId: eventId,
-				}
-			}},
-			{$pull: {
+				},
 				owned_events:
 				{
 					eventId: eventId,
 				}
 			}},
+			{multi: true},
 			function(err, eventId){
 				if (err){
 					return 0;
