@@ -31,14 +31,12 @@ Template.confirmEventModal.events({
 			}
 		});
 		Router.go('home')
-		Session.set('hasCachedEvent', false)
-		Session.set('clientMinimumCachedEvent', null)
+		fullEventToConfirm.removeReference()
 		fullEventToConfirm = null
 	},
 	'click .cancelEventButton'(event, template){
 		Router.go('create')
-		Session.set('hasCachedEvent', false)
-		Session.set('clientMinimumCachedEvent', null)
+		fullEventToConfirm.removeReference()
 		fullEventToConfirm = null
 	}
 });
