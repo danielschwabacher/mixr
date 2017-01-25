@@ -2,7 +2,7 @@ import '../templates/changePasswordModal.html';
 import '../templates/notificationModals.html';
 Template.changePasswordModal.events({
 	'submit .changePasswordModalForm'(event, template) {
-		// console.log("form submitted")
+		console.log("clicked changePassword")
 		event.preventDefault()
 		console.log("target: " + JSON.stringify(event.target))
 		var oldPassword = event.target.currentPasswordChangePasswordModal.value;
