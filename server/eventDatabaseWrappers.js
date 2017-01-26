@@ -147,5 +147,16 @@ Meteor.methods({
 			}
 		)
 		return 1
+	},
+	// THIS SECTION SHOULD GET MOVED
+	// This is where email verification is getting set up
+
+	// This method verifies user emails but doesn't force them
+	// to verify before logging in.
+	sendVerificationLink: function() {
+			let userID = Meteor.userId();
+			if (userID) {
+					return Accounts.sendVerificationEmail(userID);
+			}
 	}
 });
