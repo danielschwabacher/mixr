@@ -35,6 +35,16 @@ createNewMixrAccount = function(userData){
 			return;
 		}
 		else{
+			// This sends a verification email to users
+			Meteor.call('sendVerificationLink', (error, response) => {
+				if (error) {
+					console.log("Error sending verification email " + response);
+				}
+				else {
+					console.log("Verification email sent");
+				}
+			});
+			// Should this redirect to a "Please confirm account" page?
 			Modal.show('signupSuccessModal')
 		}
 		return;

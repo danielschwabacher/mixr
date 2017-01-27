@@ -2,7 +2,7 @@
 // Event objects and the Events database collection.
 //userEvents collection
 Meteor.methods({
-	"insertEvent": function(eventToInsert){
+	insertEvent: function(eventToInsert){
 		EventCollection.insert({
 			created_by: Meteor.userId(),
 			event_name: eventToInsert.eventName,
@@ -36,7 +36,7 @@ Meteor.methods({
 		});
 		return 1;
 	},
-	"registerEvent": function(eventToUpdate){
+	registerEvent: function(eventToUpdate){
 		// REGISTER CONDITIONS:
 		// User must not own event and must not already be registered
 		// if the user has not already registered
@@ -92,7 +92,7 @@ Meteor.methods({
 	// unregistering an event
 	// decrease the number attending by 1 in bigEvents table
 	// remove reference to event in user's crossReference table
-	'unregisterEvent': function(eventId){
+	unregisterEvent: function(eventId){
 		EventCollection.update(
 			{_id: eventId},
 			{
@@ -123,7 +123,7 @@ Meteor.methods({
 	// deleting an event
 	// remove event from big events collection
 	// remove EVERY reference to event in every users collection
-	'deleteEvent': function(eventId){
+	deleteEvent: function(eventId){
 		EventCollection.remove(
 			{_id: eventId},
 		)
