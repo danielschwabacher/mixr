@@ -5,5 +5,8 @@ Template.landingPage.events({
 		$(document.body).animate({
     		'scrollTop': $('#whatIsMixr').offset().top
 		}, 1000);
+	},
+	'click .signUpBigButton'(event){
+		console.log('clicked!')
 	}
 });

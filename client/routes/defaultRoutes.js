@@ -9,12 +9,28 @@ Router.configure({
 });
 
 // default index route
-Router.route('/', function(){
-	this.render('homeCover')
+Router.route('/', {
+	onBeforeAction: function () {
+		if (!Meteor.user()) {
+			if (!Meteor.loggingIn()){
+				this.render('landingPage')
+			}
+		}
+		else{
+			Router.go('events')
+		}
+	}
 });
-Router.route('/special', function(){
-	this.render('landingPage')
-});
-Router.route('/home', function(){
-	this.render('homeCover')
+
+Router.route('/home', {
+	onBeforeAction: function () {
+		if (!Meteor.user()) {
+			if (!Meteor.loggingIn()){
+				this.render('landingPage')
+			}
+		}
+		else{
+			Router.go('events')
+		}
+	}
 });

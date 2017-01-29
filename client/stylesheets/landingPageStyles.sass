@@ -1,6 +1,7 @@
 //colors
 $black_60: rgba(0,0,0,0.6)
 $color_desert_storm_approx: #f8f8f8
+$white: white
 $black_20: rgba(0,0,0,0.2)
 $color_mercury_approx: #e7e7e7
 
@@ -11,9 +12,6 @@ $font_2: Helvetica
 $font_3: Arial
 $font_4: sans-serif
 
-//urls
-$url_0: url(../img/intro-bg.jpg)
-$url_1: url(../img/banner-bg.jpg)
 .landingPageMain
 	body
 		width: 100%
@@ -61,7 +59,6 @@ $url_1: url(../img/banner-bg.jpg)
 		padding-bottom: 50px
 		text-align: center
 		color: $color_desert_storm_approx
-		background: $url_0 no-repeat center center
 		background-size: cover
 
 	.intro-message
@@ -144,18 +141,15 @@ $url_1: url(../img/banner-bg.jpg)
 
 	.banner
 		padding: 100px 0
-		color: $color_desert_storm_approx
-		background: $url_1 no-repeat center center
+		background-color: gray !important
 		background-size: cover
 		h2
 			margin: 0
 			//If you use compass, instead of the line below you could use + text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 			text-shadow: 2px 2px 3px $black_60
 			font-size: 3em
-
 		ul
 			margin-bottom: 0
-
 
 	.banner-social-buttons
 		float: right
@@ -166,10 +160,11 @@ $url_1: url(../img/banner-bg.jpg)
 			float: left
 			margin-top: 15px
 
-
 	footer
 		padding: 50px 0
 		background-color: $color_desert_storm_approx
 
+	.footer-text
+		color: $white
 	p.copyright
 		margin: 15px 0 0
