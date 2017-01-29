@@ -8,10 +8,9 @@ Router.route('/events', {
 			if (!Meteor.loggingIn()){
 				Router.go('signup');
 			}
-			this.next()
 		}
 		else{
-			this.render('mixrEventMap')
+			this.render('mixrEventMap');
 		}
 	}
 });

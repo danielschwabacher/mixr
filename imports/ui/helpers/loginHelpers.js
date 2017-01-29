@@ -15,7 +15,7 @@ function attemptLoginClient(email, pwd){
 			Modal.show('loginFailedNotification')
 		}
 		else{
-			Router.go('home')
+			Router.go('events')
 		}
 	});
 }
