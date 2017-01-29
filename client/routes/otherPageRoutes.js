@@ -5,7 +5,7 @@ Router.route('/settings', function(){
 		this.render('settingsPage')
 	}
 	else {
-		console.log("DEVNOTE: FIX THIS -- YOU ARE NOT LOGGED ON")
+		// console.log("DEVNOTE: FIX THIS -- YOU ARE NOT LOGGED ON")
 		Router.go('home')
 	}
 });

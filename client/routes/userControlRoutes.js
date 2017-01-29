@@ -36,13 +36,13 @@ Router.route('/logout', {
 	onBeforeAction: function(){
 		if (Meteor.user()){
 			Meteor.logout(function(err){
+				console.log("logging out")
 				if (err){
 					console.log("could not sign out user, error: " + err)
 				}
+				Router.go('home')
 			});
+			this.next()
 		}
-	},
-	onAfterAction: function(){
-		Router.go('home')
 	}
 });

@@ -9,28 +9,10 @@ Router.configure({
 });
 
 // default index route
-Router.route('/', {
-	onBeforeAction: function () {
-		if (!Meteor.user()) {
-			if (!Meteor.loggingIn()){
-				this.render('landingPage')
-			}
-		}
-		else{
-			Router.go('events')
-		}
-	}
-});
+Router.route('/', function(){
+	this.render('landingPage')
+})
 
-Router.route('/home', {
-	onBeforeAction: function () {
-		if (!Meteor.user()) {
-			if (!Meteor.loggingIn()){
-				this.render('landingPage')
-			}
-		}
-		else{
-			Router.go('events')
-		}
-	}
-});
+Router.route('/home', function(){
+	this.render('landingPage')
+})
