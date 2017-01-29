@@ -1,7 +1,12 @@
 import '../templates/mixrPrimaryMap.html';
-import '../../api/mapHandlers/mainMap.js'
+import '../../api/mapHandlers/mainMap.js';
+
+Template.registerHelper('checkIfOnEventPage', function(){
+	return Session.get('onPrimaryMap');
+});
 
 Template.mixrEventMap.onCreated(function(){
+	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
 		var latLng = Geolocation.latLng();
 		Meteor.subscribe("events", function() {
@@ -14,7 +19,7 @@ Template.mixrEventMap.onCreated(function(){
 });
 
 Template.mixrEventMap.onDestroyed(function(){
-	// stop subscription
+	Session.set('onPrimaryMap', false)
 });
 
 
