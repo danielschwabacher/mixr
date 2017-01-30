@@ -9,7 +9,17 @@
 					<div class="form-group">
 						<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
 					</div>
-					<input type="textarea" placeholder="Event Description">
+					<div class="input-group datetimepicker additionalPadding">
+						<span class="input-group-addon">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</span>
+						<input class="set-due-date form-control" placeholder="Click calendar to pick date and time" type="text" id="eventDateTime" required/>
+					</div>
+					<h4>Choose any event tags:</h4>
+					<div class="checkbox checkbox-success checkbox-inline">
+						<input type="checkbox" id="sportsCheckbox">
+						<label for="sportsCheckbox">Sports</label>
+					</div>
 					<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
 				</form>
 		</div>
