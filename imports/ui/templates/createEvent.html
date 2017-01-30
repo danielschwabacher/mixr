@@ -1,40 +1,17 @@
 <template name="createEventPage">
 	<div class="padDown">
-		<div class="login-block">
+		<div class="create-event-block">
 			<h1>Create a new event</h1>
-			<form class="createEventForm">
-				<input type="text" placeholder="Event Name" id="eventName" required/>
-				<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
-				<textarea placeholder="Event Description (optional)" id="eventDescription"></textarea>
-				<div class="input-group datetimepicker additionalPadding">
-					<span class="input-group-addon">
-						<i class="glyphicon glyphicon-calendar"></i>
-					</span>
-					<input class="set-due-date form-control" placeholder="Click calendar to pick date and time" type="text" id="eventDateTime" required/>
-				</div>
-				<h4>Choose any event tags:</h4>
-				<div class="checkbox checkbox-success checkbox-inline">
-                	<input type="checkbox" id="sportsCheckbox">
-                	<label for="sportsCheckbox">Sports</label>
-            	</div>
-				<div class="checkbox checkbox-success checkbox-inline">
-                	<input type="checkbox" id="gamingCheckbox">
-                	<label for="gamingCheckbox">Performance</label>
-            	</div>
-				<div class="checkbox checkbox-success checkbox-inline">
-	            	<input type="checkbox" id="artsCraftsCheckbox">
-	            	<label for="artsCraftsCheckbox">Arts</label>
-	        	</div>
-				<div class="checkbox checkbox-success checkbox-inline">
-	            	<input type="checkbox" id="artsCraftsCheckbox">
-	            	<label for="artsCraftsCheckbox">Academic Interest</label>
-	        	</div>
-				<div class="checkbox checkbox-success checkbox-inline">
-	            	<input type="checkbox" id="otherCheckbox">
-	            	<label for="otherCheckbox">Other</label>
-	        	</div>
-				<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
-			</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" placeholder="Event Name" id="eventName" required/>
+					</div>
+					<div class="form-group">
+						<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
+					</div>
+					<input type="textarea" placeholder="Event Description">
+					<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
+				</form>
 		</div>
 	</div>
 </template>

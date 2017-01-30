@@ -1,3 +1,14 @@
+$color_shark_approx: #282929
+$control_color: #e570e7
+$color_celeste_approx: #ccc
+$light_shark: #555
+$white: #fff
+
+
+//fonts
+$font_0: Open Sans
+$font_1: sans-serif
+
 .additionalPadding
 	padding: 4%
 
@@ -6,8 +17,80 @@
 
 .datepicker
 	background-color: #2a292a
-	color: #fff
+	color: $white
 
 .bootstrap-datetimepicker-widget
 	background-color: #2a292a
-	color: #fff
+	color: $white
+
+.extend_1
+	width: 92%
+	background: $white
+	margin-bottom: 4%
+	border: 1px solid $color_celeste_approx
+	padding: 4%
+	font-family: $font_0, $font_1
+	font-size: 95%
+	color: $light_shark
+
+.text-area-extend
+	width: 100%
+	height: 100px
+	border-radius: 5px
+	border: 1px solid #ccc
+	font-weight: bold
+    margin-bottom: 10px
+	font-size: 14px
+	padding:  10px 20px 10px 20px
+	outline: none
+	resize: none
+	color:#555
+
+.create-event-block
+	width: 800px
+	padding: 20px
+	background: $color_shark_approx
+	border-radius: 5px
+	margin: 0 auto
+	h1
+		text-align: center
+		color: $white
+		font-size: 20px
+		margin-top: 0
+		margin-bottom: 20px
+	input
+		height: 52px
+		border-radius: 5px
+		border: 1px solid $color_celeste_approx
+		font-weight: bold
+		margin-bottom: 20px
+		font-size: 14px
+		padding: 0 20px 0 20px
+		outline: none
+		&:active
+			border: 3px solid $control_color
+
+		&:focus
+			border: 3px solid $control_color
+	textarea
+		@extend .text-area-extend
+		&:active
+			border: 3px solid $control_color
+		&:focus
+			border: 3px solid $control_color
+
+
+.form-inline .form-group
+    width: 350px
+
+input[type="submit"]
+	width: 80%
+	background: $light_shark
+	border: 0
+	font-family: $font_0, $font_1
+	font-size: 24px
+	color: $white
+	cursor: pointer
+	transition: background .3s
+	&:hover
+		background: $control_color
