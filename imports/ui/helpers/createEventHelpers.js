@@ -12,6 +12,9 @@ Template.createEventPage.events({
 		var eventLocation = event.target.eventLocation.value;
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
+		var eventSelectedTag = $("input[type='radio']:checked");
+		var eventSelectedTagActual = eventSelectedTag.attr('id');
+		console.log("tag is: " + eventSelectedTagActual)
 		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime)
 		clientTempCachedEvent.createReference()
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
