@@ -15,8 +15,8 @@ Template.confirmEventModal.helpers({
 	returnDateTime: function() {
 		return fullEventToConfirm.eventDateTime
 	},
-	returnCoordinates: function(){
-		return JSON.stringify(fullEventToConfirm.coordinates)
+	returnEventTagType: function(){
+		return fullEventToConfirm.eventTagType
 	}
 });
 

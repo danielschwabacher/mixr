@@ -13,9 +13,27 @@ Template.createEventPage.events({
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
 		var eventSelectedTag = $("input[type='radio']:checked");
-		var eventSelectedTagActual = eventSelectedTag.attr('id');
-		console.log("tag is: " + eventSelectedTagActual)
-		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime)
+		var literalEventTag = eventSelectedTag.attr('id');
+		var eventTagShortened = "null"
+		if (literalEventTag == "sportsRadioButton"){
+			eventTagShortened = "Sports"
+		}
+		else if (literalEventTag == "performancesRadioButton"){
+			eventTagShortened = "Performances"
+		}
+		else if (literalEventTag == "artsRadioButton"){
+			eventTagShortened = "Arts"
+		}
+		else if (literalEventTag == "academicInterestRadioButton"){
+		eventTagShortened = "Academic Interest"
+		}
+		else if (literalEventTag == "otherRadioButton"){
+			eventTagShortened = "Other"
+		}
+		else{
+			eventTagShortened = "Could not find tag"
+		}
+		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTagShortened)
 		clientTempCachedEvent.createReference()
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
 		// used to confirm route in IronRouter

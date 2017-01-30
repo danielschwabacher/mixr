@@ -15,11 +15,12 @@ createFullCachedEvent = function(minimumCachedEvent, eventCoords){
 	eLocation = minimumCachedEvent.eventLoc
 	eDescription = minimumCachedEvent.eventDescription
 	eDateTime = minimumCachedEvent.eventDateTime
+	eTagType = minimumCachedEvent.eventTagType
 	position = {
 		latitude: coordinatesObj.lat,
 		longitude: coordinatesObj.lng
 	};
-	return new FullCachedEvent(eName, eLocation, eDescription, eDateTime, position)
+	return new FullCachedEvent(eName, eLocation, eDescription, eDateTime, eTagType, position)
 }
 
 
