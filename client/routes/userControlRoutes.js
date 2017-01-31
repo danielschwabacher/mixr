@@ -39,10 +39,9 @@ Router.route('/logout', {
 				if (err){
 					console.log("could not sign out user, error: " + err)
 				}
+				Router.go('home')
 			});
+			this.next()
 		}
-	},
-	onAfterAction: function(){
-		Router.go('home')
 	}
 });

@@ -31,11 +31,7 @@ Template.dynamicModalCreated.events({
 	'click .deleteEventCreatedModal'(event, template){
 		var self = this
 		Meteor.call('deleteEvent', self._id)
-	},
-	'click .unregisterEventCreatedModal'(event, template){
-		var self = this
-		Meteor.call('unregisterEvent', self._id)
-	},
+	}
 });
 
 

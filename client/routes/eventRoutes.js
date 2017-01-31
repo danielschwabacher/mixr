@@ -10,7 +10,7 @@ Router.route('/events', {
 			}
 		}
 		else{
-			this.render('mixrEventMap')
+			this.render('mixrEventMap');
 		}
 	}
 });

@@ -1,19 +1,44 @@
 <template name="createEventPage">
 	<div class="padDown">
-		<div class="login-block">
+		<div class="create-event-block">
 			<h1>Create a new event</h1>
-			<form class="createEventForm">
-				<input type="text" placeholder="Event Name" id="eventName" required/>
-				<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
-				<textarea placeholder="Event Description (optional)" id="eventDescription"></textarea>
-				<div class="input-group datetimepicker additionalPadding">
-					<span class="input-group-addon">
-						<i class="glyphicon glyphicon-calendar"></i>
-					</span>
-					<input class="set-due-date form-control" placeholder="Click calendar to pick date and time" type="text" id="eventDateTime" required/>
-				</div>
-				<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
-			</form>
+				<form class="form-inline createEventForm">
+					<div class="form-group">
+						<input type="text" placeholder="Event Name" id="eventName" required/>
+					</div>
+					<div class="form-group">
+						<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
+					</div>
+					<textarea placeholder="Event Description (optional)" id="eventDescription"></textarea>
+					<div class="input-group datetimepicker calendarPadding">
+						<span class="input-group-addon">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</span>
+						<input class="set-due-date form-control" placeholder="Click calendar to pick date and time" type="text" id="eventDateTime" required/>
+					</div>
+					<h4>Event Tag:</h4>
+                    <div class="radio radio-mixr radio-inline">
+                        <input type="radio" id="sportsRadioButton" name="eventTagAnswer" required>
+                        <label for="sportsRadioButton">Sports</label>
+                    </div>
+                    <div class="radio radio-mixr radio-inline">
+                        <input type="radio" id="performancesRadioButton" name="eventTagAnswer">
+                        <label for="performancesRadioButton">Performances</label>
+                    </div>
+                    <div class="radio radio-mixr radio-inline">
+                        <input type="radio" id="artsRadioButton" name="eventTagAnswer">
+                        <label for="artsRadioButton">Arts</label>
+                    </div>
+                    <div class="radio radio-mixr radio-inline">
+                        <input type="radio" id="academicInterestRadioButton" name="eventTagAnswer">
+                        <label for="academicInterestRadioButton">Academic Interest</label>
+                    </div>
+	                <div class="radio radio-mixr radio-inline">
+	                    <input type="radio" id="otherRadioButton" name="eventTagAnswer">
+	                    <label for="otherRadioButton">Other</label>
+	                </div>
+					<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
+				</form>
 		</div>
 	</div>
 </template>

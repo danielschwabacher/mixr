@@ -33,18 +33,11 @@
 				<li><a href="{{pathFor 'events'}}">Events around me</a></li>
 			</ul>
 			<ul class="nav navbar-nav nb-center">
-				<form action="" class="navbar-form navbar-right">
-					<div class="input-group">
-						<input type="Search" placeholder="Search event tags..." class="form-control container-fluid"/>
-						<div class="input-group-btn">
-							<button class="btn btn-info search-btn">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</div>
-					</div>
-				</form>
 				<li><a href="{{pathFor 'settings'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
 				<li><a href="{{pathFor 'create'}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
+				{{#if checkIfOnEventPage}}
+					{{> applyEventFiltersSection}}
+				{{/if}}
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="{{pathFor 'settings'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
@@ -52,4 +45,14 @@
 			</ul>
 		</div>
 	</nav>
+</template>
+
+<template name="applyEventFiltersSection">
+	<li class="dropdown navbar-inverse">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Apply event filters<span class="caret"></span></a>
+		<ul class="dropdown-menu inverse-dropdown">
+			<li><a href="#">Sort by time</a></li>
+			<li><a href="#">Sort by tags</a></li>
+		</ul>
+	</li>
 </template>
