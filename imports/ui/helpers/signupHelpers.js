@@ -6,7 +6,7 @@ Template.signupPage.events({
 	'submit .registerForm'(event, template) {
 		event.preventDefault();
 		var firstName = event.target.firstName.value;
-        var lastName = event.target.lastName.value;
+    var lastName = event.target.lastName.value;
 		var email = event.target.emailSignup.value;
 		var password = event.target.password.value;
 		var passwordConfirm = event.target.passwordConfirm.value;

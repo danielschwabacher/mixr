@@ -1,10 +1,9 @@
-/* General formatting */
+/* General Email Formatting */
 Accounts.emailTemplates.siteName = "Mixr";
 Accounts.emailTemplates.from = "Mixr Dev Team <mixrdev123456@gmail.com>";
 
-/* Forgot password formatting 
-SSR.compileTemplate('passwordReset', Assets.getText('forgotPassword.html'));
 
+/* Forgot Password Email Reset */
 Accounts.emailTemplates.resetPassword.subject = function(user) {
   return "Reset Password"
 };
@@ -17,13 +16,8 @@ Accounts.emailTemplates.resetPassword.from = function() {
   return "Mixr Dev Team <mixrdev123456@gmail.com>"
 };
 
-Accounts.emailTemplates.resetPassword.html = function(user, url) {
-  var variables_we_want_to_fill_from_template;
-  return SSR.render('passwordReset', variables_we_want_to_fill_from_template) + url
-};
-*/
 
-/* Verification email formatting */
+/* Account Verification Email */
 Accounts.emailTemplates.verifyEmail.subject = function(user) {
   return "Verify your Mixr account"
 };
@@ -35,3 +29,19 @@ Accounts.emailTemplates.verifyEmail.text = function(user, url) {
 Accounts.emailTemplates.verifyEmail.from = function() {
   return "Mixr Dev Team <mixrdev123456@gmail.com>"
 };
+
+
+
+
+
+/*
+LEAVE THIS IN:
+This is a template for custom HTML emails once Mixr is deployed
+
+SSR.compileTemplate('passwordReset', Assets.getText('forgotPassword.html'));
+
+Accounts.emailTemplates.resetPassword.html = function(user, url) {
+  var variables_we_want_to_fill_from_template;
+  return SSR.render('passwordReset', variables_we_want_to_fill_from_template) + url
+};
+*/
