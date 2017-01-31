@@ -1,6 +1,7 @@
 import './routes/defaultRoutes.js'
 import './routes/eventRoutes.js'
 import './routes/userControlRoutes.js'
+
 Modal.allowMultiple = true
 if (Meteor.isClient) {
 	console.log("current userId: " + Meteor.userId())

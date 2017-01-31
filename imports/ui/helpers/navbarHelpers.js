@@ -15,7 +15,8 @@ Template.navbarActive.events({
 		Router.go('logout')
 	},
 	'click .sortByTagDropDown'(event){
-		console.log("clicked sortby tag.")
+		event.preventDefault()
+		console.log("clicked the dropdown sort by tags button")
 		Modal.show('sortByTagsEventFilterModal')
 	}
 });
