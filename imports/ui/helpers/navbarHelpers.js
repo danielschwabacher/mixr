@@ -1,6 +1,3 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-
 import '../templates/navbars.html';
 import '../templates/applyEventFilterModals.html'
 
@@ -16,7 +13,6 @@ Template.navbarActive.events({
 	},
 	'click .sortByTagDropDown'(event){
 		event.preventDefault()
-		console.log("clicked the dropdown sort by tags button")
 		Modal.show('sortByTagsEventFilterModal')
 	}
 });
