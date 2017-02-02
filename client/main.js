@@ -4,6 +4,7 @@ import './routes/userControlRoutes.js'
 
 Modal.allowMultiple = true
 if (Meteor.isClient) {
+	Session.set('eventTagFilterIncludes', null)
 	console.log("current userId: " + Meteor.userId())
 	Meteor.startup(function() {
 		GoogleMaps.load({

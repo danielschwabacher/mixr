@@ -1,4 +1,5 @@
 import '../templates/eventResponseModals.html';
+import '../../api/Filters/tagFilter.js'
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
 
@@ -11,7 +12,7 @@ Template.sortByTagsEventFilterModal.events({
 		var checkedValues = $('input:checkbox:checked').map(function() {
     		return this.id;
 		}).get();
-		console.log("checked is: " + checkedValues)
-		console.log("reload map with filters applied")
+		tagsToInclude = new TagFilter(checkedValues)
+		Session.set('tagIncludes', tagsToInclude)
 	}
 });

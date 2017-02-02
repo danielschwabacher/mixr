@@ -10,6 +10,8 @@ Template.mixrEventMap.onCreated(function(){
 	GoogleMaps.ready('mixrMap', function(map) {
 		var latLng = Geolocation.latLng();
 		Meteor.subscribe("events", function() {
+			includeTags = Session.get('tagsToInclude')
+			console.log("tags: " + includeTags)
 			var client_collection = EventCollection.find();
 			client_collection.forEach(function(currentEvent){
 				createMarker(map.instance, currentEvent)
@@ -17,7 +19,14 @@ Template.mixrEventMap.onCreated(function(){
 		});
 	});
 });
-
+/*
+Template.mixrEventMap.onRendered(function(){
+	Deps.autorun(function () {
+		var self = this;
+		displayTags = Session.get('tagIncludes');
+	}
+});
+*/
 Template.mixrEventMap.onDestroyed(function(){
 	Session.set('onPrimaryMap', false)
 });
