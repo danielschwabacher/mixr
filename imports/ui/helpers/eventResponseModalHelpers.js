@@ -13,6 +13,6 @@ Template.sortByTagsEventFilterModal.events({
     		return this.id;
 		}).get();
 		tagsToInclude = new TagFilter(checkedValues)
-		Session.set('tagIncludes', tagsToInclude)
+		Session.set('tagIncludes', tagsToInclude.mongoIncludes)
 	}
 });

@@ -5,28 +5,34 @@ Template.registerHelper('checkIfOnEventPage', function(){
 	return Session.get('onPrimaryMap');
 });
 
-Template.mixrEventMap.onCreated(function(){
+Template.mixrEventMap.onRendered(function(){
 	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
 		var latLng = Geolocation.latLng();
-		Meteor.subscribe("events", function() {
-			includeTags = Session.get('tagsToInclude')
-			console.log("tags: " + includeTags)
-			var client_collection = EventCollection.find();
-			client_collection.forEach(function(currentEvent){
-				createMarker(map.instance, currentEvent)
-			});
+		Tracker.autorun(function(){
+			console.log("running... ")
+			includeTags = Session.get('tagIncludes')
+			if (includeTags){
+				console.log("have tags")
+				console.log("tags are: " + includeTags)
+				var client_collection = EventCollection.find(
+					{ event_tag: { $in: includeTags} },
+				);
+				client_collection.forEach(function(currentEvent){
+					createMarker(map.instance, currentEvent)
+				});
+			}
+			else{
+				console.log("no tags")
+				var client_collection = EventCollection.find()
+				client_collection.forEach(function(currentEvent){
+					createMarker(map.instance, currentEvent)
+				});
+			}
 		});
 	});
 });
-/*
-Template.mixrEventMap.onRendered(function(){
-	Deps.autorun(function () {
-		var self = this;
-		displayTags = Session.get('tagIncludes');
-	}
-});
-*/
+
 Template.mixrEventMap.onDestroyed(function(){
 	Session.set('onPrimaryMap', false)
 });
