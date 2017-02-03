@@ -2,9 +2,7 @@
 Accounts.emailTemplates.siteName = "Mixr";
 Accounts.emailTemplates.from = "Mixr Dev Team <mixrdev123456@gmail.com>";
 
-/* Forgot password formatting 
-SSR.compileTemplate('passwordReset', Assets.getText('forgotPassword.html'));
-
+/* Forgot password formatting */
 Accounts.emailTemplates.resetPassword.subject = function(user) {
   return "Reset Password"
 };
@@ -16,12 +14,6 @@ Accounts.emailTemplates.resetPassword.text = function(user, url) {
 Accounts.emailTemplates.resetPassword.from = function() {
   return "Mixr Dev Team <mixrdev123456@gmail.com>"
 };
-
-Accounts.emailTemplates.resetPassword.html = function(user, url) {
-  var variables_we_want_to_fill_from_template;
-  return SSR.render('passwordReset', variables_we_want_to_fill_from_template) + url
-};
-*/
 
 /* Verification email formatting */
 Accounts.emailTemplates.verifyEmail.subject = function(user) {
@@ -35,3 +27,16 @@ Accounts.emailTemplates.verifyEmail.text = function(user, url) {
 Accounts.emailTemplates.verifyEmail.from = function() {
   return "Mixr Dev Team <mixrdev123456@gmail.com>"
 };
+
+
+/*  LEAVE THIS
+  This stuff has to do with using custom HTML emails once the site is deployed
+
+
+SSR.compileTemplate('passwordReset', Assets.getText('forgotPassword.html'));
+
+Accounts.emailTemplates.resetPassword.html = function(user, url) {
+  var variables_we_want_to_fill_from_template;
+  return SSR.render('passwordReset', variables_we_want_to_fill_from_template) + url
+};
+*/
