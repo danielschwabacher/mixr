@@ -13,40 +13,13 @@ Template.mixrEventMap.onRendered(function(){
         Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagIncludes') ? Session.get('tagIncludes') : fullTagArray
-			console.log("tags are: " + includeTags)
 			client_collection = EventCollection.find(
 				{ event_tag: { $in: includeTags} }
 			);
-			if (client_collection.count() > 0){
-				client_collection.forEach(function(currentEvent){
-					console.log("creating markers on tagged map...")
-					createMarker(map.instance, currentEvent)
-				});
-			}
-			else{
-				console.log("no events... remove markers")
-			}
-			console.log("done")
+			client_collection.forEach(function(currentEvent){
+				createMarker(map.instance, currentEvent)
+			});
         });
-		/*
-		if (includeTags){
-			console.log("Tags selected within map")
-			client_collection = EventCollection.find(
-				{ event_tag: { $in: includeTags} },
-			);
-			client_collection.forEach(function(currentEvent){
-				console.log("creating markers on tagged map...")
-				createMarker(map.instance, currentEvent)
-			});
-		}
-		else{
-			console.log("No tags on map")
-			client_collection = EventCollection.find()
-			client_collection.forEach(function(currentEvent){
-				createMarker(map.instance, currentEvent)
-			});
-		}
-		*/
 	});
 });
 
