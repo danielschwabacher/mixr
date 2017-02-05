@@ -14,6 +14,10 @@ Template.navbarActive.events({
 	'click .sortByTagDropDown'(event){
 		event.preventDefault()
 		Modal.show('sortByTagsEventFilterModal')
+	},
+	'click .sortByTimeDropDown'(event){
+		event.preventDefault()
+		Modal.show('sortByTimeEventFilterModal')
 	}
 });
 

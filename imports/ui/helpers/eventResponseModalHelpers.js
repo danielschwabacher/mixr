@@ -3,9 +3,6 @@ import '../../api/Filters/tagFilter.js'
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
 
-Template.sortByTagsEventFilterModal.onCreated(function() {
-});
-
 Template.sortByTagsEventFilterModal.events({
 	'click #submitEventFilterTagSelections'(event, template){
 		event.preventDefault()
@@ -14,5 +11,11 @@ Template.sortByTagsEventFilterModal.events({
 		}).get();
 		tagHandler = new TagFilter(checkedValues)
 		tagHandler.insertMongoTags()
+	}
+});
+
+Template.sortByTimeEventFilterModal.events({
+	'click #submitEventFilterTimeSelections'(event, template){
+		console.log("filtering times...")
 	}
 });
