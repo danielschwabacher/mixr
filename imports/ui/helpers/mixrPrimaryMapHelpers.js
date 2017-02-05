@@ -1,6 +1,6 @@
 import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/mainMap.js';
-
+GLOBAL_MARKERS = []
 Template.registerHelper('checkIfOnEventPage', function(){
 	return Session.get('onPrimaryMap');
 });
@@ -9,27 +9,44 @@ Template.mixrEventMap.onRendered(function(){
 	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
 		var latLng = Geolocation.latLng();
-		Tracker.autorun(function(){
-			console.log("running... ")
-			includeTags = Session.get('tagIncludes')
-			if (includeTags){
-				console.log("have tags")
-				console.log("tags are: " + includeTags)
-				var client_collection = EventCollection.find(
-					{ event_tag: { $in: includeTags} },
-				);
+		fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
+        Tracker.autorun(() => {
+			removeMarkers()
+			includeTags = Session.get('tagIncludes') ? Session.get('tagIncludes') : fullTagArray
+			console.log("tags are: " + includeTags)
+			client_collection = EventCollection.find(
+				{ event_tag: { $in: includeTags} }
+			);
+			if (client_collection.count() > 0){
 				client_collection.forEach(function(currentEvent){
+					console.log("creating markers on tagged map...")
 					createMarker(map.instance, currentEvent)
 				});
 			}
 			else{
-				console.log("no tags")
-				var client_collection = EventCollection.find()
-				client_collection.forEach(function(currentEvent){
-					createMarker(map.instance, currentEvent)
-				});
+				console.log("no events... remove markers")
 			}
-		});
+			console.log("done")
+        });
+		/*
+		if (includeTags){
+			console.log("Tags selected within map")
+			client_collection = EventCollection.find(
+				{ event_tag: { $in: includeTags} },
+			);
+			client_collection.forEach(function(currentEvent){
+				console.log("creating markers on tagged map...")
+				createMarker(map.instance, currentEvent)
+			});
+		}
+		else{
+			console.log("No tags on map")
+			client_collection = EventCollection.find()
+			client_collection.forEach(function(currentEvent){
+				createMarker(map.instance, currentEvent)
+			});
+		}
+		*/
 	});
 });
 

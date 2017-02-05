@@ -23,7 +23,9 @@ TagFilter = function(rawTagIds){
 		}
 	}
 }
-
+TagFilter.prototype.insertMongoTags = function(){
+	Session.set('tagIncludes', this.mongoIncludes)
+}
 TagFilter.prototype.sayIds = function(){
 	for (item of this.mongoIncludes){
 		console.log("Item in tag filter (mongo includes) is (from sayIds): " + item)

@@ -12,7 +12,7 @@ Template.sortByTagsEventFilterModal.events({
 		var checkedValues = $('input:checkbox:checked').map(function() {
     		return this.id;
 		}).get();
-		tagsToInclude = new TagFilter(checkedValues)
-		Session.set('tagIncludes', tagsToInclude.mongoIncludes)
+		tagHandler = new TagFilter(checkedValues)
+		tagHandler.insertMongoTags()
 	}
 });

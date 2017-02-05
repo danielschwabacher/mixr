@@ -16,19 +16,19 @@ Template.createEventPage.events({
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"
 		if (literalEventTag == "sportsRadioButton"){
-			eventTagShortened = "Sports"
+			eventTagShortened = "sports"
 		}
 		else if (literalEventTag == "performancesRadioButton"){
-			eventTagShortened = "Performances"
+			eventTagShortened = "performances"
 		}
 		else if (literalEventTag == "artsRadioButton"){
-			eventTagShortened = "Arts"
+			eventTagShortened = "arts"
 		}
 		else if (literalEventTag == "academicInterestRadioButton"){
-		eventTagShortened = "Academic Interest"
+		eventTagShortened = "academicInterest"
 		}
 		else if (literalEventTag == "otherRadioButton"){
-			eventTagShortened = "Other"
+			eventTagShortened = "other"
 		}
 		else{
 			eventTagShortened = "Could not find tag"
