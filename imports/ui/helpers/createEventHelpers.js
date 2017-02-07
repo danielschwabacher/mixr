@@ -1,8 +1,16 @@
 import '../templates/createEvent.html';
 import '../../api/Event/cachedEvent.js';
+import flatpickr from 'flatpickr'
 
 Template.createEventPage.onRendered(function() {
-    this.$('.datetimepicker').datetimepicker();
+	//flatpickr(".flatpickr");
+	todayDate = new Date()
+	console.log("year is: " + todayDate.getFullYear())
+	$(".flatpickr").flatpickr({
+		minDate: "today",
+		maxDate: new Date(todayDate.getFullYear(), todayDate.getMonth(), (todayDate.getDate() + 10)),
+		enableTime: true
+	});
 });
 
 Template.createEventPage.events({
