@@ -7,6 +7,17 @@ Meteor.methods({
 			if (userID) {
 					return Accounts.sendVerificationEmail(userID);
 			}
-	}
-  // This is where the functions for forgotten passwords will go
+	},
+  
+  // Sends the user a password reset email
+  sendForgotPassword: function(userEmail) {
+      let userID = Accounts.findUserByEmail(userEmail)
+      if (userID) {
+          console.log("userID was valid");
+          return Accounts.sendResetPasswordEmail(userID);
+      } else {
+          alert();
+          console.log("The userID was NOT valid");
+      }
+  }
 });
