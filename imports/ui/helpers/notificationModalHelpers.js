@@ -25,6 +25,14 @@ Template.confirmEventModal.events({
 		Meteor.call("insertEvent", fullEventToConfirm, function (err, didInsert){
 			if (didInsert){
 				Modal.show('eventCreatedSuccessModal')
+				Meteor.call('sendCreatedEventEmail', function(err){
+					if(err){
+						console.log("Email notification for new event was NOT sent." + err)
+					}
+					else {
+						console.log("Email notification for new event was successfully sent!")
+					}
+				});
 			}
 			else{
 				Modal.show('eventNotCreatedModal')
