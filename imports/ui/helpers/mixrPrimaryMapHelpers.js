@@ -1,20 +1,25 @@
 import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/mainMap.js';
-
+GLOBAL_MARKERS = []
 Template.registerHelper('checkIfOnEventPage', function(){
 	return Session.get('onPrimaryMap');
 });
 
-Template.mixrEventMap.onCreated(function(){
+Template.mixrEventMap.onRendered(function(){
 	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
 		var latLng = Geolocation.latLng();
-		Meteor.subscribe("events", function() {
-			var client_collection = EventCollection.find();
+		fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
+        Tracker.autorun(() => {
+			removeMarkers()
+			includeTags = Session.get('tagIncludes') ? Session.get('tagIncludes') : fullTagArray
+			client_collection = EventCollection.find(
+				{ event_tag: { $in: includeTags} }
+			);
 			client_collection.forEach(function(currentEvent){
 				createMarker(map.instance, currentEvent)
 			});
-		});
+        });
 	});
 });
 

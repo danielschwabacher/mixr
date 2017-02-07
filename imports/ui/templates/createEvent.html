@@ -1,4 +1,5 @@
 <template name="createEventPage">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.3.5/themes/confetti.css">
 	<div class="padDown">
 		<div class="create-event-block">
 			<h1>Create a new event</h1>
@@ -10,13 +11,7 @@
 						<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
 					</div>
 					<textarea placeholder="Event Description (optional)" id="eventDescription"></textarea>
-					<div class="input-group datetimepicker calendarPadding">
-						<span class="input-group-addon">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</span>
-						<input class="set-due-date form-control" placeholder="Click calendar to pick date and time" type="text" id="eventDateTime" required/>
-					</div>
-					<h4>Event Tag:</h4>
+					<h5>Event Tag:</h5>
                     <div class="radio radio-mixr radio-inline">
                         <input type="radio" id="sportsRadioButton" name="eventTagAnswer" required>
                         <label for="sportsRadioButton">Sports</label>
@@ -37,6 +32,7 @@
 	                    <input type="radio" id="otherRadioButton" name="eventTagAnswer">
 	                    <label for="otherRadioButton">Other</label>
 	                </div>
+					<input class="flatpickr" id="eventDateTime" type="text" placeholder="Select Date..." required>
 					<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
 				</form>
 		</div>

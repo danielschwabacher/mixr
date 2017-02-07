@@ -1,8 +1,5 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-
 import '../templates/navbars.html';
-
+import '../templates/applyEventFilterModals.html'
 
 // Inactive (user not logged in handlers)
 Template.navbarInactive.events({
@@ -13,6 +10,14 @@ Template.navbarInactive.events({
 Template.navbarActive.events({
 	'click .navbar-signout'(event) {
 		Router.go('logout')
+	},
+	'click .sortByTagDropDown'(event){
+		event.preventDefault()
+		Modal.show('sortByTagsEventFilterModal')
+	},
+	'click .sortByTimeDropDown'(event){
+		event.preventDefault()
+		Modal.show('sortByTimeEventFilterModal')
 	}
 });
 

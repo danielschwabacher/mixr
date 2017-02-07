@@ -1,8 +1,16 @@
 import '../templates/createEvent.html';
 import '../../api/Event/cachedEvent.js';
+import flatpickr from 'flatpickr'
 
 Template.createEventPage.onRendered(function() {
-    this.$('.datetimepicker').datetimepicker();
+	//flatpickr(".flatpickr");
+	todayDate = new Date()
+	console.log("year is: " + todayDate.getFullYear())
+	$(".flatpickr").flatpickr({
+		minDate: "today",
+		maxDate: new Date(todayDate.getFullYear(), todayDate.getMonth(), (todayDate.getDate() + 10)),
+		enableTime: true
+	});
 });
 
 Template.createEventPage.events({
@@ -16,19 +24,19 @@ Template.createEventPage.events({
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"
 		if (literalEventTag == "sportsRadioButton"){
-			eventTagShortened = "Sports"
+			eventTagShortened = "sports"
 		}
 		else if (literalEventTag == "performancesRadioButton"){
-			eventTagShortened = "Performances"
+			eventTagShortened = "performances"
 		}
 		else if (literalEventTag == "artsRadioButton"){
-			eventTagShortened = "Arts"
+			eventTagShortened = "arts"
 		}
 		else if (literalEventTag == "academicInterestRadioButton"){
-		eventTagShortened = "Academic Interest"
+		eventTagShortened = "academicInterest"
 		}
 		else if (literalEventTag == "otherRadioButton"){
-			eventTagShortened = "Other"
+			eventTagShortened = "other"
 		}
 		else{
 			eventTagShortened = "Could not find tag"

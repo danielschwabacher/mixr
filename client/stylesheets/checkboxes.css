@@ -79,6 +79,13 @@
 .checkbox-success input[type="checkbox"]:checked + label::after {
   color: #fff; }
 
+ .checkbox-mixr input[type="checkbox"] + label::after {
+ background-color: #e570e7; }
+ .checkbox-mixr input[type="checkbox"]:checked + label::before {
+ border-color: #e570e7; }
+ .checkbox-mixr input[type="checkbox"]:checked + label::after {
+ background-color: #e570e7; }
+
 .radio {
   padding-left: 20px; }
   .radio label {
