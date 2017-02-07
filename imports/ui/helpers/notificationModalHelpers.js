@@ -55,16 +55,6 @@ Template.eventInformationModal.events({
 	'click .registerEventButton'(event, template){
 		Meteor.call("registerEvent", this, function(err, didRegister){
 			if (didRegister){
-
-				Meteor.call("sendRegisteredForEventEmail", this, function(err){
-					if (err) {
-						console.log("Email did NOT send correctly")
-					}
-					else {
-						console.log("Email sent successfully!!")
-					}
-				});
-
 				Modal.show("eventDidRegisterModal")
 			}
 			else{

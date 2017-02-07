@@ -58,7 +58,7 @@ Meteor.methods({
     var eventDescription = "Event Description: " + currentEvent.event_description
     var eventLocation = "Event Location: " + currentEvent.event_location
     var eventDate = "Event Date: " + currentEvent.event_dateTime
-    var emailText = "Here are the details of the event you registered for!" + eventDescription + eventLocation + eventDate
+    var emailText = "Here are the details of the event you registered for!\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
 
     if (currentUser && userEmail){
       Email.send({
