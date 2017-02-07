@@ -23,7 +23,7 @@ Meteor.methods({
   },
 
   // Sends the user an email when they create an event
-  sendCreatedEventEmail: function() {
+  sendCreatedEventEmail: function(eventTitle) {
 
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
@@ -31,12 +31,13 @@ Meteor.methods({
 
     let currentUser = Meteor.user();
     var userEmail = currentUser.emails[0].address;
+    var emailSubject = "'" + eventTitle + "' is now live on Mixr!"
 
     if (currentUser && userEmail) {
       Email.send({
         to: userEmail,
-        from: "mixrdev123456@gmail.com",
-        subject: "Your latest event on Mixr!",
+        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+        subject: emailSubject,
         text: "Congratulations! Your event is now live on Mixr.",
       });
     }
