@@ -24,22 +24,50 @@ Meteor.methods({
 
   // Sends the user an email when they create an event
   sendCreatedEventEmail: function(eventTitle) {
-
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     this.unblock();
 
     let currentUser = Meteor.user();
+
     var userEmail = currentUser.emails[0].address;
-    var emailSubject = "'" + eventTitle + "' is now live on Mixr!"
+    var emailText = "'" + eventTitle + "' is now live on Mixr!"
+    var emailSubject = "New event created on Mixr"
 
     if (currentUser && userEmail) {
       Email.send({
         to: userEmail,
         from: "Mixr Dev Team <mixrdev123456@gmail.com>",
         subject: emailSubject,
-        text: "Congratulations! Your event is now live on Mixr.",
+        text: emailText
       });
     }
+  },
+
+  // Sends the user an email when they register for an event with event details
+  sendRegisteredForEventEmail: function(currentEvent) {
+    // Let other method calls from the same client start running,
+    // without waiting for the email sending to complete.
+    this.unblock();
+
+    let currentUser = Meteor.user()
+
+    var userEmail = currentUser.emails[0].address
+
+    var emailSubject = "You've registered for '" + currentEvent.event_name + "' on Mixr!"
+    var eventDescription = "Event Description: " + currentEvent.event_description
+    var eventLocation = "Event Location: " + currentEvent.event_location
+    var eventDate = "Event Date: " + currentEvent.event_dateTime
+    var emailText = "Here are the details of the event you registered for!" + eventDescription + eventLocation + eventDate
+
+    if (currentUser && userEmail){
+      Email.send({
+        to: userEmail,
+        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+        subject: emailSubject,
+        text: emailText
+      });
+    }
+
   }
 });

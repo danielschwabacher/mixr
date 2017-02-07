@@ -84,8 +84,12 @@ Meteor.methods({
 					}
 				}
 			)
+			// call method to send email to user with the details of event
+			Meteor.call('sendRegisteredForEventEmail', eventToUpdate)
+
 			return 1;
 		}
+
 		else{
 			return 0
 		}
