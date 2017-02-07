@@ -3,6 +3,33 @@ import '../../api/Filters/tagFilter.js'
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
 
+// TODO: encapsulate this in a different method
+Template.sortByTagsEventFilterModal.onRendered(function() {
+	var sessionTags = Session.get('tagIncludes')
+	if (sessionTags){
+		for (item of sessionTags){
+			switch (item) {
+				case "sports":
+					$('#sportsCheckboxFilter').prop('checked', true);
+					break;
+	  			case "performances":
+					$('#performancesCheckboxFilter').prop('checked', true);
+					break;
+				case "arts":
+					$('#artsCheckBoxFilter').prop('checked', true);
+					break;
+				case "academicInterest":
+					$('#academicInterestFilter').prop('checked', true);
+					break;
+				case "other":
+					$('#otherFilter').prop('checked', true);
+					break;
+			}
+		}
+	}
+});
+
+
 Template.sortByTagsEventFilterModal.events({
 	'click #submitEventFilterTagSelections'(event, template){
 		event.preventDefault()
@@ -10,7 +37,8 @@ Template.sortByTagsEventFilterModal.events({
     		return this.id;
 		}).get();
 		tagHandler = new TagFilter(checkedValues)
-		tagHandler.insertMongoTags()
+		tagHandler.populateTags()
+		tagHandler.setSessionTags()
 	}
 });
 

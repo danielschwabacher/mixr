@@ -3,6 +3,9 @@
 TagFilter = function(rawTagIds){
 	this.rawIncludes = rawTagIds
 	this.mongoIncludes = []
+}
+
+TagFilter.prototype.populateTags = function(){
 	for (item of this.rawIncludes){
 		switch (item) {
 			case "sportsCheckboxFilter":
@@ -23,9 +26,10 @@ TagFilter = function(rawTagIds){
 		}
 	}
 }
-TagFilter.prototype.insertMongoTags = function(){
+TagFilter.prototype.setSessionTags = function(){
 	Session.set('tagIncludes', this.mongoIncludes)
 }
+
 TagFilter.prototype.sayIds = function(){
 	for (item of this.mongoIncludes){
 		console.log("Item in tag filter (mongo includes) is (from sayIds): " + item)
