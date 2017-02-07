@@ -8,7 +8,7 @@ Meteor.methods({
 			if (userID) {
 					return Accounts.sendVerificationEmail(userID);
 			}
-	},
+  	},
 
   // Sends the user a password reset email
   sendForgotPassword: function(userEmail) {

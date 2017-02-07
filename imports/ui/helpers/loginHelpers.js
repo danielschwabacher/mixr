@@ -9,7 +9,7 @@ Template.loginPage.events({
 		attemptLoginClient(loginEmail, loginPassword)
 	},
 
-	'click .forgotPassword'(event) {
+	'click .forgotPasswordLink'(event, template){
 		event.preventDefault()
 		Modal.show('forgotPasswordModal')
 	}

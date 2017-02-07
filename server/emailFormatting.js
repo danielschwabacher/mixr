@@ -3,7 +3,10 @@ Accounts.emailTemplates.siteName = "Mixr";
 Accounts.emailTemplates.from = "Mixr Dev Team <mixrdev123456@gmail.com>";
 
 
+
 /* Forgot Password Email Reset */
+
+/* Forgot password formatting */
 Accounts.emailTemplates.resetPassword.subject = function(user) {
   return "Reset Password"
 };
@@ -17,7 +20,10 @@ Accounts.emailTemplates.resetPassword.from = function() {
 };
 
 
+
 /* Account Verification Email */
+
+/* Verification email formatting */
 Accounts.emailTemplates.verifyEmail.subject = function(user) {
   return "Verify your Mixr account"
 };
@@ -38,6 +44,12 @@ Accounts.emailTemplates.verifyEmail.from = function() {
 LEAVE THIS IN:
 This is a template for custom HTML emails once Mixr is deployed
 
+=======
+/*  LEAVE THIS
+  This stuff has to do with using custom HTML emails once the site is deployed
+
+
+>>>>>>> master
 SSR.compileTemplate('passwordReset', Assets.getText('forgotPassword.html'));
 
 Accounts.emailTemplates.resetPassword.html = function(user, url) {
