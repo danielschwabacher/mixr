@@ -68,6 +68,45 @@ Meteor.methods({
         text: emailText
       });
     }
+  },
 
+  // Sends the user an email when an event they're registered for is deleted
+  sendEventDeletedEmail: function(eventID) {
+    // Let other method calls from the same client start running,
+    // without waiting for the email sending to complete.
+    this.unblock();  // Especially important here since the DB is being queried so much
+    var delEvent = EventCollection.findOne(
+      {
+        _id: eventID
+      }
+    )
+    var eName = delEvent.event_name
+    var eLocation = delEvent.event_location
+    var eDate = delEvent.event_dateTime
+    // Find every user registered to this event and notify them it was deleted
+    var registeredUsers = UserEventsCrossReferenceCollection.find(
+      {
+        'registered_events.eventId': eventID
+      }
+    )
+    // Send email to every user that was registered for the event
+    registeredUsers.forEach(function(doc) {
+      let currUserID = doc.user
+      let currUser = Meteor.users.findOne(
+        {
+          _id: currUserID
+        }
+      )
+      let currEmail = currUser.emails[0].address
+      if (currEmail){
+        Email.send({
+          to: currEmail,
+          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+          subject: "An event you registered for has been removed!",
+          text: "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted."
+        });
+      }
+    });
   }
+
 });
