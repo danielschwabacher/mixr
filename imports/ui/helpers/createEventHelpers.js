@@ -12,9 +12,6 @@ Template.createEventPage.onRendered(function() {
     });
 });
 
-Template.createEventPage.onDestroyed(function() {
-});
-
 Template.createEventPage.events({
 	'submit .createEventForm'(event, template) {
 		event.preventDefault()
