@@ -1,6 +1,7 @@
 import '../templates/settingsPage.html'
 import './settingPageModals.js'
 import './changePasswordModalHelpers.js'
+
 Template.settingsPage.onCreated(function () {
 	Session.set('default', true)
 });
