@@ -3,17 +3,20 @@ Accounts.emailTemplates.siteName = "Mixr";
 Accounts.emailTemplates.from = "Mixr Dev Team <mixrdev123456@gmail.com>";
 
 /* Forgot password formatting */
+SSR.compileTemplate('passwordReset', Assets.getText('forgotPasswordEmailTemplate.html'));
+
 Accounts.emailTemplates.resetPassword.subject = function(user) {
   return "Reset Password"
-};
-
-Accounts.emailTemplates.resetPassword.text = function(user, url) {
-  return "Click the following link to reset your password! \n" + url
 };
 
 Accounts.emailTemplates.resetPassword.from = function() {
   return "Mixr Dev Team <mixrdev123456@gmail.com>"
 };
+
+Accounts.emailTemplates.resetPassword.html = function(user, url) {
+  var emailData
+  return SSR.render('passwordReset', emailData) + url
+}
 
 /* Verification email formatting */
 Accounts.emailTemplates.verifyEmail.subject = function(user) {
