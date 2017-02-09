@@ -31,3 +31,4 @@ tsega:bootstrap3-datetimepicker
 session
 autopublish
 meteorhacks:ssr
+momentjs:moment

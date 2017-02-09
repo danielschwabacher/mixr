@@ -8,18 +8,14 @@ Template.createEventPage.onRendered(function() {
 		maxDate: new Date(todayDate.getFullYear(), todayDate.getMonth(), (todayDate.getDate() + 10)),
 		allowInputToggle: true,
 		stepping: 5,
-		format: moment().format()
+		format: "ddd, MMM Do, h:mmA",
     });
-	// $(".datetimepicker").prop('disabled', true);
 });
 
 Template.createEventPage.onDestroyed(function() {
 });
 
 Template.createEventPage.events({
-	'click .datetimepicker'(event, template){
- 		$('.datetimepicker').show()
-	},
 	'submit .createEventForm'(event, template) {
 		event.preventDefault()
 		var eventName = event.target.eventName.value;
