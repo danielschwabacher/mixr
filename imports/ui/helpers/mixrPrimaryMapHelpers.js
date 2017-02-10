@@ -9,10 +9,9 @@ Template.mixrEventMap.onRendered(function(){
 	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
 		var latLng = Geolocation.latLng();
-		fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
         Tracker.autorun(() => {
 			removeMarkers()
-			includeTags = Session.get('tagIncludes') ? Session.get('tagIncludes') : fullTagArray
+			includeTags = Session.get('tagIncludes')
 			client_collection = EventCollection.find(
 				{ event_tag: { $in: includeTags} }
 			);
