@@ -84,8 +84,12 @@ Meteor.methods({
 					}
 				}
 			)
+			// call method to send email to user with the details of event
+			Meteor.call('sendRegisteredForEventEmail', eventToUpdate)
+
 			return 1;
 		}
+
 		else{
 			return 0
 		}
@@ -125,6 +129,13 @@ Meteor.methods({
 	// remove event from big events collection
 	// remove EVERY reference to event in every users collection
 	deleteEvent: function(eventId){
+		// Call method to tell all registered users the event has been deleted
+		Meteor.call('sendEventDeletedEmail', eventId, function(err) {
+			if (err){
+				console.log('Email was NOT sent successfully' + err)
+			}
+		});
+
 		EventCollection.remove(
 			{_id: eventId},
 		)

@@ -31,4 +31,8 @@ tsega:bootstrap3-datetimepicker
 session
 autopublish
 meteorhacks:ssr
+<<<<<<< HEAD
 momentjs:moment
+=======
+email
+>>>>>>> 575616b282d0a1d744fe4f1db5b4ddef301130e2

@@ -22,9 +22,18 @@ Template.confirmEventModal.helpers({
 
 Template.confirmEventModal.events({
 	'click .confirmEventButton'(event, template){
+		var eventName = fullEventToConfirm.eventName
 		Meteor.call("insertEvent", fullEventToConfirm, function (err, didInsert){
 			if (didInsert){
 				Modal.show('eventCreatedSuccessModal')
+				Meteor.call('sendCreatedEventEmail', eventName, function(err){
+					if(err){
+						console.log("Email notification for new event was NOT sent." + err)
+					}
+					else {
+						console.log("Email notification for new event was successfully sent!")
+					}
+				});
 			}
 			else{
 				Modal.show('eventNotCreatedModal')
@@ -38,6 +47,7 @@ Template.confirmEventModal.events({
 		Router.go('create')
 		fullEventToConfirm.removeReference()
 		fullEventToConfirm = null
+		eventName = null
 	}
 });
 
