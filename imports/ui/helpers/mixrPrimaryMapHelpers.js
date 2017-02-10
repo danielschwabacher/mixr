@@ -34,8 +34,8 @@ Template.mixrEventMap.helpers({
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
 			return {
-				draggable: false,
-				scrollwheel: false,
+				draggable: true,
+				scrollwheel: true,
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
 				zoom: 15
 			};
