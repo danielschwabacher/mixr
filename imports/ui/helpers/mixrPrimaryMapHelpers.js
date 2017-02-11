@@ -11,7 +11,7 @@ Template.mixrEventMap.onRendered(function(){
 		var latLng = Geolocation.latLng();
         Tracker.autorun(() => {
 			removeMarkers()
-			includeTags = Session.get('tagIncludes')
+			includeTags = Session.get('tagFilterIncludes')
 			client_collection = EventCollection.find(
 				{ event_tag: { $in: includeTags} }
 			);

@@ -5,8 +5,8 @@ import './routes/userControlRoutes.js'
 Modal.allowMultiple = true
 if (Meteor.isClient) {
 	fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
-	Session.set('eventTagFilterIncludes', null)
-	Session.set('tagIncludes', fullTagArray)
+	Session.set('tagFilterIncludes', fullTagArray)
+	Session.set('timeFilterHours', 24)
 	// console.log("current userId: " + Meteor.userId())
 	Meteor.startup(function() {
 		GoogleMaps.load({
