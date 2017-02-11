@@ -20,8 +20,7 @@ Template.createEventPage.events({
 		var eventLocation = event.target.eventLocation.value;
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
-		var eventTimeStamp = moment(eventDateTime, "ddd, MMM Do, h:mmA").utcOffset(-420);
-		console.log("timestamp: " + eventTimeStamp)
+		var eventTimeStamp = moment(eventDateTime, "ddd, MMM Do, h:mmA").unix()
 
 		var eventSelectedTag = $("input[type='radio']:checked");
 		var literalEventTag = eventSelectedTag.attr('id');
@@ -48,6 +47,7 @@ Template.createEventPage.events({
 
 		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
 		clientTempCachedEvent.createReference()
+		// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
 		// used to confirm route in IronRouter
 		Router.go('pickLocation')
