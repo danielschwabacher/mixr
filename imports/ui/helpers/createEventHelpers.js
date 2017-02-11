@@ -1,6 +1,6 @@
 import '../templates/createEvent.html';
 import '../../api/Event/cachedEvent.js';
-// var momentTimeZone = require('moment-timezone');
+
 
 Template.createEventPage.onRendered(function() {
 	todayDate = new Date()

@@ -1,5 +1,6 @@
 import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/mainMap.js';
+import '../../api/Time/converter.js'
 GLOBAL_MARKERS = []
 Template.registerHelper('checkIfOnEventPage', function(){
 	return Session.get('onPrimaryMap');
@@ -13,8 +14,14 @@ Template.mixrEventMap.onRendered(function(){
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
 			timeFilter = Session.get('timeFilterHours')
+			currentUnixTime = moment().unix()
+			additionalSeconds = hoursToSeconds(timeFilter)
+			unixTimeRange = currentUnixTime + additionalSeconds
 			client_collection = EventCollection.find(
-				{ event_tag: { $in: includeTags} }
+				{
+					event_tag: { $in: includeTags},
+					event_timestamp: {$lte: unixTimeRange}
+				}
 			);
 			client_collection.forEach(function(currentEvent){
 				createMarker(map.instance, currentEvent)

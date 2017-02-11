@@ -1,9 +1,8 @@
 import '../templates/eventResponseModals.html';
 import '../../api/Filters/tagFilter.js'
+
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
-// import rangeslider-js from 'rangeslider-js';
-// var rangesliderJs = require('rangeslider-js')
 var Slider = require("bootstrap-slider");
 
 // TODO: encapsulate this in a different method
@@ -64,6 +63,5 @@ Template.sortByTimeEventFilterModal.onRendered(function() {
 Template.sortByTimeEventFilterModal.events({
 	'click #submitEventFilterTimeSelections'(event, template){
 		Session.set('timeFilterHours', timeSlider.getValue())
-		// console.log("time until event: " + Session.get('timeFilterHours'))
 	}
 });
