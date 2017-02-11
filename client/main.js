@@ -6,7 +6,7 @@ Modal.allowMultiple = true
 if (Meteor.isClient) {
 	fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
 	Session.set('tagFilterIncludes', fullTagArray)
-	Session.set('timeFilterHours', 24)
+	Session.set('timeFilterHours', 72)
 	// console.log("current userId: " + Meteor.userId())
 	Meteor.startup(function() {
 		GoogleMaps.load({
