@@ -2,6 +2,11 @@ import '../../ui/helpers/notificationModalHelpers.js'
 
 createMarker = function(mapInstance, eventToDisplay){
 	eventPosition = {lat: eventToDisplay.event_position.latitude, lng: eventToDisplay.event_position.longitude}
+	eventName = eventToDisplay.event_name
+	eventDescription = eventToDisplay.event_description
+	// console.log(JSON.stringify(eventToDisplay))
+	eventTag = eventToDisplay.event_tag
+	x = eventToDisplay
 	var eventMarker = new google.maps.Marker({
 		position: eventPosition,
 		map: mapInstance
@@ -10,7 +15,13 @@ createMarker = function(mapInstance, eventToDisplay){
 		Modal.show('eventInformationModal', eventToDisplay)
 	});
 	var markerWindow = new google.maps.InfoWindow({
-    	content: JSON.stringify(eventToDisplay)
+    	content: '<div id="iw-container">' +
+                    '<div class="iw-content">' +
+                      '<div class="iw-subTitle">Event name: </div>' + eventName +
+					  '<div class="iw-subTitle">Event description: </div>' + eventDescription +
+					  '<div class="iw-subTitle">Tag: </div>' + eventTag +
+                    '</div>' +
+                  '</div>'
   	});
 	eventMarker.addListener("mouseover", function() {
     	markerWindow.open(mapInstance, eventMarker);
