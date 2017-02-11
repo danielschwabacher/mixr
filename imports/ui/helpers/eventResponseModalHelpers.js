@@ -64,6 +64,6 @@ Template.sortByTimeEventFilterModal.onRendered(function() {
 Template.sortByTimeEventFilterModal.events({
 	'click #submitEventFilterTimeSelections'(event, template){
 		Session.set('timeFilterHours', timeSlider.getValue())
-		console.log("time until event: " + Session.get('timeFilterHours'))
+		// console.log("time until event: " + Session.get('timeFilterHours'))
 	}
 });

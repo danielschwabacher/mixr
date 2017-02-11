@@ -12,6 +12,7 @@ Template.mixrEventMap.onRendered(function(){
         Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
+			timeFilter = Session.get('timeFilterHours')
 			client_collection = EventCollection.find(
 				{ event_tag: { $in: includeTags} }
 			);

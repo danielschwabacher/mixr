@@ -1,5 +1,6 @@
 import '../templates/createEvent.html';
 import '../../api/Event/cachedEvent.js';
+// var momentTimeZone = require('moment-timezone');
 
 Template.createEventPage.onRendered(function() {
 	todayDate = new Date()
@@ -19,9 +20,13 @@ Template.createEventPage.events({
 		var eventLocation = event.target.eventLocation.value;
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
+		var eventTimeStamp = moment(eventDateTime, "ddd, MMM Do, h:mmA").utcOffset(-420);
+		console.log("timestamp: " + eventTimeStamp)
+
 		var eventSelectedTag = $("input[type='radio']:checked");
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"
+
 		if (literalEventTag == "sportsRadioButton"){
 			eventTagShortened = "sports"
 		}
@@ -40,7 +45,8 @@ Template.createEventPage.events({
 		else{
 			eventTagShortened = "Could not find tag"
 		}
-		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTagShortened)
+
+		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
 		clientTempCachedEvent.createReference()
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
 		// used to confirm route in IronRouter

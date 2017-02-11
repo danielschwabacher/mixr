@@ -9,6 +9,7 @@ Meteor.methods({
 			event_location: eventToInsert.eventLoc,
 			event_description: eventToInsert.eventDescription,
 			event_dateTime: eventToInsert.eventDateTime,
+			event_timestamp: eventToInsert.eventTimeStamp,
 			event_tag: eventToInsert.eventTagType,
 			event_position: eventToInsert.coordinates,
 			number_of_users_attending: 1
