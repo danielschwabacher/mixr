@@ -9,6 +9,15 @@ createMarker = function(mapInstance, eventToDisplay){
 	eventMarker.addListener('click', function() {
 		Modal.show('eventInformationModal', eventToDisplay)
 	});
+	var markerWindow = new google.maps.InfoWindow({
+    	content: JSON.stringify(eventToDisplay)
+  	});
+	eventMarker.addListener("mouseover", function() {
+    	markerWindow.open(mapInstance, eventMarker);
+	});
+	eventMarker.addListener('mouseout', function(){
+		markerWindow.close();
+	});
 	GLOBAL_MARKERS.push(eventMarker)
 }
 
