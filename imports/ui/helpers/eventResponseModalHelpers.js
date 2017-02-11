@@ -52,8 +52,8 @@ Template.sortByTimeEventFilterModal.onRendered(function() {
 		min: 1,
 		max: 72,
 		ticks: [1, 24, 48, 72],
+		ticks_positions: [0, 33, 66, 100],
 		ticks_labels: ["1 hour", "1 day", "2 days", "3 days"],
-		tooltip_position: 'top',
 		formatter: function(value) {
 			return value + " hours"
 		},
