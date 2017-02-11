@@ -79,6 +79,9 @@ Template.eventInformationModal.helpers({
 	getMarkerEventDateTime: function(){
 		return this.event_dateTime
 	},
+	getMarkerEventTag: function(){
+		return this.event_tag
+	},
 	getMarkerEventNumberRegistered: function(){
 		return this.number_of_users_attending
 	}
