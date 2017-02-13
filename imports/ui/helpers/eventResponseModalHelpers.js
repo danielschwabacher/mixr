@@ -68,5 +68,8 @@ Template.sortByTimeEventFilterModal.onRendered(function() {
 Template.sortByTimeEventFilterModal.events({
 	'click #submitEventFilterTimeSelections'(event, template){
 		Session.set('timeFilterHours', timeSlider.getValue())
+	},
+	'click #resetTimeButton'(event, template){
+		Session.set('timeFilterHours', 72)
 	}
 });
