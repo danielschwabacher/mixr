@@ -41,6 +41,11 @@ Template.sortByTagsEventFilterModal.events({
 		tagHandler = new TagFilter(checkedValues)
 		tagHandler.populateTags()
 		tagHandler.setSessionTags()
+	},
+	'click #resetTagsButton'(event, template){
+		event.preventDefault()
+		fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
+		Session.set('tagFilterIncludes', fullTagArray)
 	}
 });
 
