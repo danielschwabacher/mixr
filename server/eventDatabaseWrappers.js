@@ -2,8 +2,10 @@
 // Event objects and the Events database collection.
 //userEvents collection
 Meteor.methods({
-	insertEvent: function(eventToInsert){
+	insertEvent: function(eventToInsert, expiration){
+		expirationTime = moment((expiration*1000)).toDate()
 		EventCollection.insert({
+			"expireAt": new Date(expirationTime),
 			created_by: Meteor.userId(),
 			event_name: eventToInsert.eventName,
 			event_location: eventToInsert.eventLoc,

@@ -23,7 +23,8 @@ Template.confirmEventModal.helpers({
 Template.confirmEventModal.events({
 	'click .confirmEventButton'(event, template){
 		var eventName = fullEventToConfirm.eventName
-		Meteor.call("insertEvent", fullEventToConfirm, function (err, didInsert){
+		var eventExpiration = fullEventToConfirm.eventTimeStamp
+		Meteor.call("insertEvent", fullEventToConfirm, eventExpiration, function (err, didInsert){
 			if (didInsert){
 				Modal.show('eventCreatedSuccessModal')
 				Meteor.call('sendCreatedEventEmail', eventName, function(err){
