@@ -1,7 +1,8 @@
 import '../templates/accountSettingsPage.html'
-// import './settingPageModals.js'
 import './changePasswordModalHelpers.js'
 
-Template.accountSettingsPage.onCreated(function () {
-	console.log("on settings")
+Template.accountSettingsPage.events({
+	'click #changePasswordLink'(event, template){
+		Modal.show("changePasswordModal")
+	}
 });
