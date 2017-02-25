@@ -1,22 +1,8 @@
 <template name="accountSettingsPage">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	{{> leftSettingsPane}}
-	{{> activeContent}}
+	{{> mapSettingsPanel}}
 </template>
 
-<template name="activeContent">
-	{{> Template.dynamic template=getCurrentFocus}}
-</template>
-
-<template name="leftSettingsPane">
-	<div class="navbar navbar-inverse navbar-fixed-left settings-pane-left">
-		<ul class="nav navbar-nav">
-			<li class="mapSettingsLink"><a href="#">Map Settings</a></li>
-			<li class="manageEventsLink"><a href="#">Manage my events</a></li>
-			<li class="changePasswordLink"><a href="#">Change Password</a></li>
-		</ul>
-	</div>
-</template>
 
 <template name="mapSettingsPanel">
 	<div class="activeDiv">
