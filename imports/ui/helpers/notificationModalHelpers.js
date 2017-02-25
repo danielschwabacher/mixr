@@ -57,6 +57,7 @@ Template.eventInformationModal.events({
 		Meteor.call("registerEvent", this, function(err, didRegister){
 			if (didRegister){
 				Modal.show("eventDidRegisterModal")
+				Meteor.call('sendRegisteredForEventEmail', this)
 			}
 			else{
 				Modal.show("eventAlreadyRegisteredModal")

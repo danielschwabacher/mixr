@@ -67,6 +67,7 @@ Meteor.methods({
 				},
 				function(err, eventId){
 					if (err){
+						console.log("return err -- !isOwner !isRegistered")
 						return 0;
 					}
 				}
@@ -83,17 +84,19 @@ Meteor.methods({
 				{upsert: true},
 				function(err, eventId){
 					if (err){
+						console.log("return err -- crossReference")
 						return 0;
 					}
 				}
 			)
 			// call method to send email to user with the details of event
-			Meteor.call('sendRegisteredForEventEmail', eventToUpdate)
-
+			// Meteor.call('sendRegisteredForEventEmail', eventToUpdate)
+			console.log("return success")
 			return 1;
 		}
 
 		else{
+			console.log("return err -- catchAll")
 			return 0
 		}
 	},

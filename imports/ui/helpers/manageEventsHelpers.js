@@ -79,6 +79,7 @@ Template.dynamicModalRegistered.events({
 Template.dynamicModalCreated.events({
 	'click .deleteEventCreatedModal'(event, template){
 		var self = this
+		console.log("trying to delete: " + self._id)
 		Meteor.call('deleteEvent', self._id)
 	}
 });
