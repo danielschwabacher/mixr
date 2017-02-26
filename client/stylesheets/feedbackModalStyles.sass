@@ -1,0 +1,26 @@
+$color_shark_approx: #282929
+$control_color: #e570e7
+$color_celeste_approx: #ccc
+$light_shark: #555
+$white: #fff
+
+.text-area-extend
+	width: 89%
+	height: 100px
+	border-radius: 5px
+	border: 1px solid #ccc
+	font-weight: bold
+    margin-bottom: 10px
+	font-size: 14px
+	padding:  10px 20px 10px 20px
+	outline: none
+	resize: none
+	color:#555
+
+.feedback-modal-block
+	textarea
+		@extend .text-area-extend
+		&:active
+			border: 3px solid $control_color
+		&:focus
+			border: 3px solid $control_color

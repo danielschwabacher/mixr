@@ -1,8 +1,19 @@
 import '../templates/accountSettingsPage.html'
+import '../templates/feedBackModal.html'
 import './changePasswordModalHelpers.js'
 
 Template.accountSettingsPage.events({
 	'click #changePasswordLink'(event, template){
 		Modal.show("changePasswordModal")
+	},
+	'click #giveFeedbackLink'(event, template){
+		Modal.show("feedbackModalDisplay")
+	}
+});
+
+Template.feedbackModalDisplay.events({
+	'submit .sendFeedbackModalForm'(event, template) {
+		event.preventDefault()
+		console.log("send feedback clicked.")
 	}
 });
