@@ -29,7 +29,6 @@ dburles:google-maps
 mdg:geolocation
 tsega:bootstrap3-datetimepicker
 session
-autopublish
 meteorhacks:ssr
 momentjs:moment
 email

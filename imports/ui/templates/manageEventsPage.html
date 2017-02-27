@@ -1,6 +1,7 @@
 <template name="manageEventsPanel">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 	<div class="activeDiv">
+		{{#if Template.subscriptionsReady}}
 		<div class="row">
 			My Created Events:
 			{{#each getAssociatedEventNames getOwnedEventIds}}
@@ -14,8 +15,19 @@
 				{{> eventRegisteredNameHolder}}
 			{{/each}}
 		</div>
+		{{else}}
+			{{> loader}}
+  		{{/if}}
 	</div>
 </template>
+
+
+<template name="loader">
+	Loading...
+</template>
+
+
+
 
 <template name="eventCreatedNameHolder">
 	<a class="nameLinkCreated"><li>{{ eventName }}</li></a>

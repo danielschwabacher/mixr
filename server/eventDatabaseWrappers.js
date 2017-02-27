@@ -30,7 +30,8 @@ Meteor.methods({
 							eventId: eventId,
 						}
 					}},
-					{upsert: true}, function(err, eventId){
+					{upsert: true},
+					function(err, eventId){
 						if (err){
 							return 0;
 						}
@@ -45,6 +46,7 @@ Meteor.methods({
 		// User must not own event and must not already be registered
 		// if the user has not already registered
 		// is true if user owns event
+		event_dateTime = eventToUpdate.eventDateTime
 		var isOwner = UserEventsCrossReferenceCollection.findOne(
 			{
 				user: Meteor.userId(),
@@ -101,7 +103,7 @@ Meteor.methods({
 		}
 	},
 	// unregistering an event
-	// decrease the number attending by 1 in bigEvents table
+	// decrease the number attending by 1 in the big Events table
 	// remove reference to event in user's crossReference table
 	unregisterEvent: function(eventId){
 		EventCollection.update(
@@ -132,7 +134,7 @@ Meteor.methods({
 		return 1
 	},
 	// deleting an event
-	// remove event from big events collection
+	// remove event from big Events collection
 	// remove EVERY reference to event in every users collection
 	deleteEvent: function(eventId){
 		// Call method to tell all registered users the event has been deleted
