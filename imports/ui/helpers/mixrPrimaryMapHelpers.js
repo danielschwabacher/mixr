@@ -2,8 +2,13 @@ import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/mainMap.js';
 import '../../api/Time/converter.js'
 GLOBAL_MARKERS = []
+
 Template.registerHelper('checkIfOnEventPage', function(){
 	return Session.get('onPrimaryMap');
+});
+
+Template.mixrEventMap.onCreated(function(){
+	this.eventsCollection = this.subscribe('events');
 });
 
 Template.mixrEventMap.onRendered(function(){

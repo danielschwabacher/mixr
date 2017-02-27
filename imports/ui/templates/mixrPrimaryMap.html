@@ -1,9 +1,20 @@
 <template name="mixrEventMap">
-		<div class="mapDirectionsCallout">
-		</div>
-        <div class="container-fluid">
-            <div id="fullMapDiv">
+	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
+	<div class="mapDirectionsCallout">
+	</div>
+	{{#if Template.subscriptionsReady}}
+		<div class="container-fluid">
+			<div id="fullMapDiv">
 				{{> googleMap name="mixrMap" options=initPrimaryEventMapOptions}}
 			</div>
 		</div>
+		{{else}}
+			{{> mapLoader}}
+	{{/if}}
+</template>
+
+<template name="mapLoader">
+	<div class="loading">
+		Fetching events around you...
+	</div>
 </template>
