@@ -29,7 +29,10 @@ Template.mixrEventMap.onRendered(function(){
 				}
 			);
 			client_collection.forEach(function(currentEvent){
-				createMarker(map.instance, currentEvent)
+				temp_marker = new Marker(map.instance, currentEvent)
+				// console.log("temp_marker is: " + temp_marker)
+				temp_marker.createObjectMarker()
+				// temp_marker = null
 			});
         });
 	});

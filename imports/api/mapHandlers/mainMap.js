@@ -1,35 +1,47 @@
 import '../../ui/helpers/notificationModalHelpers.js'
+import '../InfoBubble/infobubble-compiled.js'
 
-createMarker = function(mapInstance, eventToDisplay){
-	eventPosition = {lat: eventToDisplay.event_position.latitude, lng: eventToDisplay.event_position.longitude}
-	eventName = eventToDisplay.event_name
-	eventDescription = eventToDisplay.event_description
-	// console.log(JSON.stringify(eventToDisplay))
-	eventTag = eventToDisplay.event_tag
-	x = eventToDisplay
+
+Marker = function(mapInstance, content){
+	this.map = mapInstance
+	this.eventInfo = content
+}
+Marker.prototype.getName = function(){
+	return this.eventInfo.event_name;
+}
+Marker.prototype.createObjectMarker = function(){
+	// console.log("creating marker: " + JSON.stringify(this.eventInfo))
+	eventPosition = {lat: this.eventInfo.event_position.latitude, lng: this.eventInfo.event_position.longitude}
+	eventName = this.eventInfo.event_name
+	eventDescription = this.eventInfo.event_description
+	eventTag = this.eventInfo.event_tag
+
+
 	var eventMarker = new google.maps.Marker({
 		position: eventPosition,
-		map: mapInstance
-	})
-	eventMarker.addListener('click', function() {
-		Modal.show('eventInformationModal', eventToDisplay)
+		map: this.map
 	});
-	var markerWindow = new google.maps.InfoWindow({
-    	content: '<div id="iw-container">' +
-                    '<div class="iw-content">' +
-                      '<div class="iw-subTitle">Event name: </div>' + eventName +
-					  '<div class="iw-subTitle">Event description: </div>' + eventDescription +
-					  '<div class="iw-subTitle">Tag: </div>' + eventTag +
-                    '</div>' +
-                  '</div>'
-  	});
-	eventMarker.addListener("mouseover", function() {
-    	markerWindow.open(mapInstance, eventMarker);
+
+	markerInfo = '<div id="iw-container">' + '<div class="iw-content">' + '<div class="iw-subTitle">Event name: </div>' + eventName +'<div class="iw-subTitle">Event description: </div>' + eventDescription +'<div class="iw-subTitle">Tag: </div>' + eventTag + '</div>' + '</div>'
+
+	eventDisplayBubble = new InfoBubble({
+		content: markerInfo,
+		backgroundColor: 'black',
+		borderRadius: 4,
+		arrowSize: 10,
+		maxWidth: 300,
+		disableAutoPan: true
 	});
-	eventMarker.addListener('mouseout', function(){
-		markerWindow.close();
+
+	google.maps.event.addListener(eventMarker, 'click', function() {
+		console.log("clicked marker: " + this.eventInfo.event_name)
+		eventDisplayBubble.setContent(markerInfo);
+		eventDisplayBubble.open(this.map, eventMarker);
 	});
+
 	GLOBAL_MARKERS.push(eventMarker)
+
+	return 0;
 }
 
 removeMarkers = function(mapInstance){
