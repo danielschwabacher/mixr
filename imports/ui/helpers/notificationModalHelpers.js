@@ -1,6 +1,7 @@
-import '../templates/notificationModals.html';
+import '../templates/notificationModals.html'
 import './eventResponseModalHelpers.js'
 import './pickLocationHelpers.js'
+import '../templates/createEvent.html'
 
 Template.confirmEventModal.helpers({
 	returnEventName: function() {
@@ -53,14 +54,19 @@ Template.confirmEventModal.events({
 
 Template.eventInformationModal.events({
 	'click .registerEventButton'(event, template){
-		Meteor.call("registerEvent", this, function(err, didRegister){
-			if (didRegister){
-				Modal.show("eventDidRegisterModal")
-			}
-			else{
-				Modal.show("eventAlreadyRegisteredModal")
-			}
-		});
+		if (Meteor.user() && Meteor.user().emails[0].verified){
+			Meteor.call("registerEvent", this, function(err, didRegister){
+				if (didRegister){
+					Modal.show("eventDidRegisterModal")
+				}
+				else{
+					Modal.show("eventAlreadyRegisteredModal")
+				}
+			});
+		}
+		else {
+			Modal.show("emailNotVerifiedModal")
+		}
 	}
 });
 

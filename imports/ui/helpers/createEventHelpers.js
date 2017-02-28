@@ -51,7 +51,6 @@ Template.createEventPage.events({
 
 Template.emailNotVerifiedModal.events({
 	'click #resendVerificationLink'(event, template){
-		console.log("Clicking the button worked")
 		Meteor.call('sendVerificationLink', (error, response) => {
 			if (error) {
 				console.log("Error sending verification email " + response);
