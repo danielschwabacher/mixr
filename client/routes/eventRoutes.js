@@ -1,6 +1,7 @@
 import '../../imports/ui/helpers/mixrPrimaryMapHelpers.js';
 import '../../imports/ui/helpers/createEventHelpers.js';
 import '../../imports/ui/helpers/pickLocationHelpers.js';
+import '../../imports/ui/templates/createEvent.html';
 
 Router.route('/events', {
 	onBeforeAction: function () {
@@ -22,6 +23,9 @@ Router.route('/create', {
 			if (!Meteor.loggingIn()){
 				Router.go('signup');
 			}
+		}
+		if (!Meteor.user().emails[0].verified) {
+			this.render('emailNotVerifiedModal')
 		}
 		else{
 			this.render('createEventPage')
