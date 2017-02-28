@@ -24,9 +24,6 @@ Router.route('/create', {
 				Router.go('signup');
 			}
 		}
-		if (!Meteor.user().emails[0].verified) {
-			this.render('emailNotVerifiedModal')
-		}
 		else{
 			this.render('createEventPage')
 		}

@@ -1,7 +1,6 @@
 import '../templates/createEvent.html';
 import '../../api/Event/cachedEvent.js';
 
-
 Template.createEventPage.onRendered(function() {
 	todayDate = new Date()
     $('.datetimepicker').datetimepicker({
@@ -51,8 +50,25 @@ Template.createEventPage.events({
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
 		// used to confirm route in IronRouter
 		Router.go('pickLocation')
+	},
+	'click #resendEmailButton'(event, template) {
+		Meteor.call('sendVerificationLink', (error, response) => {
+ 			if (error) {
+				console.log("Error sending verification email " + response);
+			}
+		});
+		Router.go('home')
+	}
+
+});
+
+
+Template.createEventPage.helpers({
+	isVerified: function(){
+		return Meteor.user().emails[0].verified
 	}
 });
+
 
 
 Template.emailNotVerifiedModal.events({
