@@ -33,14 +33,14 @@
 				<li><a href="{{pathFor 'events'}}">Events around me</a></li>
 			</ul>
 			<ul class="nav navbar-nav nb-center">
-				<li><a href="{{pathFor 'settings'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
+				<li><a href="{{pathFor 'manage'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
 				<li><a href="{{pathFor 'create'}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
 				{{#if checkIfOnEventPage}}
 					{{> applyEventFiltersSection}}
 				{{/if}}
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{{pathFor 'settings'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
+				<li><a href="{{pathFor 'account'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
 				<li class="navbar-signout"><a href="{{pathFor 'logout'}}"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
 			</ul>
 		</div>

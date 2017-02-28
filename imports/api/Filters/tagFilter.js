@@ -27,7 +27,7 @@ TagFilter.prototype.populateTags = function(){
 	}
 }
 TagFilter.prototype.setSessionTags = function(){
-	Session.set('tagIncludes', this.mongoIncludes)
+	Session.set('tagFilterIncludes', this.mongoIncludes)
 }
 
 TagFilter.prototype.sayIds = function(){

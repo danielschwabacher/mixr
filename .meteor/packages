@@ -17,7 +17,6 @@ standard-minifier-js@1.2.1    # JS minifier run for production mode
 es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
 ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.2.1            # Server-side component of the `meteor shell` command
-
 twbs:bootstrap
 fourseven:scss
 fortawesome:fontawesome
@@ -28,8 +27,7 @@ peppelg:bootstrap-3-modal
 dburles:google-maps
 mdg:geolocation
 tsega:bootstrap3-datetimepicker
-session@1.1.7
-autopublish@1.0.7
+session
 meteorhacks:ssr
 momentjs:moment
 email@1.1.18

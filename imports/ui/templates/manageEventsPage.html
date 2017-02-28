@@ -1,47 +1,33 @@
-<template name="settingsPage">
-	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	{{> leftSettingsPane}}
-	{{> activeContent}}
-</template>
-
-<template name="activeContent">
-	{{> Template.dynamic template=getCurrentFocus}}
-</template>
-
-<template name="leftSettingsPane">
-	<div class="navbar navbar-inverse navbar-fixed-left settings-pane-left">
-		<ul class="nav navbar-nav">
-			<li class="mapSettingsLink"><a href="#">Map Settings</a></li>
-			<li class="manageEventsLink"><a href="#">Manage my events</a></li>
-			<li class="changePasswordLink"><a href="#">Change Password</a></li>
-		</ul>
-	</div>
-</template>
-
-<template name="mapSettingsPanel">
-	<div class="activeDiv">
-		<div class="row">
-			On map settings
-		</div>
-	</div>
-</template>
-
 <template name="manageEventsPanel">
+	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 	<div class="activeDiv">
+		{{#if Template.subscriptionsReady}}
 		<div class="row">
 			My Created Events:
 			{{#each getAssociatedEventNames getOwnedEventIds}}
 				{{> eventCreatedNameHolder}}
 			{{/each}}
 		</div>
+		<hr class="section-heading-spacer">
 		<div class="row">
 			My Registered Events:
 			{{#each getAssociatedEventNames getRegisteredEventIds}}
 				{{> eventRegisteredNameHolder}}
 			{{/each}}
 		</div>
+		{{else}}
+			{{> manageEventLoader}}
+  		{{/if}}
 	</div>
 </template>
+
+
+<template name="manageEventLoader">
+	Loading your events...
+</template>
+
+
+
 
 <template name="eventCreatedNameHolder">
 	<a class="nameLinkCreated"><li>{{ eventName }}</li></a>
@@ -67,8 +53,8 @@
 					<h3>Number of People Registered: {{returnContextualNumberAttending}}</h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Nevermind</button>
-					<button type="button" class="btn btn-danger deleteEventCreatedModal" data-dismiss="modal">Delete Event</button>
+					<button type="button" class="btn btn-info btn-float-left" data-dismiss="modal">Nevermind</button>
+					<button type="button" class="btn btn-danger deleteEventCreatedModal btn-float-right" data-dismiss="modal">Delete Event</button>
 				</div>
 			</div>
 		</div>
@@ -90,8 +76,8 @@
 					<h3>Number of People Registered: {{returnContextualNumberAttending}}</h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-dismiss="modal">Nevermind</button>
-					<button type="button" class="btn btn-danger unregisterEventRegisteredModal" data-dismiss="modal">Unregister</button>
+					<button type="button" class="btn btn-info btn-float-left" data-dismiss="modal">Nevermind</button>
+					<button type="button" class="btn btn-danger unregisterEventRegisteredModal btn-float-right" data-dismiss="modal">Unregister</button>
 				</div>
 			</div>
 		</div>

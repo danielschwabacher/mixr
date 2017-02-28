@@ -24,7 +24,8 @@ Template.confirmEventModal.helpers({
 Template.confirmEventModal.events({
 	'click .confirmEventButton'(event, template){
 		var eventName = fullEventToConfirm.eventName
-		Meteor.call("insertEvent", fullEventToConfirm, function (err, didInsert){
+		var eventExpiration = fullEventToConfirm.eventTimeStamp
+		Meteor.call("insertEvent", fullEventToConfirm, eventExpiration, function (err, didInsert){
 			if (didInsert){
 				Modal.show('eventCreatedSuccessModal')
 				Meteor.call('sendCreatedEventEmail', eventName, function(err){
@@ -84,6 +85,9 @@ Template.eventInformationModal.helpers({
 	},
 	getMarkerEventDateTime: function(){
 		return this.event_dateTime
+	},
+	getMarkerEventTag: function(){
+		return this.event_tag
 	},
 	getMarkerEventNumberRegistered: function(){
 		return this.number_of_users_attending

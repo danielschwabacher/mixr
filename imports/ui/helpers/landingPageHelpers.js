@@ -6,7 +6,7 @@ Template.landingPage.events({
     		'scrollTop': $('#whatIsMixr').offset().top
 		}, 1000);
 	},
-	'click .signUpBigButton'(event){
-		console.log('clicked!')
+	'click #signupBannerButton'(event){
+		Router.go('signup');
 	}
 });
