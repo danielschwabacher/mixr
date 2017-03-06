@@ -12,7 +12,8 @@ Meteor.startup(() => {
 		return UserEventsCrossReferenceCollection.find({})
 	});
 	CrossReferenceSpider = new CrossReferenceDaemon()
-	Meteor.setInterval(purge, 10000)
+	// run purge once per day (every 86400000 seconds) 
+	Meteor.setInterval(purge, 86400000)
 });
 
 purge = function(){
