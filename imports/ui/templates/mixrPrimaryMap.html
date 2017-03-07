@@ -1,16 +1,17 @@
-<template name="mixrEventMap" class="mixrEventMap">
+<template name="mixrEventMap">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	<div class="mapDirectionsCallout">
-	</div>
-	{{#if Template.subscriptionsReady}}
-		<div class="container-fluid">
-			<div id="fullMapDiv">
+	<div class="container-fluid mapHolder">
+		{{#if Template.subscriptionsReady}}
+		<div class="row mapRow">
+  			<div class="col-sm-4 scrollBoxDiv">ScrollBox</div>
+  			<div class="col-sm-8 mapDiv">
 				{{> googleMap name="mixrMap" options=initPrimaryEventMapOptions}}
 			</div>
 		</div>
 		{{else}}
 			{{> mapLoader}}
-	{{/if}}
+		{{/if}}
+	</div>
 </template>
 
 <template name="mapLoader">

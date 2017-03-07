@@ -1,40 +1,21 @@
-$background-primary: rgb(209, 210, 210)
-$background-gradient-1: rgb(174, 166, 176)
-$background-gradient-2: rgb(112, 112, 112)
-$white: #fff
-$black_50: rgba(0,0,0,.5)
-$color_trendy_pink_approx: #a14fa2
-$color_shark_approx: #282929
+$background-primary: #373737
 
-.mixrEventMap
-	background: $background-primary
-	// background: linear-gradient(to bottom, $background-primary 0,$background-gradient-1 47%,$background-gradient-2 100%) !important
-	filter: progid:dximagetransform.microsoft.gradient(startcolorstr='$background-primary', endcolorstr='$background-gradient-1',gradienttype=0) !important
-
-#fullMapDiv
-	text-align: left
-	background-color: black
-	margin-left: 35%
-	width: 65%
-	bottom: 18px
-	height: 500px
-	margin-top: 50px
-	display: inline-block
-	position: relative
-
-#boxDiv
-	text-align: right
-	background-color: black
-	margin-left: 35%
-	width: 65%
-	bottom: 18px
-	height: 500px
-	margin-top: 0px
-	display: inline-block
-	position: relative
-
-.mapDirectionsCallout
+.mapHolder
+	height: 100%
+	width: 100%
 	padding-top: 4%
+
+.mapRow
+	// position: relative
+	height: 100vh
+
+.mapDiv
+	background-color: gray
+	height: 650px
+
+.scrollBoxDiv
+	background-color: gray
+	height: 650px
 
 .loading
 	font-family: 'Passion One'
@@ -42,3 +23,14 @@ $color_shark_approx: #282929
 	display: block
 	font-size: 35px
 	color: white
+
+
+#fullMapDiv
+	text-align: left
+	background-color: black
+	width: 100%
+	bottom: 18px
+	height: 500px
+	margin-top: 50px
+	display: inline-block
+	position: relative

@@ -43,9 +43,11 @@ Template.mixrEventMap.onDestroyed(function(){
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
+		console.log("init")
 		var latLng = Geolocation.latLng();
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
+			console.log("loaded")
 			return {
 				draggable: true,
 				scrollwheel: true,
