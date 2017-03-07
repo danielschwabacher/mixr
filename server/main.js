@@ -12,21 +12,28 @@ Meteor.startup(() => {
 	Meteor.publish('userEventsCrossReference', function(){
 		return UserEventsCrossReferenceCollection.find({})
 	});
-	addData()
-	console.log("---DATA ADDED---")
 	CrossReferenceSpider = new CrossReferenceDaemon()
-	if (!CrossReferenceSpider.expireOwned){
-		console.log("purging owned...")
+	addOwnedEventsAcrossMultipleUsers(750)
+	addRegisteredEventsAcrossMultipleUsers(750)
+	addBothEventTypesAcrossMultipleUsers(750)
+	addMultipleEventsToASingleUser(100, "bob")
+	Meteor.setTimeout(function(){
+		console.log("Timeout Expired.")
+		console.log("Purging Owned...")
+		console.time('ownedPurge');
 		ownedIds = CrossReferenceSpider.getOwnedEventIds()
-		CrossReferenceSpider.expireOwnedEventIds(ownedIds)
-		console.log("purge done")
-	}
-	if (!CrossReferenceSpider.expireReg){
-		console.log("purging registered...")
-		registeredIds = CrossReferenceSpider.getRegisteredEventIds()
-		CrossReferenceSpider.expireRegisteredEventIds(registeredIds)
-		console.log("purge done")
-	}
+		CrossReferenceSpider.waitAndExpireEvents(ownedIds, CrossReferenceSpider.expireOwnedEventIds),
+		console.timeEnd('ownedPurge');
+		console.log("Purge Done")
+		console.log("-------------")
+		console.time('regPurge');
+		console.log("Purging Registered...")
+		ownedIds = CrossReferenceSpider.getRegisteredEventIds()
+		CrossReferenceSpider.waitAndExpireEvents(ownedIds, CrossReferenceSpider.expireRegisteredEventIds),
+		console.timeEnd('regPurge');
+		console.log("Purge Done")
+		console.log("---ALL PURGING DONE---")
+	}, 10000);
 });
 
 
@@ -36,11 +43,12 @@ Meteor.startup(() => {
 
 
 
-addData = function(){
-	for (i = 0; i < 5; i++){
+addOwnedEventsAcrossMultipleUsers = function(numEvents){
+	for (i = 0; i < numEvents; i++){
+		randomUserId = Math.random().toString(36).substring(7);
 		randomId = (Math.random() / i + ((Math.random() *(i/1000))));
 		UserEventsCrossReferenceCollection.update(
-			{user: "testingPurge"},
+			{user: randomUserId},
 			{$push: {
 				owned_events:
 				{
@@ -55,20 +63,49 @@ addData = function(){
 			}
 		)
 	}
-	console.log("added section 0")
-	for (i = 0; i < 5; i++){
-		randomId = (Math.random() / i + ((Math.random() *(i/1000))));
+	console.log("Added random owned events.")
+}
+
+
+
+addRegisteredEventsAcrossMultipleUsers = function(numEvents){
+	for (i = 0; i < numEvents; i++){
+		randomUserId = Math.random().toString(36).substring(7);
 		randomId2 = "89584397d" + (Math.random() / i + ((Math.random() *(i/1000))));
 		UserEventsCrossReferenceCollection.update(
-			{user: randomId},
+			{user: randomUserId},
+			{$push: {
+				registered_events:
+				{
+					eventId: randomId2,
+				}
+			}},
+			{upsert: true},
+			function(err, eventId){
+				if (err){
+					return 0;
+				}
+			}
+		)
+	}
+	console.log("Added random registered events.")
+}
+
+addBothEventTypesAcrossMultipleUsers = function(numEvents){
+	for (i = 0; i < numEvents; i++){
+		randomUserId = Math.random().toString(36).substring(7);
+		randomOwnedId = Math.random().toString(36).substring(7);
+		randomId2 = Math.random().toString(36).substring(7);
+		UserEventsCrossReferenceCollection.update(
+			{user: randomUserId},
 			{$push: {
 				owned_events:
 				{
-					eventId: randomId + "7326dsf" + randomId2,
+					eventId: randomOwnedId,
 				},
 				registered_events:
 				{
-					eventId: randomId,
+					eventId: randomId2,
 				}
 			}},
 			{upsert: true},
@@ -79,5 +116,32 @@ addData = function(){
 			}
 		)
 	}
-	console.log("added section 1")
+	console.log("Added random double event types.")
+}
+
+addMultipleEventsToASingleUser = function(numEvents, name){
+	for (i = 0; i < numEvents; i++){
+		randomOwnedId = Math.random().toString(36).substring(7);
+		randomId2 = Math.random().toString(36).substring(7);
+		UserEventsCrossReferenceCollection.update(
+			{user: name},
+			{$push: {
+				owned_events:
+				{
+					eventId: randomOwnedId,
+				},
+				registered_events:
+				{
+					eventId: randomId2,
+				}
+			}},
+			{upsert: true},
+			function(err, eventId){
+				if (err){
+					return 0;
+				}
+			}
+		)
+	}
+	console.log("Added random double event types to user: " + name);
 }

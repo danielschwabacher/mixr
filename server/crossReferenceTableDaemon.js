@@ -5,10 +5,7 @@
 
 	sleepTime: the amount of time (in milliseconds) between table purges.
 */
-CrossReferenceDaemon = function(){
-	this.expireOwned = false
-	this.expireReg = false
-}
+CrossReferenceDaemon = function(){}
 
 // get all the owned_event ids across every user in the crossReference table
 CrossReferenceDaemon.prototype.getOwnedEventIds = function(){
@@ -48,7 +45,7 @@ CrossReferenceDaemon.prototype.expireOwnedEventIds = function(eventIds){
 			{_id: currentEventId}
 		)
 		if (!result){
-			console.log("Owned event id: " + currentEventId + " not found in DB.")
+			// console.log("Owned event id: " + currentEventId + " not found in DB.")
 			UserEventsCrossReferenceCollection.update(
 				{},
 				{$pull: {
@@ -61,7 +58,6 @@ CrossReferenceDaemon.prototype.expireOwnedEventIds = function(eventIds){
 			)
 		}
 	}
-	this.expireOwned = true
 }
 
 // remove eventIds that are no longer in the regsitered_events subdocument
@@ -86,5 +82,9 @@ CrossReferenceDaemon.prototype.expireRegisteredEventIds = function(eventIds){
 			)
 		}
 	}
-	this.expireReg = true
+}
+
+
+CrossReferenceDaemon.prototype.waitAndExpireEvents = function(idList, callback){
+	callback(idList)
 }
