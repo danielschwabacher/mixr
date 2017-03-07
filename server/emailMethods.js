@@ -122,10 +122,9 @@ Meteor.methods({
 
   changeSubscriptionPreference: function() {
     var userID = Meteor.userId()
-
     Meteor.users.update(
       {_id: userID},
-      {$set: {profile: { email_preference: '0'}}}
+      {$inc: { 'profile.email_preference': -1 }}
     );
   }
 
