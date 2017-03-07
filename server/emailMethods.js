@@ -28,10 +28,10 @@ Meteor.methods({
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     this.unblock();
-    let currentUser = Meteor.user();
+    var currentUser = Meteor.user();
     var emailPreference = currentUser.profile.email_preference
 
-    if (emailPreference) {
+    if (emailPreference == 1) {
       var userEmail = currentUser.emails[0].address;
       var emailText = "'" + eventTitle + "' is now live on Mixr!"
       var emailSubject = "New event created on Mixr"
@@ -125,19 +125,7 @@ Meteor.methods({
 
     Meteor.users.update(
       {_id: userID},
-      {$set: {
-          profile:
-          {
-            email_preference: '0',
-          }
-        }
-      },
-      function(err){
-        if (err){
-          console.log("There was an error: " + err)
-          return 0;
-        }
-      }
+      {$set: {profile: { email_preference: '0'}}}
     );
   }
 
