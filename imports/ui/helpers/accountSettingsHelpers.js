@@ -15,5 +15,14 @@ Template.feedbackModalDisplay.events({
 	'submit .sendFeedbackModalForm'(event, template) {
 		event.preventDefault()
 		console.log("send feedback clicked.")
+
+		var userFeedback = event.target.feedbackArea.value
+		Meteor.call('sendUserFeedback', userFeedback, (error, response) => {
+			if (error) {
+				console.log("There was an error: " + response)
+			}
+		});
+		Modal.hide("feedbackModalDisplay")
+		Router.go('home')
 	}
 });

@@ -126,6 +126,36 @@ Meteor.methods({
       {_id: userID},
       {$inc: { 'profile.email_preference': -1 }}
     );
+  },
+
+  sendUserFeedback: function(feedback) {
+    this.unblock()
+
+    var currUser = Meteor.user()
+    var userEmail = Meteor.user().emails[0].address
+    var returnSubject = "We received your feedback!"
+    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to solve any problems and make Mixr better for everyone! \n\nSincerely,\nThe Mixr Dev Team"
+
+    var sendAddress = "mixrdev123456@gmail.com"
+    var emailSubject = "User Feedback"
+    var emailText = "User " + userEmail + " has sent the following feedback:\n\n" + feedback
+
+    if (currUser && userEmail){
+      Email.send({
+        to: sendAddress,
+        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+        subject: emailSubject,
+        text: emailText
+      });
+
+      Email.send({
+        to: userEmail,
+        from: "Mixr Dev Team <mixrdev12345@gmail.com>",
+        subject: returnSubject,
+        text: returnText
+      })
+    }
   }
+
 
 });
