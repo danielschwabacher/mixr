@@ -13,10 +13,10 @@ Meteor.startup(() => {
 		return UserEventsCrossReferenceCollection.find({})
 	});
 	CrossReferenceSpider = new CrossReferenceDaemon()
-	addOwnedEventsAcrossMultipleUsers(750)
-	addRegisteredEventsAcrossMultipleUsers(750)
-	addBothEventTypesAcrossMultipleUsers(750)
-	addMultipleEventsToASingleUser(100, "bob")
+	// addOwnedEventsAcrossMultipleUsers(750)
+	// addRegisteredEventsAcrossMultipleUsers(750)
+	// addBothEventTypesAcrossMultipleUsers(750)
+	// addMultipleEventsToASingleUser(100, "bob")
 	Meteor.setTimeout(function(){
 		console.log("Timeout Expired.")
 		console.log("Purging Owned...")
