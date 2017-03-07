@@ -29,19 +29,30 @@ Meteor.methods({
     // without waiting for the email sending to complete.
     this.unblock();
     let currentUser = Meteor.user();
+    var emailPreference = currentUser.profile.email_preference
 
-    var userEmail = currentUser.emails[0].address;
-    var emailText = "'" + eventTitle + "' is now live on Mixr!"
-    var emailSubject = "New event created on Mixr"
+    if (emailPreference) {
+      var userEmail = currentUser.emails[0].address;
+      var emailText = "'" + eventTitle + "' is now live on Mixr!"
+      var emailSubject = "New event created on Mixr"
+      var link = Meteor.absoluteUrl() + "unsubscribe"
 
-    if (currentUser && userEmail) {
-      Email.send({
-        to: userEmail,
-        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
-        subject: emailSubject,
-        text: emailText
-      });
+      var emailData = {
+        message: emailText,
+        unsubscribeLink: link
+      };
+
+      SSR.compileTemplate('unsubscribeEmail', Assets.getText('unsubscribeEmailTemplate.html'));
+      if (currentUser && userEmail) {
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+          subject: emailSubject,
+          html: SSR.render('unsubscribeEmail', emailData)
+        });
+      }
     }
+
   },
 
   // Sends the user an email when they register for an event with event details
@@ -107,6 +118,27 @@ Meteor.methods({
         });
       }
     });
+  },
+
+  changeSubscriptionPreference: function() {
+    var userID = Meteor.userId()
+
+    Meteor.users.update(
+      {_id: userID},
+      {$set: {
+          profile:
+          {
+            email_preference: '0',
+          }
+        }
+      },
+      function(err){
+        if (err){
+          console.log("There was an error: " + err)
+          return 0;
+        }
+      }
+    );
   }
 
 });

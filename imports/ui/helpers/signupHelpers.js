@@ -11,12 +11,13 @@ Template.signupPage.events({
 		var password = event.target.password.value;
 		var passwordConfirm = event.target.passwordConfirm.value;
 		var userProfileData = {
-			username : email,
+				username : email,
     		password : password,
     		email : email,
     		profile: {
       			first_name : firstName,
       			last_name : lastName,
+						email_preference: '1' // 1 = receive emails.   0 = do NOT send emails
   			}
 		};
 		if (password == passwordConfirm){
