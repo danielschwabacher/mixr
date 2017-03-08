@@ -88,3 +88,21 @@ CrossReferenceDaemon.prototype.expireRegisteredEventIds = function(eventIds){
 CrossReferenceDaemon.prototype.waitAndExpireEvents = function(idList, callback){
 	callback(idList)
 }
+
+CrossReferenceDaemon.prototype.purge = function(){
+	console.log("Interval expired.")
+	console.log("Purging Owned...")
+	console.time('ownedPurge');
+	ownedIds = this.getOwnedEventIds()
+	this.waitAndExpireEvents(ownedIds, this.expireOwnedEventIds),
+	console.timeEnd('ownedPurge');
+	console.log("owned_events purge finished.")
+	console.log("-------------")
+	console.time('regPurge');
+	console.log("Purging Registered...")
+	ownedIds = this.getRegisteredEventIds()
+	this.waitAndExpireEvents(ownedIds, this.expireRegisteredEventIds),
+	console.timeEnd('regPurge');
+	console.log("registered_events purge finished.")
+	console.log("---ALL PURGING DONE---")
+}
