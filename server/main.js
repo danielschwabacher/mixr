@@ -15,10 +15,8 @@ Meteor.startup(() => {
 	});
 
 	CrossReferenceSpider = new CrossReferenceDaemon()
-	DaemonTester = new DaemonTester()
-	DaemonTester.populate(1, "testing")
 	Meteor.setInterval(function(){
 		CrossReferenceSpider.purge()
-	}, 5000);
+	}, 86400000);
 
 });
