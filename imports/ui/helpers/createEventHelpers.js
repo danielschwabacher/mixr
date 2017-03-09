@@ -4,10 +4,11 @@ import '../../api/Event/cachedEvent.js';
 Template.createEventPage.onRendered(function() {
 	todayDate = new Date()
     $('.datetimepicker').datetimepicker({
+		defaultDate: todayDate,
 		minDate: todayDate,
 		maxDate: new Date(todayDate.getFullYear(), todayDate.getMonth(), (todayDate.getDate() + 10)),
 		allowInputToggle: true,
-		stepping: 5,
+		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
 });
@@ -20,7 +21,6 @@ Template.createEventPage.events({
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
 		var eventTimeStamp = moment(eventDateTime, "ddd, MMM Do, h:mmA").unix()
-
 		var eventSelectedTag = $("input[type='radio']:checked");
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"

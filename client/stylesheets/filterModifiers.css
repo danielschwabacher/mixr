@@ -1,0 +1,33 @@
+.slider.slider-horizontal {
+	margin-bottom: 24px !important;
+    width: 210px !important;
+    height: 20px !important;
+}
+
+body > div.modal.fade.in > div > div > div.modal-header > div > div.slider-tick-label-container > div:nth-child(1){
+	width: 70px !important;
+    position: absolute !important;
+    left: 0% !important;
+    margin-left: -35px !important;
+}
+
+body > div.modal.fade.in > div > div > div.modal-header > div > div.slider-tick-label-container > div:nth-child(2){
+	width: 70px !important;
+    position: absolute !important;
+    left: 33% !important;
+    margin-left: -35px !important;
+}
+
+body > div.modal.fade.in > div > div > div.modal-header > div > div.slider-tick-label-container > div:nth-child(3){
+	width: 70px !important;
+    position: absolute !important;
+    left: 66% !important;
+    margin-left: -35px !important;
+}
+
+body > div.modal.fade.in > div > div > div.modal-header > div > div.slider-tick-label-container > div:nth-child(4){
+	width: 70px !important;
+    position: absolute !important;
+    left: 100% !important;
+    margin-left: -35px !important;
+}
