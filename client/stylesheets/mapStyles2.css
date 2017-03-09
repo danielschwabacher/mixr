@@ -1,0 +1,40 @@
+html,body, .container
+{
+    height:100%;
+}
+.container
+{
+    display:table;
+    width: 100%;
+	padding-top:  3%;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: .5%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.eventDisplay{
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.row
+{
+    height: 100%;
+	padding-top: 4%;
+    display: table-row;
+}
+
+@media (min-width: 992px) {
+  .row .no-float {
+      display: table-cell;
+      float: none;
+  }
+}
+.col-md-3 {
+    background: black;
+}
+.col-md-9 {
+    background: gray;
+}

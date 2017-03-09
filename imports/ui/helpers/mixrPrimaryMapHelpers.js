@@ -43,11 +43,9 @@ Template.mixrEventMap.onDestroyed(function(){
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
-		console.log("init")
 		var latLng = Geolocation.latLng();
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
-			console.log("loaded")
 			return {
 				draggable: true,
 				scrollwheel: true,
@@ -55,5 +53,41 @@ Template.mixrEventMap.helpers({
 				zoom: 15
 			};
 		}
+	}
+});
+
+Template.eventDisplay.helpers({
+	// returns an array of objects representing the object
+	'getEvents': function(){
+		eventsArray = []
+		allEvents = EventCollection.find({});
+		allEvents.forEach(function(currentDoc){
+			eventsArray.push(currentDoc)
+		});
+		return eventsArray
+    },
+	returnContextualEventName: function(){
+		return this.event_name
+	},
+	returnContextualEventLocation: function(){
+		return this.event_location
+	},
+	returnContextualEventLocation: function(){
+		return this.event_location
+	},
+	returnContextualEventDescription: function(){
+		return this.event_description
+	},
+	returnContextualEventDateTime: function(){
+		return this.event_dateTime
+	},
+	returnContextualNumberAttending: function(){
+		return this.number_of_users_attending
+	}
+});
+
+Template.eventSection.events({
+	"mouseover .clickableArea"(event, template) {
+		console.log(this._id)
 	}
 });

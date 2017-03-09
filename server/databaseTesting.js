@@ -1,5 +1,5 @@
 insertFakeData = function(){
-	for (i = 0; i < 500; i++){
+	for (i = 0; i < 10; i++){
 		console.log("creating random event, number: " + i)
 		latDet = 40.008952566368045 + (Math.random() / i + ((Math.random() *(i/1000))));
 		longDet = -105 + (Math.random() / i) - (Math.random() *(i/1000));

@@ -1,10 +1,12 @@
 <template name="mixrEventMap">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	<div class="container-fluid mapHolder">
+  	<div class="container">
 		{{#if Template.subscriptionsReady}}
-		<div class="row mapRow">
-  			<div class="col-sm-4 scrollBoxDiv">ScrollBox</div>
-  			<div class="col-sm-8 mapDiv">
+		<div class="row">
+  			<div class="col-md-3 no-float">
+				{{> eventDisplay}}
+			</div>
+  			<div class="col-md-9 no-float">
 				{{> googleMap name="mixrMap" options=initPrimaryEventMapOptions}}
 			</div>
 		</div>
@@ -17,5 +19,33 @@
 <template name="mapLoader">
 	<div class="loading">
 		Fetching events around you...
+	</div>
+</template>
+
+
+<template name="eventDisplay">
+	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
+	<div class="eventDisplay">
+		Events around you:
+		<hr class="section-heading-spacer">
+		{{#each getEvents}}
+			{{> eventSection }}
+		{{/each}}
+	</div>
+</template>
+
+
+<template name="eventSection">
+	<div class="clickableArea">
+		<div class="row">
+			<div class="col-sm-4">{{ event_name }}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">{{ event_description }}</div>
+		</div>
+		<button class="btn btn-info">More info</button>
+		<button class="btn btn-success">Register!</button>
+		<br>
+		<hr class="section-heading-spacer">
 	</div>
 </template>
