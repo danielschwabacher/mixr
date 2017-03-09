@@ -38,17 +38,18 @@ Meteor.methods({
       var link = Meteor.absoluteUrl() + "unsubscribe"
 
       var emailData = {
+        eventTitle: eventTitle,
         message: emailText,
         unsubscribeLink: link
       };
 
-      SSR.compileTemplate('unsubscribeEmail', Assets.getText('unsubscribeEmailTemplate.html'));
+      SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
       if (currentUser && userEmail) {
         Email.send({
           to: userEmail,
           from: "Mixr Dev Team <mixrdev123456@gmail.com>",
           subject: emailSubject,
-          html: SSR.render('unsubscribeEmail', emailData)
+          html: SSR.render('createEventEmail', emailData)
         });
       }
     }

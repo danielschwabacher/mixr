@@ -8,6 +8,9 @@ Template.accountSettingsPage.events({
 	},
 	'click #giveFeedbackLink'(event, template){
 		Modal.show("feedbackModalDisplay")
+	},
+	'click #emailSettingsLink'(event, template){
+		Modal.show("emailPreferencesModal")
 	}
 });
 
