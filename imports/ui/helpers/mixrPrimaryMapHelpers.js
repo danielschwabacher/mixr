@@ -1,8 +1,10 @@
 import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/mainMap.js';
 import '../../api/Time/converter.js'
+import { EJSON } from 'meteor/ejson'
 GLOBAL_MARKERS = []
-
+MAP = 0
+ALL_SHOWN_EVENTS = 0
 Template.registerHelper('checkIfOnEventPage', function(){
 	return Session.get('onPrimaryMap');
 });
@@ -14,6 +16,7 @@ Template.mixrEventMap.onCreated(function(){
 Template.mixrEventMap.onRendered(function(){
 	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
+		MAP = map.instance
 		var latLng = Geolocation.latLng();
         Tracker.autorun(() => {
 			removeMarkers()
@@ -22,13 +25,14 @@ Template.mixrEventMap.onRendered(function(){
 			currentUnixTime = moment().unix()
 			additionalSeconds = hoursToSeconds(timeFilter)
 			unixTimeRange = currentUnixTime + additionalSeconds
-			client_collection = EventCollection.find(
+			ALL_SHOWN_EVENTS = EventCollection.find(
 				{
 					event_tag: { $in: includeTags},
 					event_timestamp: {$lte: unixTimeRange}
 				}
 			);
-			client_collection.forEach(function(currentEvent){
+			// Session.set('cachedEventsToDisplay', EJSON.clone(ALL_SHOWN_EVENTS))
+			ALL_SHOWN_EVENTS.forEach(function(currentEvent){
 				temp_marker = new Marker(map.instance, currentEvent)
 				temp_marker.createObjectMarker()
 			});
@@ -43,7 +47,9 @@ Template.mixrEventMap.onDestroyed(function(){
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
-		var latLng = Geolocation.latLng();
+		var latLng = Geolocation.latLng(
+			{timeout: 10000}
+		);
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
 			return {
@@ -87,7 +93,25 @@ Template.eventDisplay.helpers({
 });
 
 Template.eventSection.events({
+	"click .clickableArea"(event, template){
+		Modal.show('eventInformationModal', this)
+	},
 	"mouseover .clickableArea"(event, template) {
-		console.log(this._id)
+		removeMarkers()
+		singleMarker = EventCollection.find(
+			{
+				_id: this._id
+			}
+		);
+		singleMarker.forEach(function(currentEvent){
+			temp_marker = new Marker(MAP, currentEvent)
+			temp_marker.createObjectMarker()
+		});
+	},
+	"mouseout .clickableArea"(event,template){
+		ALL_SHOWN_EVENTS.forEach(function(currentEvent){
+			temp_marker = new Marker(MAP, currentEvent)
+			temp_marker.createObjectMarker()
+		});
 	}
 });

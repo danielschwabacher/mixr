@@ -17,5 +17,5 @@ Meteor.startup(() => {
 	Meteor.setInterval(function(){
 		CrossReferenceSpider.purge()
 	}, 86400000);
-	insertFakeData()
+	// insertFakeData()
 });
