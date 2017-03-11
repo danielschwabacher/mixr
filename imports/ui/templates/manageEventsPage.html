@@ -2,14 +2,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 	<div class="activeDiv">
 		{{#if Template.subscriptionsReady}}
-		<div class="row">
+		<div class="info-row row">
 			My Created Events:
 			{{#each getAssociatedEventNames getOwnedEventIds}}
 				{{> eventCreatedNameHolder}}
 			{{/each}}
 		</div>
 		<hr class="section-heading-spacer">
-		<div class="row">
+		<div class="info-row row">
 			My Registered Events:
 			{{#each getAssociatedEventNames getRegisteredEventIds}}
 				{{> eventRegisteredNameHolder}}

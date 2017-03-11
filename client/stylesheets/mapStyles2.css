@@ -23,7 +23,7 @@ html,body, .container
 {
     height: 100%;
 	padding-top: 4%;
-    display: table-row;
+	display: table-row;
 }
 
 @media (min-width: 992px) {
