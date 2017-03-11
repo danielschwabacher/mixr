@@ -156,6 +156,28 @@ Meteor.methods({
         text: returnText
       })
     }
+  },
+
+  updateUserEmailPreferences: function(userPrefs) {
+    // userPrefs has 3 boolean fields defined as
+    // 		var userPrefs = {
+    //			createEPref: createEventPref,
+    //			registerEPref: registerEventPref,
+    //			deletedEPref: deletedEventPref
+    //		}
+    var userID = Meteor.userId()
+    var createEventPref = Number(userPrefs.createEPref)
+    var registerEventPref = Number(userPrefs.registerEPref)
+    var deletedEventPref = Number(userPrefs.deletedEPref)
+
+    Meteor.users.update(
+      {_id: userID},
+      {$set: { 'profile.custom_email_preferences': {
+        create_event: createEventPref,
+        register_event: registerEventPref,
+        event_deleted: deletedEventPref
+      }}}
+    );
   }
 
 

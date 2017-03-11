@@ -17,7 +17,11 @@ Template.signupPage.events({
     		profile: {
       			first_name : firstName,
       			last_name : lastName,
-						email_preference: 1 // 1 = receive emails.   0 = do NOT send emails
+						custom_email_preferences: {
+							create_event: 1,
+							register_event: 1,
+							event_deleted: 1
+						}
   			}
 		};
 		if (password == passwordConfirm){

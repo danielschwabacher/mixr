@@ -35,24 +35,31 @@
 	<div class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form class="sendFeedbackModalForm">
+				<form class="updateEmailPrefModalForm">
 					<div class="modal-header">
 						<h4 class="modal-title">Email Preferences</h4>
 					</div>
+
 					<div class="checkbox checkbox-mixr checkbox-inline">
-						<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes" checked>
-						<label for="createEventPref">Notify me when I create an event</label>
+						<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
+						<label for="createdEventPref">Notify me when I create an event</label>
 					</div>
+
+					<div>
+					</div>
+
 					<div class="checkbox checkbox-mixr checkbox-inline">
 						<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes" checked>
 						<label for="registeredEventPref">Notify me when I register for an event</label>
 					</div>
+
 					<div class="checkbox checkbox-mixr checkbox-inline">
 						<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes" checked>
 						<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
 					</div>
+
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success btn-float-right" id="sendFeedbackButton">Send to dev team!</button>
+						<button type="submit" class="btn btn-success btn-float-right" id="updateEmailPrefButton">Update Preferences</button>
 						<button class="btn btn-danger btn-float-left" data-dismiss="modal">Nevermind</button>
 					</div>
 				</form>
