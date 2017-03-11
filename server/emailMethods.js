@@ -121,13 +121,23 @@ Meteor.methods({
         }
       )
       let currEmail = currUser.emails[0].address
-      if (currEmail){
-        Email.send({
-          to: currEmail,
-          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
-          subject: "An event you registered for has been removed!",
-          text: "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted."
-        });
+      var emailPreference = currUser.profile.custom_email_preferences.event_deleted
+
+      if (emailPreference) {
+        var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted."
+        var emailData = {
+          message: emailText
+        }
+
+        SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
+        if (currUser && currEmail){
+          Email.send({
+            to: currEmail,
+            from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+            subject: "An event you registered for has been removed!",
+            html: SSR.render('eventDeletedEmail', emailData)
+          });
+        }
       }
     });
   },
