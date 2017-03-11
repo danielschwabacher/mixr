@@ -29,13 +29,13 @@ Meteor.methods({
     // without waiting for the email sending to complete.
     this.unblock();
     var currentUser = Meteor.user();
-    var emailPreference = currentUser.profile.email_preference
+    var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
-    if (emailPreference == 1) {
+    if (emailPreference) {
       var userEmail = currentUser.emails[0].address;
       var emailText = "'" + eventTitle + "' is now live on Mixr!"
       var emailSubject = "New event created on Mixr"
-      var link = Meteor.absoluteUrl() + "unsubscribe"
+      var link = Meteor.absoluteUrl() + "account"
 
       var emailData = {
         eventTitle: eventTitle,
