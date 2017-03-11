@@ -64,32 +64,30 @@ Template.mixrEventMap.helpers({
 
 Template.eventDisplay.helpers({
 	// returns an array of objects representing the object
-	'getEvents': function(){
-		eventsArray = []
-		allEvents = EventCollection.find({});
-		allEvents.forEach(function(currentDoc){
+	'getEvents': function(tags, time){
+		var eventsArray = []
+		currentUnixTime = moment().unix()
+		additionalSeconds = hoursToSeconds(time)
+		unixTimeRange = currentUnixTime + additionalSeconds
+		displayEvents = EventCollection.find(
+			{
+				event_tag: { $in: tags},
+				event_timestamp: {$lte: unixTimeRange}
+			}
+		);
+		displayEvents.forEach(function(currentDoc){
 			eventsArray.push(currentDoc)
 		});
+		console.log("time: " + time)
 		return eventsArray
     },
-	returnContextualEventName: function(){
-		return this.event_name
+	'returnSessionTags': function(){
+		return Session.get('tagFilterIncludes')
+
 	},
-	returnContextualEventLocation: function(){
-		return this.event_location
+	'returnSessionTimes': function(){
+		return Session.get('timeFilterHours')
 	},
-	returnContextualEventLocation: function(){
-		return this.event_location
-	},
-	returnContextualEventDescription: function(){
-		return this.event_description
-	},
-	returnContextualEventDateTime: function(){
-		return this.event_dateTime
-	},
-	returnContextualNumberAttending: function(){
-		return this.number_of_users_attending
-	}
 });
 
 Template.eventSection.events({

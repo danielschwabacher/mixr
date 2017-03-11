@@ -28,7 +28,7 @@
 	<div class="eventDisplay">
 		Events around you:
 		<hr class="section-heading-spacer">
-		{{#each getEvents}}
+		{{#each getEvents returnSessionTags returnSessionTimes}}
 			{{> eventSection }}
 		{{/each}}
 	</div>
