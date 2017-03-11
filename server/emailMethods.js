@@ -62,24 +62,35 @@ Meteor.methods({
     // without waiting for the email sending to complete.
     this.unblock();
 
-    let currentUser = Meteor.user()
+    var currentUser = Meteor.user()
+    var emailPreference = currentUser.profile.custom_email_preferences.register_event
 
-    var userEmail = currentUser.emails[0].address
+    if (emailPreference) {
+      var userEmail = currentUser.emails[0].address
+      var link = Meteor.absoluteUrl() + "account"
+      var emailSubject = "You've registered for '" + currentEvent.event_name + "' on Mixr!"
+      var eventDescription = "Event Description: " + currentEvent.event_description
+      var eventLocation = "Event Location: " + currentEvent.event_location
+      var eventDate = "Event Date: " + currentEvent.event_dateTime
+      var emailText = "Here are the details of the event you registered for!\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
 
-    var emailSubject = "You've registered for '" + currentEvent.event_name + "' on Mixr!"
-    var eventDescription = "Event Description: " + currentEvent.event_description
-    var eventLocation = "Event Location: " + currentEvent.event_location
-    var eventDate = "Event Date: " + currentEvent.event_dateTime
-    var emailText = "Here are the details of the event you registered for!\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
+      var emailData = {
+        message: emailText,
+        unsubscribeLink: link
+      }
 
-    if (currentUser && userEmail){
-      Email.send({
-        to: userEmail,
-        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
-        subject: emailSubject,
-        text: emailText
-      });
+      SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
+      if (currentUser && userEmail){
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+          subject: emailSubject,
+          html: SSR.render('registerForEvent', emailData)
+        });
+      }
     }
+
+
   },
 
   // Sends the user an email when an event they're registered for is deleted
