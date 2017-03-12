@@ -1,6 +1,7 @@
-import '../templates/notificationModals.html';
+import '../templates/notificationModals.html'
 import './eventResponseModalHelpers.js'
 import './pickLocationHelpers.js'
+import '../templates/createEvent.html'
 
 Template.confirmEventModal.helpers({
 	returnEventName: function() {
@@ -23,7 +24,8 @@ Template.confirmEventModal.helpers({
 Template.confirmEventModal.events({
 	'click .confirmEventButton'(event, template){
 		var eventName = fullEventToConfirm.eventName
-		Meteor.call("insertEvent", fullEventToConfirm, function (err, didInsert){
+		var eventExpiration = fullEventToConfirm.eventTimeStamp
+		Meteor.call("insertEvent", fullEventToConfirm, eventExpiration, function (err, didInsert){
 			if (didInsert){
 				Modal.show('eventCreatedSuccessModal')
 				Meteor.call('sendCreatedEventEmail', eventName, function(err){
@@ -53,14 +55,19 @@ Template.confirmEventModal.events({
 
 Template.eventInformationModal.events({
 	'click .registerEventButton'(event, template){
-		Meteor.call("registerEvent", this, function(err, didRegister){
-			if (didRegister){
-				Modal.show("eventDidRegisterModal")
-			}
-			else{
-				Modal.show("eventAlreadyRegisteredModal")
-			}
-		});
+		if (Meteor.user() && Meteor.user().emails[0].verified){
+			Meteor.call("registerEvent", this, function(err, didRegister){
+				if (didRegister){
+					Modal.show("eventDidRegisterModal")
+				}
+				else{
+					Modal.show("eventAlreadyRegisteredModal")
+				}
+			});
+		}
+		else {
+			Modal.show("emailNotVerifiedModal")
+		}
 	}
 });
 
@@ -78,6 +85,9 @@ Template.eventInformationModal.helpers({
 	},
 	getMarkerEventDateTime: function(){
 		return this.event_dateTime
+	},
+	getMarkerEventTag: function(){
+		return this.event_tag
 	},
 	getMarkerEventNumberRegistered: function(){
 		return this.number_of_users_attending

@@ -1,11 +1,13 @@
 import '../templates/eventResponseModals.html';
 import '../../api/Filters/tagFilter.js'
+
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
+var Slider = require("bootstrap-slider");
 
 // TODO: encapsulate this in a different method
 Template.sortByTagsEventFilterModal.onRendered(function() {
-	var sessionTags = Session.get('tagIncludes')
+	var sessionTags = Session.get('tagFilterIncludes')
 	if (sessionTags){
 		for (item of sessionTags){
 			switch (item) {
@@ -39,11 +41,35 @@ Template.sortByTagsEventFilterModal.events({
 		tagHandler = new TagFilter(checkedValues)
 		tagHandler.populateTags()
 		tagHandler.setSessionTags()
+	},
+	'click #resetTagsButton'(event, template){
+		event.preventDefault()
+		fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
+		Session.set('tagFilterIncludes', fullTagArray)
 	}
+});
+
+Template.sortByTimeEventFilterModal.onRendered(function() {
+	timeUntilEvent = Session.get('timeFilterHours')
+	timeSlider = new Slider(".timeSlider", {
+		value: timeUntilEvent,
+		min: 1,
+		max: 72,
+		ticks: [1, 24, 48, 72],
+		ticks_positions: [0, 33, 66, 100],
+		ticks_labels: ["1 hour", "1 day", "2 days", "3 days"],
+		formatter: function(value) {
+			return value + " hours"
+		},
+	});
+
 });
 
 Template.sortByTimeEventFilterModal.events({
 	'click #submitEventFilterTimeSelections'(event, template){
-		console.log("filtering times...")
+		Session.set('timeFilterHours', timeSlider.getValue())
+	},
+	'click #resetTimeButton'(event, template){
+		Session.set('timeFilterHours', 72)
 	}
 });

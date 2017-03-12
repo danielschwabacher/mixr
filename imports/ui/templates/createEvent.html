@@ -1,42 +1,64 @@
 <template name="createEventPage">
-	<div class="padDown">
-		<div class="create-event-block">
-			<h1>Create a new event</h1>
-				<form class="form-inline createEventForm">
-					<div class="form-group">
-						<input type="text" placeholder="Event Name" id="eventName" required/>
-					</div>
-					<div class="form-group">
-						<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
-					</div>
-					<textarea placeholder="Event Description (optional)" id="eventDescription"></textarea>
-					<h5>Event Tag:</h5>
-                    <div class="radio radio-mixr radio-inline">
-                        <input type="radio" id="sportsRadioButton" name="eventTagAnswer" required>
-                        <label for="sportsRadioButton">Sports</label>
-                    </div>
-                    <div class="radio radio-mixr radio-inline">
-                        <input type="radio" id="performancesRadioButton" name="eventTagAnswer">
-                        <label for="performancesRadioButton">Performances</label>
-                    </div>
-                    <div class="radio radio-mixr radio-inline">
-                        <input type="radio" id="artsRadioButton" name="eventTagAnswer">
-                        <label for="artsRadioButton">Arts</label>
-                    </div>
-                    <div class="radio radio-mixr radio-inline">
-                        <input type="radio" id="academicInterestRadioButton" name="eventTagAnswer">
-                        <label for="academicInterestRadioButton">Academic Interest</label>
-                    </div>
-	                <div class="radio radio-mixr radio-inline">
-	                    <input type="radio" id="otherRadioButton" name="eventTagAnswer">
-	                    <label for="otherRadioButton">Other</label>
-	                </div>
-					<div class="input-group datetimepicker additionalPadding">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-						<input class="set-due-date form-control" placeholder="Select date..." type="text" id="eventDateTime" required/>
-					</div>
-					<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
-				</form>
+	{{#if isVerified}}
+		<div class="padDown">
+			<div class="create-event-block">
+				<h1>Create a new event</h1>
+					<form class="form-inline createEventForm">
+						<div class="form-group">
+							<input type="text" placeholder="Event Name" id="eventName" required/>
+						</div>
+						<div class="form-group">
+							<input type="text" placeholder="Event Location Details (e.g: field by park)" id="eventLocation" required/>
+						</div>
+						<textarea placeholder="Event Description (optional)" id="eventDescription"></textarea>
+						<h5>Event Tag:</h5>
+	                    <div class="radio radio-mixr radio-inline">
+	                        <input type="radio" id="sportsRadioButton" name="eventTagAnswer" required>
+	                        <label for="sportsRadioButton">Sports</label>
+	                    </div>
+	                    <div class="radio radio-mixr radio-inline">
+	                        <input type="radio" id="performancesRadioButton" name="eventTagAnswer">
+	                        <label for="performancesRadioButton">Performances</label>
+	                    </div>
+	                    <div class="radio radio-mixr radio-inline">
+	                        <input type="radio" id="artsRadioButton" name="eventTagAnswer">
+	                        <label for="artsRadioButton">Arts</label>
+	                    </div>
+	                    <div class="radio radio-mixr radio-inline">
+	                        <input type="radio" id="academicInterestRadioButton" name="eventTagAnswer">
+	                        <label for="academicInterestRadioButton">Academic Interest</label>
+	                    </div>
+		                <div class="radio radio-mixr radio-inline">
+		                    <input type="radio" id="otherRadioButton" name="eventTagAnswer">
+		                    <label for="otherRadioButton">Other</label>
+		                </div>
+						<div class="input-group datetimepicker additionalPadding">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+							<input class="set-due-date form-control" placeholder="Select date..." type="text" id="eventDateTime" required/>
+						</div>
+						<input type="submit" value="Choose Event Location" id="pickLocationButton" required/>
+					</form>
+			</div>
+		</div>
+	{{else}}
+		<div class="padDown">
+			<h1>You'll need to verify your account first</h1>
+			<button id="resendEmailButton" type="button" class="btn btn-success" autofocus>Resend verification email</button>
+		</div>
+	{{/if}}
+</template>
+
+<template name="emailNotVerifiedModal">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Oops! It looks like your email address isn't verified. </h3>
+				</div>
+				<div class="modal-footer">
+					<button id="resendVerificationLink" type="button" class="btn btn-success" autofocus>Resend verification email</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

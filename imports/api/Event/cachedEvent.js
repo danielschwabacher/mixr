@@ -1,17 +1,19 @@
 //TODO: make this OO and incorporate inheritance from event
-CachedEvent = function(eName, eLoc, eDesc, eDateTime, eType){
+CachedEvent = function(eName, eLoc, eDesc, eDateTime, eTimeStamp, eType){
 	this.eventName = eName
 	this.eventLoc = eLoc
 	this.eventDescription = eDesc
 	this.eventDateTime = eDateTime
+	this.eventTimeStamp = eTimeStamp
 	this.eventTagType = eType
 }
 
-FullCachedEvent = function(eName, eLoc, eDesc, eDateTime, eType, eCoords){
+FullCachedEvent = function(eName, eLoc, eDesc, eDateTime, eTimeStamp, eType, eCoords){
 	this.eventName = eName
 	this.eventLoc = eLoc
 	this.eventDescription = eDesc
 	this.eventDateTime = eDateTime
+	this.eventTimeStamp = eTimeStamp
 	this.eventTagType = eType
 	this.coordinates = eCoords
 }
