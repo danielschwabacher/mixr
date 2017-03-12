@@ -28,20 +28,32 @@ Meteor.methods({
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     this.unblock();
-    let currentUser = Meteor.user();
+    var currentUser = Meteor.user();
+    var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
-    var userEmail = currentUser.emails[0].address;
-    var emailText = "'" + eventTitle + "' is now live on Mixr!"
-    var emailSubject = "New event created on Mixr"
+    if (emailPreference) {
+      var userEmail = currentUser.emails[0].address;
+      var emailText = "'" + eventTitle + "' is now live on Mixr!"
+      var emailSubject = "New event created on Mixr"
+      var link = Meteor.absoluteUrl() + "account"
 
-    if (currentUser && userEmail) {
-      Email.send({
-        to: userEmail,
-        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
-        subject: emailSubject,
-        text: emailText
-      });
+      var emailData = {
+        eventTitle: eventTitle,
+        message: emailText,
+        unsubscribeLink: link
+      };
+
+      SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
+      if (currentUser && userEmail) {
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+          subject: emailSubject,
+          html: SSR.render('createEventEmail', emailData)
+        });
+      }
     }
+
   },
 
   // Sends the user an email when they register for an event with event details
@@ -50,24 +62,35 @@ Meteor.methods({
     // without waiting for the email sending to complete.
     this.unblock();
 
-    let currentUser = Meteor.user()
+    var currentUser = Meteor.user()
+    var emailPreference = currentUser.profile.custom_email_preferences.register_event
 
-    var userEmail = currentUser.emails[0].address
+    if (emailPreference) {
+      var userEmail = currentUser.emails[0].address
+      var link = Meteor.absoluteUrl() + "account"
+      var emailSubject = "You've registered for '" + currentEvent.event_name + "' on Mixr!"
+      var eventDescription = "Event Description: " + currentEvent.event_description
+      var eventLocation = "Event Location: " + currentEvent.event_location
+      var eventDate = "Event Date: " + currentEvent.event_dateTime
+      var emailText = "Here are the details of the event you registered for!\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
 
-    var emailSubject = "You've registered for '" + currentEvent.event_name + "' on Mixr!"
-    var eventDescription = "Event Description: " + currentEvent.event_description
-    var eventLocation = "Event Location: " + currentEvent.event_location
-    var eventDate = "Event Date: " + currentEvent.event_dateTime
-    var emailText = "Here are the details of the event you registered for!\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
+      var emailData = {
+        message: emailText,
+        unsubscribeLink: link
+      }
 
-    if (currentUser && userEmail){
-      Email.send({
-        to: userEmail,
-        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
-        subject: emailSubject,
-        text: emailText
-      });
+      SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
+      if (currentUser && userEmail){
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+          subject: emailSubject,
+          html: SSR.render('registerForEvent', emailData)
+        });
+      }
     }
+
+
   },
 
   // Sends the user an email when an event they're registered for is deleted
@@ -98,15 +121,85 @@ Meteor.methods({
         }
       )
       let currEmail = currUser.emails[0].address
-      if (currEmail){
-        Email.send({
-          to: currEmail,
-          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
-          subject: "An event you registered for has been removed!",
-          text: "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted."
-        });
+      var emailPreference = currUser.profile.custom_email_preferences.event_deleted
+
+      if (emailPreference) {
+        var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted."
+        var emailData = {
+          message: emailText
+        }
+
+        SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
+        if (currUser && currEmail){
+          Email.send({
+            to: currEmail,
+            from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+            subject: "An event you registered for has been removed!",
+            html: SSR.render('eventDeletedEmail', emailData)
+          });
+        }
       }
     });
+  },
+
+  changeSubscriptionPreference: function() {
+    var userID = Meteor.userId()
+    Meteor.users.update(
+      {_id: userID},
+      {$inc: { 'profile.email_preference': -1 }}
+    );
+  },
+
+  sendUserFeedback: function(feedback) {
+    this.unblock()
+
+    var currUser = Meteor.user()
+    var userEmail = Meteor.user().emails[0].address
+    var returnSubject = "We received your feedback!"
+    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to solve any problems to make Mixr better for everyone! \n\nSincerely,\nThe Mixr Dev Team"
+
+    var sendAddress = "mixrdev123456@gmail.com"
+    var emailSubject = "User Feedback"
+    var emailText = "User " + userEmail + " has sent the following feedback:\n\n" + feedback
+
+    if (currUser && userEmail){
+      Email.send({
+        to: sendAddress,
+        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+        subject: emailSubject,
+        text: emailText
+      });
+
+      Email.send({
+        to: userEmail,
+        from: "Mixr Dev Team <mixrdev12345@gmail.com>",
+        subject: returnSubject,
+        text: returnText
+      })
+    }
+  },
+
+  updateUserEmailPreferences: function(userPrefs) {
+    // userPrefs has 3 boolean fields defined as
+    // 		var userPrefs = {
+    //			createEPref: createEventPref,
+    //			registerEPref: registerEventPref,
+    //			deletedEPref: deletedEventPref
+    //		}
+    var userID = Meteor.userId()
+    var createEventPref = Number(userPrefs.createEPref)
+    var registerEventPref = Number(userPrefs.registerEPref)
+    var deletedEventPref = Number(userPrefs.deletedEPref)
+
+    Meteor.users.update(
+      {_id: userID},
+      {$set: { 'profile.custom_email_preferences': {
+        create_event: createEventPref,
+        register_event: registerEventPref,
+        event_deleted: deletedEventPref
+      }}}
+    );
   }
+
 
 });
