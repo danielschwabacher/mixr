@@ -11,14 +11,22 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
 			</div>
-			<ul class="nav navbar-nav">
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-	    		<li><a href="{{pathFor 'signup'}}"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
-	    		<li><a href="{{pathFor 'login'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login</a></li>
-	  		</ul>
+			<div class="collapse navbar-collapse" id="myNavbar">
+
+				<ul class="nav navbar-nav">
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{{pathFor 'signup'}}"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
+					<li><a href="{{pathFor 'login'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login</a></li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 </template>
@@ -27,22 +35,29 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="{{pathFor 'events'}}">Events around me</a></li>
-			</ul>
-			<ul class="nav navbar-nav nb-center">
-				<li><a href="{{pathFor 'manage'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
-				<li><a href="{{pathFor 'create'}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
-				{{#if checkIfOnEventPage}}
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="{{pathFor 'events'}}">Events around me</a></li>
+				</ul>
+				<ul class="nav navbar-nav nb-center">
+					<li><a href="{{pathFor 'manage'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
+					<li><a href="{{pathFor 'create'}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
+					{{#if checkIfOnEventPage}}
 					{{> applyEventFiltersSection}}
-				{{/if}}
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{{pathFor 'account'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
-				<li class="navbar-signout"><a href="{{pathFor 'logout'}}"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
-			</ul>
+					{{/if}}
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{{pathFor 'account'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
+					<li class="navbar-signout"><a href="{{pathFor 'logout'}}"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 </template>
