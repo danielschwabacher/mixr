@@ -1,48 +1,20 @@
 <template name="navbar">
 	{{> yield }}
 	{{#if currentUser}}
-		{{> navbarActive}}
+	{{> navbarActive}}
 	{{else}}
-		{{> navbarInactive}}
+	{{> navbarInactive}}
 	{{/if}}
 </template>
-
-<template name="navbarInactive">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-
-				<ul class="nav navbar-nav">
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{pathFor 'signup'}}"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
-					<li><a href="{{pathFor 'login'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-</template>
-
 <template name="navbarActive">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
+	<div role="navigation" class="navbar navbar-default navbar-inverse navbar-fixed-top">
+		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
+				<div class="navbar-buttons">
+					<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
+				</div>
 			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
+			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="{{pathFor 'events'}}">Events around me</a></li>
 				</ul>
@@ -59,7 +31,33 @@
 				</ul>
 			</div>
 		</div>
-	</nav>
+	</div>
+</template>
+
+
+<template name="navbarInactive">
+	<div role="navigation" class="navbar navbar-default navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="navbar-buttons">
+					<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
+				</div>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav">
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="{{pathFor 'signup'}}"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
+						<li><a href="{{pathFor 'login'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login</a></li>
+					</ul>
+				</ul>
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="applyEventFiltersSection">

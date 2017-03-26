@@ -1,116 +1,220 @@
-<template name="landingPage" class="landingPageMain">
-
-    <a name="intro"></a>
-	<div class="site-wrapper">
-	  <div class="site-wrapper-inner">
-	    <div class="cover-container">
-	      <div class="inner cover">
-	        <h1 class="cover-heading">mixr.</h1>
-	        <p class="lead">Welcome to the world's first event-based social network. Meet similarly minded people near you and do the things you love.</p>
-	      </div>
-	    </div>
-	  </div>
+<template name="landingPage">
+	<div id="all">
+		<!-- navbar-->
+		<header class="header">
+			<div role="navigation" class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<div class="navbar-buttons">
+							<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
+						</div>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="#">Left</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#">Right</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- *** SIGNUP MODAL ***_________________________________________________________
+	-->
+	<div id="get-started" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+					<h4 class="modal-title text-center">Get started</h4>
+				</div>
+				<div class="modal-body">
+					<form action="#" method="post">
+						<div class="form-group">
+							<input id="email_modal" type="text" placeholder="name@company.com" class="form-control">
+						</div>
+						<p class="text-center">
+							<button class="btn btn-primary"><i class="pe-7s-magic-wand"></i> Sign up</button>
+						</p>
+					</form>
+					<p class="text-center text-muted">Effects present letters inquiry no an removed or friends. Desire behind latter me though in.</p>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<section id="section-button" class="scroll-down-button">
-		<a href=""><span></span>Learn More</a>
+	<!-- *** SIGNUP MODAL END ***-->
+	<section id="intro" class="text-intro no-padding-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>mixr</h1>
+					<h3 class="weight-300">Welcome to the world's first event based social network.</h3>
+				</div>
+			</div>
+		</div>
 	</section>
-	<h1 class="cover-heading">mixr is: </h1>
-    <div class="content-section-a" id="whatIsMixr">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Fresh</h2>
-                    <p class="lead">
-						mixr is a new social network concept that revolves around real life events, a platform to connect like-minded individuals to the events and activites they love.
-					</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-					<i class="fa fa-users fa-5x bannerIconSpacing" aria-hidden="true"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="content-section-b">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Nearby</h2>
-                    <p class="lead">mixr is all done based on location, so every time you see an interesting event going on later, chances are it's right around the corner!</p>
-                </div>
-                <div class="col-lg-5 col-sm-pull-6">
-					<i class="fa fa-crosshairs fa-5x bannerIconSpacing" aria-hidden="true"></i>
-                </div>
-            </div>
-        </div>
-        <!-- /.container -->
-    </div>
-    <!-- /.content-section-b -->
-
-    <div class="content-section-a">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Spontaneous</h2>
-					<p class="lead">mixr emphasizes events happening in the near future so you'll always be able find something intersting happening around you. Never be bored again!</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-					<i class="fa fa-clock-o fa-5x bannerIconSpacing" aria-hidden="true"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- /.content-section-a -->
-
-
-	{{#unless currentUser}}
-	<div class="content-section-c">
-	    <div class="container container-special">
-	        <div class="row">
-	            <div class="col-sm-8">
-	                <h2>The mixr beta is live! Join now: </h2>
-	            </div>
-	            <div class="col-sm-4">
-					<button class="btn btn-success btn-lg bannerButton" id="signupBannerButton">Sign up!</button>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-
-
-    <!-- /.banner -->
-	{{/unless}}
-
-    <!-- Footer -->
-    <footer>
-        <div class="container container-black">
-            <div class="row">
-                <div class="col-lg-12">
-				<ul class="list-inline">
-					<li>
-						<a id="privacyModalLink">Privacy</a>
-					</li>
-					<li>
-						<a id="simplePrivacyModalLink">Privacy (for users)</a>
-					</li>
-					<li>
-						<a id="termsModalLink">Terms</a>
-					</li>
-					<li>
-						<a id="disclaimerModalLink">Beta Disclaimer</a>
-					</li>
-				</ul>
-                    <p class="copyright footer-text small">Copyright mixr &copy; concept. Daniel Schwabacher and Nicholas Montoya. All Rights Reserved</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+	<!--   *** CUSTOMERS END ***-->
+	<!--   *** FEATURES ***-->
+	<section id="features" class="section">
+		<div class="container">
+			<div class="row text-center-mobile">
+				<div class="col-md-6">
+					<div class="icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+					<h2>Fresh</h2>
+					<p>mixr is a new social network concept that revolves around real life events, a platform to connect like-minded individuals to the events and activites they love.</p>
+				</div>
+				<div class="col-md-6">
+					<p><img alt="" src="img/features1.png" class="img-responsive"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section background-gray-lightest">
+		<div class="container">
+			<div class="row text-center-mobile">
+				<div class="col-md-6">
+					<p><img alt="" src="img/features2.png" class="img-responsive"></p>
+				</div>
+				<div class="col-md-6">
+					<div class="icon brand-terciary"><i class="fa fa-crosshairs" aria-hidden="true"></i></div>
+					<h2>Nearby</h2>
+					<p>mixr is all done based on location, so every time you see an interesting event going on later, chances are it's right around the corner!</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section no-padding-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-lg-8 col-lg-offset-2 text-center">
+					<div class="icon brand-secondary"><i class="fa fa-clock-o fa-2x bannerIconSpacing" aria-hidden="true"></i></div>
+					<h2>Spontaneous</h2>
+					<p>mixr emphasizes events happening in the near future so you'll always be able find something intersting happening around you. Never be bored again!</p>
+					<p class="margin-bottom--zero"><img alt="" src="img/features3.png" class="img-responsive"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--   *** FEATURES END ***  -->
+	<!--   *** TEXT ***-->
+	<section id="text" class="text-page section-inverse background-secondary">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-center">Text page</h2>
+					<p class="lead text-center">Age lived smile six defer bed their few. Had admitting concluded too behaviour him she.</p>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>Able an hope of body. Any nay shyness article matters own removal nothing his forming. Gay own additions education satisfied the perpetual. If he cause manor happy. Without farther she exposed saw man led. Along on happy could cease green oh. </p>
+							<p>Betrayed cheerful declared end and. Questions we additions is extremely incommode. Next half add call them eat face. Age lived smile six defer bed their few. Had admitting concluded too behaviour him she. Of death to or to being other. </p>
+						</div>
+						<div class="col-sm-6">
+							<p>Effects present letters inquiry no an removed or friends. Desire behind latter me though in. Supposing shameless am he engrossed up additions. My possible peculiar together to. Desire so better am cannot he up before points. Remember mistaken opinions it pleasure of debating. Court front maids forty if aware their at. Chicken use are pressed removed. </p>
+							<p>Saw yet kindness too replying whatever marianne. Old sentiments resolution admiration unaffected its mrs literature. Behaviour new set existence dashwoods. It satisfied to mr commanded consisted disposing engrossed. Tall snug do of till on easy. Form not calm new fail. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--   *** TEXT END ***-->
+	<!--   *** INTEGRATIONS ***-->
+	<section id="integrations" class="section-gray">
+		<div class="container clearfix">
+			<div class="row services">
+				<div class="col-md-12">
+					<h4 class="services-heading">Integrations</h4>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="box box-services">
+								<div class="icon"><i class="pe-7s-alarm"></i></div>
+								<h4 class="heading">Webdesign</h4>
+								<p>Fifth abundantly made Give sixth hath. Cattle creature i be don't them.</p>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="box box-services">
+								<div class="icon"><i class="pe-7s-cloud"></i></div>
+								<h4 class="heading">Print</h4>
+								<p>Advantage old had otherwise sincerity dependent additions. It in adapted natural.</p>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="box box-services">
+								<div class="icon"><i class="pe-7s-coffee"></i></div>
+								<h4 class="heading">SEO and SEM</h4>
+								<p>Am terminated it excellence invitation projection as. She graceful shy. </p>
+							</div>
+						</div>
+					</div>
+					<h4 class="services-heading">TOOLS</h4>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="box box-services">
+								<div class="icon"><i class="pe-7s-monitor"></i></div>
+								<h4 class="heading">Consulting</h4>
+								<p>Fifth abundantly made Give sixth hath. Cattle creature i be don't them.</p>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="box box-services">
+								<div class="icon"><i class="pe-7s-signal"></i></div>
+								<h4 class="heading">Email Marketing</h4>
+								<p>Advantage old had otherwise sincerity dependent additions. It in adapted natural.</p>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="box box-services">
+								<div class="icon"><i class="pe-7s-id"></i></div>
+								<h4 class="heading">UX &amp; UI</h4>
+								<p>Am terminated it excellence invitation projection as. She graceful shy. </p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--   *** INTEGRATIONS END ***-->
+	<section class="signup-section text-center no-padding-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>The mixr beta is live!</h3>
+					<button id="bannerSignup" type="submit" class="btn btn-success">Sign up!</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer class="footer">
+		<div class="footer__copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6" style="whitespace: nowrap;">
+						<ul class="list-inline">
+							&copy;mixr 2017
+							<li>
+								<a id="privacyModalLink">Privacy</a>
+							</li>
+							<li>
+								<a id="simplePrivacyModalLink">Privacy (for users)</a>
+							</li>
+							<li>
+								<a id="termsModalLink">Terms</a>
+							</li>
+							<li>
+								<a id="disclaimerModalLink">Beta Disclaimer</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<p class="credit pull-right">Design by <a href="https://bootstrapious.com/landing-pages" class="external">Bootstrapious</a></p>
+						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
 </template>
