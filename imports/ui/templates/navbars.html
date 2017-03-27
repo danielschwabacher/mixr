@@ -6,9 +6,10 @@
 	{{> navbarInactive}}
 	{{/if}}
 </template>
+
 <template name="navbarActive">
-	<div role="navigation" class="navbar navbar-default navbar-inverse navbar-fixed-top">
-		<div class="container">
+	<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="nav-container">
 			<div class="navbar-header">
 				<div class="navbar-buttons">
 					<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
@@ -16,9 +17,10 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="{{pathFor 'events'}}">Events around me</a></li>
+					<li><a href="{{pathFor 'home'}}">mixr</a></li>
 				</ul>
 				<ul class="nav navbar-nav nb-center">
+					<li><a href="{{pathFor 'events'}}">Events around me</a></li>
 					<li><a href="{{pathFor 'manage'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
 					<li><a href="{{pathFor 'create'}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
 					{{#if checkIfOnEventPage}}
@@ -36,8 +38,8 @@
 
 
 <template name="navbarInactive">
-	<div role="navigation" class="navbar navbar-default navbar-inverse navbar-fixed-top">
-		<div class="container">
+	<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="nav-container">
 			<div class="navbar-header">
 				<div class="navbar-buttons">
 					<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
