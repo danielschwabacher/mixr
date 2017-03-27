@@ -17,11 +17,12 @@
 			<div class="row text-center-mobile">
 				<div class="col-md-6">
 					<div class="icon"><i class="fa fa-users" aria-hidden="true"></i></div>
-					<h2>Fresh</h2>
-					<p>mixr is a new social network concept that revolves around real life events, a platform to connect like-minded individuals to the events and activites they love.</p>
+					<h2>See all the cool events happening near you!</h2>
+					<p>mixr is a new social network concept that revolves around real life events, a platform to connect like-minded individuals to the events and activites they love. With mixr, you'll always be able to find new and interesting events around you.</p>
 				</div>
 				<div class="col-md-6">
-					<p><img alt="" src="img/features1.png" class="img-responsive"></p>
+					<p><img alt="" src="/eventsVector.png" class="img-responsive" ></p>
+					<a href="http://www.freepik.com/free-photos-vectors/infographic" class="blackText">Infographic vector created by Freepik</a>
 				</div>
 			</div>
 		</div>
@@ -30,12 +31,12 @@
 		<div class="container">
 			<div class="row text-center-mobile">
 				<div class="col-md-6">
-					<p><img alt="" src="img/features2.png" class="img-responsive"></p>
+					<p><img alt="" src="/clockCalendar.jpeg" class="img-responsive"></p>
+					<a href="http://www.freepik.com/free-photos-vectors/background" class="blackText">Background vector created by Photoroyalty - Freepik.com</a>
 				</div>
 				<div class="col-md-6">
-					<div class="icon brand-terciary"><i class="fa fa-crosshairs" aria-hidden="true"></i></div>
-					<h2>Nearby</h2>
-					<p>mixr is all done based on location, so every time you see an interesting event going on later, chances are it's right around the corner!</p>
+					<h2>Live in the moment!</h2>
+					<p>mixr is all location based, so every event you see is local to you! Furthermore, with mixr, you'll only see events happening soon, so if something looks interesting, chances are it's right around the corner.</p>
 				</div>
 			</div>
 		</div>
@@ -54,12 +55,12 @@
 	</section>
 	<!--   *** FEATURES END ***  -->
 	<!--   *** TEXT ***-->
-	<section id="text" class="text-page section-inverse background-secondary">
+	<section id="text" class="text-page section-inverse background-secondary no-padding-bottom">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2 class="text-center">Text page</h2>
-					<p class="lead text-center">Age lived smile six defer bed their few. Had admitting concluded too behaviour him she.</p>
+					<h2 class="text-center">About the mixr beta</h2>
+					<p class="lead text-center"></p>
 					<div class="row">
 						<div class="col-sm-6">
 							<p>Able an hope of body. Any nay shyness article matters own removal nothing his forming. Gay own additions education satisfied the perpetual. If he cause manor happy. Without farther she exposed saw man led. Along on happy could cease green oh. </p>
@@ -75,18 +76,19 @@
 		</div>
 	</section>
 	<!--   *** TEXT END ***-->
-
+	{{#unless currentUser}}
 	<section class="signup-section text-center no-padding-bottom">
-		<div class="container">
+		<div class="container container-dark">
 			<div class="row">
 				<div class="col-md-12">
-					<h3>The mixr beta is live!</h3>
+					<h3 class="whiteText">The mixr beta is live!</h3>
 					<button id="bannerSignup" type="submit" class="btn btn-success">Sign up!</button>
 				</div>
 			</div>
 		</div>
 	</section>
-	
+	{{/unless}}
+
 	<footer class="footer">
 		<div class="footer__copyright">
 			<div class="container">

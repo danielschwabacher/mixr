@@ -1,0 +1,7 @@
+.blackText {
+	font-size: 9px;
+	color: black;
+}
+.blackText:hover {
+  color: red;
+}
