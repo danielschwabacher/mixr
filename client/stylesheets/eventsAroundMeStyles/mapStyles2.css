@@ -1,22 +1,24 @@
-html,body, .container
-{
-    height:100%;
-}
 .container
 {
-    display:table;
+    display: table;
     width: 100%;
-	padding-top:  3%;
-	padding-right: 20px;
-	padding-left: 20px;
-	padding-bottom: .5%;
+	padding-top:  2%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-.eventDisplay{
-	height: 100%;
-	overflow-y: scroll;
+.eventNameHeader{
+	font-size: 18px;
+	text-transform: uppercase;
+}
+
+.eventDescription{
+	font-size: 15px;
+	max-width: 100px;
+    text-overflow: ellipsis;
+	/* Required for text-overflow to do anything */
+  	white-space: nowrap;
+  	overflow: hidden;
 }
 
 .row

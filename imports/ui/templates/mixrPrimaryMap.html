@@ -1,5 +1,4 @@
 <template name="mixrEventMap">
-	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
   	<div class="container">
 		{{#if Template.subscriptionsReady}}
 		<div class="row">
@@ -24,7 +23,6 @@
 
 
 <template name="eventDisplay">
-	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 	<div class="eventDisplay">
 		Events around you:
 		<hr class="section-heading-spacer">
@@ -36,12 +34,16 @@
 
 
 <template name="eventSection">
-	<div class="clickableArea">
-		<div class="row">
-			<div class="col-sm-4">{{ event_name }}</div>
+	<div class="eventSection clickableArea">
+		<div class="row eventNameHeader">
+			<div class="col-sm-12">
+				{{ event_name }}
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-4">{{ event_description }}</div>
+			<div class="col-sm-12 eventDescription">
+				{{ event_description }}
+			</div>
 		</div>
 		<button class="btn btn-info">More info</button>
 		<button class="btn btn-success">Register!</button>
