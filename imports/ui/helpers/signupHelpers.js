@@ -1,12 +1,13 @@
 import '../templates/signupPage.html';
 import '../templates/notificationModals.html';
+import '../../api/Notifications/notifyWrapper.js';
 
 //TODO: Implement email verification
 Template.signupPage.events({
 	'submit .registerForm'(event, template) {
 		event.preventDefault();
 		var firstName = event.target.firstName.value;
-    var lastName = event.target.lastName.value;
+    	var lastName = event.target.lastName.value;
 		var email = event.target.emailSignup.value;
 		var password = event.target.password.value;
 		var passwordConfirm = event.target.passwordConfirm.value;
@@ -36,8 +37,7 @@ Template.signupPage.events({
 createNewMixrAccount = function(userData){
 	var newUserCreated = Accounts.createUser(userData, function(err){
 		if (err) {
-			Modal.show('signupFailedModal')
-			return;
+			Modal.show("signupFailedModal")
 		}
 		else{
 			// This sends a verification email to users
@@ -46,8 +46,7 @@ createNewMixrAccount = function(userData){
 					console.log("Error sending verification email " + response);
 				}
 			});
-			// Should this redirect to a "Please confirm account" page?
-			Modal.show('signupSuccessModal')
+			notify('Account created successfully', "success")
 		}
 		return;
 	});
