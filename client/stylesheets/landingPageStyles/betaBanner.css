@@ -5,3 +5,14 @@
 .whiteText{
 	color: white;
 }
+
+#signupBannerButton{
+	background-color: white;
+	margin-top: 10px;
+	padding: 20 200px 20px 200px;
+	border-radius: 8px;
+}
+
+#signupBannerButton:hover{
+	background-color: #A200FF;
+}
