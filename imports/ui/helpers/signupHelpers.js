@@ -4,26 +4,26 @@ import '../../api/Notifications/notifyWrapper.js';
 
 //TODO: Implement email verification
 Template.signupPage.events({
-	'submit .registerForm'(event, template) {
+	'click #registerButton'(event, template) {
 		event.preventDefault();
-		var firstName = event.target.firstName.value;
-    	var lastName = event.target.lastName.value;
-		var email = event.target.emailSignup.value;
-		var password = event.target.password.value;
-		var passwordConfirm = event.target.passwordConfirm.value;
+		var firstName = document.getElementById('firstName').value;
+		var lastName = document.getElementById('lastName').value
+		var email = document.getElementById('email').value
+		var password = document.getElementById('password').value
+		var passwordConfirm = document.getElementById('password_confirm').value
 		var userProfileData = {
-				username : email,
-    		password : password,
-    		email : email,
-    		profile: {
-      			first_name : firstName,
-      			last_name : lastName,
-						custom_email_preferences: {
-							create_event: 1,
-							register_event: 1,
-							event_deleted: 1
-						}
-  			}
+			username : email,
+			password : password,
+			email : email,
+			profile: {
+				first_name : firstName,
+				last_name : lastName,
+				custom_email_preferences: {
+					create_event: 1,
+					register_event: 1,
+					event_deleted: 1
+				}
+			}
 		};
 		if (password == passwordConfirm){
 			createNewMixrAccount(userProfileData)
