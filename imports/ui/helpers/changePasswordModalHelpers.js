@@ -2,6 +2,7 @@ import '../templates/changePasswordModal.html';
 import '../templates/notificationModals.html';
 // Adding in forgot password helpers here
 import '../templates/forgotPasswordModal.html';
+import '../../api/Notifications/notifyWrapper.js';
 
 Template.changePasswordModal.events({
 	'submit .changePasswordModalForm'(event, template) {
@@ -21,7 +22,7 @@ Template.changePasswordModal.events({
 			});
 		}
 		else{
-			Modal.show('passwordsDoNotMatchModal');
+			notify("Passwords do not match", "danger", "center")
 		}
 	}
 });
@@ -33,12 +34,12 @@ Template.forgotPasswordModal.events({
     var userEmail = event.target.userEmail.value
     Meteor.call('sendForgotPassword', userEmail, function(err) {
       if (err){
-        Modal.show("passwordResetFailedModal");
+		  notify("Invalid email: link was not sent", "danger", "center")
       }
       else{
         Modal.hide(template)
-        Modal.show("resetLinkSentModal");
-				Router.go('home')
+       	notify("Email reset link sent!", "success", "right")
+		Router.go('home')
       }
     });
   }

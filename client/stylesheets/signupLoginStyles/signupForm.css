@@ -19,7 +19,8 @@ Last change	: 2015/03/27
 
 /*=== 3. Text Outside the Box ===*/
 .etc-login-form {
-  color: #919191;
+	text-align: center;
+  color: white;
   padding: 10px 20px;
 }
 .etc-login-form p {

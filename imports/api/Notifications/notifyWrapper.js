@@ -1,8 +1,7 @@
 // interface to call default notification with sitewide styling
-notify = function(msg, notificationType){
+notify = function(msg, notificationType, alignment){
 	$.notify({
 		// options
-		title: 'mixr: ',
 		message: msg,
 		target: '_blank'
 	},{
@@ -15,11 +14,11 @@ notify = function(msg, notificationType){
 		showProgressbar: false,
 		placement: {
 			from: "top",
-			align: "right"
+			align: alignment
 		},
 		offset: 20,
 		spacing: 10,
-		z_index: 1031,
+		z_index: 10310,
 		delay: 5000,
 		timer: 1000,
 		url_target: '_blank',

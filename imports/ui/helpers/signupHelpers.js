@@ -29,7 +29,7 @@ Template.signupPage.events({
 			createNewMixrAccount(userProfileData)
 		}
 		else{
-			Modal.show('passwordsDoNotMatchModal')
+			notify("Passwords do not match", "danger", "center")
 		}
 	},
 });
@@ -46,7 +46,7 @@ createNewMixrAccount = function(userData){
 					console.log("Error sending verification email " + response);
 				}
 			});
-			notify('Account created successfully', "success")
+			notify('Account created successfully', "success", "right")
 		}
 		return;
 	});
