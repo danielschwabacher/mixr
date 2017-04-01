@@ -2,10 +2,10 @@ import '../templates/loginPage.html';
 import '../templates/notificationModals.html';
 import '../templates/forgotPasswordModal.html';
 Template.loginPage.events({
-	'submit .loginForm'(event, template) {
+	'click #loginButton'(event, template) {
 		event.preventDefault()
-		var loginEmail = event.target.emailLogin.value;
-		var loginPassword = event.target.passwordLogin.value;
+		var loginEmail = document.getElementById('emailLogin').value
+		var loginPassword =  document.getElementById('passwordLogin').value
 		attemptLoginClient(loginEmail, loginPassword)
 	},
 
