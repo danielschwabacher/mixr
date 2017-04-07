@@ -13,11 +13,11 @@ Template.changePasswordModal.events({
 		if (newPassword1 == newPassword2){
 			Accounts.changePassword(oldPassword, newPassword1, function(err){
 				if (err){
-					Modal.show("passwordChangeFailedModal");
+					notify("Your password is incorrect", "danger", "center")
 				}
 				else{
-					Modal.hide(template)
-					Modal.show("passwordChangedModal");
+					Modal.hide()
+					notify("Password changed successfully!", "success", "right")
 				}
 			});
 		}
