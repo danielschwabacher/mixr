@@ -37,7 +37,7 @@ Template.signupPage.events({
 createNewMixrAccount = function(userData){
 	var newUserCreated = Accounts.createUser(userData, function(err){
 		if (err) {
-			Modal.show("signupFailedModal")
+			notify('Account could not be created, email already in use', "danger", "center")
 		}
 		else{
 			// This sends a verification email to users
