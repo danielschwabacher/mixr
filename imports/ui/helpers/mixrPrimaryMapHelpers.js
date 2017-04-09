@@ -1,6 +1,7 @@
 import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/mainMap.js';
 import '../../api/Time/converter.js'
+import { EJSON } from 'meteor/ejson'
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
@@ -14,9 +15,7 @@ Template.mixrEventMap.onCreated(function(){
 
 Template.mixrEventMap.onRendered(function(){
 	Session.set('onPrimaryMap', true)
-	// console.log(GoogleMaps.maps.mixrMap)
 	GoogleMaps.ready('mixrMap', function(map) {
-		console.log("map is ready..." + map.instance)
 		MAP = map.instance
 		var latLng = Geolocation.latLng();
         Tracker.autorun(() => {
@@ -48,20 +47,17 @@ Template.mixrEventMap.onDestroyed(function(){
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
-		console.log("Initializing map...")
 		var latLng = Geolocation.latLng(
 			{timeout: 10000}
 		);
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
-			console.log("Loaded and latLng recieved...")
-			options = {
+			return {
 				draggable: true,
 				scrollwheel: true,
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
 				zoom: 15
 			};
-			return options
 		}
 	}
 });
@@ -93,7 +89,7 @@ Template.eventDisplay.helpers({
 		return Session.get('timeFilterHours')
 	},
 });
-/*
+
 Template.eventSection.events({
 	"click .clickableArea"(event, template){
 		Modal.show('eventInformationModal', this)
@@ -117,4 +113,3 @@ Template.eventSection.events({
 		});
 	}
 });
-*/
