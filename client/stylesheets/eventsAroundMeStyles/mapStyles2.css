@@ -1,4 +1,4 @@
-.container
+.map-container
 {
     display: table;
     width: 100%;
@@ -39,5 +39,6 @@
     background: black;
 }
 .col-md-9 {
+	height: 500px;
     background: gray;
 }

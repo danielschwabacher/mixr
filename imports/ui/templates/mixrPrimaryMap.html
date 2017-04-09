@@ -1,18 +1,13 @@
 <template name="mixrEventMap">
-  	<div class="container">
-		{{#if Template.subscriptionsReady}}
+  	<div class="map-container">
 		<div class="row">
   			<div class="col-md-3 no-float">
 				{{> eventDisplay}}
 			</div>
   			<div class="col-md-9 no-float">
-				Map here
-				{{> googleMap name="mixrMap" options=initPrimaryEventMapOptions}}
+				{{> googleMap name="mixrMap2" options=initPrimaryEventMapOptions}}
 			</div>
 		</div>
-		{{else}}
-			{{> mapLoader}}
-		{{/if}}
 	</div>
 </template>
 
@@ -21,7 +16,6 @@
 		Fetching events around you...
 	</div>
 </template>
-
 
 <template name="eventDisplay">
 	<div class="eventDisplay">
@@ -33,18 +27,13 @@
 	</div>
 </template>
 
-
 <template name="eventSection">
-	<div class="eventSection clickableArea">
-		<div class="row eventNameHeader">
-			<div class="col-sm-12">
-				{{ event_name }}
-			</div>
+	<div class="clickableArea">
+		<div class="row">
+			<div class="col-sm-4">{{ event_name }}</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12 eventDescription">
-				{{ event_description }}
-			</div>
+			<div class="col-sm-4">{{ event_description }}</div>
 		</div>
 		<button class="btn btn-info">More info</button>
 		<button class="btn btn-success">Register!</button>

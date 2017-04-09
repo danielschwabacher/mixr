@@ -16,6 +16,7 @@ Template.mixrEventMap.onCreated(function(){
 Template.mixrEventMap.onRendered(function(){
 	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
+		console.log("map is ready")
 		MAP = map.instance
 		var latLng = Geolocation.latLng();
         Tracker.autorun(() => {
@@ -48,7 +49,7 @@ Template.mixrEventMap.onDestroyed(function(){
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
 		var latLng = Geolocation.latLng(
-			{timeout: 10000}
+			{timeout: 100}
 		);
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
