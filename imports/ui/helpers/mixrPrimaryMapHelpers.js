@@ -1,7 +1,6 @@
 import '../templates/mixrPrimaryMap.html';
 import '../../api/mapHandlers/mainMap.js';
 import '../../api/Time/converter.js'
-// import { EJSON } from 'meteor/ejson'
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
@@ -49,18 +48,20 @@ Template.mixrEventMap.onDestroyed(function(){
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
-		console.log("getting options...")
+		console.log("Initializing map...")
 		var latLng = Geolocation.latLng(
 			{timeout: 10000}
 		);
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
-			return {
+			console.log("Loaded and latLng recieved...")
+			options = {
 				draggable: true,
 				scrollwheel: true,
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
 				zoom: 15
 			};
+			return options
 		}
 	}
 });

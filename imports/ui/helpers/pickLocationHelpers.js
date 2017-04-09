@@ -21,7 +21,7 @@ Template.pickLocationPage.helpers({
 		);
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
-			console.log("loaded pickLocation map")
+			// console.log("loaded pickLocation map")
 			return {
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
 				zoom: 15
