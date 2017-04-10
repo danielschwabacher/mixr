@@ -1,54 +1,11 @@
-.event-container
-{
-	height: 100%;
+.event-display-column{
+	height: calc(100vh - 80px);
 	background-color: black;
 }
-
-.event-display-column{
-	height: 100%;
-	background-color: white;
+.event-display-column h4{
+	color: white;
 }
-
 .map-display-column{
-	height: 100%;
-	background-color: yellow;
+	height: calc(100vh - 80px);
+	background-color: black;
 }
-/*
-.event-container
-{
-    display: table;
-    width: 100%;
-	height: 90%;
-	padding-top:  2%;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.eventNameHeader{
-	font-size: 18px;
-	text-transform: uppercase;
-}
-
-.eventDescription{
-	font-size: 15px;
-	max-width: 100px;
-    text-overflow: ellipsis;
-	/* Required for text-overflow to do anything //
-  	white-space: nowrap;
-  	overflow: hidden;
-}
-
-.row
-{
-    height: 100%;
-	padding-top: 4%;
-	z-index: 1;
-	display: table-row;
-}
-
-@media (min-width: 992px) {
-  .row .no-float {
-      display: table-cell;
-      float: none;
-  }
-}
-*/

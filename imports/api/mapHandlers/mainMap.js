@@ -38,6 +38,7 @@ Marker.prototype.createObjectMarker = function(){
 		Modal.show('eventInformationModal', this.eventInfo)
 	});
 
+	/*
 	google.maps.event.addListener(eventMarker, 'mouseover', () => {
 		// console.log("clicked marker: " + this.eventInfo.event_name)
 		this.bubble.setContent(markerInfo);
@@ -47,6 +48,7 @@ Marker.prototype.createObjectMarker = function(){
 	google.maps.event.addListener(eventMarker, 'mouseout', () => {
 		this.bubble.close()
 	});
+	*/
 
 	GLOBAL_MARKERS.push(eventMarker)
 

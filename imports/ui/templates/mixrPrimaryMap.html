@@ -1,31 +1,24 @@
 <template name="mixrEventMap">
 	<div class="container-fluid">
 		<div class="row content">
-
-			<div class="col-sm-3">
-				<h4>Events around you</h4>
+			<div class="col-sm-3 event-display-column">
+				<h4>Events Around You</h4>
+				<hr>
 				{{> eventDisplay}}
 			</div>
 
-			<div class="col-sm-9">
-				{{> googleMap name="mixrMap2" options=initPrimaryEventMapOptions}}
+			<div class="col-sm-9 map-display-column">
+				{{> googleMap name="mixrMap" options=initPrimaryEventMapOptions}}
 			</div>
 		</div>
 	</div>
 </template>
 
-<template name="mapLoader">
-	<div class="loading">
-		Fetching events around you...
-	</div>
-</template>
 
 <template name="eventDisplay">
 	<div class="eventDisplay">
-		Events around you:
-		<hr class="section-heading-spacer">
 		{{#each getEvents returnSessionTags returnSessionTimes}}
-		{{> eventSection }}
+			{{> eventSection }}
 		{{/each}}
 	</div>
 </template>

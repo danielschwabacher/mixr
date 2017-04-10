@@ -5,9 +5,6 @@ import { EJSON } from 'meteor/ejson'
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
-Template.registerHelper('checkIfOnEventPage', function(){
-	return Session.get('onPrimaryMap');
-});
 
 Template.mixrEventMap.onCreated(function(){
 	this.eventsCollection = this.subscribe('events');
@@ -19,7 +16,6 @@ Template.mixrEventMap.onRendered(function(){
 		console.log("map is ready")
 		MAP = map.instance
 		var latLng = Geolocation.latLng();
-		/*
         Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
@@ -39,12 +35,7 @@ Template.mixrEventMap.onRendered(function(){
 				temp_marker.createObjectMarker()
 			});
         });
-		*/
 	});
-});
-
-Template.mixrEventMap.onDestroyed(function(){
-	Session.set('onPrimaryMap', false)
 });
 
 
@@ -92,7 +83,7 @@ Template.eventDisplay.helpers({
 		return Session.get('timeFilterHours')
 	},
 });
-/*
+
 Template.eventSection.events({
 	"click .clickableArea"(event, template){
 		Modal.show('eventInformationModal', this)
@@ -116,4 +107,3 @@ Template.eventSection.events({
 		});
 	}
 });
-*/
