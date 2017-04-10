@@ -38,13 +38,9 @@ Template.mixrEventMap.onRendered(function(){
 	});
 });
 
-
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
-		console.log("called init map")
-		var latLng = Geolocation.latLng(
-			{timeout: 100}
-		);
+		var latLng = Geolocation.latLng();
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
 			return {
