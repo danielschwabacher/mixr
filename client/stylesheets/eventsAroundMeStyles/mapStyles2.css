@@ -1,10 +1,19 @@
-.map-container
+.event-container
 {
     display: table;
     width: 100%;
+	height: 90%;
 	padding-top:  2%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+.event-display-column{
+	height: 100%;
+	background-color: black;
+}
+
+.map-display-column{
+	background-color: yellow;
 }
 
 .eventNameHeader{
@@ -34,11 +43,4 @@
       display: table-cell;
       float: none;
   }
-}
-.col-md-3 {
-    background: black;
-}
-.col-md-9 {
-	height: 500px;
-    background: gray;
 }

@@ -14,6 +14,16 @@ GENERAL
 =====================
 
 */
+
+.landing-page-container
+{
+    display: table;
+    width: 100%;
+	padding-top:  2%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 html {
   height: 100%;
 }

@@ -1,10 +1,10 @@
 <template name="mixrEventMap">
-  	<div class="map-container">
+  	<div class="event-container">
 		<div class="row">
-  			<div class="col-md-3 no-float">
+  			<div class="col-md-3 event-display-column">
 				{{> eventDisplay}}
 			</div>
-  			<div class="col-md-9 no-float">
+  			<div class="col-md-9 map-display-column">
 				{{> googleMap name="mixrMap2" options=initPrimaryEventMapOptions}}
 			</div>
 		</div>

@@ -19,6 +19,7 @@ Template.mixrEventMap.onRendered(function(){
 		console.log("map is ready")
 		MAP = map.instance
 		var latLng = Geolocation.latLng();
+		/*
         Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
@@ -38,6 +39,7 @@ Template.mixrEventMap.onRendered(function(){
 				temp_marker.createObjectMarker()
 			});
         });
+		*/
 	});
 });
 
@@ -79,7 +81,6 @@ Template.eventDisplay.helpers({
 		displayEvents.forEach(function(currentDoc){
 			eventsArray.push(currentDoc)
 		});
-		console.log("time: " + time)
 		return eventsArray
     },
 	'returnSessionTags': function(){
@@ -90,7 +91,7 @@ Template.eventDisplay.helpers({
 		return Session.get('timeFilterHours')
 	},
 });
-
+/*
 Template.eventSection.events({
 	"click .clickableArea"(event, template){
 		Modal.show('eventInformationModal', this)
@@ -114,3 +115,4 @@ Template.eventSection.events({
 		});
 	}
 });
+*/
