@@ -30,6 +30,20 @@
 	}
 	.map-display-column{
 		height: calc(100vh - 80px);
-		background-color: black;
+		background-color: white;
 	}
+}
+
+.event-name-holder{
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
+}
+
+.event-description-holder{
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
 }
