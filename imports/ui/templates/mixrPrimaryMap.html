@@ -3,7 +3,7 @@
 		<div class="row content">
 			<div class="col-sm-3 event-display-column">
 				<h4>Events Around You</h4>
-				<hr>
+				<hr class="map-hr">
 				{{> eventDisplay}}
 			</div>
 
@@ -24,7 +24,7 @@
 </template>
 
 <template name="eventSection">
-	<div class="clickableArea">
+	<div class="event-section-clickable-area">
 		<div class="row">
 			<div class="col-sm-4 event-name-holder">{{ event_name }}</div>
 		</div>
@@ -33,7 +33,6 @@
 		</div>
 		<button class="btn btn-info">More info</button>
 		<button class="btn btn-success">Register!</button>
-		<br>
-		<hr class="section-heading-spacer">
 	</div>
+	<hr class="map-hr">
 </template>

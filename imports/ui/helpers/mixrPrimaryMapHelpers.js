@@ -6,6 +6,13 @@ GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
 
+// helper function to display all events in ALL_SHOWN_EVENTS
+showAllEvents = function(event_list, map_instance){
+	event_list.forEach(function(currentEvent){
+		temp_marker = new Marker(map_instance, currentEvent)
+		temp_marker.createObjectMarker()
+	});
+}
 Template.mixrEventMap.onCreated(function(){
 	this.eventsCollection = this.subscribe('events');
 });
@@ -30,10 +37,7 @@ Template.mixrEventMap.onRendered(function(){
 				}
 			);
 			// Session.set('cachedEventsToDisplay', EJSON.clone(ALL_SHOWN_EVENTS))
-			ALL_SHOWN_EVENTS.forEach(function(currentEvent){
-				temp_marker = new Marker(map.instance, currentEvent)
-				temp_marker.createObjectMarker()
-			});
+			showAllEvents(ALL_SHOWN_EVENTS, map.instance)
         });
 	});
 });
@@ -81,10 +85,10 @@ Template.eventDisplay.helpers({
 });
 
 Template.eventSection.events({
-	"click .clickableArea"(event, template){
+	"click .event-section-clickable-area"(event, template){
 		Modal.show('eventInformationModal', this)
 	},
-	"mouseover .clickableArea"(event, template) {
+	"mouseenter .event-section-clickable-area"(event, template) {
 		removeMarkers()
 		singleMarker = EventCollection.find(
 			{
@@ -96,10 +100,7 @@ Template.eventSection.events({
 			temp_marker.createObjectMarker()
 		});
 	},
-	"mouseout .clickableArea"(event,template){
-		ALL_SHOWN_EVENTS.forEach(function(currentEvent){
-			temp_marker = new Marker(MAP, currentEvent)
-			temp_marker.createObjectMarker()
-		});
+	"mouseleave .event-section-clickable-area"(event,template){
+		showAllEvents(ALL_SHOWN_EVENTS, MAP)
 	}
 });

@@ -33,6 +33,14 @@
 		background-color: white;
 	}
 }
+.map-hr{
+	width: 100%;
+	margin: 10px !important;
+}
+.event-section-clickable-area{
+	height: 100%;
+	width: 100%;
+}
 
 .event-name-holder{
 	width: 100%;
