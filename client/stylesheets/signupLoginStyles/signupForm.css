@@ -28,6 +28,7 @@ Last change	: 2015/03/27
 }
 /*=== 4. Main Form ===*/
 .login-form-1 {
+	color: white;
 	width: 400px;
 	border-radius: 5px;
 	display: inline-block;
