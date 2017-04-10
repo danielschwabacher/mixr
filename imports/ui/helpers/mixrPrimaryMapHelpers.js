@@ -50,6 +50,7 @@ Template.mixrEventMap.onDestroyed(function(){
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
+		console.log("called init map")
 		var latLng = Geolocation.latLng(
 			{timeout: 100}
 		);
