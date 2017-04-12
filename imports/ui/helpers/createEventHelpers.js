@@ -55,7 +55,7 @@ Template.createEventPage.events({
 	'click #resendEmailButton'(event, template) {
 		Meteor.call('sendVerificationLink', (error, response) => {
  			if (error) {
-				notify("Could not resend email verification: " + error, "danger", "center")
+				notify("Error: Could not send verification email", "danger", "center")
 			}
 			else{
 				notify("Email verification link sent", "success", "right")
@@ -78,10 +78,13 @@ Template.emailNotVerifiedModal.events({
 	'click #resendVerificationLink'(event, template){
 		Meteor.call('sendVerificationLink', (error, response) => {
 			if (error) {
-
-				console.log("Error sending verification email " + response);
+				notify("Error: Could not send verification email", "danger", "center")
+			}
+			else{
+				notify("Email verification link sent!", "success", "right")
 			}
 		});
-		Router.go('home')
+		// Router.go('home')
+		Modal.hide(template)
 	}
 });
