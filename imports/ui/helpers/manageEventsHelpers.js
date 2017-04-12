@@ -1,4 +1,5 @@
 import '../templates/manageEventsPage.html';
+import '../../api/Notifications/notifyWrapper.js';
 
 Template.manageEventsPanel.onCreated(function(){
 	this.crossReferenceCollection = this.subscribe('userEventsCrossReference');
@@ -85,8 +86,14 @@ Template.dynamicModalRegistered.events({
 Template.dynamicModalCreated.events({
 	'click .deleteEventCreatedModal'(event, template){
 		var self = this
-		console.log("trying to delete: " + self._id)
-		Meteor.call('deleteEvent', self._id)
+		Meteor.call('deleteEvent', self._id, function(error, result) {
+			if (result){
+				notify("Event deleted successfully!", "success", "right")
+			}
+			else{
+				notify("Error: Could not delete event, please try again.", "danger", "center")
+			}
+		});
 	}
 });
 
