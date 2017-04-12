@@ -189,3 +189,17 @@
 [class^="pe-7s-"], [class*=" pe-7s-"] {
   display: inline-block;
 }
+
+#signupBannerButton{
+	background-color: #282929;
+	margin-top: 10px;
+	font-size: 28px;
+	font-weight: bold;
+	color: white;
+	width: 50%;
+	padding: 10px;
+	border-radius: 8px;
+}
+#signupBannerButton:hover{
+	background-color: #A200FF;
+}
