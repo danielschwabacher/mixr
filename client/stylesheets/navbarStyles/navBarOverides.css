@@ -44,3 +44,12 @@
 		display:block !important;
 	}
 }
+
+
+@media(min-width: 768px){
+	.navbar-nav{
+		display: inline-block;
+		float: middle;
+		margin: 0;
+	}
+};

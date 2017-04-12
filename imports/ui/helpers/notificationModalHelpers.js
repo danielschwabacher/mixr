@@ -34,7 +34,7 @@ Template.confirmEventModal.events({
 						notify("Error: Could not send event reference email", "danger", "center")
 					}
 					else {
-						notify("Event email reference sent!", "success", "right")
+						notify("Event reference email sent!", "success", "right")
 					}
 				});
 			}
