@@ -85,7 +85,22 @@ Template.eventDisplay.helpers({
 });
 
 Template.eventSection.events({
-	"click .event-section-clickable-area"(event, template){
+	"click #eventSectionRegisterButton"(event, template){
+		if (Meteor.user() && Meteor.user().emails[0].verified){
+			Meteor.call("registerEvent", this, function(err, didRegister){
+				if (didRegister){
+					notify("Registered successfully!", "success", "right")
+				}
+				else{
+					notify("Error: You are already registered for this event", "danger", "center")
+				}
+			});
+		}
+		else {
+			Modal.show("emailNotVerifiedModal")
+		}
+	},
+	"click #eventSectionMoreInfoButton"(event, template){
 		Modal.show('eventInformationModal', this)
 	},
 	"mouseenter .event-section-clickable-area"(event, template) {
