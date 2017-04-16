@@ -79,7 +79,14 @@ Template.eventCreatedNameHolder.events({
 Template.dynamicModalRegistered.events({
 	'click .unregisterEventRegisteredModal'(event, template){
 		var self = this
-		Meteor.call('unregisterEvent', self._id)
+		Meteor.call('unregisterEvent', self._id, function(error, result){
+			if (result){
+				notify("Unregistered successfully!", "success", "right")
+			}
+			else{
+				notify("Error: Could not unregister from event, please try again.", "danger", "center")
+			}
+		});
 	}
 });
 
