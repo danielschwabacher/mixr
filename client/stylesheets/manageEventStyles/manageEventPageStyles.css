@@ -14,35 +14,11 @@
 		background-color: #292828;
 		color: white;
 	}
-
 	.nameLinkCreated{
 		color: white;
 		font-size: 30px;
 	}
 }
-
-
-@media(min-width: 576px){
-	.manageEventContainer{
-		font-family: 'Passion One';
-		display: block;
-		margin: 5%;
-		font-size: 35px;
-	}
-
-	.manageEventPageCol{
-		width: 45%;
-		margin-right: 4%;
-		background-color: #292828;
-		color: white;
-	}
-
-	.nameLinkCreated{
-		color: white;
-		font-size: 30px;
-	}
-}
-
 
 @media(min-width: 0px){
 	.manageEventContainer{
@@ -51,14 +27,16 @@
 		margin: 5%;
 		font-size: 35px;
 	}
-
+	.manageEventRow{
+		width: 100%;
+		margin-top: 10px;
+	}
 	.manageEventPageCol{
-		width: 45%;
+		width: 100%;
 		margin-right: 4%;
 		background-color: #292828;
 		color: white;
 	}
-
 	.nameLinkCreated{
 		color: white;
 		font-size: 30px;
