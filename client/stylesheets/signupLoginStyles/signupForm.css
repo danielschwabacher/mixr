@@ -35,7 +35,31 @@ Last change	: 2015/03/27
 }
 @media(min-width: 1200px){
 	.login-form-1 {
+		width: 800px;
+		border-radius: 5px;
+		display: inline-block;
+	}
+}
+
+@media(min-width: 992px){
+	.login-form-1 {
+		width: 700px;
+		border-radius: 5px;
+		display: inline-block;
+	}
+}
+
+@media(min-width: 768px){
+	.login-form-1 {
 		min-width: 600px;
+		border-radius: 5px;
+		display: inline-block;
+	}
+}
+
+@media(max-width: 668px){
+	.login-form-1 {
+		min-width: 400px;
 		border-radius: 5px;
 		display: inline-block;
 	}
