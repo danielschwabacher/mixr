@@ -13,18 +13,4 @@ Template.forgotPasswordModal.events({
         console.log("Email successfully sent!");
       }
     });
-
-    /*
-    Meteor.call('sendForgotPassword', userEmail, function(error){
-      if (error) {
-        Modal.show("passwordChangeFailedModal")
-        console.log("Error sending email")
-      }
-      else {
-        Modal.hide(template)
-        Modal.show("passwordChangedModal")
-      }
-  }
-  */
-
 });

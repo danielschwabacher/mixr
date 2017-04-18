@@ -17,8 +17,3 @@ Router.route('/', function(){
 Router.route('/home', function(){
 	this.render('landingPage')
 })
-
-// unsubscribe from emails page
-Router.route('/unsubscribe', function(){
-  this.render('unsubscribeFromEmails')
-})
