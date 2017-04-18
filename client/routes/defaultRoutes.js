@@ -1,7 +1,6 @@
 import '../../imports/ui/helpers/homeHelpers.js';
 import '../../imports/ui/helpers/navbarHelpers.js';
 import '../../imports/ui/helpers/landingPageHelpers.js';
-import '../../imports/ui/helpers/unsubscribeFromEmailsHelpers.js';
 
 
 // "global" route so the navbar appears on every page
