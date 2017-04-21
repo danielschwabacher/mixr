@@ -1,4 +1,5 @@
 import '../templates/mixrPrimaryMap.html';
+import '../templates/applyEventFilterModals.html'
 import '../../api/mapHandlers/mainMap.js';
 import '../../api/Time/converter.js'
 import { EJSON } from 'meteor/ejson'
@@ -116,5 +117,16 @@ Template.eventSection.events({
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
 		showAllEvents(ALL_SHOWN_EVENTS, MAP)
+	}
+});
+
+Template.applyEventFiltersSection.events({
+	"click .sortByTagDropDown"(event){
+		event.preventDefault()
+		Modal.show('sortByTagsEventFilterModal')
+	},
+	"click .sortByTimeDropDown"(event){
+		event.preventDefault()
+		Modal.show('sortByTimeEventFilterModal')
 	}
 });

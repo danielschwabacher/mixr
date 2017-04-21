@@ -3,7 +3,7 @@
 		<div class="row content">
 			<div class="col-sm-3 event-display-column">
 				<h4>Events Around You</h4>
-				{{> applyEventFiltersSectionInCol}}
+				{{> applyEventFiltersSection}}
 				<hr class="map-hr">
 				{{> eventDisplay}}
 			</div>
@@ -39,7 +39,7 @@
 </template>
 
 
-<template name="applyEventFiltersSectionInCol">
+<template name="applyEventFiltersSection">
 	<li class="dropdown navbar-inverse dd-event-display-filter-selector-global">
 		<a class="dropdown-toggle dd-event-display-filter-modals" data-toggle="dropdown" href="#">Apply event filters<span class="caret"></span></a>
 		<ul class="dropdown-menu inverse-dropdown">
