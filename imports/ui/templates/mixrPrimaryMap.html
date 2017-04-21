@@ -3,6 +3,7 @@
 		<div class="row content">
 			<div class="col-sm-3 event-display-column">
 				<h4>Events Around You</h4>
+				{{> applyEventFiltersSectionInCol}}
 				<hr class="map-hr">
 				{{> eventDisplay}}
 			</div>
@@ -35,4 +36,15 @@
 		<button class="btn btn-success" id="eventSectionRegisterButton">Register!</button>
 	</div>
 	<hr class="map-hr">
+</template>
+
+
+<template name="applyEventFiltersSectionInCol">
+	<li class="dropdown navbar-inverse">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Apply event filters<span class="caret"></span></a>
+		<ul class="dropdown-menu inverse-dropdown">
+			<li class="sortByTimeDropDown"><a href="#">Sort by time</a></li>
+			<li class="sortByTagDropDown"><a href="#">Sort by tags</a></li>
+		</ul>
+	</li>
 </template>

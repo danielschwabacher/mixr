@@ -55,3 +55,7 @@
 	white-space: nowrap;
   	overflow: hidden;
 }
+
+.event-display-column{
+	overflow-y: scroll;
+}

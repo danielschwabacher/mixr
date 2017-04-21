@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import './crossReferenceTableDaemon.js'
 import './daemonTester.js'
+import './databaseTesting.js'
 Meteor.startup(() => {
 	//UserEventsCrossReferenceCollection.remove({})
 	//process.env.MAIL_URL = 'smtp://mixrdev123456%40gmail.com:' + encodeURIComponent("Zope123456^") + '@smtp.gmail.com:465';
@@ -17,5 +18,5 @@ Meteor.startup(() => {
 	Meteor.setInterval(function(){
 		CrossReferenceSpider.purge()
 	}, 86400000);
-	// insertFakeData()
+	insertFakeData()
 });
