@@ -142,14 +142,6 @@ Meteor.methods({
     });
   },
 
-  changeSubscriptionPreference: function() {
-    var userID = Meteor.userId()
-    Meteor.users.update(
-      {_id: userID},
-      {$inc: { 'profile.email_preference': -1 }}
-    );
-  },
-
   sendUserFeedback: function(feedback) {
     this.unblock()
 
