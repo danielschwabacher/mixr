@@ -59,3 +59,19 @@
 .event-display-column{
 	overflow-y: scroll;
 }
+
+.dd-event-display-filter-modals{
+	font-size: 20px;
+	color: white;
+}
+.dd-event-display-filter-selector-global{
+	background-color: black;
+}
+.sortByTimeDropDown{
+	font-size: 20px;
+	float: left;
+}
+.sortByTagDropDown{
+	font-size: 20px;
+	float: right;
+}

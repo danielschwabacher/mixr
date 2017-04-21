@@ -5,10 +5,7 @@ import { EJSON } from 'meteor/ejson'
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
-// global helper to see if current path is event page
-Template.registerHelper('checkIfOnEventPage', function(){
-	return Session.get('onPrimaryMap');
-});
+
 // helper function to display all events in ALL_SHOWN_EVENTS
 showAllEvents = function(event_list, map_instance){
 	event_list.forEach(function(currentEvent){
@@ -21,7 +18,6 @@ Template.mixrEventMap.onCreated(function(){
 });
 
 Template.mixrEventMap.onRendered(function(){
-	Session.set('onPrimaryMap', true)
 	GoogleMaps.ready('mixrMap', function(map) {
 		console.log("map is ready")
 		MAP = map.instance
@@ -43,10 +39,6 @@ Template.mixrEventMap.onRendered(function(){
 			showAllEvents(ALL_SHOWN_EVENTS, map.instance)
         });
 	});
-});
-
-Template.mixrEventMap.onDestroyed(function(){
-	Session.set('onPrimaryMap', false)
 });
 
 Template.mixrEventMap.helpers({

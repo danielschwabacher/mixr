@@ -1,9 +1,9 @@
 <template name="navbar">
 	{{> yield }}
 	{{#if currentUser}}
-	{{> navbarActive}}
+		{{> navbarActive}}
 	{{else}}
-	{{> navbarInactive}}
+		{{> navbarInactive}}
 	{{/if}}
 </template>
 
@@ -23,9 +23,6 @@
 					<li><a href="{{pathFor 'events'}}" data-toggle="collapse" data-target=".navbar-collapse.in">Events around me</a></li>
 					<li><a href="{{pathFor 'manage'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
 					<li><a href="{{pathFor 'create'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
-					{{#if checkIfOnEventPage}}
-					{{> applyEventFiltersSection}}
-					{{/if}}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="{{pathFor 'account'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
@@ -58,14 +55,4 @@
 			</div>
 		</div>
 	</div>
-</template>
-
-<template name="applyEventFiltersSection">
-	<li class="dropdown navbar-inverse">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Apply event filters<span class="caret"></span></a>
-		<ul class="dropdown-menu inverse-dropdown">
-			<li class="sortByTimeDropDown"><a href="#">Sort by time</a></li>
-			<li class="sortByTagDropDown"><a href="#">Sort by tags</a></li>
-		</ul>
-	</li>
 </template>
