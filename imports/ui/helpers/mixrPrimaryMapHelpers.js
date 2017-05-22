@@ -56,20 +56,34 @@ Template.mixrEventMap.helpers({
 		}
 	}
 });
-
+Session.set('sidebarIds', null)
 Template.eventDisplay.helpers({
 	// returns an array of objects representing the object
-	'getEvents': function(tags, time){
+	// if id is null, then no marker is hovered over.
+	// Only selects tags and times.
+	'getEvents': function(tags, time, id){
+		sidebarId = Session.get('sidebarIds')
 		var eventsArray = []
 		currentUnixTime = moment().unix()
 		additionalSeconds = hoursToSeconds(time)
 		unixTimeRange = currentUnixTime + additionalSeconds
-		displayEvents = EventCollection.find(
-			{
-				event_tag: { $in: tags},
-				event_timestamp: {$lte: unixTimeRange}
-			}
-		);
+		if (sidebarId){
+			displayEvents = EventCollection.find(
+				{
+					_id: sidebarId,
+					event_tag: { $in: tags},
+					event_timestamp: {$lte: unixTimeRange}
+				}
+			);
+		}
+		else{
+			displayEvents = EventCollection.find(
+				{
+					event_tag: { $in: tags},
+					event_timestamp: {$lte: unixTimeRange}
+				}
+			);
+		}
 		displayEvents.forEach(function(currentDoc){
 			eventsArray.push(currentDoc)
 		});
@@ -82,6 +96,9 @@ Template.eventDisplay.helpers({
 	'returnSessionTimes': function(){
 		return Session.get('timeFilterHours')
 	},
+	'returnSessionSidebarIds': function(){
+		return Session.get('sidebarIds')
+	}
 });
 
 Template.eventSection.events({
