@@ -36,7 +36,6 @@ Template.mixrEventMap.onRendered(function(){
 					event_timestamp: {$lte: unixTimeRange}
 				}
 			);
-			// Session.set('cachedEventsToDisplay', EJSON.clone(ALL_SHOWN_EVENTS))
 			showAllEvents(ALL_SHOWN_EVENTS, map.instance)
         });
 	});
@@ -134,9 +133,6 @@ Template.eventSection.events({
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
 		showAllEvents(ALL_SHOWN_EVENTS, MAP)
-	},
-	"mouseenter #mapMarker"(event, template) {
-		removeMarkers()
 	},
 });
 
