@@ -41,6 +41,10 @@ Marker.prototype.createObjectMarker = function(){
 		updateSideBarLinks(eventMarker.get('id'))
 	});
 
+	google.maps.event.addListener(eventMarker, 'mouseout', () => {
+		updateSideBarLinks(null)
+	});
+
 	GLOBAL_MARKERS.push(eventMarker)
 
 	return 0;
