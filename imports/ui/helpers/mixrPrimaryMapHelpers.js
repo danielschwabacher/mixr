@@ -117,7 +117,10 @@ Template.eventSection.events({
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
 		showAllEvents(ALL_SHOWN_EVENTS, MAP)
-	}
+	},
+	"mouseenter #mapMarker"(event, template) {
+		removeMarkers()
+	},
 });
 
 Template.applyEventFiltersSection.events({
