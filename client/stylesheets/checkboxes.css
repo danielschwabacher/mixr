@@ -80,11 +80,11 @@
   color: #fff; }
 
  .checkbox-mixr input[type="checkbox"] + label::after {
- background-color: #e570e7; }
+ background-color: #A200FF; }
  .checkbox-mixr input[type="checkbox"]:checked + label::before {
- border-color: #e570e7; }
+ border-color: #A200FF; }
  .checkbox-mixr input[type="checkbox"]:checked + label::after {
- background-color: #e570e7; }
+ background-color: #A200FF; }
 
 .radio {
   padding-left: 20px; }
@@ -179,8 +179,8 @@
   background-color: #5cb85c; }
 
 .radio-mixr input[type="radio"] + label::after {
-background-color: #e570e7; }
+background-color: #A200FF; }
 .radio-mixr input[type="radio"]:checked + label::before {
-border-color: #e570e7; }
+border-color: #A200FF; }
 .radio-mixr input[type="radio"]:checked + label::after {
-background-color: #e570e7; }
+background-color: #A200FF; }

@@ -1,22 +1,69 @@
 <template name="accountSettingsPage">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 	{{> changePasswordLink}}
+	{{> emailSettings}}
 	{{> feedBackLink}}
 </template>
 
 
 <template name="changePasswordLink">
-	<div class="activeDiv">
-		<div class="row">
+	<div class="container-fluid">
+		<div class="settings-row row">
 			<a href="" id="changePasswordLink">Change your password</a>
 		</div>
 	</div>
 </template>
 
 <template name="feedBackLink">
-	<div class="activeDiv">
-		<div class="row">
+	<div class="container-fluid">
+		<div class="settings-row row">
 			<a href="" id="giveFeedbackLink">Give feedback!</a>
+		</div>
+	</div>
+</template>
+
+<template name="emailSettings">
+	<div class="container-fluid">
+		<div class="settings-row row">
+			<a href="" id="emailSettingsLink">Email Preferences</a>
+		</div>
+	</div>
+</template>
+
+
+<template name="emailPreferencesModal">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form class="updateEmailPrefModalForm">
+					<div class="modal-header">
+						<h4 class="modal-title">Email Preferences</h4>
+					</div>
+
+					<div class="checkbox checkbox-mixr checkbox-inline">
+						<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
+						<label for="createdEventPref">Notify me when I create an event</label>
+					</div>
+
+					<div>
+					</div>
+
+					<div class="checkbox checkbox-mixr checkbox-inline">
+						<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes" checked>
+						<label for="registeredEventPref">Notify me when I register for an event</label>
+					</div>
+
+					<div class="checkbox checkbox-mixr checkbox-inline">
+						<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes" checked>
+						<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
+					</div>
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success btn-float-right" id="updateEmailPrefButton">Update Preferences</button>
+						<button class="btn btn-danger btn-float-left" data-dismiss="modal">Nevermind</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </template>

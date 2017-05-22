@@ -92,7 +92,7 @@ Meteor.methods({
 				}
 			)
 			// call method to send email to user with the details of event
-			// IMPORTANT: this causes unexpected modal behavior when emailing accounts which aren't sandbox verified.
+			// IMPORTANT: this causes unexpected notify behavior (Error: you are already registered) when emailing accounts which aren't sandbox verified.
 			Meteor.call('sendRegisteredForEventEmail', eventToUpdate)
 			console.log("return success")
 			return 1;

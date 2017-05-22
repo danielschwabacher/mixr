@@ -1,19 +1,22 @@
 <template name="manageEventsPanel">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	<div class="activeDiv">
+	<div class="manageEventContainer">
 		{{#if Template.subscriptionsReady}}
-		<div class="row">
-			My Created Events:
-			{{#each getAssociatedEventNames getOwnedEventIds}}
-				{{> eventCreatedNameHolder}}
-			{{/each}}
+		<div class="row manageEventRow">
+			<div class="col-md-6 manageEventPageCol">
+				My Created Events:
+				{{#each getAssociatedEventNames getOwnedEventIds}}
+					{{> eventCreatedNameHolder}}
+				{{/each}}
+			</div>
 		</div>
-		<hr class="section-heading-spacer">
-		<div class="row">
-			My Registered Events:
-			{{#each getAssociatedEventNames getRegisteredEventIds}}
-				{{> eventRegisteredNameHolder}}
-			{{/each}}
+		<div class="row manageEventRow">
+			<div class="col-md-6 manageEventPageCol">
+				My Registered Events:
+				{{#each getAssociatedEventNames getRegisteredEventIds}}
+					{{> eventRegisteredNameHolder}}
+				{{/each}}
+			</div>
 		</div>
 		{{else}}
 			{{> manageEventLoader}}

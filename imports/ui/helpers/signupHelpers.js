@@ -1,29 +1,35 @@
 import '../templates/signupPage.html';
 import '../templates/notificationModals.html';
+import '../../api/Notifications/notifyWrapper.js';
 
 //TODO: Implement email verification
 Template.signupPage.events({
-	'submit .registerForm'(event, template) {
+	'click #registerButton'(event, template) {
 		event.preventDefault();
-		var firstName = event.target.firstName.value;
-    var lastName = event.target.lastName.value;
-		var email = event.target.emailSignup.value;
-		var password = event.target.password.value;
-		var passwordConfirm = event.target.passwordConfirm.value;
+		var firstName = document.getElementById('firstName').value;
+		var lastName = document.getElementById('lastName').value
+		var email = document.getElementById('email').value
+		var password = document.getElementById('password').value
+		var passwordConfirm = document.getElementById('password_confirm').value
 		var userProfileData = {
 			username : email,
-    		password : password,
-    		email : email,
-    		profile: {
-      			first_name : firstName,
-      			last_name : lastName,
-  			}
+			password : password,
+			email : email,
+			profile: {
+				first_name : firstName,
+				last_name : lastName,
+				custom_email_preferences: {
+					create_event: 1,
+					register_event: 1,
+					event_deleted: 1
+				}
+			}
 		};
 		if (password == passwordConfirm){
 			createNewMixrAccount(userProfileData)
 		}
 		else{
-			Modal.show('passwordsDoNotMatchModal')
+			notify("Passwords do not match", "danger", "center")
 		}
 	},
 });
@@ -31,8 +37,7 @@ Template.signupPage.events({
 createNewMixrAccount = function(userData){
 	var newUserCreated = Accounts.createUser(userData, function(err){
 		if (err) {
-			Modal.show('signupFailedModal')
-			return;
+			notify('Account could not be created, email already in use', "danger", "center")
 		}
 		else{
 			// This sends a verification email to users
@@ -41,8 +46,7 @@ createNewMixrAccount = function(userData){
 					console.log("Error sending verification email " + response);
 				}
 			});
-			// Should this redirect to a "Please confirm account" page?
-			Modal.show('signupSuccessModal')
+			notify('Account created successfully', "success", "right")
 		}
 		return;
 	});

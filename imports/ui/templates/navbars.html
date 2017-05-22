@@ -7,52 +7,52 @@
 	{{/if}}
 </template>
 
-<template name="navbarInactive">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
-			</div>
-			<ul class="nav navbar-nav">
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-	    		<li><a href="{{pathFor 'signup'}}"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Sign Up</a></li>
-	    		<li><a href="{{pathFor 'login'}}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login</a></li>
-	  		</ul>
-		</div>
-	</nav>
-</template>
-
 <template name="navbarActive">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
+	<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="nav-container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="{{pathFor 'home'}}">mixr</a>
+				<div class="navbar-buttons">
+					<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
+				</div>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="{{pathFor 'events'}}">Events around me</a></li>
-			</ul>
-			<ul class="nav navbar-nav nb-center">
-				<li><a href="{{pathFor 'manage'}}"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
-				<li><a href="{{pathFor 'create'}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
-				{{#if checkIfOnEventPage}}
-					{{> applyEventFiltersSection}}
-				{{/if}}
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{{pathFor 'account'}}"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
-				<li class="navbar-signout"><a href="{{pathFor 'logout'}}"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
-			</ul>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="{{pathFor 'home'}}" data-toggle="collapse" data-target=".navbar-collapse.in">mixr</a></li>
+				</ul>
+				<ul class="nav navbar-nav nb-center">
+					<li><a href="{{pathFor 'events'}}" data-toggle="collapse" data-target=".navbar-collapse.in">Events around me</a></li>
+					<li><a href="{{pathFor 'manage'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Manage my events</a></li>
+					<li><a href="{{pathFor 'create'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Create an event</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{{pathFor 'account'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{firstName}} {{lastName}}</a></li>
+					<li class="navbar-signout"><a href="{{pathFor 'logout'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
+				</ul>
+			</div>
 		</div>
-	</nav>
+	</div>
 </template>
 
-<template name="applyEventFiltersSection">
-	<li class="dropdown navbar-inverse">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Apply event filters<span class="caret"></span></a>
-		<ul class="dropdown-menu inverse-dropdown">
-			<li class="sortByTimeDropDown"><a href="#">Sort by time</a></li>
-			<li class="sortByTagDropDown"><a href="#">Sort by tags</a></li>
-		</ul>
-	</li>
+
+<template name="navbarInactive">
+	<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="nav-container">
+			<div class="navbar-header">
+				<div class="navbar-buttons">
+					<button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="pe-7s-menu"></i></button>
+				</div>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="{{pathFor 'home'}}" data-toggle="collapse" data-target=".navbar-collapse.in">mixr</a></li>
+				</ul>
+				<ul class="nav navbar-nav nb-center">
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{{pathFor 'signup'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-cog" aria-hidden="true"></i>Signup</a></li>
+					<li><a href="{{pathFor 'login'}}" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-sign-in"></i>Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </template>

@@ -1,0 +1,41 @@
+.create-event-form-text{
+	color: white;
+}
+
+.create-event-form-text-area{
+	border: 0;
+	width: 100%;
+  	background: transparent;
+	font-weight: bold;
+  	color: white;
+  	padding: 10px;
+  	resize: none;
+  	height:auto;
+}
+.create-event-form-text-area::-webkit-input-placeholder {
+  color: rgb(203, 203, 203);
+}
+
+.black{
+	border: 0;
+	background-color: #282929;
+}
+
+.glyphicon-calendar{
+	color: white;
+}
+
+#eventDateTime{
+	width: 400px;
+	margin-left: 10px;
+}
+
+#pickLocationButton{
+	background-color: #282929;
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 8px;
+}
+#pickLocationButton:hover{
+	background-color: #A200FF;
+}

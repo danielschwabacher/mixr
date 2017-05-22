@@ -1,26 +1,27 @@
 import '../templates/createEvent.html';
 import '../../api/Event/cachedEvent.js';
+import '../../api/Notifications/notifyWrapper.js'
 
 Template.createEventPage.onRendered(function() {
 	todayDate = new Date()
     $('.datetimepicker').datetimepicker({
+		defaultDate: todayDate,
 		minDate: todayDate,
 		maxDate: new Date(todayDate.getFullYear(), todayDate.getMonth(), (todayDate.getDate() + 10)),
 		allowInputToggle: true,
-		stepping: 5,
+		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
 });
 
 Template.createEventPage.events({
-	'submit .createEventForm'(event, template) {
+	'submit #createEventForm'(event, template) {
 		event.preventDefault()
 		var eventName = event.target.eventName.value;
 		var eventLocation = event.target.eventLocation.value;
 		var eventDescription = event.target.eventDescription.value;
 		var eventDateTime = event.target.eventDateTime.value;
 		var eventTimeStamp = moment(eventDateTime, "ddd, MMM Do, h:mmA").unix()
-
 		var eventSelectedTag = $("input[type='radio']:checked");
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"
@@ -54,12 +55,14 @@ Template.createEventPage.events({
 	'click #resendEmailButton'(event, template) {
 		Meteor.call('sendVerificationLink', (error, response) => {
  			if (error) {
-				console.log("Error sending verification email " + response);
+				notify("Error: Could not send verification email", "danger", "center")
+			}
+			else{
+				notify("Email verification link sent", "success", "right")
 			}
 		});
 		Router.go('home')
 	}
-
 });
 
 
@@ -75,9 +78,13 @@ Template.emailNotVerifiedModal.events({
 	'click #resendVerificationLink'(event, template){
 		Meteor.call('sendVerificationLink', (error, response) => {
 			if (error) {
-				console.log("Error sending verification email " + response);
+				notify("Error: Could not send verification email", "danger", "center")
+			}
+			else{
+				notify("Email verification link sent!", "success", "right")
 			}
 		});
-		Router.go('home')
+		// Router.go('home')
+		Modal.hide(template)
 	}
 });

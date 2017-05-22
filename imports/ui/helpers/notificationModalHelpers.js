@@ -2,6 +2,7 @@ import '../templates/notificationModals.html'
 import './eventResponseModalHelpers.js'
 import './pickLocationHelpers.js'
 import '../templates/createEvent.html'
+import '../../api/Notifications/notifyWrapper.js';
 
 Template.confirmEventModal.helpers({
 	returnEventName: function() {
@@ -27,18 +28,18 @@ Template.confirmEventModal.events({
 		var eventExpiration = fullEventToConfirm.eventTimeStamp
 		Meteor.call("insertEvent", fullEventToConfirm, eventExpiration, function (err, didInsert){
 			if (didInsert){
-				Modal.show('eventCreatedSuccessModal')
+				notify("Event created successfully!", "success", "right")
 				Meteor.call('sendCreatedEventEmail', eventName, function(err){
 					if(err){
-						console.log("Email notification for new event was NOT sent." + err)
+						notify("Error: Could not send event reference email", "danger", "center")
 					}
 					else {
-						console.log("Email notification for new event was successfully sent!")
+						notify("Event reference email sent!", "success", "right")
 					}
 				});
 			}
 			else{
-				Modal.show('eventNotCreatedModal')
+				notify("Error: Could not create event, please try again", "danger", "center")
 			}
 		});
 		Router.go('home')
@@ -58,10 +59,10 @@ Template.eventInformationModal.events({
 		if (Meteor.user() && Meteor.user().emails[0].verified){
 			Meteor.call("registerEvent", this, function(err, didRegister){
 				if (didRegister){
-					Modal.show("eventDidRegisterModal")
+					notify("Registered successfully!", "success", "right")
 				}
 				else{
-					Modal.show("eventAlreadyRegisteredModal")
+					notify("Error: You are already registered for this event", "danger", "center")
 				}
 			});
 		}

@@ -16,9 +16,12 @@ Template.pickLocationPage.onCreated(function(){
 
 Template.pickLocationPage.helpers({
 	initLocationSelectMap: function() {
-		var latLng = Geolocation.latLng();
+		var latLng = Geolocation.latLng(
+			{timeout: 10000}
+		);
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {
+			// console.log("loaded pickLocation map")
 			return {
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
 				zoom: 15

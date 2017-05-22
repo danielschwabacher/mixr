@@ -1,20 +1,50 @@
 <template name="mixrEventMap">
-	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	<div class="mapDirectionsCallout">
-	</div>
-	{{#if Template.subscriptionsReady}}
-		<div class="container-fluid">
-			<div id="fullMapDiv">
+	<div class="container-fluid event-container">
+		<div class="row content">
+			<div class="col-sm-3 event-display-column">
+				<h4>Events Around You</h4>
+				{{> applyEventFiltersSection}}
+				<hr class="map-hr">
+				{{> eventDisplay}}
+			</div>
+
+			<div class="col-sm-9 map-display-column">
 				{{> googleMap name="mixrMap" options=initPrimaryEventMapOptions}}
 			</div>
 		</div>
-		{{else}}
-			{{> mapLoader}}
-	{{/if}}
+	</div>
 </template>
 
-<template name="mapLoader">
-	<div class="loading">
-		Fetching events around you...
+
+<template name="eventDisplay">
+	<div class="eventDisplay">
+		{{#each getEvents returnSessionTags returnSessionTimes}}
+			{{> eventSection }}
+		{{/each}}
 	</div>
+</template>
+
+<template name="eventSection">
+	<div class="event-section-clickable-area">
+		<div class="row">
+			<div class="col-sm-4 event-name-holder">{{ event_name }}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 event-description-holder">{{ event_description }}</div>
+		</div>
+		<button class="btn btn-info" id="eventSectionMoreInfoButton">More info</button>
+		<button class="btn btn-success" id="eventSectionRegisterButton">Register!</button>
+	</div>
+	<hr class="map-hr">
+</template>
+
+
+<template name="applyEventFiltersSection">
+	<li class="dropdown navbar-inverse dd-event-display-filter-selector-global">
+		<a class="dropdown-toggle dd-event-display-filter-modals" data-toggle="dropdown" href="#">Apply event filters<span class="caret"></span></a>
+		<ul class="dropdown-menu inverse-dropdown">
+			<li class="sortByTimeDropDown"><a href="#">Sort by time</a></li>
+			<li class="sortByTagDropDown"><a href="#">Sort by tags</a></li>
+		</ul>
+	</li>
 </template>

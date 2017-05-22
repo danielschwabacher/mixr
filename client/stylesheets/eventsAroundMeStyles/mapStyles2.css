@@ -1,0 +1,77 @@
+/* if navbar is collapsed */
+@media (max-width:992px){
+	.event-container{
+		margin-top: 20px;
+	}
+	.event-display-column{
+		height: calc(100vh - 80px);
+		background-color: black;
+	}
+	.event-display-column h4{
+		color: white;
+	}
+	.map-display-column{
+		height: calc(100vh - 80px);
+		background-color: black;
+	}
+}
+
+/* if navbar is not collapsed */
+@media (min-width:992px){
+	.event-container{
+		margin-top: 0px;
+	}
+	.event-display-column{
+		height: calc(100vh - 80px);
+		background-color: black;
+	}
+	.event-display-column h4{
+		color: white;
+	}
+	.map-display-column{
+		height: calc(100vh - 80px);
+		background-color: white;
+	}
+}
+.map-hr{
+	width: 100%;
+	margin: 10px !important;
+}
+.event-section-clickable-area{
+	height: 100%;
+	width: 100%;
+}
+
+.event-name-holder{
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
+}
+
+.event-description-holder{
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
+}
+
+.event-display-column{
+	overflow-y: scroll;
+}
+
+.dd-event-display-filter-modals{
+	font-size: 20px;
+	color: white;
+}
+.dd-event-display-filter-selector-global{
+	background-color: black;
+}
+.sortByTimeDropDown{
+	font-size: 20px;
+	float: left;
+}
+.sortByTagDropDown{
+	font-size: 20px;
+	float: right;
+}
