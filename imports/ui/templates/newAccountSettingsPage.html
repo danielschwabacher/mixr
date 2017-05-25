@@ -1,0 +1,37 @@
+<template name="newSettings">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="sideBarSettingLinks" id="authPaneLink"><a href="#"><i class="fa fa-list-alt fa-fw"></i>Authentication</a></li>
+					<li class="sideBarSettingLinks" id="emailPaneLink"><a href="#"><i class="fa fa-file-o fa-fw"></i>Email Settings</a></li>
+					<li class="sideBarSettingLinks" id="feedbackPaneLink"><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Give Feedback!</a></li>
+				</ul>
+			</div>
+			{{> currentPane}}
+		</div>
+	</div>
+</template>
+
+<template name="currentPane">
+	{{ getCurrentPane }}
+</template>
+
+<template name="AuthenticationPane">
+	<div class="col-md-9 well">
+		Auth
+	</div>
+</template>
+
+
+<template name="EmailSettingsPane">
+	<div class="col-md-9 well">
+		Email
+	</div>
+</template>
+
+<template name="FeedbackPane">
+	<div class="col-md-9 well">
+		Feedback
+	</div>
+</template>

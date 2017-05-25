@@ -13,7 +13,7 @@
 * Last Updated: 3/03/17
 * This is the nightly build release candidate branch.
 * It is **NOT** necessarily feature safe.
-* The current URL for this branch is: https://mixrbeta-izyzlpfauj.now.sh
+* The current URL for this branch is: https://mixrbeta-izyzlpfauj.now 
 * The URL for this branch is a ***secret***; under **NO** circumstance should the above URL be shared with anyone outside the mixr dev team.
 *  This branch points to the **mixr_nightly_build_sandbox** mLab sandbox DB.
 * This branch ultimately merges into **deployed**
