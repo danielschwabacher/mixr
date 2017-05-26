@@ -23,15 +23,3 @@ Router.route('/account', function(){
 		Router.go('home')
 	}
 });
-
-/*
-Router.route('/newAccount', function(){
-	if (Meteor.user()){
-		this.render('newSettings')
-	}
-	else {
-		// console.log("DEVNOTE: FIX THIS -- YOU ARE NOT LOGGED ON")
-		Router.go('home')
-	}
-});
-*/
