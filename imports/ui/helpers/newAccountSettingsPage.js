@@ -25,4 +25,7 @@ Template.registerHelper('getCurrentPane', function(){
 	else if (Session.get("settingsPagePaneSelection") == "feedback"){
 		return "FeedbackPane"
 	}
+	else {
+		return "AuthenticationPane"
+	}
 });

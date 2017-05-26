@@ -14,12 +14,25 @@
 </template>
 
 <template name="currentPane">
-	{{ getCurrentPane }}
+	{{> Template.dynamic template=getCurrentPane}}
 </template>
 
 <template name="AuthenticationPane">
 	<div class="col-md-9 well">
-		Auth
+		<form class="changePasswordModalForm">
+			<div class="modal-header">
+				<h4 class="modal-title">Change your password</h4>
+			</div>
+			<div class="modal-body">
+				<input type="password" value="" placeholder="Enter current password" id="currentPasswordChangePasswordModal" autofocus/>
+				<input type="password" value="" placeholder="New Password" id="newPassword1"/>
+				<input type="password" value="" placeholder="Confirm Password" id="newPassword2"/>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success btn-float-right" id="changePasswordButton">Change Password</button>
+				<button class="btn btn-danger btn-float-left" data-dismiss="modal">Nevermind</button>
+			</div>
+		</form>
 	</div>
 </template>
 
