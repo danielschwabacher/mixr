@@ -1,4 +1,3 @@
-import '../templates/accountSettingsPage.html'
 import '../templates/feedBackModal.html'
 import './changePasswordModalHelpers.js'
 
@@ -45,7 +44,7 @@ Template.emailPreferencesModal.events({
 			deletedEPref: deletedEventPref
 		}
 		Meteor.call('updateUserEmailPreferences', userPrefs, (error, response) => {
-			if (error) {
+			if (error) {s
 				console.log("There was an error: " + response)
 			}
 		});

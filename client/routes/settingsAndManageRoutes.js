@@ -1,7 +1,5 @@
-import '../../imports/ui/helpers/accountSettingsHelpers.js';
 import '../../imports/ui/helpers/manageEventsHelpers.js';
-import '../../imports/ui/helpers/newAccountSettingsPage.js';
-
+import '../../imports/ui/helpers/accountSettingsHelpers2.js';
 
 Router.route('/manage', function(){
 	if (Meteor.user()){
