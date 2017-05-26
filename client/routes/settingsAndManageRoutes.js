@@ -16,7 +16,7 @@ Router.route('/manage', function(){
 
 Router.route('/account', function(){
 	if (Meteor.user()){
-		this.render('newSettings')
+		this.render('accountSettings')
 	}
 	else {
 		// console.log("DEVNOTE: FIX THIS -- YOU ARE NOT LOGGED ON")

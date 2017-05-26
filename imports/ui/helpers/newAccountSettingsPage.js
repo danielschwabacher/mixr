@@ -1,5 +1,5 @@
 import '../templates/newAccountSettingsPage.html'
-Template.newSettings.events({
+Template.accountSettings.events({
  	'click #authPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "auth")
 	},
@@ -11,7 +11,7 @@ Template.newSettings.events({
 	},
 });
 
-Template.newSettings.onRendered(function() {
+Template.accountSettings.onRendered(function() {
 	Session.set("settingsPagePaneSelection", "auth")
 });
 
