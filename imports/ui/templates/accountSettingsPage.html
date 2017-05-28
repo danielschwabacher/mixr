@@ -37,13 +37,14 @@
 				<label for="createdEventPref">Notify me when I create an event</label>
 			</div>
 			<div class="checkbox checkbox-mixr checkbox-inline">
-				<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes" checked>
+				<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes">
 				<label for="registeredEventPref">Notify me when I register for an event</label>
 			</div>
 			<div class="checkbox checkbox-mixr checkbox-inline">
-				<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes" checked>
+				<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes">
 				<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
 			</div>
+			{{currentPreferences}}
 			<button type="submit" class="btn btn-success btn-float-right" id="updateEmailPrefButton">Update Preferences</button>
 		</form>
 	</div>

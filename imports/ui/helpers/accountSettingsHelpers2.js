@@ -83,3 +83,29 @@ Template.registerHelper('getCurrentPane', function(){
 		return "AuthenticationPane"
 	}
 });
+
+
+
+Template.EmailSettingsPane.helpers({
+  // Calls a server-side function that returns an array containing
+  // the users current email preferences and updates HTML page to reflect them
+  currentPreferences: function() {
+    Meteor.call('grabEmailPref', (error, result) => {
+      if (error) {
+        notify("There was an error checking the create event email preference.", "danger", "center")
+        console.log("Error checking email preference: " + error)
+      }
+      // Due to asynchronous server calls, need to have the outcome as a callback
+      if (result[0]) {
+        $('#createdEventPref').attr('checked', true)
+      }
+      if (result[1]) {
+        $('#registeredEventPref').attr('checked', true)
+      }
+      if (result[2]) {
+        $('#eventDeletedPref').attr('checked', true)
+      }
+    });
+  }
+
+});

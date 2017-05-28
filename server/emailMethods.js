@@ -191,6 +191,17 @@ Meteor.methods({
         event_deleted: deletedEventPref
       }}}
     );
+  },
+
+  grabEmailPref: function() {
+    // Returns an array of the users current email preferences
+    var currentUser = Meteor.user()
+    var createEpref = Meteor.user().profile.custom_email_preferences.create_event
+    var registerEpref = Meteor.user().profile.custom_email_preferences.register_event
+    var deleteEpref = Meteor.user().profile.custom_email_preferences.event_deleted
+
+    var pref = [createEpref, registerEpref, deleteEpref]
+    return pref
   }
 
 
