@@ -52,7 +52,6 @@ Template.accountSettings.events({
 	'submit .sendFeedbackForm'(event, template) {
 		event.preventDefault()
 		console.log("send feedback clicked.")
-
 		var userFeedback = event.target.feedbackArea.value
 		Meteor.call('sendUserFeedback', userFeedback, (error, response) => {
 			if (error) {
