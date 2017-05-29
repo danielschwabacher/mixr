@@ -90,19 +90,22 @@ Template.EmailSettingsPane.helpers({
   // Calls a server-side function that returns an array containing
   // the users current email preferences and updates HTML page to reflect them
   currentPreferences: function() {
+    var CREATED_EVENT_PREF = 0
+    var REGISTERED_EVENT_PREF = 1
+    var EVENT_DELETED_PREF = 2
     Meteor.call('grabEmailPref', (error, result) => {
       if (error) {
         notify("There was an error checking the create event email preference.", "danger", "center")
         console.log("Error checking email preference: " + error)
       }
       // Due to asynchronous server calls, need to have the outcome as a callback
-      if (result[0]) {
+      if (result[CREATED_EVENT_PREF]) {
         $('#createdEventPref').attr('checked', true)
       }
-      if (result[1]) {
+      if (result[REGISTERED_EVENT_PREF]) {
         $('#registeredEventPref').attr('checked', true)
       }
-      if (result[2]) {
+      if (result[EVENT_DELETED_PREF]) {
         $('#eventDeletedPref').attr('checked', true)
       }
     });
