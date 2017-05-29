@@ -62,7 +62,7 @@ Template.createEventPage.events({
 			// Validation failed
 			// TODO: Replace redirection with notifications that allow users
 			// 			 to correct the incorrect input
-			Router.go('home')
+			notify("One of the fields was not correctly named, please correct this issue before proceeding", "danger", "center")
 		}
 	},
 	'click #resendEmailButton'(event, template) {
@@ -119,7 +119,7 @@ validateAll = function(eventName) {
 	return result
 }
 
-// Only allows the name to be 20 alphanumeric characters and spaces
+// Only allows the name to be a maximum if 20 alphanumeric characters and spaces
 validateName = function(eventName) {
 	var re = /^[a-zA-Z0-9\t]{20}$/
 	var result = re.test(eventName)
