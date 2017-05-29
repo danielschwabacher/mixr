@@ -45,12 +45,25 @@ Template.createEventPage.events({
 			eventTagShortened = "Could not find tag"
 		}
 
-		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
-		clientTempCachedEvent.createReference()
-		// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
-		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
-		// used to confirm route in IronRouter
-		Router.go('pickLocation')
+		// Perform validation
+		// TODO: Need to add in all field validations.
+		var result = validateAll(eventName)
+
+		if (result) {
+			// Validation was a success
+			clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
+			clientTempCachedEvent.createReference()
+			// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
+			// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
+			// used to confirm route in IronRouter
+			Router.go('pickLocation')
+		}
+		else {
+			// Validation failed
+			// TODO: Replace redirection with notifications that allow users
+			// 			 to correct the incorrect input
+			Router.go('home')
+		}
 	},
 	'click #resendEmailButton'(event, template) {
 		Meteor.call('sendVerificationLink', (error, response) => {
@@ -88,3 +101,27 @@ Template.emailNotVerifiedModal.events({
 		Modal.hide(template)
 	}
 });
+
+/* --------------------------------------------------------------------------
+ *  These are methods that will validate the user provided information before
+ *  handing it over to the server
+ * -------------------------------------------------------------------------- */
+
+// Calls all validation functions to confirm everything is correctly formatted
+validateAll = function(eventName) {
+	var result
+	var nameCheck = validateName(eventName)
+
+	result = (nameCheck && 1)
+	if(!result) {
+		console.log("Failed validation; event not mixr-cached or added to DB")
+	}
+	return result
+}
+
+// Only allows the name to be 20 alphanumeric characters and spaces
+validateName = function(eventName) {
+	var re = /^[a-zA-Z0-9\t]{20}$/
+	var result = re.test(eventName)
+	return result
+}
