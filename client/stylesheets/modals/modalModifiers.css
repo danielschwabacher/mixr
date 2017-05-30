@@ -18,19 +18,26 @@
 .slider{
 	margin-left: 175px;
 }
+
+
+
+
+.checkbox-tag-filter{
+	margin-left: 50px;
+}
 .modal-footer .btn-danger {
 	background-color: #DB2B39;
 	border-color: #DB2B39;
-	color: black;
+	color: white;
 }
 
 .modal-footer .btn-success{
 	background-color: #279AF1;
 	border-color: #279AF1;
-	color: #0c0000;
+	color: #000000;
 }
 .modal-footer .btn-info{
 	background-color: #FFBA08;
 	border-color: #FFBA08;
-	color: #0c0000;
+	color: #000000;
 }
