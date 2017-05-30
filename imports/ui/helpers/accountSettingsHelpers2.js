@@ -22,6 +22,9 @@ Template.accountSettings.events({
 				else{
 					Modal.hide()
 					notify("Password changed successfully!", "success", "right")
+					event.target.currentPasswordChangePasswordModal.value = ""
+					event.target.newPassword1.value = ""
+					event.target.newPassword2.value = ""
 				}
 			});
 		}
