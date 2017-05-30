@@ -5,7 +5,7 @@
 	}
 	.event-display-column{
 		height: calc(100vh - 80px);
-		background-color: black;
+		background-color: #282929;
 	}
 	.event-display-column h4{
 		color: white;
@@ -23,7 +23,7 @@
 	}
 	.event-display-column{
 		height: calc(100vh - 80px);
-		background-color: black;
+		background-color: #282929;
 	}
 	.event-display-column h4{
 		color: white;
@@ -65,13 +65,25 @@
 	color: white;
 }
 .dd-event-display-filter-selector-global{
-	background-color: black;
+	background-color: #279AF1;
+	border-radius: 10px;
+	text-decoration: none;
+	list-style-type: none;
+	text-align: center;
 }
 .sortByTimeDropDown{
 	font-size: 20px;
 	float: left;
+	width: 100%;
+	display: block;
 }
 .sortByTagDropDown{
 	font-size: 20px;
-	float: right;
+	float: left;
+	width: 100%;
+}
+
+.applyFilterDropDownUL{
+	background-color: #279AF1 !important;
+	border-radius: 10px;
 }
