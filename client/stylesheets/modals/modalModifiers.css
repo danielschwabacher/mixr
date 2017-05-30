@@ -3,22 +3,41 @@
 }
 /* modal */
 .modal-content {
-  background-color: #8CC084;
-  border: 1px solid #999999;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #282929;
+  color: white;
   border-radius: 0;
 }
+.modal-content .modal-title {
+	text-align: center;
+	color: white;
+}
+.modal-content h5{
+	text-align: center;
+	color: white;
+}
+.slider{
+	margin-left: 175px;
+}
 
+
+
+
+.checkbox-tag-filter{
+	margin-left: 50px;
+}
 .modal-footer .btn-danger {
-	background-color: #DB5461;
-	color: black;
+	background-color: #DB2B39;
+	border-color: #DB2B39;
+	color: white;
 }
 
 .modal-footer .btn-success{
-	background-color: #1BE7FF;
-	color: #0c0000;
+	background-color: #279AF1;
+	border-color: #279AF1;
+	color: #000000;
 }
 .modal-footer .btn-info{
-	background-color: #8693AB;
-	color: #0c0000;
+	background-color: #FFBA08;
+	border-color: #FFBA08;
+	color: #000000;
 }

@@ -80,11 +80,11 @@
   color: #fff; }
 
  .checkbox-mixr input[type="checkbox"] + label::after {
- background-color: #A200FF; }
+ background-color: #279AF1; }
  .checkbox-mixr input[type="checkbox"]:checked + label::before {
- border-color: #A200FF; }
+ border-color: #279AF1; }
  .checkbox-mixr input[type="checkbox"]:checked + label::after {
- background-color: #A200FF; }
+ background-color: #279AF1; }
 
 .radio {
   padding-left: 20px; }

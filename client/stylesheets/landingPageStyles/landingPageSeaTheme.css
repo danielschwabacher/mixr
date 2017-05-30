@@ -857,6 +857,7 @@ NAVBAR
   letter-spacing: 0.1em;
   color: #4fb0c6;
 }
+/*
 ul.dropdown-menu li a {
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
@@ -867,6 +868,7 @@ ul.dropdown-menu li a:hover {
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
+*/
 #login-modal {
   overflow: hidden;
 }
@@ -979,10 +981,12 @@ STYLE SWITCHER FOR DEMO
 .nav > li > a {
   padding: 10px 15px;
 }
+
 .nav > li > a:hover,
 .nav > li > a:focus {
   background-color: #cdcdcd;
 }
+
 .nav > li.disabled > a {
   color: #999999;
 }
@@ -1022,6 +1026,7 @@ STYLE SWITCHER FOR DEMO
   color: #ffffff;
   background-color: #379392;
 }
+
 .nav-tabs-justified > li > a {
   border-radius: 2px;
 }
@@ -1311,6 +1316,7 @@ STYLE SWITCHER FOR DEMO
   line-height: 1.55;
   color: #555555;
 }
+/*
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
   color: #262626;
@@ -1322,6 +1328,7 @@ STYLE SWITCHER FOR DEMO
   color: #ffffff;
   background-color: #379392;
 }
+*/
 /* modal */
 .modal-content {
   background-color: #ffffff;
