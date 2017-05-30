@@ -54,16 +54,17 @@ Template.accountSettings.events({
 	},
 	'submit .sendFeedbackForm'(event, template) {
 		event.preventDefault()
-		console.log("send feedback clicked.")
 		var userFeedback = event.target.feedbackArea.value
+		notify("Sending...", "info", "right")
 		Meteor.call('sendUserFeedback', userFeedback, (error, response) => {
 			if (error) {
 				notify("We couldn't send your feedback right now.", "danger", "center")
 				console.log("There was an error: " + response)
+				return
 			}
 			notify("Your feedback has been sent, thanks!", "success", "right")
+			event.target.feedbackArea.value = ""
 		});
-		Router.go('home')
 	}
 });
 
