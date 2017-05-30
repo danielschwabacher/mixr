@@ -34,7 +34,6 @@ Template.accountSettings.events({
 	},
 	'submit .updateEmailPreferencesForm'(event, template) {
 		event.preventDefault()
-		console.log("updated email prefs submitted")
 		var createEventPref = $('#createdEventPref').is(':checked')
 		var registerEventPref = $('#registeredEventPref').is(':checked')
 		var deletedEventPref = $('#eventDeletedPref').is(':checked')
@@ -43,14 +42,14 @@ Template.accountSettings.events({
 			registerEPref: registerEventPref,
 			deletedEPref: deletedEventPref
 		}
+		notify("Working...", "info", "right")
 		Meteor.call('updateUserEmailPreferences', userPrefs, (error, response) => {
-			if (error) {s
-				console.log("There was an error: " + response)
+			if (error) {
+				notify("Email preferences could not be updated at this time.", "danger", "center")
+				return
 			}
+			notify("Email preferences updated successfully!", "success", "right")
 		});
-
-		Modal.hide("emailPreferencesModal")
-		Router.go("home")
 	},
 	'submit .sendFeedbackForm'(event, template) {
 		event.preventDefault()
