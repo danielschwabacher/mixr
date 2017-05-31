@@ -45,7 +45,7 @@ Router.route('/logout', {
 				}
 				Router.go('home')
 			});
-			// this.next()
+			this.next()
 		}
 	}
 });
