@@ -47,7 +47,7 @@ Template.createEventPage.events({
 
 		// Perform validation
 		// TODO: Need to add in all field validations.
-		var result = validateAll(eventName)
+		var result = validateAll(eventName, eventLocation)
 
 		if (result) {
 			// Validation was a success
@@ -62,7 +62,7 @@ Template.createEventPage.events({
 			// Validation failed
 			// TODO: Replace redirection with notifications that allow users
 			// 			 to correct the incorrect input
-			notify("One of the fields was not correctly named, please correct this issue before proceeding", "danger", "center")
+			notify("Please correct all errors before proceeding", "danger", "center")
 		}
 	},
 	'click #resendEmailButton'(event, template) {
@@ -105,23 +105,42 @@ Template.emailNotVerifiedModal.events({
 /* --------------------------------------------------------------------------
  *  These are methods that will validate the user provided information before
  *  handing it over to the server
+ *  Things to be aware of:
+ *	1) **All validations must be done client side to ensure server security**
+ *  2) There are various regular expressions that more concisely represent certain patterns
+ * 	   but the more verbose version allows easier modification in case new characters
+ *     need to be allowed
+ *  3) All functions besides validateAll return bools
+ *
  * -------------------------------------------------------------------------- */
 
 // Calls all validation functions to confirm everything is correctly formatted
-validateAll = function(eventName) {
-	var result
+validateAll = function(eventName, eventLocation) {
 	var nameCheck = validateName(eventName)
+	var locCheck = validateLocation(eventLocation)
 
-	result = (nameCheck && 1)
+	var result = (nameCheck && locCheck && 1)
 	if(!result) {
 		console.log("Failed validation; event not mixr-cached or added to DB")
 	}
 	return result
 }
 
-// Only allows the name to be a maximum if 20 alphanumeric characters and spaces
+// Allows the name to be a maximum if 20 alphanumeric characters and spaces
 validateName = function(eventName) {
 	var re = /^[a-zA-Z0-9\t]{20}$/
 	var result = re.test(eventName)
+	if (!result) {
+		notify("Error: Restricted characters in event name", "danger", "center")
+	}
 	return result
+}
+
+// Allows the location to be a maximum of 64 alphanumeric characters, spaces, commas, and hyphens
+validateLocation = function(eventLocation) {
+	var re = /^[a-zA-Z0-9\t,-]{64}$/
+ 	var result = re.test(eventLocation)
+	if (!result) {
+		notify("Error: restricted characters in event location", "danger", "center")
+	}
 }
