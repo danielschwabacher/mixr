@@ -47,7 +47,7 @@ Template.createEventPage.events({
 
 		// Perform validation
 		// TODO: Need to add in all field validations.
-		var result = validateAll(eventName, eventLocation)
+		var result = validateAll(eventName, eventLocation, eventDescription)
 
 		if (result) {
 			// Validation was a success
@@ -115,18 +115,21 @@ Template.emailNotVerifiedModal.events({
  * -------------------------------------------------------------------------- */
 
 // Calls all validation functions to confirm everything is correctly formatted
-validateAll = function(eventName, eventLocation) {
+validateAll = function(eventName, eventLocation, eventDescription) {
 	var nameCheck = validateName(eventName)
 	var locCheck = validateLocation(eventLocation)
+	var descCheck = validateDescription(eventDescription)
 
-	var result = (nameCheck && locCheck && 1)
+	var result = (nameCheck && locCheck && descCheck && 1)
+
 	if(!result) {
 		console.log("Failed validation; event not mixr-cached or added to DB")
 	}
 	return result
 }
 
-// Allows the name to be a maximum if 20 alphanumeric characters and spaces
+// Requires the name to be a minimum of 1 character(s) and a maximum
+// of 20 alphanumeric characters and spaces
 validateName = function(eventName) {
 	var re = /^[a-zA-Z0-9\t]{20}$/
 	var result = re.test(eventName)
@@ -136,11 +139,24 @@ validateName = function(eventName) {
 	return result
 }
 
-// Allows the location to be a maximum of 64 alphanumeric characters, spaces, commas, and hyphens
+// Requires the location to be a minimum of 1 character(s) and a maximum
+// of 64 alphanumeric characters, spaces, commas, and hyphens
 validateLocation = function(eventLocation) {
-	var re = /^[a-zA-Z0-9\t,-]{64}$/
+	var re = /[-,a-zA-Z0-9\t]{1,164}$/
  	var result = re.test(eventLocation)
 	if (!result) {
 		notify("Error: restricted characters in event location", "danger", "center")
 	}
+	return result
+}
+
+// Allows the event description to be 155 character(s) (because fuck 140 character limits)
+// Does NOT require a description to pass
+validateDescription = function(eventDescription) {
+	var re = /^[.*]{0,155}$/
+	var result = re.test(eventDescription)
+	if (!result) {
+		notify("Error: The event description can only be 155 characters", "danger", "center")
+	}
+	return result
 }
