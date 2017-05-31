@@ -1,5 +1,6 @@
 import '../templates/eventResponseModals.html';
 import '../../api/Filters/tagFilter.js'
+import '../../api/Notifications/notifyWrapper.js'
 
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
@@ -41,11 +42,14 @@ Template.sortByTagsEventFilterModal.events({
 		tagHandler = new TagFilter(checkedValues)
 		tagHandler.populateTags()
 		tagHandler.setSessionTags()
+		notify("Tags updated", "success", "right")
+
 	},
 	'click #resetTagsButton'(event, template){
 		event.preventDefault()
 		fullTagArray = ['sports', 'performances', 'arts', 'academicInterest', 'other']
 		Session.set('tagFilterIncludes', fullTagArray)
+		notify("Tags reset", "success", "right")
 	}
 });
 
@@ -68,8 +72,12 @@ Template.sortByTimeEventFilterModal.onRendered(function() {
 Template.sortByTimeEventFilterModal.events({
 	'click #submitEventFilterTimeSelections'(event, template){
 		Session.set('timeFilterHours', timeSlider.getValue())
+		notifyString = "Showing events within " + timeSlider.getValue() + " hours."
+		notify(notifyString, "success", "right")
+
 	},
 	'click #resetTimeButton'(event, template){
 		Session.set('timeFilterHours', 72)
+		notify("Time reset", "success", "right")
 	}
 });
