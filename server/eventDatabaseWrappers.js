@@ -13,8 +13,8 @@ Meteor.methods({
 			event_dateTime: eventToInsert.eventDateTime,
 			event_timestamp: eventToInsert.eventTimeStamp,
 			event_tag: eventToInsert.eventTagType,
+			event_max_number: eventToInsert.eventMaxRegistered,
 			event_position: eventToInsert.coordinates,
-			number_of_users_attending: 1
 		}, function(err, eventId){
 			if (err){
 				return 0;
