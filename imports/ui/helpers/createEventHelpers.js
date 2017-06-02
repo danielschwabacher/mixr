@@ -58,7 +58,7 @@ Template.createEventPage.events({
 
 		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
 		clientTempCachedEvent.createReference()
-		// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
+
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
 		// used to confirm route in IronRouter
 		Router.go('pickLocation')

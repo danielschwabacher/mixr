@@ -19,7 +19,10 @@ Template.confirmEventModal.helpers({
 	},
 	returnEventTagType: function(){
 		return fullEventToConfirm.eventTagType
-	}
+	},
+	returnMaxNumber: function(){
+		return fullEventToConfirm.eventMaxRegistered
+	},
 });
 
 Template.confirmEventModal.events({
