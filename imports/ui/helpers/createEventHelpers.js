@@ -35,6 +35,7 @@ Template.createEventPage.events({
 		var eventSelectedTag = $("input[type='radio']:checked");
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"
+		var eventMaxRegistered = event.target.maxRegistered.value;
 
 		if (literalEventTag == "sportsRadioButton"){
 			eventTagShortened = "sports"
@@ -55,7 +56,7 @@ Template.createEventPage.events({
 			eventTagShortened = "Could not find tag"
 		}
 
-		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
+		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
 		clientTempCachedEvent.createReference()
 		// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
