@@ -12,6 +12,16 @@ Template.createEventPage.onRendered(function() {
 		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
+
+	$('.btn-minus').on('click', function(){
+		currentNumber = parseInt($(this).parent().siblings('input').val())
+		$(this).parent().siblings('input').val(currentNumber - 1)
+	});
+
+	$('.btn-plus').on('click', function(){
+		currentNumber = parseInt($(this).parent().siblings('input').val())
+		$(this).parent().siblings('input').val(currentNumber + 1)
+	});
 });
 
 Template.createEventPage.events({
