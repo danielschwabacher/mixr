@@ -124,6 +124,9 @@ Template.dynamicModalRegistered.helpers({
 	},
 	returnContextualNumberAttending: function(){
 		return this.number_of_users_attending
+	},
+	returnMaxNumberAttending: function(){
+		return this.event_max_number
 	}
 });
 
@@ -145,5 +148,8 @@ Template.dynamicModalCreated.helpers({
 	},
 	returnContextualNumberAttending: function(){
 		return this.number_of_users_attending
+	},
+	returnMaxNumberAttending: function(){
+		return this.event_max_number
 	}
 })
