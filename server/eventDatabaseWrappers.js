@@ -45,8 +45,8 @@ Meteor.methods({
 	registerEvent: function(eventToUpdate){
 		// REGISTER CONDITIONS:
 		// User must not own event and must not already be registered
-		// if the user has not already registered
-		// is true if user owns event
+		// Event must be able to accomodate another person attending.
+		// eg. (current_attending < max_attending)
 		event_dateTime = eventToUpdate.eventDateTime
 		var isOwner = UserEventsCrossReferenceCollection.findOne(
 			{
@@ -61,6 +61,12 @@ Meteor.methods({
 				'registered_events.eventId': eventToUpdate._id
 			}
 		)
+		// returns true if current number of users registered is less than the max
+		// if not true, registering for event is not possible
+		var eligibleToRegister = EventCollection.findOne(
+			{'_id': eventToUpdate._id}
+		)
+		console.log("registering for event: " + eligibleToRegister)
 		if (!isOwner && !isRegistered){
 			// Increment the number of users attending the associative event
 			EventCollection.update(
