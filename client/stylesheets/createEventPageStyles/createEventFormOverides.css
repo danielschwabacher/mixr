@@ -39,3 +39,11 @@
 #pickLocationButton:hover{
 	background-color: #A200FF;
 }
+
+
+#noMaximumRegistrationCheckbox{
+	margin-left: 100px;
+}
+.nomaxCheckbox{
+	margin-left: 30px;
+}
