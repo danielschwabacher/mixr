@@ -95,5 +95,8 @@ Template.eventInformationModal.helpers({
 	},
 	getMarkerEventNumberRegistered: function(){
 		return this.number_of_users_attending
-	}
+	},
+	returnMaxNumber: function(){
+		return this.event_max_number
+	},
 });
