@@ -12,10 +12,15 @@ Template.createEventPage.onRendered(function() {
 		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
-
+	document.getElementById("maxRegistered").value = 1;
 	$('.btn-minus').on('click', function(){
-		currentNumber = parseInt($(this).parent().siblings('input').val())
-		$(this).parent().siblings('input').val(currentNumber - 1)
+		if ($(this).parent().siblings('input').val() >= 2){
+			currentNumber = parseInt($(this).parent().siblings('input').val())
+			$(this).parent().siblings('input').val(currentNumber - 1)
+		}
+		else{
+			notify("Minimum number of attendees is 1", "danger", "center")
+		}
 	});
 
 	$('.btn-plus').on('click', function(){

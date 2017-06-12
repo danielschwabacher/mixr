@@ -68,11 +68,17 @@ Meteor.methods({
 		)
 		var eventCurrentRegistered = eventContext.number_of_users_attending
 		var eventMaxNumber = eventContext.event_max_number
-
-		console.log("CURRENT NUMBER (attending) FOR THIS EVENT: " + JSON.stringify(eventCurrentRegistered))
-		console.log("MAXIMUM NUMBER (attending) FOR THIS EVENT: " + eventMaxNumber)
-		
-		if (!isOwner && !isRegistered){
+		var eventCanBeRegisteredFor = null
+		if (eventCurrentRegistered < eventMaxNumber){
+			eventCanBeRegisteredFor = true
+		}
+		else {
+			eventCanBeRegisteredFor = false
+		}
+		if (!eventCanBeRegisteredFor){
+			return -1
+		}
+		if (!isOwner && !isRegistered && eventCanBeRegisteredFor){
 			// Increment the number of users attending the associative event
 			EventCollection.update(
 				{_id: eventToUpdate._id},
@@ -81,7 +87,8 @@ Meteor.methods({
 				},
 				function(err, eventId){
 					if (err){
-						console.log("return err -- !isOwner !isRegistered")
+						console.log("Error registering for event within EventCollection.update")
+						console.log(err)
 						return 0;
 					}
 				}
@@ -98,7 +105,8 @@ Meteor.methods({
 				{upsert: true},
 				function(err, eventId){
 					if (err){
-						console.log("return err -- crossReference")
+						console.log("Error registering for event within UserEventsCrossReferenceCollection.update")
+						console.log(err)
 						return 0;
 					}
 				}
@@ -106,12 +114,12 @@ Meteor.methods({
 			// call method to send email to user with the details of event
 			// IMPORTANT: this causes unexpected notify behavior (Error: you are already registered) when emailing accounts which aren't sandbox verified.
 			Meteor.call('sendRegisteredForEventEmail', eventToUpdate)
-			console.log("return success")
+			console.log("Registered for event success!")
 			return 1;
 		}
 
 		else{
-			console.log("return err -- catchAll")
+			console.log("Error registering for event -- user or event does not meet registration critiera.")
 			return 0
 		}
 	},
