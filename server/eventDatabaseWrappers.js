@@ -61,12 +61,17 @@ Meteor.methods({
 				'registered_events.eventId': eventToUpdate._id
 			}
 		)
-		// returns true if current number of users registered is less than the max
-		// if not true, registering for event is not possible
-		var eligibleToRegister = EventCollection.findOne(
+		// This is the event with the corresponding ID.
+		// Used to get max and current registrations.
+		var eventContext = EventCollection.findOne(
 			{'_id': eventToUpdate._id}
 		)
-		console.log("registering for event: " + eligibleToRegister)
+		var eventCurrentRegistered = eventContext.number_of_users_attending
+		var eventMaxNumber = eventContext.event_max_number
+
+		console.log("CURRENT NUMBER (attending) FOR THIS EVENT: " + JSON.stringify(eventCurrentRegistered))
+		console.log("MAXIMUM NUMBER (attending) FOR THIS EVENT: " + eventMaxNumber)
+		
 		if (!isOwner && !isRegistered){
 			// Increment the number of users attending the associative event
 			EventCollection.update(
