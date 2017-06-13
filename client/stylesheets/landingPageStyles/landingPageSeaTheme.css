@@ -984,7 +984,7 @@ STYLE SWITCHER FOR DEMO
 
 .nav > li > a:hover,
 .nav > li > a:focus {
-  background-color: #cdcdcd;
+  background-color: #A200FF;
 }
 
 .nav > li.disabled > a {
@@ -1020,14 +1020,6 @@ STYLE SWITCHER FOR DEMO
 .nav-pills > li > a {
   border-radius: 0;
 }
-
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
-  color: #ffffff;
-  background-color: #379392;
-}
-
 
 .nav-tabs-justified > li > a {
   border-radius: 2px;
