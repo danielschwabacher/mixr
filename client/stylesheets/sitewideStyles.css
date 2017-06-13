@@ -31,18 +31,20 @@
 	background-color: #a27500;
 	border-color: #a27500;
 }
-
-.btn-danger:active .btn-danger:focus{
-	background-color: #9e1c26 !important;
-	border-color: #9e1c26 !important;
+.btn.btn-danger.focus,
+.btn.btn-danger:focus {
+	background-color: #9e1c26;
+	border-color: #9e1c26;
 }
 
-.btn-success:active .btn-danger:focus{
-	background-color: #1564a1 !important;
-	border-color: #1564a1 !important;
+.btn.btn-success.focus,
+.btn.btn-success:focus {
+	background-color: #1564a1;
+	border-color: #1564a1;
 }
 
-.btn-info:active .btn-info:focus{
-	background-color: #a27500 !important;
-	border-color: #a27500 !important;
+.btn.btn-info.focus,
+.btn.btn-info:focus {
+	background-color: #a27500;
+	border-color: #a27500;
 }
