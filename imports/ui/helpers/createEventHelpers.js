@@ -27,6 +27,18 @@ Template.createEventPage.onRendered(function() {
 		currentNumber = parseInt($(this).parent().siblings('input').val())
 		$(this).parent().siblings('input').val(currentNumber + 1)
 	});
+
+	$('#noMaximumRegistrationCheckbox').change(function(){
+		if($(this).is(':checked')){
+			document.getElementById("maxRegistered").value = "NO MAXIMUM";
+			$('.btn-plus').prop("disabled", true);
+			$('.btn-minus').prop("disabled", true);
+		} else {
+			document.getElementById("maxRegistered").value = 1;
+			$('.btn-plus').prop("disabled", false);
+			$('.btn-minus').prop("disabled", false);
+		}
+	});
 });
 
 Template.createEventPage.events({
