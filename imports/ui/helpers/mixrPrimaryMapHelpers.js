@@ -6,6 +6,7 @@ import { EJSON } from 'meteor/ejson'
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
+ALL_SHOWN_EVENTS_SCRAPED = []
 
 // helper function to display all events in ALL_SHOWN_EVENTS
 showAllEvents = function(event_list, map_instance){
@@ -14,6 +15,7 @@ showAllEvents = function(event_list, map_instance){
 		temp_marker.createObjectMarker()
 	});
 }
+
 Template.mixrEventMap.onCreated(function(){
 	this.eventsCollection = this.subscribe('events');
 });
@@ -33,10 +35,20 @@ Template.mixrEventMap.onRendered(function(){
 			ALL_SHOWN_EVENTS = EventCollection.find(
 				{
 					event_tag: { $in: includeTags},
-					event_timestamp: {$lte: unixTimeRange}
+					event_timestamp: {$lte: unixTimeRange},
+
 				}
 			);
-			showAllEvents(ALL_SHOWN_EVENTS, map.instance)
+
+			ALL_SHOWN_EVENTS.forEach(
+				function(doc) {
+					if (doc.number_of_users_attending < doc.event_max_number){
+						console.log("Pushing: " + doc.event_name)
+						ALL_SHOWN_EVENTS_SCRAPED.push(doc)
+					}
+				}
+			);
+			showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, map.instance)
         });
 	});
 });
@@ -57,9 +69,13 @@ Template.mixrEventMap.helpers({
 });
 Session.set('sidebarIds', null)
 Template.eventDisplay.helpers({
-	// returns an array of objects representing the object
-	// if id is null, then no marker is hovered over.
-	// Only selects tags and times.
+	/*
+		This is for the sidebar part of the map display.
+		It returns an array of objects representing the events
+		to display. If id is null, then no marker is hovered over,
+		hence all the events are displayed.
+		Only selects tags and times.
+	*/
 	'getEvents': function(tags, time, id){
 		sidebarId = Session.get('sidebarIds')
 		var eventsArray = []
@@ -84,7 +100,9 @@ Template.eventDisplay.helpers({
 			);
 		}
 		displayEvents.forEach(function(currentDoc){
-			eventsArray.push(currentDoc)
+			if (currentDoc.number_of_users_attending < currentDoc.event_max_number){
+				eventsArray.push(currentDoc)
+			}
 		});
 		return eventsArray
     },
@@ -138,7 +156,7 @@ Template.eventSection.events({
 		});
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
-		showAllEvents(ALL_SHOWN_EVENTS, MAP)
+		showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
 	},
 });
 
