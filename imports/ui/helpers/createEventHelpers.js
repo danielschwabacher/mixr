@@ -53,7 +53,9 @@ Template.createEventPage.events({
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"
 		var eventMaxRegistered = event.target.maxRegistered.value;
-
+		if (eventMaxRegistered == "NO MAXIMUM"){
+			eventMaxRegistered = Number.POSITIVE_INFINITY
+		}
 		if (literalEventTag == "sportsRadioButton"){
 			eventTagShortened = "sports"
 		}
