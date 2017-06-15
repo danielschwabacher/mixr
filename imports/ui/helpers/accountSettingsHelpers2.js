@@ -2,12 +2,18 @@ import '../templates/accountSettingsPage.html'
 Template.accountSettings.events({
  	'click #authPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "auth")
+    	$(".sideBarSettingLinks").removeClass('active');
+		$("#authPaneLink").addClass('active');
 	},
 	'click #emailPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "email")
+		$(".sideBarSettingLinks").removeClass('active');
+		$("#emailPaneLink").addClass('active');
 	},
 	'click #feedbackPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "feedback")
+		$(".sideBarSettingLinks").removeClass('active');
+		$("#feedbackPaneLink").addClass('active');
 	},
 	'submit .changePasswordForm'(event, template) {
 		event.preventDefault()
@@ -69,6 +75,7 @@ Template.accountSettings.events({
 
 Template.accountSettings.onRendered(function() {
 	Session.set("settingsPagePaneSelection", "auth")
+	$("#authPaneLink").addClass('active');
 });
 
 Template.registerHelper('getCurrentPane', function(){

@@ -43,7 +43,6 @@ Template.mixrEventMap.onRendered(function(){
 			ALL_SHOWN_EVENTS.forEach(
 				function(doc) {
 					if (doc.number_of_users_attending < doc.event_max_number){
-						console.log("Pushing: " + doc.event_name)
 						ALL_SHOWN_EVENTS_SCRAPED.push(doc)
 					}
 				}
