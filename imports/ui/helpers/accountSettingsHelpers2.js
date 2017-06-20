@@ -41,7 +41,7 @@ Template.accountSettings.events({
 			deletedEPref: deletedEventPref
 		}
 		Meteor.call('updateUserEmailPreferences', userPrefs, (error, response) => {
-			if (error) {s
+			if (error) {
 				console.log("There was an error: " + response)
 			}
 		});
