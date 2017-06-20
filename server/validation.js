@@ -31,7 +31,7 @@ Meteor.methods({
 // Requires the name to be a minimum of 1 character and a maximum
 // of 20 alphanumeric characters and spaces
 validateName = function(eventName) {
-  var re = /^[a-zA-Z0-9\t]{20}$/
+  var re = /^[a-zA-Z0-9\s]{1,20}$/
   var result = re.test(eventName)
   if (!result) {
     console.log("Error: Restricted characters in event name")
