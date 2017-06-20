@@ -47,13 +47,13 @@ Template.createEventPage.events({
 
 		// Perform validation
 		// TODO: Need to add in all field validations.
-		var result = Meteor.call('validateAll', eventName, eventLocation, eventDescription, (error, response) => {
+		Meteor.call('validateAll', eventName, eventLocation, eventDescription, (error, response) => {
 			if (error) {
 				console.log("There was an error: " + error)
 				// TODO: Need to return an error message saying something was wrong
 			}
 			else{
-				if (result) {
+				if (response) {
 					// Validation was a success
 					clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
 					clientTempCachedEvent.createReference()

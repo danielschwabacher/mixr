@@ -53,7 +53,7 @@ validateLocation = function(eventLocation) {
 // Allows the event description to be 155 character(s) (because fuck 140 character limits)
 // Does NOT require a description to pass
 validateDescription = function(eventDescription) {
-  var re = /^[.*]{0,155}$/
+  var re = /[.*]{0,155}$/
   var result = re.test(eventDescription)
   if (!result) {
     console.log("Error: The event description can only be 155 characters")
