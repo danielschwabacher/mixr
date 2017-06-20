@@ -39,10 +39,10 @@ validateName = function(eventName) {
   return result
 }
 
-// Requires the location to be a minimum of 1 character(s) and a maximum
+// Requires the location to be a minimum of 1 character and a maximum
 // of 64 alphanumeric characters, spaces, commas, and hyphens
 validateLocation = function(eventLocation) {
-  var re = /[-,a-zA-Z0-9\t]{1,164}$/
+  var re = /^[-,a-zA-Z0-9\t]{1,64}$/
   var result = re.test(eventLocation)
   if (!result) {
     console.log("Error: restricted characters in event location")
