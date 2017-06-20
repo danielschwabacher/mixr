@@ -47,24 +47,32 @@ Template.createEventPage.events({
 
 		// Perform validation
 		// TODO: Need to add in all field validations.
-		var result = validateAll(eventName, eventLocation, eventDescription)
-
-		if (result) {
-			// Validation was a success
-			clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
-			clientTempCachedEvent.createReference()
-			// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
-			// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
-			// used to confirm route in IronRouter
-			Router.go('pickLocation')
-		}
-		else {
-			// Validation failed
-			// TODO: Replace redirection with notifications that allow users
-			// 			 to correct the incorrect input
-			notify("Please correct all errors before proceeding", "danger", "center")
-		}
+		var result = Meteor.call('validateAll', eventName, eventLocation, eventDescription, (error, response) => {
+			if (error) {
+				console.log("There was an error: " + error)
+				// TODO: Need to return an error message saying something was wrong
+			}
+			else{
+				if (result) {
+					// Validation was a success
+					clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
+					clientTempCachedEvent.createReference()
+					// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
+					// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
+					// used to confirm route in IronRouter
+					Router.go('pickLocation')
+				}
+				else {
+					// Validation failed
+					// TODO: Make this some kind of failure notification
+					//
+					notify("Please correct all errors before proceeding", "danger", "center")
+				}
+			}
+		});
 	},
+
+
 	'click #resendEmailButton'(event, template) {
 		Meteor.call('sendVerificationLink', (error, response) => {
  			if (error) {
@@ -101,62 +109,3 @@ Template.emailNotVerifiedModal.events({
 		Modal.hide(template)
 	}
 });
-
-/* --------------------------------------------------------------------------
- *  These are methods that will validate the user provided information before
- *  handing it over to the server
- *  Things to be aware of:
- *	1) **All validations must be done client side to ensure server security**
- *  2) There are various regular expressions that more concisely represent certain patterns
- * 	   but the more verbose version allows easier modification in case new characters
- *     need to be allowed
- *  3) All functions besides validateAll return bools
- *
- * -------------------------------------------------------------------------- */
-
-// Calls all validation functions to confirm everything is correctly formatted
-validateAll = function(eventName, eventLocation, eventDescription) {
-	var nameCheck = validateName(eventName)
-	var locCheck = validateLocation(eventLocation)
-	var descCheck = validateDescription(eventDescription)
-
-	var result = (nameCheck && locCheck && descCheck && 1)
-
-	if(!result) {
-		console.log("Failed validation; event not mixr-cached or added to DB")
-	}
-	return result
-}
-
-// Requires the name to be a minimum of 1 character(s) and a maximum
-// of 20 alphanumeric characters and spaces
-validateName = function(eventName) {
-	var re = /^[a-zA-Z0-9\t]{20}$/
-	var result = re.test(eventName)
-	if (!result) {
-		notify("Error: Restricted characters in event name", "danger", "center")
-	}
-	return result
-}
-
-// Requires the location to be a minimum of 1 character(s) and a maximum
-// of 64 alphanumeric characters, spaces, commas, and hyphens
-validateLocation = function(eventLocation) {
-	var re = /[-,a-zA-Z0-9\t]{1,164}$/
- 	var result = re.test(eventLocation)
-	if (!result) {
-		notify("Error: restricted characters in event location", "danger", "center")
-	}
-	return result
-}
-
-// Allows the event description to be 155 character(s) (because fuck 140 character limits)
-// Does NOT require a description to pass
-validateDescription = function(eventDescription) {
-	var re = /^[.*]{0,155}$/
-	var result = re.test(eventDescription)
-	if (!result) {
-		notify("Error: The event description can only be 155 characters", "danger", "center")
-	}
-	return result
-}
