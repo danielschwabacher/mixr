@@ -25,18 +25,6 @@ Marker.prototype.createObjectMarker = function(){
 		Modal.show('eventInformationModal', this.eventInfo)
 	});
 
-	/*
-	google.maps.event.addListener(eventMarker, 'mouseover', () => {
-		// console.log("clicked marker: " + this.eventInfo.event_name)
-		this.bubble.setContent(markerInfo);
-		this.bubble.open(this.map, eventMarker);
-	});
-
-	google.maps.event.addListener(eventMarker, 'mouseout', () => {
-		this.bubble.close()
-	});
-	*/
-
 	google.maps.event.addListener(eventMarker, 'mouseover', () => {
 		updateSideBarLinks(eventMarker.get('id'))
 	});
@@ -46,7 +34,6 @@ Marker.prototype.createObjectMarker = function(){
 	});
 
 	GLOBAL_MARKERS.push(eventMarker)
-
 	return 0;
 }
 

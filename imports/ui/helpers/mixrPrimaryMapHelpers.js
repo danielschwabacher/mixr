@@ -25,6 +25,14 @@ Template.mixrEventMap.onRendered(function(){
 		console.log("map is ready")
 		MAP = map.instance
 		var latLng = Geolocation.latLng();
+		// Lat, Lng coordinate pairs which define the Boulder area
+		// bounding box.
+		var BOULDER_BOUNDS = new google.maps.LatLngBounds(
+			// Southwest bound
+     		new google.maps.LatLng(39.964069, -105.301758),
+			// Northeast bound
+     		new google.maps.LatLng(40.094551, -105.178197)
+   		);
         Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
@@ -66,7 +74,9 @@ Template.mixrEventMap.helpers({
 		}
 	}
 });
+
 Session.set('sidebarIds', null)
+
 Template.eventDisplay.helpers({
 	/*
 		This is for the sidebar part of the map display.
