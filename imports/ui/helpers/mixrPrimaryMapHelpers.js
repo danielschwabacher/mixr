@@ -22,9 +22,11 @@ Template.mixrEventMap.onCreated(function(){
 
 Template.mixrEventMap.onRendered(function(){
 	GoogleMaps.ready('mixrMap', function(map) {
-		console.log("map is ready")
+
 		MAP = map.instance
+
 		var latLng = Geolocation.latLng();
+
 		// Lat, Lng coordinate pairs which define the Boulder area
 		// bounding box.
 		var BOULDER_BOUNDS = new google.maps.LatLngBounds(
@@ -33,6 +35,22 @@ Template.mixrEventMap.onRendered(function(){
 			// Northeast bound
      		new google.maps.LatLng(40.094551, -105.178197)
    		);
+
+		var lastValidCenter = MAP.getCenter();
+
+		google.maps.event.addListener(MAP, 'dragend', function() {
+			if (BOULDER_BOUNDS.contains(MAP.getCenter())) {
+				// still within valid bounds, so save the last valid position
+				lastValidCenter = MAP.getCenter();
+				return;
+			}
+			else{
+				// not valid anymore => return to last valid position
+				MAP.panTo(lastValidCenter);
+				notify("This beta only supports Boulder locations!", "info", "center")
+			}
+		});
+
         Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
