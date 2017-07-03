@@ -24,20 +24,17 @@
 
 	A bounding box is created by 'drawing' a line from
 	these two LatLng pairs. Thus, any bounding box generated
-	by this object is always a rectangle. 
+	by this object is always a rectangle.
+
+
+var BOULDER_BOUNDS = new google.maps.LatLngBounds(
+// Southwest bound
+new google.maps.LatLng(39.964069, -105.301758),
+// Northeast bound
+new google.maps.LatLng(40.094551, -105.178197)
+);
 */
 
 Bounds = function(southwest_bounds, northeast_bounds){
-	this.rawIncludes = rawTagIds
-	this.mongoIncludes = []
+	return
 }
-
-
-		// Lat, Lng coordinate pairs which define the Boulder area
-		// bounding box.
-		var BOULDER_BOUNDS = new google.maps.LatLngBounds(
-			// Southwest bound
-     		new google.maps.LatLng(39.964069, -105.301758),
-			// Northeast bound
-     		new google.maps.LatLng(40.094551, -105.178197)
-   		);

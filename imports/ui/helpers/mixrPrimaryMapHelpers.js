@@ -22,9 +22,7 @@ Template.mixrEventMap.onCreated(function(){
 
 Template.mixrEventMap.onRendered(function(){
 	GoogleMaps.ready('mixrMap', function(map) {
-
 		MAP = map.instance
-
 		var latLng = Geolocation.latLng();
 
 		// Lat, Lng coordinate pairs which define the Boulder area
@@ -34,8 +32,8 @@ Template.mixrEventMap.onRendered(function(){
      		new google.maps.LatLng(39.964069, -105.301758),
 			// Northeast bound
      		new google.maps.LatLng(40.094551, -105.178197)
-   		);
 
+		);
 		var lastValidCenter = MAP.getCenter();
 
 		google.maps.event.addListener(MAP, 'dragend', function() {
@@ -51,7 +49,7 @@ Template.mixrEventMap.onRendered(function(){
 			}
 		});
 
-        Tracker.autorun(() => {
+		Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
 			timeFilter = Session.get('timeFilterHours')
@@ -69,14 +67,17 @@ Template.mixrEventMap.onRendered(function(){
 			ALL_SHOWN_EVENTS.forEach(
 				function(doc) {
 					if (doc.number_of_users_attending < doc.event_max_number){
+						console.log("Doc is: " + doc.event_name)
 						ALL_SHOWN_EVENTS_SCRAPED.push(doc)
 					}
 				}
 			);
+			
 			showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, map.instance)
-        });
+		});
 	});
 });
+
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
@@ -99,8 +100,11 @@ Template.eventDisplay.helpers({
 	/*
 		This is for the sidebar part of the map display.
 		It returns an array of objects representing the events
-		to display. If id is null, then no marker is hovered over,
+		to display.
+
+		If id is null, then no marker is hovered over,
 		hence all the events are displayed.
+
 		Only selects tags and times.
 	*/
 	'getEvents': function(tags, time, id){
