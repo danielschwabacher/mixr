@@ -83,7 +83,7 @@ Meteor.methods({
       if (currentUser && userEmail){
         Email.send({
           to: userEmail,
-          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+		  from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
           subject: emailSubject,
           html: SSR.render('registerForEvent', emailData)
         });
