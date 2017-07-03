@@ -75,13 +75,34 @@ Template.createEventPage.events({
 			eventTagShortened = "Could not find tag"
 		}
 
-		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
-		clientTempCachedEvent.createReference()
-
-		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
-		// used to confirm route in IronRouter
-		Router.go('pickLocation')
+		// Perform validation
+		// TODO: Need to add in all field validations.
+		Meteor.call('validateAll', eventName, eventLocation, eventDescription, (error, response) => {
+			if (error) {
+				console.log("There was an error: " + error)
+				// TODO: Need to return an error message saying something was wrong
+			}
+			else{
+				if (response) {
+					// Validation was a success
+					clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
+					clientTempCachedEvent.createReference()
+					// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
+					// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
+					// used to confirm route in IronRouter
+					Router.go('pickLocation')
+				}
+				else {
+					// Validation failed
+					// TODO: Make this some kind of failure notification
+					//
+					notify("Please correct all errors before proceeding", "danger", "center")
+				}
+			}
+		});
 	},
+
+
 	'click #resendEmailButton'(event, template) {
 		Meteor.call('sendVerificationLink', (error, response) => {
  			if (error) {

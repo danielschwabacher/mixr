@@ -51,6 +51,7 @@ Template.accountSettings.events({
 		notify("Working...", "info", "right")
 		Meteor.call('updateUserEmailPreferences', userPrefs, (error, response) => {
 			if (error) {
+				console.log("There was an error: " + response)
 				notify("Email preferences could not be updated at this time.", "danger", "center")
 				return
 			}

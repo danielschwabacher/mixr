@@ -1,7 +1,7 @@
 /*
 	Because the crossReference table is an amalgamation of subdocuments, it is not able to
 	utilize mongo's TTL system. The CrossReferenceDaemon will search for eventIDs not longer present
-	in the big event table and expire the assocaited eventIds from the crossReference table.
+	in the big event table and expire the associated eventIds from the crossReference table.
 
 	sleepTime: the amount of time (in milliseconds) between table purges.
 */
