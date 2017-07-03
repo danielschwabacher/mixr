@@ -62,6 +62,20 @@
 							<span class="input-group-addon black"><i class="glyphicon glyphicon-calendar"></i></span>
 							<input class="set-due-date form-control" placeholder="Select date..." type="text" id="eventDateTime" required/>
 						</div>
+						<h4 class="create-event-form-text">Max number of people (including yourself):</h4>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-minus btn-info" type="button">-</button>
+							</span>
+							<input type="text" name="maxRegistered" id="maxRegistered" class="form-control no-padding add-color text-center" value="0" disabled>
+							<span class="input-group-btn">
+								<button class="btn btn-plus btn-info" type="button">+</button>
+							</span>
+							<span class="checkbox checkbox-mixr checkbox-inline nomaxCheckbox">
+								<input type="checkbox" class="styled" id="noMaximumRegistrationCheckbox" name="noMaximumRegistrationCheckbox">
+								<label for="noMaximumRegistrationCheckbox">No maximum</label>
+							</span>
+						</div>
 					</div>
 					<input type="submit" value="Choose Event Location!" id="pickLocationButton" required/>
 				</div>

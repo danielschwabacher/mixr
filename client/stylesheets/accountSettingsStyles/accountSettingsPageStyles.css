@@ -1,16 +1,13 @@
-.settings-row{
-	width: 100%;
-    margin: 50px auto;
+.nav-stacked{
+	font-size: 20px;
+	background-color: #282929;
+}
+.nav-stacked a:hover{
+	font-size: 20px;
+	background-color: #A200FF !important;
 }
 
-.settings-row a{
-	font-size: 30px;
-	font-weight: bold;
-	color: black;
-}
-
-
-.settings-row a:hover{
-	color: #A200FF;
-	text-decoration: none;
+.nav-stacked a:focus{
+	font-size: 20px;
+	background-color: #A200FF !important;
 }

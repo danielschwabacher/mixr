@@ -12,6 +12,33 @@ Template.createEventPage.onRendered(function() {
 		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
+	document.getElementById("maxRegistered").value = 1;
+	$('.btn-minus').on('click', function(){
+		if ($(this).parent().siblings('input').val() >= 2){
+			currentNumber = parseInt($(this).parent().siblings('input').val())
+			$(this).parent().siblings('input').val(currentNumber - 1)
+		}
+		else{
+			notify("Minimum number of attendees is 1", "danger", "center")
+		}
+	});
+
+	$('.btn-plus').on('click', function(){
+		currentNumber = parseInt($(this).parent().siblings('input').val())
+		$(this).parent().siblings('input').val(currentNumber + 1)
+	});
+
+	$('#noMaximumRegistrationCheckbox').change(function(){
+		if($(this).is(':checked')){
+			document.getElementById("maxRegistered").value = "NO MAXIMUM";
+			$('.btn-plus').prop("disabled", true);
+			$('.btn-minus').prop("disabled", true);
+		} else {
+			document.getElementById("maxRegistered").value = 1;
+			$('.btn-plus').prop("disabled", false);
+			$('.btn-minus').prop("disabled", false);
+		}
+	});
 });
 
 Template.createEventPage.events({
@@ -25,7 +52,10 @@ Template.createEventPage.events({
 		var eventSelectedTag = $("input[type='radio']:checked");
 		var literalEventTag = eventSelectedTag.attr('id');
 		var eventTagShortened = "null"
-
+		var eventMaxRegistered = event.target.maxRegistered.value;
+		if (eventMaxRegistered == "NO MAXIMUM"){
+			eventMaxRegistered = Number.POSITIVE_INFINITY
+		}
 		if (literalEventTag == "sportsRadioButton"){
 			eventTagShortened = "sports"
 		}
@@ -45,9 +75,9 @@ Template.createEventPage.events({
 			eventTagShortened = "Could not find tag"
 		}
 
-		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
+		clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
 		clientTempCachedEvent.createReference()
-		// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
+
 		// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
 		// used to confirm route in IronRouter
 		Router.go('pickLocation')

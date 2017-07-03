@@ -1,69 +1,67 @@
-<template name="accountSettingsPage">
-	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	{{> changePasswordLink}}
-	{{> emailSettings}}
-	{{> feedBackLink}}
-</template>
-
-
-<template name="changePasswordLink">
-	<div class="container-fluid">
-		<div class="settings-row row">
-			<a href="" id="changePasswordLink">Change your password</a>
-		</div>
-	</div>
-</template>
-
-<template name="feedBackLink">
-	<div class="container-fluid">
-		<div class="settings-row row">
-			<a href="" id="giveFeedbackLink">Give feedback!</a>
-		</div>
-	</div>
-</template>
-
-<template name="emailSettings">
-	<div class="container-fluid">
-		<div class="settings-row row">
-			<a href="" id="emailSettingsLink">Email Preferences</a>
-		</div>
-	</div>
-</template>
-
-
-<template name="emailPreferencesModal">
-	<div class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form class="updateEmailPrefModalForm">
-					<div class="modal-header">
-						<h4 class="modal-title">Email Preferences</h4>
-					</div>
-
-					<div class="checkbox checkbox-mixr checkbox-inline">
-						<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
-						<label for="createdEventPref">Notify me when I create an event</label>
-					</div>
-
-					<div>
-					</div>
-
-					<div class="checkbox checkbox-mixr checkbox-inline">
-						<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes" checked>
-						<label for="registeredEventPref">Notify me when I register for an event</label>
-					</div>
-
-					<div class="checkbox checkbox-mixr checkbox-inline">
-						<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes" checked>
-						<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
-					</div>
-
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success btn-float-right" id="updateEmailPrefButton">Update Preferences</button>
-						<button class="btn btn-danger btn-float-left" data-dismiss="modal">Nevermind</button>
-					</div>
-				</form>
+<template name="accountSettings">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="sideBarSettingLinks" id="authPaneLink"><a href="#"><i class="fa fa-lock fa-fw"></i>Authentication</a></li>
+					<li class="sideBarSettingLinks" id="emailPaneLink"><a href="#"><i class="fa fa-file-o fa-fw"></i>Email Settings</a></li>
+					<li class="sideBarSettingLinks" id="feedbackPaneLink"><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Give Feedback!</a></li>
+				</ul>
 			</div>
+			{{> currentPane}}
 		</div>
+	</div>
+</template>
+
+<template name="currentPane">
+	{{> Template.dynamic template=getCurrentPane}}
+</template>
+
+<template name="AuthenticationPane">
+	<div class="col-md-9 well">
+		<form class="changePasswordForm">
+			<input type="password" value="" placeholder="Enter current password" id="currentPasswordChangePasswordModal" autofocus/>
+			<input type="password" value="" placeholder="New Password" id="newPassword1"/>
+			<input type="password" value="" placeholder="Confirm Password" id="newPassword2"/>
+			<button type="submit" class="btn btn-success btn-float-right" id="changePasswordButton">Change Password</button>
+		</form>
+	</div>
+</template>
+
+
+<template name="EmailSettingsPane">
+	<div class="col-md-9 well">
+		<form class="updateEmailPreferencesForm">
+			<div class="checkbox checkbox-mixr checkbox-inline">
+				<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
+				<label for="createdEventPref">Notify me when I create an event</label>
+			</div>
+			<div class="checkbox checkbox-mixr checkbox-inline">
+				<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes">
+				<label for="registeredEventPref">Notify me when I register for an event</label>
+			</div>
+			<div class="checkbox checkbox-mixr checkbox-inline">
+				<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes">
+				<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
+			</div>
+			{{currentPreferences}}
+			<button type="submit" class="btn btn-success btn-float-right" id="updateEmailPrefButton">Update Preferences</button>
+		</form>
+	</div>
+</template>
+
+<template name="FeedbackPane">
+	<div class="col-md-9 well">
+		<form class="sendFeedbackForm">
+			<div class="modal-header">
+				<h4 class="modal-title">What's on your mind?</h4>
+			</div>
+			<div class="modal-body feedback-modal-block">
+				<textarea value="" placeholder="Please provide feature requests, bug reports or anything else you'd like to communicate with the dev team here. Thanks for your feedback!" id="feedbackArea" autofocus required></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success btn-float-right" id="sendFeedbackButton">Send to dev team!</button>
+			</div>
+		</form>
 	</div>
 </template>

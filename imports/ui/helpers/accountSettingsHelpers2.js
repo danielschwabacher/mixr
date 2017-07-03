@@ -1,0 +1,123 @@
+import '../templates/accountSettingsPage.html'
+Template.accountSettings.events({
+ 	'click #authPaneLink'(event, template){
+		Session.set("settingsPagePaneSelection", "auth")
+    	$(".sideBarSettingLinks").removeClass('active');
+		$("#authPaneLink").addClass('active');
+	},
+	'click #emailPaneLink'(event, template){
+		Session.set("settingsPagePaneSelection", "email")
+		$(".sideBarSettingLinks").removeClass('active');
+		$("#emailPaneLink").addClass('active');
+	},
+	'click #feedbackPaneLink'(event, template){
+		Session.set("settingsPagePaneSelection", "feedback")
+		$(".sideBarSettingLinks").removeClass('active');
+		$("#feedbackPaneLink").addClass('active');
+	},
+	'submit .changePasswordForm'(event, template) {
+		event.preventDefault()
+		var oldPassword = event.target.currentPasswordChangePasswordModal.value;
+		var newPassword1 = event.target.newPassword1.value;
+		var newPassword2 = event.target.newPassword2.value;
+		if (newPassword1 == newPassword2){
+			Accounts.changePassword(oldPassword, newPassword1, function(err){
+				if (err){
+					notify("Your password is incorrect", "danger", "center")
+				}
+				else{
+					Modal.hide()
+					notify("Password changed successfully!", "success", "right")
+					event.target.currentPasswordChangePasswordModal.value = ""
+					event.target.newPassword1.value = ""
+					event.target.newPassword2.value = ""
+				}
+			});
+		}
+		else{
+			notify("Passwords do not match", "danger", "center")
+		}
+	},
+	'submit .updateEmailPreferencesForm'(event, template) {
+		event.preventDefault()
+		var createEventPref = $('#createdEventPref').is(':checked')
+		var registerEventPref = $('#registeredEventPref').is(':checked')
+		var deletedEventPref = $('#eventDeletedPref').is(':checked')
+		var userPrefs = {
+			createEPref: createEventPref,
+			registerEPref: registerEventPref,
+			deletedEPref: deletedEventPref
+		}
+		notify("Working...", "info", "right")
+		Meteor.call('updateUserEmailPreferences', userPrefs, (error, response) => {
+			if (error) {
+				notify("Email preferences could not be updated at this time.", "danger", "center")
+				return
+			}
+			notify("Email preferences updated successfully!", "success", "right")
+		});
+	},
+	'submit .sendFeedbackForm'(event, template) {
+		event.preventDefault()
+		var userFeedback = event.target.feedbackArea.value
+		notify("Sending...", "info", "right")
+		Meteor.call('sendUserFeedback', userFeedback, (error, response) => {
+			if (error) {
+				notify("We couldn't send your feedback right now.", "danger", "center")
+				console.log("There was an error: " + response)
+				return
+			}
+			notify("Your feedback has been sent, thanks!", "success", "right")
+			event.target.feedbackArea.value = ""
+		});
+	}
+});
+
+Template.accountSettings.onRendered(function() {
+	Session.set("settingsPagePaneSelection", "auth")
+	$("#authPaneLink").addClass('active');
+});
+
+Template.registerHelper('getCurrentPane', function(){
+	if (Session.get("settingsPagePaneSelection") == "auth"){
+		return "AuthenticationPane"
+	}
+	else if (Session.get("settingsPagePaneSelection") == "email"){
+		return "EmailSettingsPane"
+	}
+	else if (Session.get("settingsPagePaneSelection") == "feedback"){
+		return "FeedbackPane"
+	}
+	else {
+		return "AuthenticationPane"
+	}
+});
+
+
+
+Template.EmailSettingsPane.helpers({
+  // Calls a server-side function that returns an array containing
+  // the users current email preferences and updates HTML page to reflect them
+  currentPreferences: function() {
+    var CREATED_EVENT_PREF = 0
+    var REGISTERED_EVENT_PREF = 1
+    var EVENT_DELETED_PREF = 2
+    Meteor.call('grabEmailPref', (error, result) => {
+      if (error) {
+        notify("There was an error checking the create event email preference.", "danger", "center")
+        console.log("Error checking email preference: " + error)
+      }
+      // Due to asynchronous server calls, need to have the outcome as a callback
+      if (result[CREATED_EVENT_PREF]) {
+        $('#createdEventPref').attr('checked', true)
+      }
+      if (result[REGISTERED_EVENT_PREF]) {
+        $('#registeredEventPref').attr('checked', true)
+      }
+      if (result[EVENT_DELETED_PREF]) {
+        $('#eventDeletedPref').attr('checked', true)
+      }
+    });
+  }
+
+});

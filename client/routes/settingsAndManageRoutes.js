@@ -1,5 +1,5 @@
-import '../../imports/ui/helpers/accountSettingsHelpers.js';
 import '../../imports/ui/helpers/manageEventsHelpers.js';
+import '../../imports/ui/helpers/accountSettingsHelpers2.js';
 
 Router.route('/manage', function(){
 	if (Meteor.user()){
@@ -14,7 +14,7 @@ Router.route('/manage', function(){
 
 Router.route('/account', function(){
 	if (Meteor.user()){
-		this.render('accountSettingsPage')
+		this.render('accountSettings')
 	}
 	else {
 		// console.log("DEVNOTE: FIX THIS -- YOU ARE NOT LOGGED ON")

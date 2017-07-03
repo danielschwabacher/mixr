@@ -6,6 +6,7 @@ import { EJSON } from 'meteor/ejson'
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
+ALL_SHOWN_EVENTS_SCRAPED = []
 
 // helper function to display all events in ALL_SHOWN_EVENTS
 showAllEvents = function(event_list, map_instance){
@@ -14,15 +15,42 @@ showAllEvents = function(event_list, map_instance){
 		temp_marker.createObjectMarker()
 	});
 }
+
 Template.mixrEventMap.onCreated(function(){
 	this.eventsCollection = this.subscribe('events');
 });
 
 Template.mixrEventMap.onRendered(function(){
 	GoogleMaps.ready('mixrMap', function(map) {
-		console.log("map is ready")
+
 		MAP = map.instance
+
 		var latLng = Geolocation.latLng();
+
+		// Lat, Lng coordinate pairs which define the Boulder area
+		// bounding box.
+		var BOULDER_BOUNDS = new google.maps.LatLngBounds(
+			// Southwest bound
+     		new google.maps.LatLng(39.964069, -105.301758),
+			// Northeast bound
+     		new google.maps.LatLng(40.094551, -105.178197)
+   		);
+
+		var lastValidCenter = MAP.getCenter();
+
+		google.maps.event.addListener(MAP, 'dragend', function() {
+			if (BOULDER_BOUNDS.contains(MAP.getCenter())) {
+				// still within valid bounds, so save the last valid position
+				lastValidCenter = MAP.getCenter();
+				return;
+			}
+			else{
+				// not valid anymore => return to last valid position
+				MAP.panTo(lastValidCenter);
+				notify("This beta only supports Boulder locations!", "info", "center")
+			}
+		});
+
         Tracker.autorun(() => {
 			removeMarkers()
 			includeTags = Session.get('tagFilterIncludes')
@@ -33,10 +61,19 @@ Template.mixrEventMap.onRendered(function(){
 			ALL_SHOWN_EVENTS = EventCollection.find(
 				{
 					event_tag: { $in: includeTags},
-					event_timestamp: {$lte: unixTimeRange}
+					event_timestamp: {$lte: unixTimeRange},
+
 				}
 			);
-			showAllEvents(ALL_SHOWN_EVENTS, map.instance)
+
+			ALL_SHOWN_EVENTS.forEach(
+				function(doc) {
+					if (doc.number_of_users_attending < doc.event_max_number){
+						ALL_SHOWN_EVENTS_SCRAPED.push(doc)
+					}
+				}
+			);
+			showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, map.instance)
         });
 	});
 });
@@ -55,11 +92,17 @@ Template.mixrEventMap.helpers({
 		}
 	}
 });
+
 Session.set('sidebarIds', null)
+
 Template.eventDisplay.helpers({
-	// returns an array of objects representing the object
-	// if id is null, then no marker is hovered over.
-	// Only selects tags and times.
+	/*
+		This is for the sidebar part of the map display.
+		It returns an array of objects representing the events
+		to display. If id is null, then no marker is hovered over,
+		hence all the events are displayed.
+		Only selects tags and times.
+	*/
 	'getEvents': function(tags, time, id){
 		sidebarId = Session.get('sidebarIds')
 		var eventsArray = []
@@ -84,7 +127,9 @@ Template.eventDisplay.helpers({
 			);
 		}
 		displayEvents.forEach(function(currentDoc){
-			eventsArray.push(currentDoc)
+			if (currentDoc.number_of_users_attending < currentDoc.event_max_number){
+				eventsArray.push(currentDoc)
+			}
 		});
 		return eventsArray
     },
@@ -104,11 +149,17 @@ Template.eventSection.events({
 	"click #eventSectionRegisterButton"(event, template){
 		if (Meteor.user() && Meteor.user().emails[0].verified){
 			Meteor.call("registerEvent", this, function(err, didRegister){
-				if (didRegister){
+				if (didRegister == 1){
 					notify("Registered successfully!", "success", "right")
 				}
-				else{
+				else if (didRegister == 0){
 					notify("Error: You are already registered for this event", "danger", "center")
+				}
+				else if (didRegister == -1){
+					notify("Error: event is full", "danger", "center")
+				}
+				else{
+					notify("Unknown error, please try again later.", "danger", "center")
 				}
 			});
 		}
@@ -132,7 +183,7 @@ Template.eventSection.events({
 		});
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
-		showAllEvents(ALL_SHOWN_EVENTS, MAP)
+		showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
 	},
 });
 

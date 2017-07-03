@@ -17,11 +17,12 @@ createFullCachedEvent = function(minimumCachedEvent, eventCoords){
 	eDateTime = minimumCachedEvent.eventDateTime
 	eTimeStamp = minimumCachedEvent.eventTimeStamp
 	eTagType = minimumCachedEvent.eventTagType
+	eMaxRegistered = minimumCachedEvent.eventMaxRegistered
 	position = {
 		latitude: coordinatesObj.lat,
 		longitude: coordinatesObj.lng
 	};
-	return new FullCachedEvent(eName, eLocation, eDescription, eDateTime, eTimeStamp, eTagType, position)
+	return new FullCachedEvent(eName, eLocation, eDescription, eDateTime, eTimeStamp, eTagType, eMaxRegistered, position)
 }
 
 

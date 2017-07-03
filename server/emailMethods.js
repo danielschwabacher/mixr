@@ -47,7 +47,7 @@ Meteor.methods({
       if (currentUser && userEmail) {
         Email.send({
           to: userEmail,
-          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+		  from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
           subject: emailSubject,
           html: SSR.render('createEventEmail', emailData)
         });
@@ -83,7 +83,7 @@ Meteor.methods({
       if (currentUser && userEmail){
         Email.send({
           to: userEmail,
-          from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+		  from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
           subject: emailSubject,
           html: SSR.render('registerForEvent', emailData)
         });
@@ -133,7 +133,7 @@ Meteor.methods({
         if (currUser && currEmail){
           Email.send({
             to: currEmail,
-            from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+ 			from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
             subject: "An event you registered for has been removed!",
             html: SSR.render('eventDeletedEmail', emailData)
           });
@@ -157,14 +157,14 @@ Meteor.methods({
     if (currUser && userEmail){
       Email.send({
         to: sendAddress,
-        from: "Mixr Dev Team <mixrdev123456@gmail.com>",
+		from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
         subject: emailSubject,
         text: emailText
       });
 
       Email.send({
         to: userEmail,
-        from: "Mixr Dev Team <mixrdev12345@gmail.com>",
+		from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
         subject: returnSubject,
         text: returnText
       })
@@ -191,6 +191,17 @@ Meteor.methods({
         event_deleted: deletedEventPref
       }}}
     );
+  },
+
+  grabEmailPref: function() {
+    // Returns an array of the users current email preferences
+    var currentUser = Meteor.user()
+    var createEpref = Meteor.user().profile.custom_email_preferences.create_event
+    var registerEpref = Meteor.user().profile.custom_email_preferences.register_event
+    var deleteEpref = Meteor.user().profile.custom_email_preferences.event_deleted
+
+    var pref = [createEpref, registerEpref, deleteEpref]
+    return pref
   }
 
 

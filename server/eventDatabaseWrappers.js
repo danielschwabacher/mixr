@@ -13,6 +13,7 @@ Meteor.methods({
 			event_dateTime: eventToInsert.eventDateTime,
 			event_timestamp: eventToInsert.eventTimeStamp,
 			event_tag: eventToInsert.eventTagType,
+			event_max_number: eventToInsert.eventMaxRegistered,
 			event_position: eventToInsert.coordinates,
 			number_of_users_attending: 1
 		}, function(err, eventId){
@@ -44,8 +45,8 @@ Meteor.methods({
 	registerEvent: function(eventToUpdate){
 		// REGISTER CONDITIONS:
 		// User must not own event and must not already be registered
-		// if the user has not already registered
-		// is true if user owns event
+		// Event must be able to accomodate another person attending.
+		// eg. (current_attending < max_attending)
 		event_dateTime = eventToUpdate.eventDateTime
 		var isOwner = UserEventsCrossReferenceCollection.findOne(
 			{
@@ -60,8 +61,25 @@ Meteor.methods({
 				'registered_events.eventId': eventToUpdate._id
 			}
 		)
-		if (!isOwner && !isRegistered){
-			// Increment the number of users attending the associatve event
+		// This is the event with the corresponding ID.
+		// Used to get max and current registrations.
+		var eventContext = EventCollection.findOne(
+			{'_id': eventToUpdate._id}
+		)
+		var eventCurrentRegistered = eventContext.number_of_users_attending
+		var eventMaxNumber = eventContext.event_max_number
+		var eventCanBeRegisteredFor = null
+		if (eventCurrentRegistered < eventMaxNumber){
+			eventCanBeRegisteredFor = true
+		}
+		else {
+			eventCanBeRegisteredFor = false
+		}
+		if (!eventCanBeRegisteredFor){
+			return -1
+		}
+		if (!isOwner && !isRegistered && eventCanBeRegisteredFor){
+			// Increment the number of users attending the associative event
 			EventCollection.update(
 				{_id: eventToUpdate._id},
 				{
@@ -69,7 +87,8 @@ Meteor.methods({
 				},
 				function(err, eventId){
 					if (err){
-						console.log("return err -- !isOwner !isRegistered")
+						console.log("Error registering for event within EventCollection.update")
+						console.log(err)
 						return 0;
 					}
 				}
@@ -86,7 +105,8 @@ Meteor.methods({
 				{upsert: true},
 				function(err, eventId){
 					if (err){
-						console.log("return err -- crossReference")
+						console.log("Error registering for event within UserEventsCrossReferenceCollection.update")
+						console.log(err)
 						return 0;
 					}
 				}
@@ -94,12 +114,12 @@ Meteor.methods({
 			// call method to send email to user with the details of event
 			// IMPORTANT: this causes unexpected notify behavior (Error: you are already registered) when emailing accounts which aren't sandbox verified.
 			Meteor.call('sendRegisteredForEventEmail', eventToUpdate)
-			console.log("return success")
+			console.log("Registered for event success!")
 			return 1;
 		}
 
 		else{
-			console.log("return err -- catchAll")
+			console.log("Error registering for event -- user or event does not meet registration critiera.")
 			return 0
 		}
 	},
