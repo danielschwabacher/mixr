@@ -1,7 +1,50 @@
-.btn-success{
-	float: right;
+.btn-danger {
+	background-color: #DB2B39;
+	border-color: #DB2B39;
+	color: white;
+	float: left;
 }
 
-.btn-danger{
-	float: left;
+.btn-success{
+	background-color: #279AF1;
+	border-color: #279AF1;
+	color: #000000;
+	float: right;
+}
+.btn-info{
+	background-color: #FFBA08;
+	border-color: #FFBA08;
+	color: #000000;
+}
+
+.btn-danger:hover {
+	background-color: #9e1c26;
+	border-color: #9e1c26;
+}
+
+.btn-success:hover{
+	background-color: #1564a1;
+	border-color: #1564a1;
+}
+
+.btn-info:hover{
+	background-color: #a27500;
+	border-color: #a27500;
+}
+.btn.btn-danger.focus,
+.btn.btn-danger:focus {
+	background-color: #9e1c26;
+	border-color: #9e1c26;
+}
+
+.btn.btn-success.focus,
+.btn.btn-success:focus {
+	background-color: #1564a1;
+	border-color: #1564a1;
+}
+
+.btn.btn-info.focus,
+.btn.btn-info:focus {
+	background-color: #a27500;
+	border-color: #a27500;
 }

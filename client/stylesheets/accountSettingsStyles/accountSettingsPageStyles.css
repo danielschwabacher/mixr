@@ -2,8 +2,12 @@
 	font-size: 20px;
 	background-color: #282929;
 }
+.nav-stacked a:hover{
+	font-size: 20px;
+	background-color: #A200FF !important;
+}
 
-
-#feedbackPaneLink:hover{
-	background-color: blue;
+.nav-stacked a:focus{
+	font-size: 20px;
+	background-color: #A200FF !important;
 }

@@ -2,12 +2,18 @@ import '../templates/accountSettingsPage.html'
 Template.accountSettings.events({
  	'click #authPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "auth")
+    	$(".sideBarSettingLinks").removeClass('active');
+		$("#authPaneLink").addClass('active');
 	},
 	'click #emailPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "email")
+		$(".sideBarSettingLinks").removeClass('active');
+		$("#emailPaneLink").addClass('active');
 	},
 	'click #feedbackPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "feedback")
+		$(".sideBarSettingLinks").removeClass('active');
+		$("#feedbackPaneLink").addClass('active');
 	},
 	'submit .changePasswordForm'(event, template) {
 		event.preventDefault()
@@ -22,6 +28,9 @@ Template.accountSettings.events({
 				else{
 					Modal.hide()
 					notify("Password changed successfully!", "success", "right")
+					event.target.currentPasswordChangePasswordModal.value = ""
+					event.target.newPassword1.value = ""
+					event.target.newPassword2.value = ""
 				}
 			});
 		}
@@ -31,7 +40,6 @@ Template.accountSettings.events({
 	},
 	'submit .updateEmailPreferencesForm'(event, template) {
 		event.preventDefault()
-		console.log("updated email prefs submitted")
 		var createEventPref = $('#createdEventPref').is(':checked')
 		var registerEventPref = $('#registeredEventPref').is(':checked')
 		var deletedEventPref = $('#eventDeletedPref').is(':checked')
@@ -40,32 +48,35 @@ Template.accountSettings.events({
 			registerEPref: registerEventPref,
 			deletedEPref: deletedEventPref
 		}
+		notify("Working...", "info", "right")
 		Meteor.call('updateUserEmailPreferences', userPrefs, (error, response) => {
 			if (error) {
 				console.log("There was an error: " + response)
+				notify("Email preferences could not be updated at this time.", "danger", "center")
+				return
 			}
+			notify("Email preferences updated successfully!", "success", "right")
 		});
-
-		Modal.hide("emailPreferencesModal")
-		Router.go("home")
 	},
 	'submit .sendFeedbackForm'(event, template) {
 		event.preventDefault()
-		console.log("send feedback clicked.")
 		var userFeedback = event.target.feedbackArea.value
+		notify("Sending...", "info", "right")
 		Meteor.call('sendUserFeedback', userFeedback, (error, response) => {
 			if (error) {
 				notify("We couldn't send your feedback right now.", "danger", "center")
 				console.log("There was an error: " + response)
+				return
 			}
 			notify("Your feedback has been sent, thanks!", "success", "right")
+			event.target.feedbackArea.value = ""
 		});
-		Router.go('home')
 	}
 });
 
 Template.accountSettings.onRendered(function() {
 	Session.set("settingsPagePaneSelection", "auth")
+	$("#authPaneLink").addClass('active');
 });
 
 Template.registerHelper('getCurrentPane', function(){
