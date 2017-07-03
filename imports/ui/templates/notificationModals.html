@@ -78,6 +78,7 @@
 					<h3 id="eventDescriptionConfirmation">Event Description: {{returnDescription}}</h3>
 					<h3 id="eventDateTimeConfirmation">Event Date and Time: {{returnDateTime}}</h3>
 					<h3 id="eventTagTypeConfirmation">Event Tag: {{returnEventTagType}}</h3>
+					<h3 id="eventTagTypeConfirmation">Max number of attendees: {{returnMaxNumber}}</h3>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger cancelEventButton btn-float-left" data-dismiss="modal">Cancel Event</button>
@@ -103,10 +104,10 @@
 					<h3>Event Description: {{getMarkerEventDescription}}</h3>
 					<h3>Event Date and Time: {{getMarkerEventDateTime}}</h3>
 					<h3>Event Tag: {{getMarkerEventTag}}</h3>
-					<h3>Number of People Registered: {{getMarkerEventNumberRegistered}}</h3>
+					<h3>Number of People Registered: {{getMarkerEventNumberRegistered}} / <small>{{returnMaxNumber}}</small> </h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger notInterestedInEventButton" data-dismiss="modal">I'm not interested</button>
+					<button type="button" class="btn btn-danger notInterestedInEventButton" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-success registerEventButton" data-dismiss="modal">Register for this event!</button>
 				</div>
 			</div>

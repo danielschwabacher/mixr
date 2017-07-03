@@ -1,15 +1,27 @@
 import '../templates/pickLocationPage.html';
 import './notificationModalHelpers.js';
 import '../../api/mapHandlers/pickEventMapAPI.js'
+import '../../api/Notifications/notifyWrapper.js'
 
 Template.pickLocationPage.onCreated(function(){
 	markerArray = []
+	var BOULDER_BOUNDS = new google.maps.LatLngBounds(
+		// Southwest bound
+ 		new google.maps.LatLng(39.964069, -105.301758),
+		// Northeast bound
+ 		new google.maps.LatLng(40.094551, -105.178197)
+	);
 	GoogleMaps.ready('mixrPickLocationMap', function(map) {
 		var latLng = Geolocation.latLng();
 		GoogleMaps.maps.mixrPickLocationMap.instance.addListener('click', function(marker) {
-			placeMarker(marker.latLng, map.instance);
-			fullEventToConfirm = createFullCachedEvent(Session.get('clientMinimumCachedEvent'), marker.latLng)
-			Modal.show('confirmEventModal')
+			if (BOULDER_BOUNDS.contains(marker.latLng)){
+				placeMarker(marker.latLng, map.instance);
+				fullEventToConfirm = createFullCachedEvent(Session.get('clientMinimumCachedEvent'), marker.latLng)
+				Modal.show('confirmEventModal')
+			}
+			else{
+				notify("Please pick an area within Boulder county.", "danger", "center")
+			}
 		});
 	});
 });

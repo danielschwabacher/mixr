@@ -19,7 +19,10 @@ Template.confirmEventModal.helpers({
 	},
 	returnEventTagType: function(){
 		return fullEventToConfirm.eventTagType
-	}
+	},
+	returnMaxNumber: function(){
+		return fullEventToConfirm.eventMaxRegistered
+	},
 });
 
 Template.confirmEventModal.events({
@@ -58,11 +61,17 @@ Template.eventInformationModal.events({
 	'click .registerEventButton'(event, template){
 		if (Meteor.user() && Meteor.user().emails[0].verified){
 			Meteor.call("registerEvent", this, function(err, didRegister){
-				if (didRegister){
+				if (didRegister == 1){
 					notify("Registered successfully!", "success", "right")
 				}
-				else{
+				else if (didRegister == 0){
 					notify("Error: You are already registered for this event", "danger", "center")
+				}
+				else if (didRegister == -1){
+					notify("Error: event is full", "danger", "center")
+				}
+				else{
+					notify("Unknown error, please try again later.", "danger", "center")
 				}
 			});
 		}
@@ -92,5 +101,8 @@ Template.eventInformationModal.helpers({
 	},
 	getMarkerEventNumberRegistered: function(){
 		return this.number_of_users_attending
-	}
+	},
+	returnMaxNumber: function(){
+		return this.event_max_number
+	},
 });
