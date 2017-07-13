@@ -10,13 +10,20 @@ ALL_SHOWN_EVENTS_SCRAPED = []
 
 // helper function to display all events in ALL_SHOWN_EVENTS
 showAllEvents = function(event_list, map_instance){
-	removeMarkers()
 	event_list.forEach(function(currentEvent){
 		temp_marker = new Marker(map_instance, currentEvent)
 		temp_marker.createObjectMarker()
 	});
 }
 
+
+clearMarkerLists = function(){
+	ALL_SHOWN_EVENTS = []
+	ALL_SHOWN_EVENTS.length = 0
+
+	ALL_SHOWN_EVENTS_SCRAPED = []
+	ALL_SHOWN_EVENTS_SCRAPED.length = 0
+}
 Template.mixrEventMap.onCreated(function(){
 	this.eventsCollection = this.subscribe('events');
 });
@@ -51,6 +58,8 @@ Template.mixrEventMap.onRendered(function(){
 		});
 
 		Tracker.autorun(() => {
+			clearMarkerLists()
+			console.log("Start: " + ALL_SHOWN_EVENTS_SCRAPED.length)
 			includeTags = Session.get('tagFilterIncludes')
 			timeFilter = Session.get('timeFilterHours')
 			console.log("tags have changed.")
@@ -71,7 +80,7 @@ Template.mixrEventMap.onRendered(function(){
 					}
 				}
 			);
-			console.log("We're about to show: " + ALL_SHOWN_EVENTS_SCRAPED.length + " markers.")
+			console.log("End: " + ALL_SHOWN_EVENTS_SCRAPED.length)
 			showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
 		});
 	});
