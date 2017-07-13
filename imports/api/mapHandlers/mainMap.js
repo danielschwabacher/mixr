@@ -37,10 +37,10 @@ Marker.prototype.createObjectMarker = function(){
 	return 0;
 }
 
-removeMarkers = function(mapInstance){
-	for(i=0; i < GLOBAL_MARKERS.length; i++){
-        GLOBAL_MARKERS[i].setMap(null);
-    }
+removeMarkers = function(){
+	console.log("removed")
+	GLOBAL_MARKERS = []
+	console.log("in removeMarkers: " + GLOBAL_MARKERS.length)
 }
 
 updateSideBarLinks = function(eventId){
