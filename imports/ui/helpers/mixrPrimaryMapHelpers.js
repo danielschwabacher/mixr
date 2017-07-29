@@ -44,6 +44,11 @@ Template.mixrEventMap.onRendered(function(){
 		);
 		var lastValidCenter = MAP.getCenter();
 
+		if (!BOULDER_BOUNDS.contains(MAP.getCenter())){
+			alert("Only Boulder is currently supported.")
+		}
+
+
 		google.maps.event.addListener(MAP, 'dragend', function() {
 			if (BOULDER_BOUNDS.contains(MAP.getCenter())) {
 				// still within valid bounds, so save the last valid position
@@ -58,14 +63,12 @@ Template.mixrEventMap.onRendered(function(){
 		});
 
 		Tracker.autorun(() => {
-			clearMarkerLists()
-			console.log("Start: " + ALL_SHOWN_EVENTS_SCRAPED.length)
 			includeTags = Session.get('tagFilterIncludes')
 			timeFilter = Session.get('timeFilterHours')
-			console.log("tags have changed.")
 			currentUnixTime = moment().unix()
 			additionalSeconds = hoursToSeconds(timeFilter)
 			unixTimeRange = currentUnixTime + additionalSeconds
+			clearMarkerLists()
 			ALL_SHOWN_EVENTS = EventCollection.find(
 				{
 					event_tag: { $in: includeTags},
@@ -80,7 +83,7 @@ Template.mixrEventMap.onRendered(function(){
 					}
 				}
 			);
-			console.log("End: " + ALL_SHOWN_EVENTS_SCRAPED.length)
+			removeMarkers()
 			showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
 		});
 	});
