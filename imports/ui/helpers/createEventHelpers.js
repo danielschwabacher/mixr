@@ -3,6 +3,22 @@ import '../../api/Event/cachedEvent.js';
 import '../../api/Notifications/notifyWrapper.js'
 
 Template.createEventPage.onRendered(function() {
+	var latLng = Geolocation.latLng();
+
+	// Lat, Lng coordinate pairs which define the Boulder area
+	// bounding box.
+	var BOULDER_BOUNDS = new google.maps.LatLngBounds(
+		// Southwest bound
+ 		new google.maps.LatLng(39.964069, -105.301758),
+		// Northeast bound
+ 		new google.maps.LatLng(40.094551, -105.178197)
+
+	);
+
+	if (!BOULDER_BOUNDS.contains(latLng)){
+		Router.go("error")
+	}
+
 	todayDate = new Date()
     $('.datetimepicker').datetimepicker({
 		defaultDate: todayDate,
