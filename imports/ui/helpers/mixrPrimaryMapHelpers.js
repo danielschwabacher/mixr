@@ -45,7 +45,7 @@ Template.mixrEventMap.onRendered(function(){
 		var lastValidCenter = MAP.getCenter();
 
 		if (!BOULDER_BOUNDS.contains(MAP.getCenter())){
-			alert("Only Boulder is currently supported.")
+			Router.go("error")
 		}
 
 

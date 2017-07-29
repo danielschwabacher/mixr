@@ -48,3 +48,10 @@
 	background-color: #a27500;
 	border-color: #a27500;
 }
+
+
+.header-center{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}

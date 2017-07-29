@@ -1,3 +1,4 @@
+import '../../imports/ui/helpers/geolocationErrorHelpers.js';
 import '../../imports/ui/helpers/mixrPrimaryMapHelpers.js';
 import '../../imports/ui/helpers/createEventHelpers.js';
 import '../../imports/ui/helpers/pickLocationHelpers.js';
@@ -27,6 +28,14 @@ Router.route('/create', {
 		else{
 			this.render('createEventPage')
 		}
+	}
+});
+
+
+
+Router.route('/error', {
+	onBeforeAction: function () {
+		this.render('geolocationErrorPage')
 	}
 });
 
