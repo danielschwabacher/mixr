@@ -19,7 +19,8 @@ Marker.prototype.createObjectMarker = function(){
 	eventMarker.set("id", this.id)
 
 	/*
-		the arrow functions are because we need to refer to the 'this' object representing the marker (outside of the nested function).
+		the arrow functions are because we need to refer to the
+		'this' object representing the marker (outside of the nested function).
 	*/
 	google.maps.event.addListener(eventMarker, 'click', () => {
 		Modal.show('eventInformationModal', this.eventInfo)
@@ -37,10 +38,12 @@ Marker.prototype.createObjectMarker = function(){
 	return 0;
 }
 
-removeMarkers = function(mapInstance){
-	for(i=0; i < GLOBAL_MARKERS.length; i++){
-        GLOBAL_MARKERS[i].setMap(null);
-    }
+removeMarkers = function(){
+	for (var i = 0; i < GLOBAL_MARKERS.length; i++) {
+		GLOBAL_MARKERS[i].setMap(null);
+	}
+	GLOBAL_MARKERS.length = 0
+	GLOBAL_MARKERS = []
 }
 
 updateSideBarLinks = function(eventId){

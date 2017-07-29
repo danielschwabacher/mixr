@@ -16,15 +16,21 @@ showAllEvents = function(event_list, map_instance){
 	});
 }
 
+
+clearMarkerLists = function(){
+	ALL_SHOWN_EVENTS = []
+	ALL_SHOWN_EVENTS.length = 0
+
+	ALL_SHOWN_EVENTS_SCRAPED = []
+	ALL_SHOWN_EVENTS_SCRAPED.length = 0
+}
 Template.mixrEventMap.onCreated(function(){
 	this.eventsCollection = this.subscribe('events');
 });
 
 Template.mixrEventMap.onRendered(function(){
 	GoogleMaps.ready('mixrMap', function(map) {
-
 		MAP = map.instance
-
 		var latLng = Geolocation.latLng();
 
 		// Lat, Lng coordinate pairs which define the Boulder area
@@ -34,9 +40,14 @@ Template.mixrEventMap.onRendered(function(){
      		new google.maps.LatLng(39.964069, -105.301758),
 			// Northeast bound
      		new google.maps.LatLng(40.094551, -105.178197)
-   		);
 
+		);
 		var lastValidCenter = MAP.getCenter();
+
+		if (!BOULDER_BOUNDS.contains(MAP.getCenter())){
+			alert("Only Boulder is currently supported.")
+		}
+
 
 		google.maps.event.addListener(MAP, 'dragend', function() {
 			if (BOULDER_BOUNDS.contains(MAP.getCenter())) {
@@ -51,13 +62,13 @@ Template.mixrEventMap.onRendered(function(){
 			}
 		});
 
-        Tracker.autorun(() => {
-			removeMarkers()
+		Tracker.autorun(() => {
 			includeTags = Session.get('tagFilterIncludes')
 			timeFilter = Session.get('timeFilterHours')
 			currentUnixTime = moment().unix()
 			additionalSeconds = hoursToSeconds(timeFilter)
 			unixTimeRange = currentUnixTime + additionalSeconds
+			clearMarkerLists()
 			ALL_SHOWN_EVENTS = EventCollection.find(
 				{
 					event_tag: { $in: includeTags},
@@ -65,7 +76,6 @@ Template.mixrEventMap.onRendered(function(){
 
 				}
 			);
-
 			ALL_SHOWN_EVENTS.forEach(
 				function(doc) {
 					if (doc.number_of_users_attending < doc.event_max_number){
@@ -73,10 +83,12 @@ Template.mixrEventMap.onRendered(function(){
 					}
 				}
 			);
-			showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, map.instance)
-        });
+			removeMarkers()
+			showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
+		});
 	});
 });
+
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
@@ -99,8 +111,11 @@ Template.eventDisplay.helpers({
 	/*
 		This is for the sidebar part of the map display.
 		It returns an array of objects representing the events
-		to display. If id is null, then no marker is hovered over,
+		to display.
+
+		If id is null, then no marker is hovered over,
 		hence all the events are displayed.
+
 		Only selects tags and times.
 	*/
 	'getEvents': function(tags, time, id){

@@ -85,7 +85,7 @@ Template.createEventPage.events({
 			else{
 				if (response) {
 					// Validation was a success
-					clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened)
+					clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
 					clientTempCachedEvent.createReference()
 					// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
 					// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
