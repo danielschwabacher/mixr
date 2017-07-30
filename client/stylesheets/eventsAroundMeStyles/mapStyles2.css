@@ -1,7 +1,11 @@
-/* if navbar is collapsed */
-@media (max-width:992px){
+/*
+	If navbar is collapsed
+	Hide the map.
+*/
+@media (max-width:766px){
 	.event-container{
-		margin-top: 20px;
+		margin-top: 16px;
+		overflow-y: hidden;
 	}
 	.event-display-column{
 		height: calc(100vh - 80px);
@@ -17,8 +21,11 @@
 	}
 }
 
-/* if navbar is not collapsed */
-@media (min-width:992px){
+/*
+	If navbar is not collapsed
+	Show the map.
+*/
+@media (min-width: 766px) {
 	.event-container{
 		margin-top: 0px;
 	}
