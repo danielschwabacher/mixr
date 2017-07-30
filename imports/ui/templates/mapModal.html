@@ -1,0 +1,17 @@
+<template name="mapModal">
+	<div class="modal fade">
+	    <div class="modal-dialog">
+			 <div class="modal-content">
+ 	            <div class="modal-header">
+ 	                <h4 class="modal-title">Event location</h4>
+ 	            </div>
+				<div class="col-sm-9 map-display-column">
+					{{> googleMap name="modalMap" options=initModalMap}}
+				</div>
+	        	<div class="modal-footer">
+	            	<button type="button" class="btn btn-danger btn-float-left" data-dismiss="modal">Close</button>
+	        	</div>
+			</div>
+	    </div>
+	</div>
+</template>

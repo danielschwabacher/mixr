@@ -17,6 +17,11 @@
 	color: #000000;
 }
 
+.btn-info-secondary{
+	background-color: #A4D4B4;
+	border-color: #A4D4B4;
+	color: #000000;
+}
 .btn-danger:hover {
 	background-color: #9e1c26;
 	border-color: #9e1c26;
