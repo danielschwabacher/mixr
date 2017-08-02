@@ -221,12 +221,13 @@ Template.applyEventFiltersSection.events({
 
 /*
 	This is for the embedded map modal stuff.
-	Meteor was not detected this is a seperate file,
+	Meteor was not detecting this is a seperate file,
 	so it'll be here for now.
 */
 import '../templates/mapModal.html';
 
-Template.mapModal.onCreated(function(){
+Template.mapModal.onRendered(function(){
+	console.log("created template.")
 	GoogleMaps.ready('modalMap', function(map) {
 		console.log("ready.")
 	});
@@ -237,15 +238,11 @@ Template.mapModal.helpers({
 		console.log("called map modal init")
 		var latLng = Geolocation.latLng();
 		// Initialize the map once we have the latLng.
-		GoogleMaps.initialize()
-		if (GoogleMaps.loaded() && latLng) {
+		if (latLng) {
 			return {
-				draggable: false,
-				scrollwheel: false,
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
 				zoom: 15
 			};
 		}
-
 	}
 });
