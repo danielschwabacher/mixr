@@ -2,7 +2,7 @@ import '../templates/accountSettingsPage.html'
 Template.accountSettings.events({
  	'click #authPaneLink'(event, template){
 		Session.set("settingsPagePaneSelection", "auth")
-    	$(".sideBarSettingLinks").removeClass('active');
+    $(".sideBarSettingLinks").removeClass('active');
 		$("#authPaneLink").addClass('active');
 	},
 	'click #emailPaneLink'(event, template){

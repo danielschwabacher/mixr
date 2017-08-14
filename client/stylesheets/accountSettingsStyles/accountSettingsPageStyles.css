@@ -1,13 +1,18 @@
-.nav-stacked{
+.nav-pills{
 	font-size: 20px;
 	background-color: #282929;
 }
-.nav-stacked a:hover{
+
+.nav-pills a:hover{
 	font-size: 20px;
 	background-color: #A200FF !important;
 }
 
-.nav-stacked a:focus{
+.nav-pills a:active{
 	font-size: 20px;
+	background-color: #A200FF !important;
+}
+
+#feedbackPaneLink.active{
 	background-color: #A200FF !important;
 }
