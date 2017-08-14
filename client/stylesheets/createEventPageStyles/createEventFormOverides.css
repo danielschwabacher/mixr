@@ -47,3 +47,13 @@
 .nomaxCheckbox{
 	margin-left: 30px;
 }
+#resendEmailButton{
+	text-align: center;
+}
+
+.vcenter {
+	padding: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

@@ -111,8 +111,7 @@ Template.createEventPage.events({
 				else {
 					// Validation failed
 					// TODO: Make this some kind of failure notification
-					//
-					notify("Please correct all errors before proceeding", "danger", "center")
+					notify("Invalid name, location or description.", "danger", "center")
 				}
 			}
 		});

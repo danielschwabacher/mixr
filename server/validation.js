@@ -19,8 +19,8 @@ Meteor.methods({
   	var locCheck = validateLocation(eventLocation)
   	var descCheck = validateDescription(eventDescription)
 
-  	var result = (nameCheck && locCheck && descCheck && 1)
-
+  	var result = (nameCheck && locCheck && descCheck)
+    
   	if(!result) {
   		console.log("Failed validation; event not mixr-cached or added to DB")
   	}
@@ -31,7 +31,7 @@ Meteor.methods({
 // Requires the name to be a minimum of 1 character and a maximum
 // of 20 alphanumeric characters and spaces
 validateName = function(eventName) {
-  var re = /^[a-zA-Z0-9\s]{1,20}$/
+  var re = /^[a-zA-Z0-9\s ]{1,20}$/
   var result = re.test(eventName)
   if (!result) {
     console.log("Error: Restricted characters in event name")
@@ -42,7 +42,7 @@ validateName = function(eventName) {
 // Requires the location to be a minimum of 1 character and a maximum
 // of 64 alphanumeric characters, spaces, commas, and hyphens
 validateLocation = function(eventLocation) {
-  var re = /^[-,a-zA-Z0-9\t]{1,64}$/
+  var re = /^[-,a-zA-Z0-9\t ]{1,64}$/
   var result = re.test(eventLocation)
   if (!result) {
     console.log("Error: restricted characters in event location")
@@ -53,7 +53,7 @@ validateLocation = function(eventLocation) {
 // Allows the event description to be 155 character(s) (because fuck 140 character limits)
 // Does NOT require a description to pass
 validateDescription = function(eventDescription) {
-  var re = /[.*]{0,155}$/
+  var re = /[.* ]{0,155}$/
   var result = re.test(eventDescription)
   if (!result) {
     console.log("Error: The event description can only be 155 characters")
