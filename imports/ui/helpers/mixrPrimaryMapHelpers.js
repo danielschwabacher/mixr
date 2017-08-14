@@ -4,6 +4,7 @@ import '../templates/mapModal.html'
 import '../../api/mapHandlers/mainMap.js';
 import '../../api/Time/converter.js'
 import { EJSON } from 'meteor/ejson'
+import '../templates/mapModal.html';
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
@@ -184,10 +185,11 @@ Template.eventSection.events({
 		}
 	},
 	"click #eventSectionMoreInfoButton"(event, template){
+		Session.set("modalContext", template)
 		Modal.show('eventInformationModal', this)
 	},
 	"click #eventSectionViewMapButton"(event, template){
-		Modal.show('mapModal', this)
+		Modal.show('mapModal')
 	},
 	"mouseenter .event-section-clickable-area"(event, template) {
 		removeMarkers()
@@ -217,32 +219,23 @@ Template.applyEventFiltersSection.events({
 	}
 });
 
-
-
 /*
 	This is for the embedded map modal stuff.
 	Meteor was not detecting this is a seperate file,
 	so it'll be here for now.
 */
-import '../templates/mapModal.html';
-
-Template.mapModal.onRendered(function(){
-	console.log("created template.")
-	GoogleMaps.ready('modalMap', function(map) {
-		console.log("ready.")
-	});
-});
-
+/*
 Template.mapModal.helpers({
 	initModalMap: function() {
-		console.log("called map modal init")
 		var latLng = Geolocation.latLng();
 		// Initialize the map once we have the latLng.
-		if (latLng) {
+		if (GoogleMaps.loaded() && latLng) {
 			return {
+				context: this,
 				center: new google.maps.LatLng(latLng.lat, latLng.lng),
 				zoom: 15
 			};
 		}
 	}
 });
+*/
