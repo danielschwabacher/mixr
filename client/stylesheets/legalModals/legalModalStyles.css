@@ -1,0 +1,12 @@
+.legalModalHeader{
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.legalModalInfoSection{
+    color: white;
+    font-size: 14px;
+}
