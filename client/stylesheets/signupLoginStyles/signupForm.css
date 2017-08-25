@@ -212,3 +212,12 @@ label.form-invalid:after {
 #loginButton:hover{
 	background-color: #A200FF;
 }
+
+#clickwrapAgreement{
+  color: black;
+  font-size: 14px;
+}
+
+#clickwrapAgreement a{
+  color: black;
+}

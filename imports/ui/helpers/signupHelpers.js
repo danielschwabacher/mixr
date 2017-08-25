@@ -1,6 +1,7 @@
 import '../templates/signupPage.html';
 import '../templates/notificationModals.html';
 import '../../api/Notifications/notifyWrapper.js';
+import '../templates/legalModals.html';
 
 //TODO: Implement email verification
 Template.signupPage.events({
@@ -32,6 +33,17 @@ Template.signupPage.events({
 			notify("Passwords do not match", "danger", "center")
 		}
 	},
+	
+	'click #privacyModalLink'(event){
+			Modal.show('privacyModal')
+		},
+	'click #simplePrivacyModalLink'(event){
+		Modal.show('simplePrivacyModal')
+	},
+	'click #termsModalLink'(event){
+		Modal.show('termsModal')
+	}
+
 });
 
 createNewMixrAccount = function(userData){
