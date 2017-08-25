@@ -13,8 +13,8 @@ Template.landingPage.events({
 	'click #privacyModalLink'(event){
 		Modal.show('privacyModal')
 	},
-	'click #simplePrivacyModalLink'(event){
-		Modal.show('simplePrivacyModal')
+	'click #inquiriesModalLink'(event){
+		Modal.show('inquiriesModal')
 	},
 	'click #termsModalLink'(event){
 		Modal.show('termsModal')
