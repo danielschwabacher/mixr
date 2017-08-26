@@ -19,7 +19,4 @@ Template.landingPage.events({
 	'click #termsModalLink'(event){
 		Modal.show('termsModal')
 	},
-	'click #disclaimerModalLink'(event){
-		Modal.show('disclaimerModal')
-	}
 });
