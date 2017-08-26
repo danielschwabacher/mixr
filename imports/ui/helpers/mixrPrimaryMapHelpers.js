@@ -185,7 +185,7 @@ Template.eventSection.events({
 		}
 	},
 	"click #eventSectionMoreInfoButton"(event, template){
-		Session.set("modalContext", template)
+		// Session.set("modalContext", template)
 		Modal.show('eventInformationModal', this)
 	},
 	"click #eventSectionViewMapButton"(event, template){
