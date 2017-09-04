@@ -55,23 +55,10 @@ Template.sortByTagsEventFilterModal.events({
 
 Template.sortByTimeEventFilterModal.onRendered(function() {
 	timeUntilEvent = Session.get('timeFilterHours')
-	/*
-	var mySlider = $(".timeSlider").slider({
-		value: timeUntilEvent,
-		min: 1,
-		max: 72,
-		ticks: [1, 24, 48, 72],
-		ticks_positions: [0, 33, 66, 100],
-		ticks_labels: ["1 hour", "1 day", "2 days", "3 days"],
-		formatter: function(value) {
-			return value + " hours"
-		},
-	});
-	/*	
-		timeSlider = new Slider(".timeSlider", {
-
-		});
-	*/
+	// this is the actual slider
+	document.querySelector('.timeSlider').value = timeUntilEvent;
+	// this is for the label
+	document.querySelector('#timeSlider').value = timeUntilEvent + " hours";
 });
 
 Template.sortByTimeEventFilterModal.events({
