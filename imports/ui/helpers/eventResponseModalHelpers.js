@@ -88,3 +88,6 @@ Template.sortByTimeEventFilterModal.events({
 	}
 });
 
+outputUpdate = function(val) {
+	document.querySelector('#timeSlider').value = val + " hours";	
+}
