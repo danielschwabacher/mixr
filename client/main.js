@@ -9,10 +9,10 @@ if (Meteor.isClient) {
 	Session.set('tagFilterIncludes', fullTagArray)
 	Session.set('timeFilterHours', 72)
 	// console.log("current userId: " + Meteor.userId())
-	key = Meteor.settings.public.google_key;
+	// key = Meteor.settings.public.google_key;
 	Meteor.startup(function() {
 		GoogleMaps.load({
-			key: key
+			key: "AIzaSyAox36VrlsVU2wRfAJ8R94ysdsFts9o1EU"
 		});
 		Session.set('hasCachedEvent', false)
 	});

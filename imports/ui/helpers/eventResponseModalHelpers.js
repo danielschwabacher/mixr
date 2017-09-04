@@ -52,10 +52,11 @@ Template.sortByTagsEventFilterModal.events({
 		notify("Tags reset", "success", "right")
 	}
 });
-/*
+
 Template.sortByTimeEventFilterModal.onRendered(function() {
 	timeUntilEvent = Session.get('timeFilterHours')
-	timeSlider = new Slider(".timeSlider", {
+	/*
+	var mySlider = $(".timeSlider").slider({
 		value: timeUntilEvent,
 		min: 1,
 		max: 72,
@@ -66,13 +67,18 @@ Template.sortByTimeEventFilterModal.onRendered(function() {
 			return value + " hours"
 		},
 	});
+	/*	
+		timeSlider = new Slider(".timeSlider", {
 
+		});
+	*/
 });
 
 Template.sortByTimeEventFilterModal.events({
 	'click #submitEventFilterTimeSelections'(event, template){
-		Session.set('timeFilterHours', timeSlider.getValue())
-		notifyString = "Showing events within " + timeSlider.getValue() + " hours."
+		var sliderValue = $(".timeSlider").val();
+		Session.set('timeFilterHours', sliderValue)
+		notifyString = "Showing events within " + sliderValue + " hours."
 		notify(notifyString, "success", "right")
 
 	},
@@ -81,4 +87,4 @@ Template.sortByTimeEventFilterModal.events({
 		notify("Time reset", "success", "right")
 	}
 });
-*/
+
