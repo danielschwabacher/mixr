@@ -4,7 +4,7 @@ import '../../api/Notifications/notifyWrapper.js'
 
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
-var Slider = require("bootstrap-slider");
+// var Slider = require("bootstrap-slider");
 
 // TODO: encapsulate this in a different method
 Template.sortByTagsEventFilterModal.onRendered(function() {
@@ -52,7 +52,7 @@ Template.sortByTagsEventFilterModal.events({
 		notify("Tags reset", "success", "right")
 	}
 });
-
+/*
 Template.sortByTimeEventFilterModal.onRendered(function() {
 	timeUntilEvent = Session.get('timeFilterHours')
 	timeSlider = new Slider(".timeSlider", {
@@ -81,3 +81,4 @@ Template.sortByTimeEventFilterModal.events({
 		notify("Time reset", "success", "right")
 	}
 });
+*/
