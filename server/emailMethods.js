@@ -47,7 +47,7 @@ Meteor.methods({
       if (currentUser && userEmail) {
         Email.send({
           to: userEmail,
-		  from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
+		      from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: emailSubject,
           html: SSR.render('createEventEmail', emailData)
         });
@@ -83,7 +83,7 @@ Meteor.methods({
       if (currentUser && userEmail){
         Email.send({
           to: userEmail,
-		      from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
+		      from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: emailSubject,
           html: SSR.render('registerForEvent', emailData)
         });
@@ -133,7 +133,7 @@ Meteor.methods({
         if (currUser && currEmail){
           Email.send({
             to: currEmail,
- 			from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
+ 			      from: "Mixr Dev Team <notifications@mixrbeta.com>",
             subject: "An event you registered for has been removed!",
             html: SSR.render('eventDeletedEmail', emailData)
           });
@@ -157,14 +157,14 @@ Meteor.methods({
     if (currUser && userEmail){
       Email.send({
         to: sendAddress,
-		from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
+		    from: "Mixr Dev Team <notifications@mixrbeta.com>",
         subject: emailSubject,
         text: emailText
       });
 
       Email.send({
         to: userEmail,
-		from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
+		    from: "Mixr Dev Team <notifications@mixrbeta.com>",
         subject: returnSubject,
         text: returnText
       })
