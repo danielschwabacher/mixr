@@ -5,9 +5,7 @@ import '../../api/Notifications/notifyWrapper.js';
 Template.forgotPasswordModal.events({
     'submit .forgotPasswordModalForm'(event, template) {
         event.preventDefault();
-        console.log("Forgot Password Page");
-        var userEmail = event.target.userEmailForgotPasswordModal.value;
-        console.log(userEmail);
+        var userEmail = event.target.userEmail.value;
         Accounts.forgotPassword(userEmail, function(error) {
           if (error) {
               notify("Email could not be sent.", "danger", "center")
