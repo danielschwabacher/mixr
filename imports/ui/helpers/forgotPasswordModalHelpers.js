@@ -6,7 +6,8 @@ Template.forgotPasswordModal.events({
     'submit .forgotPasswordModalForm'(event, template) {
         event.preventDefault();
         var userEmail = event.target.userEmailForgotPasswordModal.value;
-        Meteor.call('sendForgotPassword', userEmail, (error, response) => {
+        console.log(userEmail);
+        Accounts.forgotPassword(userEmail, function(error) {
           if (error) {
               notify("Email could not be sent.", "danger", "center")
           }
