@@ -148,7 +148,7 @@ Meteor.methods({
     var currUser = Meteor.user()
     var userEmail = Meteor.user().emails[0].address
     var returnSubject = "We received your feedback!"
-    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to solve any problems to make Mixr better for everyone! \n\nSincerely,\nThe Mixr Dev Team"
+    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to address your concerns. \n\nSincerely,\nThe Mixr Dev Team"
 
     var sendAddress = "mixrdev123456@gmail.com"
     var emailSubject = "User Feedback"
