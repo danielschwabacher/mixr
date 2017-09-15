@@ -157,7 +157,7 @@ Meteor.methods({
     if (currUser && userEmail){
       Email.send({
         to: sendAddress,
-		    from: "Mixr Dev Team <notifications@mixrbeta.com>",
+		    from: "Mixr User <feedback@mixrbeta.com>",
         subject: emailSubject,
         text: emailText
       });
