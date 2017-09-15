@@ -60,7 +60,7 @@ Meteor.methods({
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();
+    // this.unblock();
 
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
@@ -89,8 +89,7 @@ Meteor.methods({
         });
       }
     }
-
-
+    return
   },
 
   // Sends the user an email when an event they're registered for is deleted
@@ -144,7 +143,6 @@ Meteor.methods({
 
   sendUserFeedback: function(feedback) {
     this.unblock()
-
     var currUser = Meteor.user()
     var userEmail = Meteor.user().emails[0].address
     var returnSubject = "We received your feedback!"
@@ -169,6 +167,7 @@ Meteor.methods({
         text: returnText
       })
     }
+    return
   },
 
   updateUserEmailPreferences: function(userPrefs) {
