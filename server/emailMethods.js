@@ -80,16 +80,18 @@ Meteor.methods({
       }
 
       SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
-      if (currentUser && userEmail){
-        Email.send({
-          to: userEmail,
-		      from: "Mixr Dev Team <notifications@mixrbeta.com>",
-          subject: emailSubject,
-          html: SSR.render('registerForEvent', emailData)
-        });
-      }
+      Meteor.defer(function(){
+        if (currentUser && userEmail){
+          Email.send({
+            to: userEmail,
+            from: "Mixr Dev Team <notifications@mixrbeta.com>",
+            subject: emailSubject,
+            html: SSR.render('registerForEvent', emailData)
+          });
+        }
+        console.log("email sent!")
+      });
     }
-    return
   },
 
   // Sends the user an email when an event they're registered for is deleted
