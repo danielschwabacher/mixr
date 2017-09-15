@@ -203,10 +203,12 @@ Template.eventSection.events({
 				_id: this._id
 			}
 		);
-		singleMarker.forEach(function(currentEvent){
-			temp_marker = new Marker(MAP, currentEvent)
-			temp_marker.createObjectMarker()
-		});
+		if (MAP != 0){
+			singleMarker.forEach(function(currentEvent){
+				temp_marker = new Marker(MAP, currentEvent)
+				temp_marker.createObjectMarker()
+			});
+		}
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
 		showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
