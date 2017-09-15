@@ -21,6 +21,7 @@ Template.accountSettings.events({
 		var newPassword1 = event.target.newPassword1.value;
 		var newPassword2 = event.target.newPassword2.value;
 		if (newPassword1 == newPassword2){
+			notify("Working...", "info", "right")
 			Accounts.changePassword(oldPassword, newPassword1, function(err){
 				if (err){
 					notify("Your password is incorrect", "danger", "center")

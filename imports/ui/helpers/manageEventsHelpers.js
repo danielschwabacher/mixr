@@ -1,9 +1,24 @@
 import '../templates/manageEventsPage.html';
 import '../../api/Notifications/notifyWrapper.js';
 
+Template.manageEventLoader.onRendered(function(){
+	notify("Loading...", "info", "right")
+	timeoutId = setTimeout(function(){ 
+		notify("Error detected, refreshing...", "danger", "center")
+		location.reload(true)
+	}, 5000);
+	
+});
+
 Template.manageEventsPanel.onCreated(function(){
+	$.notifyClose()
 	this.crossReferenceCollection = this.subscribe('userEventsCrossReference');
-  	this.eventsCollection = this.subscribe('events');
+	this.eventsCollection = this.subscribe('events');
+});
+
+Template.manageEventsPanel.onRendered(function(){
+	$.notifyClose();
+	clearTimeout(timeoutId);
 });
 
 Template.manageEventsPanel.helpers({
@@ -79,11 +94,14 @@ Template.eventCreatedNameHolder.events({
 Template.dynamicModalRegistered.events({
 	'click .unregisterEventRegisteredModal'(event, template){
 		var self = this
+		notify("Working...", "info", "right")		
 		Meteor.call('unregisterEvent', self._id, function(error, result){
 			if (result){
+				$.notifyClose();
 				notify("Unregistered successfully!", "success", "right")
 			}
 			else{
+				$.notifyClose();
 				notify("Error: Could not unregister from event, please try again.", "danger", "center")
 			}
 		});
@@ -93,11 +111,14 @@ Template.dynamicModalRegistered.events({
 Template.dynamicModalCreated.events({
 	'click .deleteEventCreatedModal'(event, template){
 		var self = this
+		notify("Working...", "info", "right")		
 		Meteor.call('deleteEvent', self._id, function(error, result) {
 			if (result){
+				$.notifyClose();
 				notify("Event deleted successfully!", "success", "right")
 			}
 			else{
+				$.notifyClose();				
 				notify("Error: Could not delete event, please try again.", "danger", "center")
 			}
 		});

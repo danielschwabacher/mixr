@@ -27,7 +27,7 @@ Meteor.methods({
   sendCreatedEventEmail: function(eventTitle) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();
+    // this.unblock();
     var currentUser = Meteor.user();
     var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
@@ -60,7 +60,7 @@ Meteor.methods({
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();
+    // this.defer();
 
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
@@ -89,15 +89,14 @@ Meteor.methods({
         });
       }
     }
-
-
+    return
   },
 
   // Sends the user an email when an event they're registered for is deleted
   sendEventDeletedEmail: function(eventID) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();  // Especially important here since the DB is being queried so much
+    // this.unblock();  // Especially important here since the DB is being queried so much
     var delEvent = EventCollection.findOne(
       {
         _id: eventID
@@ -143,12 +142,11 @@ Meteor.methods({
   },
 
   sendUserFeedback: function(feedback) {
-    this.unblock()
-
+    // this.unblock()
     var currUser = Meteor.user()
     var userEmail = Meteor.user().emails[0].address
     var returnSubject = "We received your feedback!"
-    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to solve any problems to make Mixr better for everyone! \n\nSincerely,\nThe Mixr Dev Team"
+    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to address your concerns. \n\nSincerely,\nThe Mixr Dev Team"
 
     var sendAddress = "mixrdev123456@gmail.com"
     var emailSubject = "User Feedback"
@@ -169,6 +167,7 @@ Meteor.methods({
         text: returnText
       })
     }
+    return
   },
 
   updateUserEmailPreferences: function(userPrefs) {
