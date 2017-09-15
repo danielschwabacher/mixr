@@ -27,7 +27,7 @@ Meteor.methods({
   sendCreatedEventEmail: function(eventTitle) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();
+    // this.unblock();
     var currentUser = Meteor.user();
     var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
@@ -60,7 +60,7 @@ Meteor.methods({
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    // this.unblock();
+    // this.defer();
 
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
@@ -96,7 +96,7 @@ Meteor.methods({
   sendEventDeletedEmail: function(eventID) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();  // Especially important here since the DB is being queried so much
+    // this.unblock();  // Especially important here since the DB is being queried so much
     var delEvent = EventCollection.findOne(
       {
         _id: eventID
@@ -142,7 +142,7 @@ Meteor.methods({
   },
 
   sendUserFeedback: function(feedback) {
-    this.unblock()
+    // this.unblock()
     var currUser = Meteor.user()
     var userEmail = Meteor.user().emails[0].address
     var returnSubject = "We received your feedback!"
