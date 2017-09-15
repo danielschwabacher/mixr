@@ -1,5 +1,4 @@
 import '../../ui/helpers/notificationModalHelpers.js'
-import '../InfoBubble/infobubble-compiled.js'
 
 Marker = function(mapInstance, content){
 	this.map = mapInstance
