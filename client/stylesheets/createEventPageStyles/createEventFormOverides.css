@@ -13,7 +13,7 @@
   	height:auto;
 }
 .create-event-form-text-area::-webkit-input-placeholder {
-  color: rgb(203, 203, 203);
+	color: rgb(203, 203, 203);
 }
 
 .black{
@@ -40,13 +40,14 @@
 	background-color: #A200FF;
 }
 
-
 #noMaximumRegistrationCheckbox{
 	margin-left: 100px;
 }
+
 .nomaxCheckbox{
 	margin-left: 30px;
 }
+
 #resendEmailButton{
 	text-align: center;
 }
@@ -61,10 +62,16 @@
 .create-event-page-main{
 	background-color: #A200FF;
 }
+
 .create-event-logo {
-	padding: 15px 0;
+	padding: 10px;
+	width: 37.1%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	border-radius: 20px;
+	margin-top: -1%;
 	color: white;
 	background-color: #282929;
-	font-size: 48px;
+	font-size: 36px;
 	font-weight: bold;
-  }
+}
