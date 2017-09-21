@@ -57,3 +57,14 @@
     vertical-align: middle;
     float: none;
 }
+
+.create-event-page-main{
+	background-color: #A200FF;
+}
+.create-event-logo {
+	padding: 15px 0;
+	color: white;
+	background-color: #282929;
+	font-size: 48px;
+	font-weight: bold;
+  }

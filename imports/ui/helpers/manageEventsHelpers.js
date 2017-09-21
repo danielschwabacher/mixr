@@ -1,14 +1,11 @@
 import '../templates/manageEventsPage.html';
 import '../../api/Notifications/notifyWrapper.js';
 
+/*
 Template.manageEventLoader.onRendered(function(){
-	notify("Loading...", "info", "right")
-	timeoutId = setTimeout(function(){ 
-		notify("Error detected, refreshing...", "danger", "center")
-		location.reload(true)
-	}, 5000);
-	
+
 });
+*/
 
 Template.manageEventsPanel.onCreated(function(){
 	$.notifyClose()

@@ -1,27 +1,29 @@
 <template name="manageEventsPanel">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	<div class="manageEventContainer">
-		{{#if Template.subscriptionsReady}}
-		<div class="row manageEventRow">
-			<div class="col-md-6 manageEventPageCol">
-				My Created Events:
-				{{#each getAssociatedEventNames getOwnedEventIds}}
-					{{> eventCreatedNameHolder}}
-				{{/each}}
+		<body class="mainManageEventPage">
+			<div class="manageEventContainer">
+				{{#if Template.subscriptionsReady}}
+				<div class="row manageEventRow">
+					<div class="col-xs-6 manageEventCol customScrollbar">
+						My Created Events:
+						<hr>
+						{{#each getAssociatedEventNames getOwnedEventIds}}
+						{{> eventCreatedNameHolder}}
+						{{/each}}
+					</div>
+					<div class="col-xs-6 manageEventCol customScrollbar">
+						My Registered Events:
+						<hr>
+						{{#each getAssociatedEventNames getRegisteredEventIds}}
+						{{> eventRegisteredNameHolder}}
+						{{/each}}
+					</div>
+				</div>
+				{{else}}
+					{{> manageEventLoader}}
+				{{/if}}
 			</div>
-		</div>
-		<div class="row manageEventRow">
-			<div class="col-md-6 manageEventPageCol">
-				My Registered Events:
-				{{#each getAssociatedEventNames getRegisteredEventIds}}
-					{{> eventRegisteredNameHolder}}
-				{{/each}}
-			</div>
-		</div>
-		{{else}}
-			{{> manageEventLoader}}
-  		{{/if}}
-	</div>
+		</body>
 </template>
 
 
