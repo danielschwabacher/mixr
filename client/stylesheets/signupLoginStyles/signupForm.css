@@ -54,12 +54,13 @@ Last change	: 2015/03/27
 	border-radius: 5px;
 	display: inline-block;
 }
+
 @media(min-width: 1200px){
 	.login-form-1 {
 		width: 800px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 
 @media(min-width: 992px){
@@ -67,7 +68,7 @@ Last change	: 2015/03/27
 		width: 700px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 
 @media(min-width: 768px){
@@ -75,7 +76,7 @@ Last change	: 2015/03/27
 		min-width: 600px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 
 @media(max-width: 668px){
@@ -83,7 +84,7 @@ Last change	: 2015/03/27
 		min-width: 400px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 .main-login-form {
   position: relative;
