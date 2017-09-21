@@ -99,3 +99,9 @@
 	border-radius: 10px;
 }
 
+.pickLocationPage{
+	margin-top: -4%;
+	height: 100vh;
+	overflow: hidden;
+	background-color: #A0F;
+}

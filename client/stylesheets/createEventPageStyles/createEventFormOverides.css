@@ -37,7 +37,8 @@
 	border-radius: 8px;
 }
 #pickLocationButton:hover{
-	background-color: #A200FF;
+	background-color: #75DBCD;
+	color: black;
 }
 
 #noMaximumRegistrationCheckbox{
