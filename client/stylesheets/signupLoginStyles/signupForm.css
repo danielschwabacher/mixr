@@ -21,6 +21,11 @@ Last change	: 2015/03/27
   height: 100%;
 }
 
+.signupPageMain{
+  background-color: #A0F !important;
+  height: 100%;
+}
+
 .login-banner{
 	padding: 10px;
 	width: 63%;
@@ -216,7 +221,8 @@ label.form-invalid:after {
 	border-radius: 8px;
 }
 #registerButton:hover{
-	background-color: #A200FF;
+  background-color: #75DBCD;
+  color: black;
 }
 
 #loginButton{
@@ -226,14 +232,22 @@ label.form-invalid:after {
 	border-radius: 8px;
 }
 #loginButton:hover{
-	background-color: #A200FF;
+  background-color: #75DBCD;
+  color: black;
 }
 
 #clickwrapAgreement{
   color: black;
-  font-size: 14px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #clickwrapAgreement a{
   color: black;
+}
+
+#clickwrapAgreement a:hover{
+  color: white;
+  text-decoration: none;
 }
