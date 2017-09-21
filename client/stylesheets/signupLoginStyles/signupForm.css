@@ -16,7 +16,23 @@ Last change	: 2015/03/27
 7. Form - Main Message
 9. Misc
 -------------------------------------------------------------------*/
+.loginPageMain{
+  background-color: #A0F;
+  height: 100%;
+}
 
+.login-banner{
+	padding: 10px;
+	width: 63%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	border-radius: 20px;
+	margin-top: -1%;
+	color: white;
+	background-color: #282929;
+	font-size: 36px;
+	font-weight: bold;
+}
 /*=== 3. Text Outside the Box ===*/
 .etc-login-form {
 	text-align: center;
