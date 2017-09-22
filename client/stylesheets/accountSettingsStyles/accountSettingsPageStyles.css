@@ -20,3 +20,9 @@
 .accountSettingsPageMain{
 	background-color: #A200FF;
 }
+
+.accountContainer{
+	height: 100%;
+	overflow: hidden;
+	background-color: #A200FF;
+}
