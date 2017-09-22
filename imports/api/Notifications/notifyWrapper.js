@@ -18,9 +18,9 @@ notify = function(msg, notificationType, alignment){
 		},
 		offset: 20,
 		spacing: 10,
-		z_index: 10310,
+		z_index: 1031,
 		delay: 800,
-		timer: 1000,
+		timer: 700,
 		url_target: '_blank',
 		mouse_over: null,
 		animate: {
@@ -29,7 +29,10 @@ notify = function(msg, notificationType, alignment){
 		},
 		onShow: null,
 		onShown: null,
-		onClose: null,
+		onClose: function(){
+			console.log("closed notification")
+		},
 		onClosed: null,
 	});
+	console.log("called notify")
 }

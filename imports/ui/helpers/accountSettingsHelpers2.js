@@ -15,19 +15,17 @@ Template.accountSettings.events({
 		$(".sideBarSettingLinks").removeClass('active');
 		$("#feedbackPaneLink").addClass('active');
 	},
-	'submit .changePasswordForm'(event, template) {
+	'submit #changePasswordForm'(event, template) {
 		event.preventDefault()
 		var oldPassword = event.target.currentPasswordChangePasswordModal.value;
 		var newPassword1 = event.target.newPassword1.value;
 		var newPassword2 = event.target.newPassword2.value;
 		if (newPassword1 == newPassword2){
-			notify("Working...", "info", "right")
 			Accounts.changePassword(oldPassword, newPassword1, function(err){
-				if (err){
+				if (err){			
 					notify("Your password is incorrect", "danger", "center")
 				}
 				else{
-					Modal.hide()
 					notify("Password changed successfully!", "success", "right")
 					event.target.currentPasswordChangePasswordModal.value = ""
 					event.target.newPassword1.value = ""
