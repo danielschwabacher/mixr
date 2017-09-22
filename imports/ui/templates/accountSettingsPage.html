@@ -1,5 +1,4 @@
 <template name="accountSettings">
-	<body class="accountSettingsPageMain">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
@@ -12,7 +11,6 @@
 				{{> currentPane}}
 			</div>
 		</div>
-	</body>
 </template>
 
 <template name="currentPane">
@@ -20,29 +18,27 @@
 </template>
 
 <template name="AuthenticationPane">
-		<div class="text-center" style="padding:50px 0">
-				<div class="login-form-1">
-					<form id="changePasswordForm" class="text-left">
-						<div class="main-login-form">
-							<div class="login-group">
-								<div class="form-group">
-									<label for="currentPasswordChangePasswordModal" class="sr-only">Current Password</label>
-									<input type="password" class="form-control" id="currentPasswordChangePasswordModal" name="currentPasswordChangePasswordModal" placeholder="Current Password" required>
-								</div>
-								<div class="form-group">
-										<label for="newPassword1" class="sr-only">New password</label>
-										<input type="password" class="form-control" id="newPassword1" name="newPassword1" placeholder="New password" required>
-								</div>
-								<div class="form-group">
-										<label for="newPassword2" class="sr-only">Confirm new password</label>
-										<input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new password" required>
-								</div>
-							</div>
-							<button type="submit" class="btn btn-success btn-float-right" id="changePasswordButton">Change Password</button>
-						</div>
-					</form>
+	<div class="login-form-1">
+		<form id="changePasswordForm" class="text-left">
+			<div class="main-login-form">
+				<div class="login-group">
+					<div class="form-group">
+						<label for="currentPasswordChangePasswordModal" class="sr-only">Current Password</label>
+						<input type="password" class="form-control" id="currentPasswordChangePasswordModal" name="currentPasswordChangePasswordModal" placeholder="Current Password" required>
+					</div>
+					<div class="form-group">
+							<label for="newPassword1" class="sr-only">New password</label>
+							<input type="password" class="form-control" id="newPassword1" name="newPassword1" placeholder="New password" required>
+					</div>
+					<div class="form-group">
+							<label for="newPassword2" class="sr-only">Confirm new password</label>
+							<input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new password" required>
+					</div>
 				</div>
+				<button type="submit" class="btn btn-success btn-float-right" id="changePasswordButton">Change Password</button>
 			</div>
+		</form>
+	</div>
 </template>
 
 

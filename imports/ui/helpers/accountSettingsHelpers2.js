@@ -20,12 +20,15 @@ Template.accountSettings.events({
 		var oldPassword = event.target.currentPasswordChangePasswordModal.value;
 		var newPassword1 = event.target.newPassword1.value;
 		var newPassword2 = event.target.newPassword2.value;
+		notify("Working...", "info", "center")
 		if (newPassword1 == newPassword2){
 			Accounts.changePassword(oldPassword, newPassword1, function(err){
 				if (err){			
+					$.notifyClose()
 					notify("Your password is incorrect", "danger", "center")
 				}
 				else{
+					$.notifyClose()
 					notify("Password changed successfully!", "success", "right")
 					event.target.currentPasswordChangePasswordModal.value = ""
 					event.target.newPassword1.value = ""
@@ -34,6 +37,7 @@ Template.accountSettings.events({
 			});
 		}
 		else{
+			$.notifyClose()
 			notify("Passwords do not match", "danger", "center")
 		}
 	},

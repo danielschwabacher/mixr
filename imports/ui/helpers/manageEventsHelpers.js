@@ -13,10 +13,10 @@ Template.manageEventsPanel.onCreated(function(){
 	this.eventsCollection = this.subscribe('events');
 });
 
+/*
 Template.manageEventsPanel.onRendered(function(){
-	$.notifyClose();
-	clearTimeout(timeoutId);
 });
+*/
 
 Template.manageEventsPanel.helpers({
 	'getOwnedEventIds': function(){
