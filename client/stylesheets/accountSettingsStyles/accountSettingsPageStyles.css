@@ -26,3 +26,14 @@
 	overflow: hidden;
 	background-color: #A200FF;
 }
+
+#changePasswordButton{
+	background-color: #282929;
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 8px;
+}
+#changePasswordButton:hover{
+  background-color: #75DBCD;
+  color: black;
+}
