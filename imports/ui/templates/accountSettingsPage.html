@@ -1,7 +1,7 @@
 <template name="accountSettings">
 		<div class="container accountContainer">
-			<div class="row">
-				<div class="col-md-3">
+			<div class="row accountSetttingPageRow">
+				<div class="col-md-3 nav-col">
 					<ul class="nav nav-pills nav-stacked">
 						<li class="sideBarSettingLinks" id="authPaneLink"><a href="#"><i class="fa fa-lock fa-fw"></i>Authentication</a></li>
 						<li class="sideBarSettingLinks" id="emailPaneLink"><a href="#"><i class="fa fa-file-o fa-fw"></i>Email Settings</a></li>
@@ -18,7 +18,7 @@
 </template>
 
 <template name="AuthenticationPane">
-	<div class="login-form-1">
+	<div class="login-form-1 containerPaddingAccountSettingPage">
 		<form id="changePasswordForm" class="text-left">
 			<div class="main-login-form">
 				<div class="login-group">
@@ -43,7 +43,7 @@
 
 
 <template name="EmailSettingsPane">
-	<div class="col-md-9 well">
+	<div class="col-md-9 well containerPaddingAccountSettingPage">
 		<form class="updateEmailPreferencesForm">
 			<div class="checkbox checkbox-mixr checkbox-inline">
 				<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
@@ -64,7 +64,7 @@
 </template>
 
 <template name="FeedbackPane">
-	<div class="col-md-9 well">
+	<div class="col-md-9 well containerPaddingAccountSettingPage">
 		<form class="sendFeedbackForm">
 			<div class="modal-header">
 				<h4 class="modal-title">What's on your mind?</h4>

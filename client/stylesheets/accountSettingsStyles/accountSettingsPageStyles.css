@@ -1,6 +1,10 @@
+.nav-col{
+	margin-bottom: 20px;
+}
 .nav-pills{
 	font-size: 20px;
 	background-color: #282929;
+	margin-bottom: 100px;
 }
 
 .nav-pills a:hover{
@@ -36,4 +40,19 @@
 #changePasswordButton:hover{
   background-color: #75DBCD;
   color: black;
+}
+
+.accountSetttingPageRow{
+	margin-top: 20px;
+}
+
+@media(max-width: 995px){
+	.containerPaddingAccountSettingPage{
+		margin-left: 16px;
+	}
+}
+@media(min-width: 996px){
+	.containerPaddingAccountSettingPage{
+		margin-left: 16px;
+	}
 }
