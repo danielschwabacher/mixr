@@ -1,29 +1,19 @@
 <template name="manageEventsPanel">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-		<body class="mainManageEventPage">
-			<div class="manageEventContainer">
-				{{#if Template.subscriptionsReady}}
-				<div class="row manageEventRow">
-					<div class="col-xs-6 manageEventCol customScrollbar">
-						My Created Events:
-						<hr>
-						{{#each getAssociatedEventNames getOwnedEventIds}}
-						{{> eventCreatedNameHolder}}
-						{{/each}}
-					</div>
-					<div class="col-xs-6 manageEventCol customScrollbar">
-						My Registered Events:
-						<hr>
-						{{#each getAssociatedEventNames getRegisteredEventIds}}
-						{{> eventRegisteredNameHolder}}
-						{{/each}}
-					</div>
-				</div>
-				{{else}}
-					{{> manageEventLoader}}
-				{{/if}}
+	<div class="manageEventContainer mainManageEventPage">
+		{{#if Template.subscriptionsReady}}
+		<div class="row manageEventRow">
+			<div class="col-xs-6 manageEventCol customScrollbar">
+				My Created Events:
+				<hr> {{#each getAssociatedEventNames getOwnedEventIds}} {{> eventCreatedNameHolder}} {{/each}}
 			</div>
-		</body>
+			<div class="col-xs-6 manageEventCol customScrollbar">
+				My Registered Events:
+				<hr> {{#each getAssociatedEventNames getRegisteredEventIds}} {{> eventRegisteredNameHolder}} {{/each}}
+			</div>
+		</div>
+		{{else}} {{> manageEventLoader}} {{/if}}
+	</div>
 </template>
 
 
@@ -32,11 +22,15 @@
 </template>
 
 <template name="eventCreatedNameHolder">
-	<a class="nameLinkCreated"><li>{{ eventName }}</li></a>
+	<a class="nameLinkCreated">
+		<li>{{ eventName }}</li>
+	</a>
 </template>
 
 <template name="eventRegisteredNameHolder">
-	<a class="nameLinkRegistered"><li>{{ eventName }}</li></a>
+	<a class="nameLinkRegistered">
+		<li>{{ eventName }}</li>
+	</a>
 </template>
 
 
