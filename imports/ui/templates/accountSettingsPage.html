@@ -1,16 +1,16 @@
 <template name="accountSettings">
-		<div class="container accountContainer">
-			<div class="row accountSetttingPageRow">
-				<div class="col-md-3 nav-col">
-					<ul class="nav nav-pills nav-stacked">
-						<li class="sideBarSettingLinks" id="authPaneLink"><a href="#"><i class="fa fa-lock fa-fw"></i>Authentication</a></li>
-						<li class="sideBarSettingLinks" id="emailPaneLink"><a href="#"><i class="fa fa-file-o fa-fw"></i>Email Settings</a></li>
-						<li class="sideBarSettingLinks" id="feedbackPaneLink"><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Give Feedback!</a></li>
-					</ul>
-				</div>
-				{{> currentPane}}
+	<div class="container accountContainer">
+		<div class="row accountSetttingPageRow">
+			<div class="col-md-3 nav-col">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="sideBarSettingLinks" id="authPaneLink"><a href="#"><i class="fa fa-lock fa-fw"></i>Authentication</a></li>
+					<li class="sideBarSettingLinks" id="emailPaneLink"><a href="#"><i class="fa fa-file-o fa-fw"></i>Email Settings</a></li>
+					<li class="sideBarSettingLinks" id="feedbackPaneLink"><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Give Feedback!</a></li>
+				</ul>
 			</div>
+			{{> currentPane}}
 		</div>
+	</div>
 </template>
 
 <template name="currentPane">
@@ -24,18 +24,19 @@
 				<div class="login-group">
 					<div class="form-group">
 						<label for="currentPasswordChangePasswordModal" class="sr-only">Current Password</label>
-						<input type="password" class="form-control" id="currentPasswordChangePasswordModal" name="currentPasswordChangePasswordModal" placeholder="Current Password" required>
+						<input type="password" class="form-control" id="currentPasswordChangePasswordModal" name="currentPasswordChangePasswordModal"
+						 placeholder="Current Password" required>
 					</div>
 					<div class="form-group">
-							<label for="newPassword1" class="sr-only">New password</label>
-							<input type="password" class="form-control" id="newPassword1" name="newPassword1" placeholder="New password" required>
+						<label for="newPassword1" class="sr-only">New password</label>
+						<input type="password" class="form-control" id="newPassword1" name="newPassword1" placeholder="New password" required>
 					</div>
 					<div class="form-group">
-							<label for="newPassword2" class="sr-only">Confirm new password</label>
-							<input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new password" required>
+						<label for="newPassword2" class="sr-only">Confirm new password</label>
+						<input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new password" required>
 					</div>
 				</div>
-				<input type="submit" id="changePasswordButton"/>
+				<input type="submit" class="accountSettingsSubmitButton" id="changePasswordButton"/>
 			</div>
 		</form>
 	</div>
@@ -43,22 +44,26 @@
 
 
 <template name="EmailSettingsPane">
-	<div class="col-md-9 well containerPaddingAccountSettingPage">
-		<form class="updateEmailPreferencesForm">
-			<div class="checkbox checkbox-mixr checkbox-inline">
-				<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
-				<label for="createdEventPref">Notify me when I create an event</label>
+	<div class="login-form-1 containerPaddingAccountSettingPage">
+		<form id="updateEmailPreferencesForm" class="text-left">
+			<div class="main-login-form">
+				<div class="login-group">
+					<div class="checkbox checkbox-mixr checkbox-inline">
+						<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
+						<label for="createdEventPref">Notify me when I create an event</label>
+					</div>
+					<div class="checkbox checkbox-mixr checkbox-inline">
+						<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes">
+						<label for="registeredEventPref">Notify me when I register for an event</label>
+					</div>
+					<div class="checkbox checkbox-mixr checkbox-inline">
+						<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes">
+						<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
+					</div>
+					{{currentPreferences}}
+				</div>
+				<input type="submit" class="accountSettingsSubmitButton" id="updateEmailPrefButton" value="Update Email Preferences"/>
 			</div>
-			<div class="checkbox checkbox-mixr checkbox-inline">
-				<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes">
-				<label for="registeredEventPref">Notify me when I register for an event</label>
-			</div>
-			<div class="checkbox checkbox-mixr checkbox-inline">
-				<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes">
-				<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
-			</div>
-			{{currentPreferences}}
-			<button type="submit" class="btn btn-success btn-float-right" id="updateEmailPrefButton">Update Preferences</button>
 		</form>
 	</div>
 </template>
@@ -70,7 +75,8 @@
 				<h4 class="modal-title">What's on your mind?</h4>
 			</div>
 			<div class="modal-body feedback-modal-block">
-				<textarea value="" placeholder="Please provide feature requests, bug reports or anything else you'd like to communicate with the dev team here. Thanks for your feedback!" id="feedbackArea" autofocus required></textarea>
+				<textarea value="" placeholder="Please provide feature requests, bug reports or anything else you'd like to communicate with the dev team here. Thanks for your feedback!"
+				 id="feedbackArea" autofocus required></textarea>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-success btn-float-right" id="sendFeedbackButton">Send to dev team!</button>

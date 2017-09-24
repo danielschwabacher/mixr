@@ -8,21 +8,12 @@
 }
 
 .nav-pills a:hover{
-	font-size: 20px;
-	background-color: #A200FF !important;
-}
-
-.nav-pills a:active{
-	font-size: 20px;
-	background-color: #A200FF !important;
+	background-color: #75DBCD !important;
+	color: black;
 }
 
 #feedbackPaneLink.active{
 	background-color: #A200FF !important;
-}
-
-.accountSettingsPageMain{
-	background-color: #A200FF;
 }
 
 .accountContainer{
@@ -31,28 +22,16 @@
 	background-color: #A200FF;
 }
 
-#changePasswordButton{
-	background-color: #282929;
+
+.accountSettingsSubmitButton{
+	background-color: #282929 !important;
 	margin-top: 10px;
 	padding: 10px;
 	border-radius: 8px;
+
 }
-#changePasswordButton:hover{
-  background-color: #75DBCD;
+
+.accountSettingsSubmitButton:hover{
+  background-color: #75DBCD !important;
   color: black;
-}
-
-.accountSetttingPageRow{
-	margin-top: 20px;
-}
-
-@media(max-width: 995px){
-	.containerPaddingAccountSettingPage{
-		margin-left: 16px;
-	}
-}
-@media(min-width: 996px){
-	.containerPaddingAccountSettingPage{
-		margin-left: 16px;
-	}
 }

@@ -41,7 +41,9 @@ Template.accountSettings.events({
 			notify("Passwords do not match", "danger", "center")
 		}
 	},
-	'submit .updateEmailPreferencesForm'(event, template) {
+
+
+	'submit #updateEmailPreferencesForm'(event, template) {
 		event.preventDefault()
 		var createEventPref = $('#createdEventPref').is(':checked')
 		var registerEventPref = $('#registeredEventPref').is(':checked')
@@ -58,9 +60,13 @@ Template.accountSettings.events({
 				notify("Email preferences could not be updated at this time.", "danger", "center")
 				return
 			}
+			$.notifyClose()
 			notify("Email preferences updated successfully!", "success", "right")
 		});
 	},
+
+
+
 	'submit .sendFeedbackForm'(event, template) {
 		event.preventDefault()
 		var userFeedback = event.target.feedbackArea.value
