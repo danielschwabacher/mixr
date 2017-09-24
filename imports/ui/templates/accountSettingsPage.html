@@ -36,7 +36,7 @@
 						<input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new password" required>
 					</div>
 				</div>
-				<input type="submit" class="accountSettingsSubmitButton" id="changePasswordButton"/>
+				<input type="submit" class="accountSettingsSubmitButton" id="changePasswordButton" />
 			</div>
 		</form>
 	</div>
@@ -52,35 +52,35 @@
 						<input type="checkbox" class="styled" id="createdEventPref" name="emailPrefCheckboxes">
 						<label for="createdEventPref">Notify me when I create an event</label>
 					</div>
+					<br>
 					<div class="checkbox checkbox-mixr checkbox-inline">
 						<input type="checkbox" class="styled" id="registeredEventPref" name="emailPrefCheckboxes">
 						<label for="registeredEventPref">Notify me when I register for an event</label>
 					</div>
+					<br>
 					<div class="checkbox checkbox-mixr checkbox-inline">
 						<input type="checkbox" class="styled" id="eventDeletedPref" name="emailPrefCheckboxes">
 						<label for="eventDeletedPref">Notify me when an event I'm registered for is cancelled</label>
 					</div>
 					{{currentPreferences}}
 				</div>
-				<input type="submit" class="accountSettingsSubmitButton" id="updateEmailPrefButton" value="Update Email Preferences"/>
+				<input type="submit" class="accountSettingsSubmitButton" id="updateEmailPrefButton" value="Update Email Preferences" />
 			</div>
 		</form>
 	</div>
 </template>
 
 <template name="FeedbackPane">
-	<div class="col-md-9 well containerPaddingAccountSettingPage">
+	<div class="login-form-1 containerPaddingAccountSettingPage">
 		<form class="sendFeedbackForm">
-			<div class="modal-header">
-				<h4 class="modal-title">What's on your mind?</h4>
+			<div class="main-login-form">
+				<div class="login-group">
+						<textarea class="accountSettingsPageFeedbackForm" value="" placeholder="Please provide feature requests, bug reports or anything else you'd like to communicate with the dev team here. Thanks for your feedback!"
+						id="feedbackArea" autofocus required></textarea>
+				</div>
 			</div>
-			<div class="modal-body feedback-modal-block">
-				<textarea value="" placeholder="Please provide feature requests, bug reports or anything else you'd like to communicate with the dev team here. Thanks for your feedback!"
-				 id="feedbackArea" autofocus required></textarea>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-success btn-float-right" id="sendFeedbackButton">Send to dev team!</button>
-			</div>
+			<input type="submit" class="accountSettingsSubmitButton" id="sendFeedbackButton" value="Send to Dev Team!" />
+			
 		</form>
 	</div>
 </template>

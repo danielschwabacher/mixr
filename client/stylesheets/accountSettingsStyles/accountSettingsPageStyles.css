@@ -1,5 +1,6 @@
 .nav-col{
-	margin-bottom: 20px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 .nav-pills{
 	font-size: 20px;
@@ -12,17 +13,19 @@
 	color: black;
 }
 
-#feedbackPaneLink.active{
-	background-color: #A200FF !important;
-}
-
 .accountContainer{
 	height: 100%;
 	overflow: hidden;
 	background-color: #A200FF;
 }
 
+.containerPaddingAccountSettingPage{
+	margin-left: 16px;
+}
 
+/*
+	Submit button stuff
+*/
 .accountSettingsSubmitButton{
 	background-color: #282929 !important;
 	margin-top: 10px;
@@ -34,4 +37,22 @@
 .accountSettingsSubmitButton:hover{
   background-color: #75DBCD !important;
   color: black;
+}
+
+
+/*
+	textarea stuff
+*/
+.accountSettingsPageFeedbackForm{
+	width: 100%;
+	height: 200px;
+	background-color: #282929;
+	color: white;
+	border: 0px;
+	resize: none;
+}
+
+.accountSettingsPageFeedbackForm::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	color: white;
+	font-size: 18px;
 }
