@@ -67,3 +67,7 @@ html,body{
 .huge{
 	text-align: center;
 }
+
+.spinner-container{
+	background-color: #A0F;
+}
