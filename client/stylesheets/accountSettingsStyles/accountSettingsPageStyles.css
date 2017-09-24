@@ -1,11 +1,10 @@
 .nav-col{
-	margin-top: 30px;
-	margin-bottom: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 .nav-pills{
 	font-size: 20px;
 	background-color: #282929;
-	margin-bottom: 100px;
 }
 
 .nav-pills a:hover{
@@ -23,6 +22,11 @@
 	margin-left: 16px;
 }
 
+
+.emailPrefLabel{
+	font-size: 18px;
+	line-height: 15px;
+}
 /*
 	Submit button stuff
 */
