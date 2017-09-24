@@ -10,7 +10,7 @@ notify = function(msg, notificationType, alignment){
 		position: null,
 		type: notificationType,
 		allow_dismiss: true,
-		newest_on_top: false,
+		newest_on_top: true,
 		showProgressbar: false,
 		placement: {
 			from: "top",
