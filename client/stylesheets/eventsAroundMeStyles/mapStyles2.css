@@ -5,7 +5,7 @@
 @media (max-width:766px){
 	.event-container{
 		background-color: #A0F;
-		margin-top: 16px;
+		padding-top: 16px;
 		overflow-y: hidden;
 	}
 	.event-display-column{
