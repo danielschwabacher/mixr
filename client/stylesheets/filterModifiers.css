@@ -31,3 +31,8 @@ body > div.modal.fade.in > div > div > div.modal-header > div > div.slider-tick-
     left: 100% !important;
     margin-left: -35px !important;
 }
+
+ #timeSlider{
+     color: white;
+     text-align: center;
+ }

@@ -4,7 +4,7 @@ import '../../api/Notifications/notifyWrapper.js'
 
 // applyEventFilterModals below
 import '../templates/applyEventFilterModals.html';
-var Slider = require("bootstrap-slider");
+// var Slider = require("bootstrap-slider");
 
 // TODO: encapsulate this in a different method
 Template.sortByTagsEventFilterModal.onRendered(function() {
@@ -55,24 +55,17 @@ Template.sortByTagsEventFilterModal.events({
 
 Template.sortByTimeEventFilterModal.onRendered(function() {
 	timeUntilEvent = Session.get('timeFilterHours')
-	timeSlider = new Slider(".timeSlider", {
-		value: timeUntilEvent,
-		min: 1,
-		max: 72,
-		ticks: [1, 24, 48, 72],
-		ticks_positions: [0, 33, 66, 100],
-		ticks_labels: ["1 hour", "1 day", "2 days", "3 days"],
-		formatter: function(value) {
-			return value + " hours"
-		},
-	});
-
+	// this is the actual slider
+	document.querySelector('.timeSlider').value = timeUntilEvent;
+	// this is for the label
+	document.querySelector('#timeSlider').value = timeUntilEvent + " hours";
 });
 
 Template.sortByTimeEventFilterModal.events({
 	'click #submitEventFilterTimeSelections'(event, template){
-		Session.set('timeFilterHours', timeSlider.getValue())
-		notifyString = "Showing events within " + timeSlider.getValue() + " hours."
+		var sliderValue = $(".timeSlider").val();
+		Session.set('timeFilterHours', sliderValue)
+		notifyString = "Showing events within " + sliderValue + " hours."
 		notify(notifyString, "success", "right")
 
 	},
@@ -81,3 +74,7 @@ Template.sortByTimeEventFilterModal.events({
 		notify("Time reset", "success", "right")
 	}
 });
+
+outputUpdate = function(val) {
+	document.querySelector('#timeSlider').value = val + " hours";	
+}

@@ -27,7 +27,7 @@ Meteor.methods({
   sendCreatedEventEmail: function(eventTitle) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();
+    // this.unblock();
     var currentUser = Meteor.user();
     var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
@@ -44,23 +44,24 @@ Meteor.methods({
       };
 
       SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
-      if (currentUser && userEmail) {
-        Email.send({
-          to: userEmail,
-		  from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
-          subject: emailSubject,
-          html: SSR.render('createEventEmail', emailData)
-        });
-      }
+      Meteor.defer(function(){        
+        if (currentUser && userEmail) {
+          Email.send({
+            to: userEmail,
+            from: "Mixr Dev Team <notifications@mixrbeta.com>",
+            subject: emailSubject,
+            html: SSR.render('createEventEmail', emailData)
+          });
+        }
+      });
     }
-
   },
 
   // Sends the user an email when they register for an event with event details
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();
+    // this.defer();
 
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
@@ -80,24 +81,25 @@ Meteor.methods({
       }
 
       SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
-      if (currentUser && userEmail){
-        Email.send({
-          to: userEmail,
-		  from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
-          subject: emailSubject,
-          html: SSR.render('registerForEvent', emailData)
-        });
-      }
+      Meteor.defer(function(){
+        if (currentUser && userEmail){
+          Email.send({
+            to: userEmail,
+            from: "Mixr Dev Team <notifications@mixrbeta.com>",
+            subject: emailSubject,
+            html: SSR.render('registerForEvent', emailData)
+          });
+        }
+        console.log("email sent!")
+      });
     }
-
-
   },
 
   // Sends the user an email when an event they're registered for is deleted
   sendEventDeletedEmail: function(eventID) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    this.unblock();  // Especially important here since the DB is being queried so much
+    // this.unblock();  // Especially important here since the DB is being queried so much
     var delEvent = EventCollection.findOne(
       {
         _id: eventID
@@ -129,46 +131,51 @@ Meteor.methods({
           message: emailText
         }
 
-        SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
-        if (currUser && currEmail){
-          Email.send({
-            to: currEmail,
- 			from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
-            subject: "An event you registered for has been removed!",
-            html: SSR.render('eventDeletedEmail', emailData)
-          });
-        }
+        SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))     
+        Meteor.defer(function(){           
+          if (currUser && currEmail){
+            Email.send({
+              to: currEmail,
+              from: "Mixr Dev Team <notifications@mixrbeta.com>",
+              subject: "An event you registered for has been removed!",
+              html: SSR.render('eventDeletedEmail', emailData)
+            });
+          }
+        });
       }
     });
   },
 
   sendUserFeedback: function(feedback) {
-    this.unblock()
-
+    // this.unblock()
     var currUser = Meteor.user()
     var userEmail = Meteor.user().emails[0].address
     var returnSubject = "We received your feedback!"
-    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to solve any problems to make Mixr better for everyone! \n\nSincerely,\nThe Mixr Dev Team"
+    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to address your concerns. \n\nSincerely,\nThe Mixr Dev Team"
 
     var sendAddress = "mixrdev123456@gmail.com"
     var emailSubject = "User Feedback"
     var emailText = "User " + userEmail + " has sent the following feedback:\n\n" + feedback
 
     if (currUser && userEmail){
-      Email.send({
-        to: sendAddress,
-		from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
-        subject: emailSubject,
-        text: emailText
+      Meteor.defer(function(){            
+        Email.send({
+          to: sendAddress,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: emailSubject,
+          text: emailText
+        });
       });
-
-      Email.send({
-        to: userEmail,
-		from: "Mixr Dev Team <notifications@emails.mixrbeta.com>",
-        subject: returnSubject,
-        text: returnText
-      })
+      Meteor.defer(function(){        
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: returnSubject,
+          text: returnText
+        });
+      });
     }
+    return
   },
 
   updateUserEmailPreferences: function(userPrefs) {

@@ -13,7 +13,7 @@
   	height:auto;
 }
 .create-event-form-text-area::-webkit-input-placeholder {
-  color: rgb(203, 203, 203);
+	color: rgb(203, 203, 203);
 }
 
 .black{
@@ -37,13 +37,45 @@
 	border-radius: 8px;
 }
 #pickLocationButton:hover{
-	background-color: #A200FF;
+	background-color: #75DBCD;
+	color: black;
 }
-
 
 #noMaximumRegistrationCheckbox{
 	margin-left: 100px;
 }
+
 .nomaxCheckbox{
 	margin-left: 30px;
 }
+
+#resendEmailButton{
+	text-align: center;
+}
+
+.vcenter {
+	padding: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.create-event-page-main{
+	background-color: #A200FF;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.create-event-logo{
+	padding: 10px;
+	width: 37.3%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	border-radius: 20px;
+	margin-top: -1%;
+	color: white;
+	background-color: #282929;
+	font-size: 36px;
+	font-weight: bold;
+  }
+  

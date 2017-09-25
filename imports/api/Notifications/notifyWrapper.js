@@ -10,7 +10,7 @@ notify = function(msg, notificationType, alignment){
 		position: null,
 		type: notificationType,
 		allow_dismiss: true,
-		newest_on_top: false,
+		newest_on_top: true,
 		showProgressbar: false,
 		placement: {
 			from: "top",
@@ -18,9 +18,9 @@ notify = function(msg, notificationType, alignment){
 		},
 		offset: 20,
 		spacing: 10,
-		z_index: 10310,
-		delay: 5000,
-		timer: 1000,
+		z_index: 1031,
+		delay: 1800,
+		timer: 100,
 		url_target: '_blank',
 		mouse_over: null,
 		animate: {

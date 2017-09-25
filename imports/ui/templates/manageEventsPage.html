@@ -1,43 +1,36 @@
 <template name="manageEventsPanel">
 	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
-	<div class="manageEventContainer">
+	<div class="manageEventContainer mainManageEventPage">
 		{{#if Template.subscriptionsReady}}
 		<div class="row manageEventRow">
-			<div class="col-md-6 manageEventPageCol">
+			<div class="col-xs-6 manageEventCol customScrollbar">
 				My Created Events:
-				{{#each getAssociatedEventNames getOwnedEventIds}}
-					{{> eventCreatedNameHolder}}
-				{{/each}}
+				<hr> {{#each getAssociatedEventNames getOwnedEventIds}} {{> eventCreatedNameHolder}} {{/each}}
 			</div>
-		</div>
-		<div class="row manageEventRow">
-			<div class="col-md-6 manageEventPageCol">
+			<div class="col-xs-6 manageEventCol customScrollbar">
 				My Registered Events:
-				{{#each getAssociatedEventNames getRegisteredEventIds}}
-					{{> eventRegisteredNameHolder}}
-				{{/each}}
+				<hr> {{#each getAssociatedEventNames getRegisteredEventIds}} {{> eventRegisteredNameHolder}} {{/each}}
 			</div>
 		</div>
-		{{else}}
-			{{> manageEventLoader}}
-  		{{/if}}
+		{{else}} {{> manageEventLoader}} {{/if}}
 	</div>
 </template>
 
 
 <template name="manageEventLoader">
-	Loading your events...
+	{{> spinner}}
 </template>
 
-
-
-
 <template name="eventCreatedNameHolder">
-	<a class="nameLinkCreated"><li>{{ eventName }}</li></a>
+	<a class="nameLinkCreated">
+		<li>{{ eventName }}</li>
+	</a>
 </template>
 
 <template name="eventRegisteredNameHolder">
-	<a class="nameLinkRegistered"><li>{{ eventName }}</li></a>
+	<a class="nameLinkRegistered">
+		<li>{{ eventName }}</li>
+	</a>
 </template>
 
 

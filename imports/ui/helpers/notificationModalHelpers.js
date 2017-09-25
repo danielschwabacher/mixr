@@ -59,18 +59,23 @@ Template.confirmEventModal.events({
 
 Template.eventInformationModal.events({
 	'click .registerEventButton'(event, template){
+		notify("Registering...", "info", "right")		
 		if (Meteor.user() && Meteor.user().emails[0].verified){
 			Meteor.call("registerEvent", this, function(err, didRegister){
 				if (didRegister == 1){
+					$.notifyClose();
 					notify("Registered successfully!", "success", "right")
 				}
 				else if (didRegister == 0){
+					$.notifyClose();
 					notify("Error: You are already registered for this event", "danger", "center")
 				}
 				else if (didRegister == -1){
+					$.notifyClose();
 					notify("Error: event is full", "danger", "center")
 				}
 				else{
+					$.notifyClose();
 					notify("Unknown error, please try again later.", "danger", "center")
 				}
 			});

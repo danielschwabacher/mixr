@@ -1,13 +1,61 @@
-.nav-stacked{
+.nav-col{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.nav-pills{
 	font-size: 20px;
 	background-color: #282929;
 }
-.nav-stacked a:hover{
-	font-size: 20px;
-	background-color: #A200FF !important;
+
+.nav-pills a:hover{
+	background-color: #75DBCD !important;
+	color: black;
 }
 
-.nav-stacked a:focus{
-	font-size: 20px;
-	background-color: #A200FF !important;
+.accountContainer{
+	height: 101%;
+	background-color: #A200FF;
+}
+
+.containerPaddingAccountSettingPage{
+	margin-left: 16px;
+}
+
+
+.emailPrefLabel{
+	font-size: 18px;
+	line-height: 15px;
+}
+/*
+	Submit button stuff
+*/
+.accountSettingsSubmitButton{
+	background-color: #282929 !important;
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 8px;
+
+}
+
+.accountSettingsSubmitButton:hover{
+  background-color: #75DBCD !important;
+  color: black;
+}
+
+
+/*
+	textarea stuff
+*/
+.accountSettingsPageFeedbackForm{
+	width: 100%;
+	height: 200px;
+	background-color: #282929;
+	color: white;
+	border: 0px;
+	resize: none;
+}
+
+.accountSettingsPageFeedbackForm::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	color: white;
+	font-size: 18px;
 }

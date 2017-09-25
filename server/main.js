@@ -4,7 +4,7 @@ import './crossReferenceTableDaemon.js'
 import './daemonTester.js'
 import './databaseTesting.js'
 Meteor.startup(() => {
-	//UserEventsCrossReferenceCollection.remove({})
+
 	process.env.MAIL_URL = 'smtp://postmaster%40emails.mixrbeta.com:9f5c1992954e0cbba1cadba72784975d@smtp.mailgun.org:587';
 
 	Meteor.publish('events', function(){
@@ -16,6 +16,5 @@ Meteor.startup(() => {
 	CrossReferenceSpider = new CrossReferenceDaemon()
 	Meteor.setInterval(function(){
 		CrossReferenceSpider.purge()
-	}, 86400000);
-	// insertFakeData()
+	}, 1800000);
 });

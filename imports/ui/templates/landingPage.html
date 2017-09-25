@@ -1,135 +1,149 @@
 <template name="landingPage">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<div id="all">
-	<section id="intro" class="text-intro padding-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>mixr</h1>
-					<h4 class="weight-300">Welcome to the world's first event based social network. Meet similarily minded people near you and do the things you love!</h4>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--   *** CUSTOMERS END ***-->
-	<!--   *** FEATURES ***-->
-	<section id="features" class="section">
-		<div class="container">
-			<div class="row text-center-mobile">
-				<div class="col-md-6">
-					<div class="icon"><i class="fa fa-users" aria-hidden="true"></i></div>
-					<h2>See all the <mark>cool events</mark> happening <mark>near you!</mark></h2>
-					<hr>
-					<h4 class="weight-300">mixr is a new social network concept that revolves around real life events, a platform to connect like-minded individuals to the events and activites they love. With mixr, you'll always be able to find new and interesting events around you.
-						<strong>Your neighborhood is more interesting than you think!</strong></h4>
-				</div>
-				<div class="col-md-6">
-					<p><img alt="" src="/cityMapCleaned.png" class="img-responsive" ></p>
-					<a href="http://www.freepik.com/free-photos-vectors/infographic" class="blackText">Infographic vector created by Freepik</a>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="section background-gray-lightest">
-		<div class="container">
-			<div class="row text-center-mobile">
-				<div class="col-md-6">
-					<p><img alt="" src="/eventBubblesDesc.png" class="img-responsive"></p>
-					<a href="http://www.freepik.com/free-photos-vectors/background" class="blackText">Background vector created by Photoroyalty - Freepik.com</a>
-				</div>
-				<div class="col-md-6">
-					<h2>Live in the moment!</h2>
-					<hr>
-					<h4 class="weight-300">Play some pickup soccer when you're bored. Check out a cool new community art gallery. Go kayaking with some new people. Because all types of events are allowed on mixr, you're sure to find something new and interesting to attend.</h4>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="section no-padding-bottom">
-		<div class="container">
-			<div class="row text-center-mobile">
-				<div class="col-md-6">
-					<p><img alt="" src="/clock.png" class="img-responsive" ></p>
-					<a href="http://www.freepik.com/free-photos-vectors/infographic" class="blackText">Infographic vector created by Freepik</a>
-				</div>
-				<div class="col-md-6">
-					<h2>Revolves around you... and your schedule</h2>
-					<hr>
-					<h4 class="weight-300">mixr is all about spontaneous experiences, there's no complicated scheduling involved. And, our unqiue event stream algorithims ensure every event you see is local to you.
-					And, with mixr, you'll only see events happening soon, so if something looks interesting, chances
-					are you won't have to wait long to check it out.</h4>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--   *** FEATURES END ***  -->
-	<!--   *** TEXT ***-->
-	<section id="text" class="text-page section-inverse background-secondary no-padding-bottom">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<h2 class="text-center">About the mixr beta</h2>
-					<div class="row">
-						<div class="col-sm-6">
-							<p>At mixr, our aim is to connect indivuals to exciting community events. As fellow University of Colorado at Boulder students, we are excited to present our beta exclusively to the town of Boulder. We really do believe Boulder is a great canidate town for the mixr service.</p>
-							<p></p>
-						</div>
-						<div class="col-sm-6">
-							<p>Effects present letters inquiry no an removed or friends. Desire behind latter me though in. Supposing shameless am he engrossed up additions. My possible peculiar together to. Desire so better am cannot he up before points. Remember mistaken opinions it pleasure of debating. Court front maids forty if aware their at. Chicken use are pressed removed. </p>
-							<p>We sincerly hope you enjoy the mixr beta and apperciate any feedback you may share with us.</p>
-						</div>
-						<p class="lead text-center">Thank you, <br>The mixr development team</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--   *** TEXT END ***-->
-	{{#unless currentUser}}
-	<section class="signup-section text-center no-padding-bottom">
-		<div class="container container-dark">
-			<div class="row">
-				<div class="col-md-12">
-					<h3 class="whiteText">The mixr beta is live!</h3>
-					<button id="signupBannerButton">Sign up!</button>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <div id="all">
+    <section id="intro" class="text-intro padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>mixr</h1>
+            <h4 class="weight-300">Welcome to the world's first event based social network. Meet similarily minded people near you and do the things
+              you love!</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--   *** CUSTOMERS END ***-->
+    <!--   *** FEATURES ***-->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="row text-center-mobile">
+          <div class="col-md-6">
+            <div class="icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+            <h2>See all the
+              <mark>cool events</mark> happening
+              <mark>near you!</mark>
+            </h2>
+            <hr>
+            <h4 class="weight-300">mixr is a new social network concept that revolves around real life events, a platform to connect like-minded
+              individuals to the events and activites they love. With mixr, you'll always be able to find new and interesting
+              events around you.
+              <strong>Your neighborhood is more interesting than you think!</strong></h4>
+          </div>
+          <div class="col-md-6">
+            <p><img alt="" src="/cityMapCleaned.png" class="img-responsive"></p>
+            <a href="http://www.freepik.com/free-photos-vectors/infographic" class="blackText">Infographic vector created by Freepik</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section background-gray-lightest">
+      <div class="container">
+        <div class="row text-center-mobile">
+          <div class="col-md-6">
+            <p><img alt="" src="/eventBubblesDesc.png" class="img-responsive"></p>
+            <a href="http://www.freepik.com/free-photos-vectors/background" class="blackText">Background vector created by Photoroyalty - Freepik.com</a>
+          </div>
+          <div class="col-md-6">
+            <h2>Live in the moment!</h2>
+            <hr>
+            <h4 class="weight-300">Play some pickup soccer when you're bored. Check out a cool new community art gallery. Go kayaking with some
+              new people. Because all types of events are allowed on mixr, you're sure to find something new and interesting
+              to attend.</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section no-padding-bottom">
+      <div class="container">
+        <div class="row text-center-mobile">
+          <div class="col-md-6">
+            <p><img alt="" src="/clock.png" class="img-responsive"></p>
+            <a href="http://www.freepik.com/free-photos-vectors/infographic" class="blackText">Infographic vector created by Freepik</a>
+          </div>
+          <div class="col-md-6">
+            <h2>Revolves around you... and your schedule</h2>
+            <hr>
+            <h4 class="weight-300">mixr is all about spontaneous experiences, there's no complicated scheduling involved. And, our unqiue event
+              stream algorithims ensure every event you see is local to you. And, with mixr, you'll only see events happening
+              soon, so if something looks interesting, chances are you won't have to wait long to check it out.</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--   *** FEATURES END ***  -->
+    <!--   *** TEXT ***-->
+    <section id="text" class="text-page section-inverse background-secondary no-padding-bottom">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="text-center">About the mixr beta</h2>
+            <div class="row">
+              <div class="col-sm-6">
+                <p>
+                  At mixr, our aim is to connect indivuals to exciting community events. As fellow University of Colorado at Boulder students,
+                  we are excited to present our beta exclusively to the town of Boulder. We really do believe Boulder is
+                  a great canidate town for the mixr service.
+                </p>
+                <p>
+                  During this beta phase, we also want to encourage you to share any ideas you may have about the website and/or service with
+                  us. We want to create a platform that best reflects the needs of the community, so don't be shy about reaching
+                  out to us. You can find ways to reach us in the site footer, in the Inquiries tab.
+                </p>
+              </div>
+              <div class="col-sm-6">
+                <p>
+                  MORE
+                </p>
+                <p>
+                  We sincerly hope you enjoy the mixr beta and greatly apperciate any feedback you may share with us.
+                </p>
+              </div>
+              <p class="lead text-center">Thank you, <br>The mixr development team</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--   *** TEXT END ***-->
+    {{#unless currentUser}}
+    <section class="signup-section text-center no-padding-bottom">
+      <div class="container container-dark">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="whiteText">The mixr beta is live!</h3>
+            <button id="signupBannerButton">Sign up!</button>
 
-				</div>
-			</div>
-		</div>
-	</section>
-	{{/unless}}
+          </div>
+        </div>
+      </div>
+    </section>
+    {{/unless}}
 
-	<footer class="footer">
-		<div class="footer__copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6" style="whitespace: nowrap;">
-						<ul class="list-inline">
-							&copy;mixr 2017
-							<li>
-								<a id="privacyModalLink">Privacy Policy</a>
-							</li>
-							<li>
-								<a id="termsModalLink">Terms and Conditions</a>
-							</li>
-							<li>
-								<a id="disclaimerModalLink">Beta Disclaimer</a>
-							</li>
-							<li>
-								<a id="disclaimerModalLink">Inquiries</a>
-							</li>
-							<li>
-								<a id="disclaimerModalLink">Jobs</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<p class="credit pull-right">Design by <a href="https://bootstrapious.com/landing-pages" class="external">Bootstrapious</a></p>
-						<!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-</div>
+    <footer class="footer">
+      <div class="footer__copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6" style="whitespace: nowrap;">
+              <ul class="list-inline">
+                &copy;mixr 2017
+                <li>
+                  <a id="privacyModalLink">Privacy Policy</a>
+                </li>
+                <li>
+                  <a id="termsModalLink">Terms and Conditions</a>
+                </li>
+                <li>
+                  <a id="inquiriesModalLink">Inquiries</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <p class="credit pull-right">Design by <a href="https://bootstrapious.com/landing-pages" class="external">Bootstrapious</a></p>
+              <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 </template>

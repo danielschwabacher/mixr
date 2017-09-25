@@ -1,6 +1,4 @@
 import '../../ui/helpers/notificationModalHelpers.js'
-import '../InfoBubble/infobubble-compiled.js'
-
 
 Marker = function(mapInstance, content){
 	this.map = mapInstance
@@ -28,6 +26,7 @@ Marker.prototype.createObjectMarker = function(){
 
 	google.maps.event.addListener(eventMarker, 'mouseover', () => {
 		updateSideBarLinks(eventMarker.get('id'))
+		// phaseMarkers(eventMarker.get('id'))
 	});
 
 	google.maps.event.addListener(eventMarker, 'mouseout', () => {

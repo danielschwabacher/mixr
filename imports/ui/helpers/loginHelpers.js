@@ -3,6 +3,7 @@ import '../templates/notificationModals.html';
 import '../templates/forgotPasswordModal.html';
 import '../../api/Notifications/notifyWrapper.js';
 
+
 Template.loginPage.events({
 	'click #loginButton'(event, template) {
 		event.preventDefault()
@@ -28,3 +29,21 @@ function attemptLoginClient(email, pwd){
 		}
 	});
 }
+
+
+// These are the events for the forgot password modal
+Template.forgotPasswordModal.events({
+  'click #forgotPasswordButton'(event, template) {
+    event.preventDefault()
+    var userEmail = document.getElementById('userEmail').value
+    Meteor.call('sendForgotPassword', userEmail, function(err) {
+      if (err){
+		  	notify("Invalid email: link was not sent", "danger", "center")
+      }
+      else{
+        Modal.hide(template)
+       	notify("Email reset link sent!", "success", "right")
+      }
+    });
+  }
+});

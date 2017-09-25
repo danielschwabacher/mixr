@@ -1,8 +1,10 @@
 import '../templates/mixrPrimaryMap.html';
 import '../templates/applyEventFilterModals.html'
+import '../templates/mapModal.html'
 import '../../api/mapHandlers/mainMap.js';
 import '../../api/Time/converter.js'
 import { EJSON } from 'meteor/ejson'
+import '../templates/mapModal.html';
 GLOBAL_MARKERS = []
 MAP = 0
 ALL_SHOWN_EVENTS = 0
@@ -45,7 +47,7 @@ Template.mixrEventMap.onRendered(function(){
 		var lastValidCenter = MAP.getCenter();
 
 		if (!BOULDER_BOUNDS.contains(MAP.getCenter())){
-			alert("Only Boulder is currently supported.")
+			Router.go("error")
 		}
 
 
@@ -162,18 +164,23 @@ Template.eventDisplay.helpers({
 
 Template.eventSection.events({
 	"click #eventSectionRegisterButton"(event, template){
+		notify("Registering...", "info", "right")
 		if (Meteor.user() && Meteor.user().emails[0].verified){
 			Meteor.call("registerEvent", this, function(err, didRegister){
 				if (didRegister == 1){
+					$.notifyClose();
 					notify("Registered successfully!", "success", "right")
 				}
 				else if (didRegister == 0){
+					$.notifyClose();
 					notify("Error: You are already registered for this event", "danger", "center")
 				}
 				else if (didRegister == -1){
+					$.notifyClose();
 					notify("Error: event is full", "danger", "center")
 				}
 				else{
+					$.notifyClose();
 					notify("Unknown error, please try again later.", "danger", "center")
 				}
 			});
@@ -183,7 +190,11 @@ Template.eventSection.events({
 		}
 	},
 	"click #eventSectionMoreInfoButton"(event, template){
+		// Session.set("modalContext", template)
 		Modal.show('eventInformationModal', this)
+	},
+	"click #eventSectionViewMapButton"(event, template){
+		Modal.show('mapModal')
 	},
 	"mouseenter .event-section-clickable-area"(event, template) {
 		removeMarkers()
@@ -192,10 +203,12 @@ Template.eventSection.events({
 				_id: this._id
 			}
 		);
-		singleMarker.forEach(function(currentEvent){
-			temp_marker = new Marker(MAP, currentEvent)
-			temp_marker.createObjectMarker()
-		});
+		if (MAP != 0){
+			singleMarker.forEach(function(currentEvent){
+				temp_marker = new Marker(MAP, currentEvent)
+				temp_marker.createObjectMarker()
+			});
+		}
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
 		showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
@@ -212,3 +225,30 @@ Template.applyEventFiltersSection.events({
 		Modal.show('sortByTimeEventFilterModal')
 	}
 });
+
+
+
+
+
+
+
+/*
+	This is for the embedded map modal stuff.
+	Meteor was not detecting this is a seperate file,
+	so it'll be here for now.
+*/
+/*
+Template.mapModal.helpers({
+	initModalMap: function() {
+		var latLng = Geolocation.latLng();
+		// Initialize the map once we have the latLng.
+		if (GoogleMaps.loaded() && latLng) {
+			return {
+				context: this,
+				center: new google.maps.LatLng(latLng.lat, latLng.lng),
+				zoom: 15
+			};
+		}
+	}
+});
+*/

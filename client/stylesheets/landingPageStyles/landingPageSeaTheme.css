@@ -1851,7 +1851,7 @@ a.badge:focus {
 }
 a.list-group-item.active > .badge,
 .nav-pills > .active > a > .badge {
-  color: #379392;
+  color: yellow;
   background-color: #ffffff;
 }
 .nav-pills > li > a > .badge {

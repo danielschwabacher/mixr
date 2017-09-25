@@ -1,3 +1,6 @@
+html,body{
+	height: 100%;
+}
 .btn-danger {
 	background-color: #DB2B39;
 	border-color: #DB2B39;
@@ -17,6 +20,11 @@
 	color: #000000;
 }
 
+.btn-info-secondary{
+	background-color: #A4D4B4;
+	border-color: #A4D4B4;
+	color: #000000;
+}
 .btn-danger:hover {
 	background-color: #9e1c26;
 	border-color: #9e1c26;
@@ -47,4 +55,23 @@
 .btn.btn-info:focus {
 	background-color: #a27500;
 	border-color: #a27500;
+}
+
+
+.header-center-main{
+	margin-top: 8%;
+	color: #282828;
+}
+
+.header-center{
+	margin-top: 1%;
+	color: #282828;
+}
+
+.huge{
+	text-align: center;
+}
+
+.spinner-container{
+	background-color: #A0F;
 }

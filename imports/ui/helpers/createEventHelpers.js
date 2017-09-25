@@ -95,8 +95,7 @@ Template.createEventPage.events({
 				else {
 					// Validation failed
 					// TODO: Make this some kind of failure notification
-					//
-					notify("Please correct all errors before proceeding", "danger", "center")
+					notify("Invalid name, location or description.", "danger", "center")
 				}
 			}
 		});
@@ -104,15 +103,17 @@ Template.createEventPage.events({
 
 
 	'click #resendEmailButton'(event, template) {
+		notify("Working...", "info", "right")		
 		Meteor.call('sendVerificationLink', (error, response) => {
  			if (error) {
+				$.notifyClose();
 				notify("Error: Could not send verification email", "danger", "center")
 			}
 			else{
+				$.notifyClose();
 				notify("Email verification link sent", "success", "right")
 			}
 		});
-		Router.go('home')
 	}
 });
 
