@@ -59,11 +59,16 @@ html,body{
 }
 
 
-.header-center{
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+.header-center-main{
+	margin-top: 8%;
+	color: #282828;
 }
+
+.header-center{
+	margin-top: 1%;
+	color: #282828;
+}
+
 .huge{
 	text-align: center;
 }
