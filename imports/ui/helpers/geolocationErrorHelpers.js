@@ -5,7 +5,6 @@ import '../templates/legalModals.html';
 
 Template.geolocationErrorPage.events({
     'click #tellUsLink'(event, template){
-        console.log("clicked.")
         Modal.show('inquiriesModal')
     }
 });

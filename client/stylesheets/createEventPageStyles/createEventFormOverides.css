@@ -63,6 +63,7 @@
 .create-event-page-main{
 	background-color: #A200FF;
 	height: 100%;
+	overflow-x: hidden;
 }
 
 .create-event-logo{
