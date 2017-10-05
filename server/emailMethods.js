@@ -44,16 +44,17 @@ Meteor.methods({
       };
 
       SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
-      if (currentUser && userEmail) {
-        Email.send({
-          to: userEmail,
-		      from: "Mixr Dev Team <notifications@mixrbeta.com>",
-          subject: emailSubject,
-          html: SSR.render('createEventEmail', emailData)
-        });
-      }
+      Meteor.defer(function(){
+        if (currentUser && userEmail) {
+          Email.send({
+            to: userEmail,
+            from: "Mixr Dev Team <notifications@mixrbeta.com>",
+            subject: emailSubject,
+            html: SSR.render('createEventEmail', emailData)
+          });
+        }
+      });
     }
-
   },
 
   // Sends the user an email when they register for an event with event details
@@ -131,14 +132,16 @@ Meteor.methods({
         }
 
         SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
-        if (currUser && currEmail){
-          Email.send({
-            to: currEmail,
- 			      from: "Mixr Dev Team <notifications@mixrbeta.com>",
-            subject: "An event you registered for has been removed!",
-            html: SSR.render('eventDeletedEmail', emailData)
-          });
-        }
+        Meteor.defer(function(){
+          if (currUser && currEmail){
+            Email.send({
+              to: currEmail,
+              from: "Mixr Dev Team <notifications@mixrbeta.com>",
+              subject: "An event you registered for has been removed!",
+              html: SSR.render('eventDeletedEmail', emailData)
+            });
+          }
+        });
       }
     });
   },
@@ -155,19 +158,22 @@ Meteor.methods({
     var emailText = "User " + userEmail + " has sent the following feedback:\n\n" + feedback
 
     if (currUser && userEmail){
-      Email.send({
-        to: sendAddress,
-		    from: "Mixr User <feedback@mixrbeta.com>",
-        subject: emailSubject,
-        text: emailText
+      Meteor.defer(function(){
+        Email.send({
+          to: sendAddress,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: emailSubject,
+          text: emailText
+        });
       });
-
-      Email.send({
-        to: userEmail,
-		    from: "Mixr Dev Team <notifications@mixrbeta.com>",
-        subject: returnSubject,
-        text: returnText
-      })
+      Meteor.defer(function(){
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: returnSubject,
+          text: returnText
+        });
+      });
     }
     return
   },

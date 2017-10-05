@@ -1,8 +1,10 @@
 <template name="pickLocationPage">
-	<div class="mapDirectionsCallout">
-		Click on the map below to select where you're hosting your event!
-	</div>
-	<div class="container-fluid full-height-map">
-		{{> googleMap name="mixrPickLocationMap" options=initLocationSelectMap}}
+	<div class="pickLocationPage">
+		<div class="mapDirectionsCallout">
+			Click on the map below to select where you're hosting your event!
+		</div>
+		<div class="container-fluid full-height-map">
+			{{> googleMap name="mixrPickLocationMap" options=initLocationSelectMap}}
+		</div>
 	</div>
 </template>

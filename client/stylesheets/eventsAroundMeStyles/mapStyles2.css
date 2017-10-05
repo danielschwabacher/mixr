@@ -4,7 +4,8 @@
 */
 @media (max-width:766px){
 	.event-container{
-		margin-top: 16px;
+		background-color: #A0F;
+		padding-top: 16px;
 		overflow-y: hidden;
 	}
 	.event-display-column{
@@ -27,7 +28,9 @@
 */
 @media (min-width: 766px) {
 	.event-container{
-		margin-top: 0px;
+		background-color: #A0F;
+		height: 96%;
+		padding-top: 2px;
 	}
 	.event-display-column{
 		height: calc(100vh - 80px);
@@ -44,6 +47,54 @@
 			display: none;
 	}
 }
+/* additonal padding between 773 and 1015 */ 
+
+@media (min-width: 766px) {
+	.event-container{
+		background-color: #A0F;
+		height: 96%;
+		padding-top: 2px;
+	}
+	.event-display-column{
+		height: calc(100vh - 80px);
+		background-color: #282929;
+	}
+	.event-display-column h4{
+		color: white;
+	}
+	.map-display-column{
+		height: calc(100vh - 80px);
+		background-color: white;
+	}
+	#eventSectionViewMapButton{
+			display: none;
+	}
+}
+
+/* additonal padding between 773 and 1015 */ 
+@media (min-width: 769px) and (max-width: 1015px){
+	.event-container{
+		background-color: #A0F;
+		height: 90%;
+		padding-top: 20px;
+	}
+	.event-display-column{
+		height: calc(100vh - 80px);
+		background-color: #282929;
+	}
+	.event-display-column h4{
+		color: white;
+	}
+	.map-display-column{
+		height: calc(100vh - 80px);
+		background-color: white;
+	}
+	#eventSectionViewMapButton{
+			display: none;
+	}
+}
+
+
 .map-hr{
 	width: 100%;
 	margin: 10px !important;
@@ -97,4 +148,11 @@
 .applyFilterDropDownUL{
 	background-color: #279AF1 !important;
 	border-radius: 10px;
+}
+
+.pickLocationPage{
+	padding-top: 2%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #A0F;
 }

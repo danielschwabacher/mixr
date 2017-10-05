@@ -1,3 +1,6 @@
+html,body{
+	height: 100%;
+}
 .btn-danger {
 	background-color: #DB2B39;
 	border-color: #DB2B39;
@@ -55,11 +58,20 @@
 }
 
 
-.header-center{
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+.header-center-main{
+	margin-top: 8%;
+	color: #282828;
 }
+
+.header-center{
+	margin-top: 1%;
+	color: #282828;
+}
+
 .huge{
 	text-align: center;
+}
+
+.spinner-container{
+	background-color: #A0F;
 }

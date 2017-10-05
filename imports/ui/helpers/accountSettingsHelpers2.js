@@ -15,19 +15,20 @@ Template.accountSettings.events({
 		$(".sideBarSettingLinks").removeClass('active');
 		$("#feedbackPaneLink").addClass('active');
 	},
-	'submit .changePasswordForm'(event, template) {
+	'submit #changePasswordForm'(event, template) {
 		event.preventDefault()
 		var oldPassword = event.target.currentPasswordChangePasswordModal.value;
 		var newPassword1 = event.target.newPassword1.value;
 		var newPassword2 = event.target.newPassword2.value;
+		notify("Working...", "info", "center")
 		if (newPassword1 == newPassword2){
-			notify("Working...", "info", "right")
 			Accounts.changePassword(oldPassword, newPassword1, function(err){
-				if (err){
+				if (err){			
+					$.notifyClose()
 					notify("Your password is incorrect", "danger", "center")
 				}
 				else{
-					Modal.hide()
+					$.notifyClose()
 					notify("Password changed successfully!", "success", "right")
 					event.target.currentPasswordChangePasswordModal.value = ""
 					event.target.newPassword1.value = ""
@@ -36,10 +37,13 @@ Template.accountSettings.events({
 			});
 		}
 		else{
+			$.notifyClose()
 			notify("Passwords do not match", "danger", "center")
 		}
 	},
-	'submit .updateEmailPreferencesForm'(event, template) {
+
+
+	'submit #updateEmailPreferencesForm'(event, template) {
 		event.preventDefault()
 		var createEventPref = $('#createdEventPref').is(':checked')
 		var registerEventPref = $('#registeredEventPref').is(':checked')
@@ -56,9 +60,13 @@ Template.accountSettings.events({
 				notify("Email preferences could not be updated at this time.", "danger", "center")
 				return
 			}
+			$.notifyClose()
 			notify("Email preferences updated successfully!", "success", "right")
 		});
 	},
+
+
+
 	'submit .sendFeedbackForm'(event, template) {
 		event.preventDefault()
 		var userFeedback = event.target.feedbackArea.value

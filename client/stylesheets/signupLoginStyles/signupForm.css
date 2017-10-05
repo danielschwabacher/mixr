@@ -16,7 +16,28 @@ Last change	: 2015/03/27
 7. Form - Main Message
 9. Misc
 -------------------------------------------------------------------*/
+.loginPageMain{
+  background-color: #A0F;
+  height: 100%;
+}
 
+.signupPageMain{
+  background-color: #A0F !important;
+  height: 100%;
+}
+
+.login-banner{
+	padding: 10px;
+	width: 63%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	border-radius: 20px;
+	margin-top: -1%;
+	color: white;
+	background-color: #282929;
+	font-size: 36px;
+	font-weight: bold;
+}
 /*=== 3. Text Outside the Box ===*/
 .etc-login-form {
 	text-align: center;
@@ -33,12 +54,13 @@ Last change	: 2015/03/27
 	border-radius: 5px;
 	display: inline-block;
 }
+
 @media(min-width: 1200px){
 	.login-form-1 {
 		width: 800px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 
 @media(min-width: 992px){
@@ -46,7 +68,7 @@ Last change	: 2015/03/27
 		width: 700px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 
 @media(min-width: 768px){
@@ -54,7 +76,7 @@ Last change	: 2015/03/27
 		min-width: 600px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 
 @media(max-width: 668px){
@@ -62,7 +84,7 @@ Last change	: 2015/03/27
 		min-width: 400px;
 		border-radius: 5px;
 		display: inline-block;
-	}
+  }
 }
 .main-login-form {
   position: relative;
@@ -200,7 +222,8 @@ label.form-invalid:after {
 	border-radius: 8px;
 }
 #registerButton:hover{
-	background-color: #A200FF;
+  background-color: #75DBCD;
+  color: black;
 }
 
 #loginButton{
@@ -210,14 +233,22 @@ label.form-invalid:after {
 	border-radius: 8px;
 }
 #loginButton:hover{
-	background-color: #A200FF;
+  background-color: #75DBCD;
+  color: black;
 }
 
 #clickwrapAgreement{
   color: black;
-  font-size: 14px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #clickwrapAgreement a{
   color: black;
+}
+
+#clickwrapAgreement a:hover{
+  color: white;
+  text-decoration: none;
 }
