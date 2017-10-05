@@ -70,13 +70,15 @@ Meteor.methods({
       var userEmail = currentUser.emails[0].address
       var link = Meteor.absoluteUrl() + "account"
       var emailSubject = "You've registered for '" + currentEvent.event_name + "' on Mixr!"
-      var eventDescription = "Event Description: " + currentEvent.event_description
+      var eventDescription = currentEvent.event_description
       var eventLocation = "Event Location: " + currentEvent.event_location
-      var eventDate = "Event Date: " + currentEvent.event_dateTime
-      var emailText = "Here are the details of the event you registered for!\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
+      var eventDate = currentEvent.event_dateTime
+      var emailText = "\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
 
       var emailData = {
-        message: emailText,
+        event_name: currentEvent.event_name,
+        event_date: eventDate,
+        event_desc: eventDescription,
         unsubscribeLink: link
       }
 
