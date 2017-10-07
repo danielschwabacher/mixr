@@ -79,3 +79,24 @@
 	font-weight: bold;
   }
   
+  .createEventRowUnverified{
+	  margin: 0;
+	  height: 100%;
+	  width: 100%;
+	  text-align: center;
+	  background-color: #A200FF;
+	  overflow-x: hidden !important;
+  }
+
+
+#resendEmailButton{
+	background-color: #282929;
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+#resendEmailButton:hover{
+	background-color: #75DBCD;
+	color: black;
+}

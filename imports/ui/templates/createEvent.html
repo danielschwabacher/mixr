@@ -84,12 +84,12 @@
     </div>
   </div>
   {{else}}
-  <div class="row">
+  <div class="row createEventRowUnverified">
     <div class="col-md-8 vcenter">
       <h1 class="header-center">You'll need to verify your account first</h1>
     </div>
     <div class="col-md-4 vcenter">
-      <button id="resendEmailButton" type="button" class="btn btn-success" autofocus>Resend verification email</button>
+      <input type="submit" value="Resend Verification Link" id="resendEmailButton" required/>        
     </div>
   </div>
   {{/if}}
