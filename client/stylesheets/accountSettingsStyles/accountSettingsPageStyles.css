@@ -13,7 +13,8 @@
 }
 
 .accountContainer{
-	height: 101%;
+	height: 100.1%;
+	overflow: hidden;
 	background-color: #A200FF;
 }
 
