@@ -5,10 +5,10 @@ Meteor.methods({
 
   // Sends the user an email verification link
   sendVerificationLink: function() {
-	let userID = Meteor.userId();
-	if (userID) {
-			return Accounts.sendVerificationEmail(userID);
-	}
+    let userID = Meteor.userId();
+    if (userID) {
+        return Accounts.sendVerificationEmail(userID);
+    }
   },
 
   // Sends the user a password reset email
