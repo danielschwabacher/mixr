@@ -12,7 +12,6 @@ Template.createEventPage.onRendered(function() {
 		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
-	// document.getElementById("maxRegistered").value = 1;
 	$('.btn-minus').on('click', function(){
 		if ($(this).parent().siblings('input').val() >= 2){
 			currentNumber = parseInt($(this).parent().siblings('input').val())
@@ -85,12 +84,14 @@ Template.createEventPage.events({
 			else{
 				if (response) {
 					// Validation was a success
-					clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
-					clientTempCachedEvent.createReference()
-					// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
-					// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
-					// used to confirm route in IronRouter
-					Router.go('pickLocation')
+					if ((document.getElementById('maxRegistered').value >= 2) || document.getElementById("maxRegistered").value == "NO MAXIMUM"){
+						clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
+						clientTempCachedEvent.createReference()
+						Router.go('pickLocation')
+					}
+					else{
+						notify("Minimum number of max registered is 2.", "danger", "center")
+					}
 				}
 				else {
 					// Validation failed
