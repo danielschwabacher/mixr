@@ -12,7 +12,7 @@ Template.createEventPage.onRendered(function() {
 		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
-	document.getElementById("maxRegistered").value = 1;
+	// document.getElementById("maxRegistered").value = 1;
 	$('.btn-minus').on('click', function(){
 		if ($(this).parent().siblings('input').val() >= 2){
 			currentNumber = parseInt($(this).parent().siblings('input').val())
