@@ -13,12 +13,9 @@ Template.createEventPage.onRendered(function() {
 		format: "ddd, MMM Do, h:mmA",
     });
 	$('.btn-minus').on('click', function(){
-		if ($(this).parent().siblings('input').val() >= 2){
+		if ($(this).parent().siblings('input').val() >= 1){
 			currentNumber = parseInt($(this).parent().siblings('input').val())
 			$(this).parent().siblings('input').val(currentNumber - 1)
-		}
-		else{
-			notify("Minimum number of attendees is 1", "danger", "center")
 		}
 	});
 
