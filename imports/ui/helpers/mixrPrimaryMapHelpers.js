@@ -19,6 +19,15 @@ showAllEvents = function(event_list, map_instance){
 }
 
 
+locationServicesEnabled = function(){
+	navigator.geolocation.getCurrentPosition(function(position){
+		return true;
+	}, function(error){
+		return false;
+	});
+}
+
+
 clearMarkerLists = function(){
 	ALL_SHOWN_EVENTS = []
 	ALL_SHOWN_EVENTS.length = 0
@@ -34,7 +43,6 @@ Template.mixrEventMap.onRendered(function(){
 	GoogleMaps.ready('mixrMap', function(map) {
 		MAP = map.instance
 		var latLng = Geolocation.latLng();
-
 		// Lat, Lng coordinate pairs which define the Boulder area
 		// bounding box.
 		var BOULDER_BOUNDS = new google.maps.LatLngBounds(
@@ -49,7 +57,6 @@ Template.mixrEventMap.onRendered(function(){
 		if (!BOULDER_BOUNDS.contains(MAP.getCenter())){
 			Router.go("error")
 		}
-
 
 		google.maps.event.addListener(MAP, 'dragend', function() {
 			if (BOULDER_BOUNDS.contains(MAP.getCenter())) {
@@ -94,6 +101,7 @@ Template.mixrEventMap.onRendered(function(){
 
 Template.mixrEventMap.helpers({
 	initPrimaryEventMapOptions: function() {
+		// alert("mixr needs location services to function.")
 		var latLng = Geolocation.latLng();
 		// Initialize the map once we have the latLng.
 		if (GoogleMaps.loaded() && latLng) {

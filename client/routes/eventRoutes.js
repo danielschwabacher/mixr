@@ -3,6 +3,7 @@ import '../../imports/ui/helpers/mixrPrimaryMapHelpers.js';
 import '../../imports/ui/helpers/createEventHelpers.js';
 import '../../imports/ui/helpers/pickLocationHelpers.js';
 import '../../imports/ui/templates/createEvent.html';
+import '../../imports/ui/templates/locationServicesErrorPage.html';
 
 Router.route('/events', {
 	onBeforeAction: function () {
@@ -55,5 +56,11 @@ Router.route('/pickLocation', {
 				Router.go('create')
 			}
 		}
+	}
+});
+
+Router.route('/locationError', {
+	onBeforeAction: function () {
+		this.render('locationServicesError')
 	}
 });
