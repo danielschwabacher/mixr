@@ -40,16 +40,15 @@ Meteor.methods({
       };
 
       SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
-      Meteor.defer(function(){
-        if (currentUser && userEmail) {
-          Email.send({
-            to: userEmail,
-            from: "Mixr Dev Team <notifications@mixrbeta.com>",
-            subject: emailSubject,
-            html: SSR.render('createEventEmail', emailData)
-          });
-        }
-      });
+      this.unblock();
+      if (currentUser && userEmail) {
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: emailSubject,
+          html: SSR.render('createEventEmail', emailData)
+        });
+      }
     }
   },
 
@@ -79,17 +78,14 @@ Meteor.methods({
       }
 
       SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
-      Meteor.defer(function(){
-        if (currentUser && userEmail){
-          Email.send({
-            to: userEmail,
-            from: "Mixr Dev Team <notifications@mixrbeta.com>",
-            subject: emailSubject,
-            html: SSR.render('registerForEvent', emailData)
-          });
-        }
-        console.log("email sent!")
-      });
+      if (currentUser && userEmail){
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: emailSubject,
+          html: SSR.render('registerForEvent', emailData)
+        });
+      }
     }
   },
 
@@ -130,16 +126,15 @@ Meteor.methods({
         }
 
         SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
-        Meteor.defer(function(){
-          if (currUser && currEmail){
-            Email.send({
-              to: currEmail,
-              from: "Mixr Dev Team <notifications@mixrbeta.com>",
-              subject: "An event you registered for has been removed!",
-              html: SSR.render('eventDeletedEmail', emailData)
-            });
-          }
-        });
+        this.unblock();
+        if (currUser && currEmail){
+          Email.send({
+            to: currEmail,
+            from: "Mixr Dev Team <notifications@mixrbeta.com>",
+            subject: "An event you registered for has been removed!",
+            html: SSR.render('eventDeletedEmail', emailData)
+          });
+        }
       }
     });
   },
@@ -156,21 +151,18 @@ Meteor.methods({
     var emailText = "User " + userEmail + " has sent the following feedback:\n\n" + feedback
 
     if (currUser && userEmail){
-      Meteor.defer(function(){
-        Email.send({
-          to: sendAddress,
-          from: "Mixr Dev Team <notifications@mixrbeta.com>",
-          subject: emailSubject,
-          text: emailText
-        });
+      this.unblock();
+      Email.send({
+        to: sendAddress,
+        from: "Mixr Dev Team <notifications@mixrbeta.com>",
+        subject: emailSubject,
+        text: emailText
       });
-      Meteor.defer(function(){
-        Email.send({
-          to: userEmail,
-          from: "Mixr Dev Team <notifications@mixrbeta.com>",
-          subject: returnSubject,
-          text: returnText
-        });
+      Email.send({
+        to: userEmail,
+        from: "Mixr Dev Team <notifications@mixrbeta.com>",
+        subject: returnSubject,
+        text: returnText
       });
     }
     return
