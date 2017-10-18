@@ -93,7 +93,7 @@ Meteor.methods({
   sendEventDeletedEmail: function(eventID) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    // this.unblock();  // Especially important here since the DB is being queried so much
+    this.unblock();  // Especially important here since the DB is being queried so much
     var delEvent = EventCollection.findOne(
       {
         _id: eventID
@@ -126,7 +126,6 @@ Meteor.methods({
         }
 
         SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
-        this.unblock();
         if (currUser && currEmail){
           Email.send({
             to: currEmail,
