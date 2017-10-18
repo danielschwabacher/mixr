@@ -4,6 +4,7 @@ import '../../api/Notifications/notifyWrapper.js'
 
 Template.createEventPage.onRendered(function() {
 	todayDate = new Date()
+	document.getElementById("maxRegistered").value = 2;
     $('.datetimepicker').datetimepicker({
 		defaultDate: todayDate,
 		minDate: todayDate,
@@ -13,9 +14,12 @@ Template.createEventPage.onRendered(function() {
 		format: "ddd, MMM Do, h:mmA",
     });
 	$('.btn-minus').on('click', function(){
-		if ($(this).parent().siblings('input').val() >= 1){
+		if ($(this).parent().siblings('input').val() > 2){
 			currentNumber = parseInt($(this).parent().siblings('input').val())
 			$(this).parent().siblings('input').val(currentNumber - 1)
+		}
+		else{
+			notify("Minimum number of max registered is 2.", "danger", "center")			
 		}
 	});
 
@@ -26,11 +30,12 @@ Template.createEventPage.onRendered(function() {
 
 	$('#noMaximumRegistrationCheckbox').change(function(){
 		if($(this).is(':checked')){
+			curr_val = document.getElementById("maxRegistered").value;					
 			document.getElementById("maxRegistered").value = "NO MAXIMUM";
 			$('.btn-plus').prop("disabled", true);
 			$('.btn-minus').prop("disabled", true);
 		} else {
-			document.getElementById("maxRegistered").value = 1;
+			document.getElementById("maxRegistered").value = curr_val;
 			$('.btn-plus').prop("disabled", false);
 			$('.btn-minus').prop("disabled", false);
 		}
