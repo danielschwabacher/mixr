@@ -13,10 +13,14 @@ Meteor.methods({
 
   // Sends the user a password reset email
   sendForgotPassword: function(userEmail) {
-      let userID = Accounts.findUserByEmail(userEmail)
-      if (userID) {
+      userID = Accounts.findUserByEmail(userEmail)
+      if (typeof userID !== undefined) {
+        if(userID !== null){
           Accounts.sendResetPasswordEmail(userID);
+          return false
+        }
       }
+      return true
   },
 
   // Sends the user an email when they create an event

@@ -38,7 +38,8 @@ Template.forgotPasswordModal.events({
     var userEmail = document.getElementById('userEmail').value
     Meteor.call('sendForgotPassword', userEmail, function(err) {
       if (err){
-		  	notify("Invalid email: link was not sent", "danger", "center")
+				Modal.hide(template)				
+		  	notify("We could not find an account with that email: link was not sent", "danger", "center")
       }
       else{
         Modal.hide(template)
