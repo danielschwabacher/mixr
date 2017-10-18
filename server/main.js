@@ -5,14 +5,14 @@ import './daemonTester.js'
 import './databaseTesting.js'
 Meteor.startup(() => {
 	smtp_creds = {
-		username: 'admin',   // eg: server@gentlenode.com
-		password: 'Zope123456^',   // eg: 3eeP1gtizk5eziohfervU
+		username: 'admin@emails.mixrbeta.com',   // eg: server@gentlenode.com
+		password: 'Zope123456',   // eg: 3eeP1gtizk5eziohfervU
 		server:   'smtp.mailgun.org',  // eg: mail.gandi.net
 		port: 587
 	  }
-	//process.env.MAIL_URL = 'smtp://postmaster%40emails.mixrbeta.com:9f5c1992954e0cbba1cadba72784975d@smtp.mailgun.org:587';
+	// process.env.MAIL_URL = 'smtp://postmaster%40emails.mixrbeta.com:9f5c1992954e0cbba1cadba72784975d@smtp.mailgun.org:587';
 	process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp_creds.username) + ':' + encodeURIComponent(smtp_creds.password) + '@' + encodeURIComponent(smtp_creds.server) + ':' + smtp_creds.port;
-	
+	console.log(process.env.MAIL_URL)
 
 	Meteor.publish('events', function(){
 		return EventCollection.find({}, {fields: {'created_by': 0, 'users_attending': 0}});
@@ -23,7 +23,7 @@ Meteor.startup(() => {
 	});
 
 	CrossReferenceSpider = new CrossReferenceDaemon()
-	
+
 	Meteor.setInterval(function(){
 		CrossReferenceSpider.purge()
 	}, 1800000);
