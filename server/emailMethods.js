@@ -202,7 +202,25 @@ Meteor.methods({
 
     var pref = [createEpref, registerEpref, deleteEpref]
     return pref
+  },
+
+  manualOverrideEmailVerification: function(){
+    /*
+      This function manually validates an email address.
+      Return codes:
+      0 - Override was successful.
+      1 - User is already verified
+      2 - Some other error
+    */
+    console.log('called')
+    if (Meteor.user().emails[0].verified){
+      console.log("already verified.")
+      return 1
+    }
+    if (!Meteor.user().emails[0].verified){
+      Meteor.users.update(Meteor.user(), {$set: {"emails.0.verified": "true"}});
+      return 0
+    }
+    return 2
   }
-
-
 });

@@ -107,8 +107,8 @@ Template.createEventPage.events({
 
 	'click #resendEmailButton'(event, template) {
 		notify("Working...", "info", "right")		
-		Meteor.call('sendVerificationLink', (error, response) => {
- 			if (error) {
+		Meteor.call('sendVerificationLink', function(err){
+ 			if (err) {
 				$.notifyClose();
 				notify("Error: Could not send verification email", "danger", "center")
 			}

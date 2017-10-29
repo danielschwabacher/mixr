@@ -86,23 +86,23 @@ Router.route('/verify/:token', {
 	action: 'attemptVerification'
 });
 
+Router.route('/verifyOverride', {
+	onBeforeAction: function(){
+		this.render("loadingSpinner")
+		Meteor.call("manualOverrideEmailVerification", function(error, resp){
+			if (resp == 1){
+				Router.go("verificationError")
+				notify("Email is already verified.", "success", "right")
 
-/*
-Router.map(function () {
-	this.route('verifyEmail', {
-		controller: 'VerificationController',
-		path: '/verify/:token',
-		action: 'verifyEmail'
-	});
-});
-
-
-AccountController = RouteController.extend({
-	verifyEmail: function () {
-		Accounts.verifyEmail(this.params.token, function () {
-			console.log("called verify");
-			Router.go('/');
+			}
+			if (resp == 0){
+				Router.go("home")
+				notify("Email was verified, enjoy the beta!", "success", "right")				
+			}
+			if (resp == 2){
+				Router.go("verficationError")				
+				notify("Unknown error, try again later", "danger", "center")				
+			}
 		});
 	}
 });
-*/

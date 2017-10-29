@@ -5,7 +5,10 @@
 </template>
 
 <template name="VerificationPageError">
-    <div>
+    <div class="errorPageMain">
         Error, account could not be verified at this time.
+        <br>
+        <span id="subtext">We know that there are some problems with our email verification system. If you clicked the email link and were brought to this page, click here:</span>
+        <input type="submit" value="Reattempt Verification" id="verifyOverrideButton" required/>        
     </div> 
 </template>
