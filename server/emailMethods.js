@@ -212,9 +212,7 @@ Meteor.methods({
       1 - User is already verified
       2 - Some other error
     */
-    console.log('called')
     if (Meteor.user().emails[0].verified){
-      console.log("already verified.")
       return 1
     }
     if (!Meteor.user().emails[0].verified){
