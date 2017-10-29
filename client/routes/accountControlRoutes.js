@@ -61,7 +61,7 @@ Router.route('verificationError', {
 
 VerificationController = RouteController.extend({
 	onBeforeAction: function(){
-		this.render('VerificationPage')
+		this.render('loadingSpinner')
 		this.next()
 	},
 	attemptVerification: function(){
