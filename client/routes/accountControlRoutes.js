@@ -2,7 +2,10 @@ import '../../imports/ui/helpers/navbarHelpers.js';
 import '../../imports/ui/helpers/signupHelpers.js';
 import '../../imports/ui/helpers/loginHelpers.js';
 import '../../imports/ui/helpers/loadingSpinnerHelpers.js';
+import '../../imports/ui/helpers/verifyEmailHelpers.js';
+import '../../imports/api/Notifications/notifyWrapper.js';
 import './eventRoutes.js'
+
 
 // if user is not already logged in, go to the signup page
 Router.route('/signup', {
@@ -49,3 +52,57 @@ Router.route('/logout', {
 		}
 	}
 });
+
+Router.route('verificationError', {
+	onBeforeAction: function(){
+		this.render("VerificationPageError")
+	}
+});
+
+VerificationController = RouteController.extend({
+	onBeforeAction: function(){
+		this.render('VerificationPage')
+		this.next()
+	},
+	attemptVerification: function(){
+		console.log("token is: " + this.params.token)
+		Accounts.verifyEmail(this.params.token, function(err){
+		if (err){
+			console.log("Could not verify" + err);
+			Router.go('verificationError')
+		}
+		else{
+			console.log("Email was verified!")
+			Router.go("home")
+			notify("Email was verified, enjoy the beta!", "success", "right")			
+		}
+	});
+	}
+});
+
+Router.route('/verify/:token', {
+	controller: 'VerificationController',
+	path: '/verify/:token',
+	action: 'attemptVerification'
+});
+
+
+/*
+Router.map(function () {
+	this.route('verifyEmail', {
+		controller: 'VerificationController',
+		path: '/verify/:token',
+		action: 'verifyEmail'
+	});
+});
+
+
+AccountController = RouteController.extend({
+	verifyEmail: function () {
+		Accounts.verifyEmail(this.params.token, function () {
+			console.log("called verify");
+			Router.go('/');
+		});
+	}
+});
+*/

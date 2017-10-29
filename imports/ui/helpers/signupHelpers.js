@@ -78,12 +78,14 @@ createNewMixrAccount = function(userData){
 		}
 		else{
 			// This sends a verification email to users
-			Meteor.call('sendVerificationLink', (error, response) => {
-				if (error) {
-					console.log("Error sending verification email " + response);
+			Meteor.call('sendVerificationLink', function(err){
+				if (err) {
+					console.log("Error sending verification email " + err);
+				}
+				else{
+					notify('Account created successfully, check your email', "success", "right")	
 				}
 			});
-			notify('Account created successfully', "success", "right")
 		}
 		return;
 	});

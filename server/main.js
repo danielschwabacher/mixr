@@ -4,14 +4,18 @@ import './crossReferenceTableDaemon.js'
 import './daemonTester.js'
 import './databaseTesting.js'
 Meteor.startup(() => {
+	Accounts.urls.verifyEmail = function(token){
+		return Meteor.absoluteUrl("verify/" + token);
+	  };
 	smtp_creds = {
 		username: 'admin@emails.mixrbeta.com',   // eg: server@gentlenode.com
 		password: 'Zope123456',   // eg: 3eeP1gtizk5eziohfervU
 		server:   'smtp.mailgun.org',  // eg: mail.gandi.net
 		port: 587
 	  }
-	// process.env.MAIL_URL = 'smtp://postmaster%40emails.mixrbeta.com:9f5c1992954e0cbba1cadba72784975d@smtp.mailgun.org:587';
+	
 	process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp_creds.username) + ':' + encodeURIComponent(smtp_creds.password) + '@' + encodeURIComponent(smtp_creds.server) + ':' + smtp_creds.port;
+	
 	console.log(process.env.MAIL_URL)
 
 	Meteor.publish('events', function(){
