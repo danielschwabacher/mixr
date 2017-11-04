@@ -33,8 +33,8 @@ Meteor.methods({
 
     if (emailPreference) {
       var userEmail = currentUser.emails[0].address;
-      var emailText = "'" + eventTitle + "' is now live on Mixr!"
-      var emailSubject = "New event created on Mixr"
+      var emailText = "'" + eventTitle + "' is now live on mixr!"
+      var emailSubject = "New event created on mixr"
       var link = Meteor.absoluteUrl() + "account"
 
       var emailData = {
@@ -68,7 +68,7 @@ Meteor.methods({
     if (emailPreference) {
       var userEmail = currentUser.emails[0].address
       var link = Meteor.absoluteUrl() + "account"
-      var emailSubject = "You've registered for '" + currentEvent.event_name + "' on Mixr!"
+      var emailSubject = "You've registered for '" + currentEvent.event_name + "' on mixr! We hope you enjoy the event!"
       var eventDescription = currentEvent.event_description
       var eventLocation = "Event Location: " + currentEvent.event_location
       var eventDate = currentEvent.event_dateTime
@@ -147,7 +147,7 @@ Meteor.methods({
     var currUser = Meteor.user()
     var userEmail = Meteor.user().emails[0].address
     var returnSubject = "We received your feedback!"
-    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to address your concerns. \n\nSincerely,\nThe Mixr Dev Team"
+    var returnText = "Thank you for your interest in Mixr!  We have received your feedback and will do our best to address your concerns. \n\nSincerely,\nThe mixr Dev Team"
 
     var sendAddress = "mixrdev123456@gmail.com"
     var emailSubject = "User Feedback"
