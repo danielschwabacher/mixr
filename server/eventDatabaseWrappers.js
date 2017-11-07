@@ -3,6 +3,7 @@
 //userEvents collection
 Meteor.methods({
 	insertEvent: function(eventToInsert, expiration){
+		console.log("Inserting event...");
 		expirationTime = moment((expiration*1000)).toDate()
 		EventCollection.insert({
 			"expireAt": new Date(expirationTime),
@@ -47,6 +48,7 @@ Meteor.methods({
 		// User must not own event and must not already be registered
 		// Event must be able to accomodate another person attending.
 		// eg. (current_attending < max_attending)
+		console.log("Registering for event...");
 		event_dateTime = eventToUpdate.eventDateTime
 		var isOwner = UserEventsCrossReferenceCollection.findOne(
 			{
@@ -63,6 +65,7 @@ Meteor.methods({
 		)
 		// This is the event with the corresponding ID.
 		// Used to get max and current registrations.
+		console.log("gettign event id");
 		var eventContext = EventCollection.findOne(
 			{'_id': eventToUpdate._id}
 		)
@@ -78,6 +81,7 @@ Meteor.methods({
 		if (!eventCanBeRegisteredFor){
 			return -1
 		}
+		console.log("GOt event id. Checking bools.");		
 		if (!isOwner && !isRegistered && eventCanBeRegisteredFor){
 			// Increment the number of users attending the associative event
 			EventCollection.update(
@@ -93,6 +97,8 @@ Meteor.methods({
 					}
 				}
 			);
+			console.log("After first eventcoll call.");		
+			
 			// add the eventId to the user's registered section
 			UserEventsCrossReferenceCollection.update(
 				{user: Meteor.userId()},
@@ -111,11 +117,16 @@ Meteor.methods({
 					}
 				}
 			)
+			console.log("Updating cross reference table.");					
 			// call method to send email to user with the details of event
 			// IMPORTANT: this causes unexpected notify behavior (Error: you are already registered) when emailing accounts which aren't sandbox verified.
+			console.log("about to send email");		
 			Meteor.call('sendRegisteredForEventEmail', eventToUpdate, function(err){
 				if (err){
 					return -2
+				}
+				else{
+					console.log("no err in send")
 				}
 			});
 			console.log("Registered for event success!")
@@ -131,6 +142,7 @@ Meteor.methods({
 	// decrease the number attending by 1 in the big Events table
 	// remove reference to event in user's crossReference table
 	unregisterEvent: function(eventId){
+		console.log("Unregistering for event...");
 		EventCollection.update(
 			{_id: eventId},
 			{
@@ -163,6 +175,7 @@ Meteor.methods({
 	// remove EVERY reference to event in every users collection
 	deleteEvent: function(eventId){
 		// Call method to tell all registered users the event has been deleted
+		console.log("Deleting event...");
 		Meteor.call('sendEventDeletedEmail', eventId, function(err) {
 			if (err){
 				console.log('Email was NOT sent successfully' + err)

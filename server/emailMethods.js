@@ -29,6 +29,7 @@ Meteor.methods({
     // without waiting for the email sending to complete.
     // this.unblock();
     var currentUser = Meteor.user();
+    console.log("Sending created event email");
     var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
     if (emailPreference) {
@@ -61,7 +62,7 @@ Meteor.methods({
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     // this.defer();
-
+    console.log("Sending registering event email"); 
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
 
@@ -81,13 +82,16 @@ Meteor.methods({
       }
 
       SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
+      console.log("before email send");
       if (currentUser && userEmail){
+        console.log("if bool passed");
         Email.send({
           to: userEmail,
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: emailSubject,
           html: SSR.render('registerForEvent', emailData)
         });
+        console.log("email should be sent");
       }
     }
   },
@@ -96,6 +100,8 @@ Meteor.methods({
   sendEventDeletedEmail: function(eventID) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
+    console.log("Sending deleted event email");
+    
     this.unblock();  // Especially important here since the DB is being queried so much
     var delEvent = EventCollection.findOne(
       {
