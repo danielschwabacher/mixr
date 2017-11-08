@@ -41,6 +41,7 @@ Template.forgotPasswordModal.events({
       if (result){
         Modal.hide(template)
 				notify("Email reset link sent!", "success", "right")
+				document.getElementById("forgotPasswordButton").disabled = false;				
       }
       else{
 				Modal.hide(template)				
@@ -48,6 +49,6 @@ Template.forgotPasswordModal.events({
 				console.log("err: " + err)
 				document.getElementById("forgotPasswordButton").disabled = false;
       }
-    });
-  }
+		});	
+	}
 });
