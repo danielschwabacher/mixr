@@ -2,7 +2,6 @@
 // such as email verification, resetting password, and whatever else may come along
 
 Meteor.methods({
-
   // Sends the user an email verification link
   sendVerificationLink: function() {
     this.unblock()
@@ -84,7 +83,6 @@ Meteor.methods({
 
       SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
       if (currentUser && userEmail){
-        console.log("if bool passed");
         var startTime = new Date();
         this.unblock()
         Email.send({
@@ -95,6 +93,7 @@ Meteor.methods({
         });
       }
     }
+    console.log("Reached end of the function: sendCreatedEventEmail");    
     return 1;
   },
 

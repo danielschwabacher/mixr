@@ -43,13 +43,13 @@ Meteor.methods({
 				)
 			}
 		});
-		Meteor.call('sendCreatedEventEmail', eventToInsert.event_name, function(err, result){
+		Meteor.call('sendCreatedEventEmail', eventToInsert.eventName, function(err, result){
 			if (err){
 				return -2
 			}
 			else{
 				console.log("No error detected in sendCreatedEventEmail")
-				console.log("Code " + result)
+				console.log("Created event email sent!")
 			}
 		});
 		console.log("Successfully inserted event!");									
@@ -134,10 +134,9 @@ Meteor.methods({
 				}
 				else{
 					console.log("No error detected in sendRegisteredForEventEmail")
-					console.log("Code " + result)
+					console.log("Registered for event success!")
 				}
 			});
-			console.log("Registered for event success!")
 			return 1;
 		}
 

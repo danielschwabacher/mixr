@@ -1,7 +1,4 @@
-// If you change this, update the METEOR_SETTINGS env var on Heroku.
 {
-	"private": {
-		"googleMapsKey": "AIzaSyAox36VrlsVU2wRfAJ8R94ysdsFts9o1EU"
-	}
+	"googleMapsKey": "AIzaSyA_nRtAJNFRutvgfKh6rl6tOqyLsf_gJNI"
 }
 
