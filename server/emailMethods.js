@@ -61,7 +61,6 @@ Meteor.methods({
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    // this.defer();
     console.log("Sending registering event email"); 
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
@@ -85,6 +84,9 @@ Meteor.methods({
       console.log("before email send");
       if (currentUser && userEmail){
         console.log("if bool passed");
+        var startTime = new Date();
+        this.unblock()
+        console.log("time is: " + startTime);
         Email.send({
           to: userEmail,
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
@@ -94,6 +96,8 @@ Meteor.methods({
         console.log("email should be sent");
       }
     }
+    var endTime = new Date()
+    return endTime
   },
 
   // Sends the user an email when an event they're registered for is deleted
@@ -101,7 +105,6 @@ Meteor.methods({
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     console.log("Sending deleted event email");
-    
     this.unblock();  // Especially important here since the DB is being queried so much
     var delEvent = EventCollection.findOne(
       {
