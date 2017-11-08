@@ -5,10 +5,10 @@ Meteor.methods({
 
   // Sends the user an email verification link
   sendVerificationLink: function() {
-    let userID = Meteor.userId();
-    if (userID) {
-
-        Accounts.sendVerificationEmail(userID);
+    this.unblock()
+    let userId = Meteor.userId();
+    if (userId) {
+        Accounts.sendVerificationEmail(userId);
     }
   },
 
@@ -29,7 +29,7 @@ Meteor.methods({
     // without waiting for the email sending to complete.
     // this.unblock();
     var currentUser = Meteor.user();
-    console.log("Sending created event email");
+    console.log("Called sendCreatedEventEmail");
     var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
     if (emailPreference) {
@@ -47,6 +47,7 @@ Meteor.methods({
       SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
       this.unblock();
       if (currentUser && userEmail) {
+        console.log("Calling send in sendCreatedEventEmail");
         Email.send({
           to: userEmail,
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
@@ -55,13 +56,14 @@ Meteor.methods({
         });
       }
     }
+    console.log("Reached end of the function: sendCreatedEventEmail");
   },
 
   // Sends the user an email when they register for an event with event details
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    console.log("Sending registering event email"); 
+    console.log("Called sendRegisteredForEventEmail"); 
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
 
@@ -81,23 +83,19 @@ Meteor.methods({
       }
 
       SSR.compileTemplate('registerForEvent', Assets.getText('registerForEvent.html'))
-      console.log("before email send");
       if (currentUser && userEmail){
         console.log("if bool passed");
         var startTime = new Date();
         this.unblock()
-        console.log("time is: " + startTime);
         Email.send({
           to: userEmail,
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: emailSubject,
           html: SSR.render('registerForEvent', emailData)
         });
-        console.log("email should be sent");
       }
     }
-    var endTime = new Date()
-    return endTime
+    return 1;
   },
 
   // Sends the user an email when an event they're registered for is deleted
