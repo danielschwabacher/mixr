@@ -7,20 +7,20 @@ Meteor.methods({
   sendVerificationLink: function() {
     let userID = Meteor.userId();
     if (userID) {
+
         Accounts.sendVerificationEmail(userID);
     }
   },
 
   // Sends the user a password reset email
   sendForgotPassword: function(userEmail) {
-      userID = Accounts.findUserByEmail(userEmail)
-      if (typeof userID !== undefined) {
-        if(userID !== null){
-          Accounts.sendResetPasswordEmail(userID);
-          return false
-        }
-      }
-      return true
+    this.unblock()
+    userId = Accounts.findUserByEmail(userEmail)
+    if (userId) {
+        Accounts.sendResetPasswordEmail(userId);
+        return true
+    }
+    return false
   },
 
   // Sends the user an email when they create an event
@@ -101,59 +101,21 @@ Meteor.methods({
   },
 
   // Sends the user an email when an event they're registered for is deleted
-  sendEventDeletedEmail: function(eventID) {
+  sendEventDeletedEmail: function(currEmail, emailData) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    console.log("Sending deleted event email");
-    this.unblock();  // Especially important here since the DB is being queried so much
-    var delEvent = EventCollection.findOne(
-      {
-        _id: eventID
-      }
-    )
-    var eName = delEvent.event_name
-    var eLocation = delEvent.event_location
-    var eDate = delEvent.event_dateTime
-    var numRegistered = delEvent.number_of_users_attending
-    // Find every user registered to this event and notify them it was deleted
-    var registeredUsers = UserEventsCrossReferenceCollection.find(
-      {
-        'registered_events.eventId': eventID
-      }
-    )
-    // Send email to every user that was registered for the event
-    registeredUsers.forEach(function(doc) {
-      let currUserID = doc.user
-      let currUser = Meteor.users.findOne(
-        {
-          _id: currUserID
-        }
-      )
-      let currEmail = currUser.emails[0].address
-      var emailPreference = currUser.profile.custom_email_preferences.event_deleted
-
-      if (emailPreference) {
-        var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted.\n\n\nAt the time of deletion, there were " + numRegistered + " people who RSVPed.\n\n\nAt mixr, we are actively working on better ways to handle deleted events, for now, however, we apologize for any inconvenience this may cause."
-
-        var emailData = {
-          message: emailText
-        }
-
-        SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
-        if (currUser && currEmail){
-          Email.send({
-            to: currEmail,
-            from: "Mixr Dev Team <notifications@mixrbeta.com>",
-            subject: "An event you registered for has been removed!",
-            html: SSR.render('eventDeletedEmail', emailData)
-          });
-        }
-      }
-    });
+      console.log("Sending deleted event email");
+      SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
+      this.unblock()
+        Email.send({
+          to: currEmail,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: "An event you registered for has been removed!",
+          html: SSR.render('eventDeletedEmail', emailData)
+        });
   },
 
   sendUserFeedback: function(feedback) {
-    // this.unblock()
     var currUser = Meteor.user()
     var userEmail = Meteor.user().emails[0].address
     var returnSubject = "We received your feedback!"

@@ -35,15 +35,18 @@ function attemptLoginClient(email, pwd){
 Template.forgotPasswordModal.events({
   'click #forgotPasswordButton'(event, template) {
     event.preventDefault()
-    var userEmail = document.getElementById('userEmail').value
-    Meteor.call('sendForgotPassword', userEmail, function(err) {
-      if (err){
-				Modal.hide(template)				
-		  	notify("We could not find an account with that email: link was not sent", "danger", "center")
+		var userEmail = document.getElementById('userEmail').value
+		document.getElementById("forgotPasswordButton").disabled = true;
+    Meteor.call('sendForgotPassword', userEmail, function(err, result) {
+      if (result){
+        Modal.hide(template)
+				notify("Email reset link sent!", "success", "right")
       }
       else{
-        Modal.hide(template)
-       	notify("Email reset link sent!", "success", "right")
+				Modal.hide(template)				
+				notify("We could not find an account with that email: link was not sent", "danger", "center")
+				console.log("err: " + err)
+				document.getElementById("forgotPasswordButton").disabled = false;
       }
     });
   }

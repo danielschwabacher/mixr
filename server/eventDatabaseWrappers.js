@@ -177,12 +177,45 @@ Meteor.methods({
 	deleteEvent: function(eventId){
 		// Call method to tell all registered users the event has been deleted
 		console.log("Deleting event...");
-		Meteor.call('sendEventDeletedEmail', eventId, function(err) {
-			if (err){
-				console.log('Email was NOT sent successfully' + err)
+		var delEvent = EventCollection.findOne(
+			{
+			  _id: eventId
 			}
-		});
+		)
+		var eName = delEvent.event_name
+		var eLocation = delEvent.event_location
+		var eDate = delEvent.event_dateTime
+		var numRegistered = delEvent.number_of_users_attending
 
+		// Find the registered users, so we can send each of them an email
+		var registeredUsers = UserEventsCrossReferenceCollection.find(
+			{
+			  'registered_events.eventId': eventId
+			}
+		);
+
+		registeredUsers.forEach(function(doc) {
+				let currUserID = doc.user
+				let currUser = Meteor.users.findOne(
+					{
+					_id: currUserID
+					}
+				)
+				let currEmail = currUser.emails[0].address
+				var emailPreference = currUser.profile.custom_email_preferences.event_deleted
+			
+				if (emailPreference) {
+					var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted.\n\n\nAt the time of deletion, there were " + numRegistered + " people who RSVPed.\n\n\nAt mixr, we are actively working on better ways to handle deleted events, for now, however, we apologize for any inconvenience this may cause."
+					var emailData = {
+						message: emailText
+					}
+					Meteor.call('sendEventDeletedEmail', currEmail, emailData, function(err) {
+						if (err){
+							console.log('Email was NOT sent successfully' + err)
+						}
+					});
+				}
+		});
 		EventCollection.remove(
 			{_id: eventId},
 		)
