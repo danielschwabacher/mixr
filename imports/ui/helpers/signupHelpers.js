@@ -72,18 +72,22 @@ Template.signupPage.events({
 });
 
 createNewMixrAccount = function(userData){
+	notify("Creating account...", "info", "right");	
 	var newUserCreated = Accounts.createUser(userData, function(err){
 		if (err) {
+			$.notifyClose()
 			notify('Account could not be created, email already in use', "danger", "center")
 		}
 		else{
 			// This sends a verification email to users
-			Meteor.call('sendVerificationLink', function(err){
-				if (err) {
-					console.log("Error sending verification email " + err);
+			Meteor.call('sendVerificationLink', function(err, result){
+				if (result) {
+					$.notifyClose()
+					notify('Account created successfully, check your email', "success", "right")	
 				}
 				else{
-					notify('Account created successfully, check your email', "success", "right")	
+					$.notifyClose()
+					notify("Verification email could not be sent at this time", "danger", "center")
 				}
 			});
 		}

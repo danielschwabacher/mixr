@@ -8,7 +8,9 @@ Meteor.methods({
     let userId = Meteor.userId();
     if (userId) {
         Accounts.sendVerificationEmail(userId);
+        return true
     }
+    return false
   },
 
   // Sends the user a password reset email
