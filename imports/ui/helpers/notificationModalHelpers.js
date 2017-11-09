@@ -32,14 +32,6 @@ Template.confirmEventModal.events({
 		Meteor.call("insertEvent", fullEventToConfirm, eventExpiration, function (err, didInsert){
 			if (didInsert){
 				notify("Event created successfully!", "success", "right")
-				Meteor.call('sendCreatedEventEmail', eventName, function(err){
-					if(err){
-						notify("Error: Could not send event reference email", "danger", "center")
-					}
-					else {
-						notify("Event reference email sent!", "success", "right")
-					}
-				});
 			}
 			else{
 				notify("Error: Could not create event, please try again", "danger", "center")

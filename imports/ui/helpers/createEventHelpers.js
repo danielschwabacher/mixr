@@ -4,6 +4,7 @@ import '../../api/Notifications/notifyWrapper.js'
 
 Template.createEventPage.onRendered(function() {
 	todayDate = new Date()
+	document.getElementById("maxRegistered").value = 2;
     $('.datetimepicker').datetimepicker({
 		defaultDate: todayDate,
 		minDate: todayDate,
@@ -12,14 +13,13 @@ Template.createEventPage.onRendered(function() {
 		stepping: 1,
 		format: "ddd, MMM Do, h:mmA",
     });
-	document.getElementById("maxRegistered").value = 1;
 	$('.btn-minus').on('click', function(){
-		if ($(this).parent().siblings('input').val() >= 2){
+		if ($(this).parent().siblings('input').val() > 2){
 			currentNumber = parseInt($(this).parent().siblings('input').val())
 			$(this).parent().siblings('input').val(currentNumber - 1)
 		}
 		else{
-			notify("Minimum number of attendees is 1", "danger", "center")
+			notify("Minimum number of max registered is 2.", "danger", "center")			
 		}
 	});
 
@@ -30,11 +30,12 @@ Template.createEventPage.onRendered(function() {
 
 	$('#noMaximumRegistrationCheckbox').change(function(){
 		if($(this).is(':checked')){
+			curr_val = document.getElementById("maxRegistered").value;					
 			document.getElementById("maxRegistered").value = "NO MAXIMUM";
 			$('.btn-plus').prop("disabled", true);
 			$('.btn-minus').prop("disabled", true);
 		} else {
-			document.getElementById("maxRegistered").value = 1;
+			document.getElementById("maxRegistered").value = curr_val;
 			$('.btn-plus').prop("disabled", false);
 			$('.btn-minus').prop("disabled", false);
 		}
@@ -85,12 +86,14 @@ Template.createEventPage.events({
 			else{
 				if (response) {
 					// Validation was a success
-					clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
-					clientTempCachedEvent.createReference()
-					// console.log("timestamp in object: " + clientTempCachedEvent.eventTimeStamp)
-					// TODO: VALIDATE INPUT MAKE INPUTS REQUIRED
-					// used to confirm route in IronRouter
-					Router.go('pickLocation')
+					if ((document.getElementById('maxRegistered').value >= 2) || document.getElementById("maxRegistered").value == "NO MAXIMUM"){
+						clientTempCachedEvent = new CachedEvent(eventName, eventLocation, eventDescription, eventDateTime, eventTimeStamp, eventTagShortened, eventMaxRegistered)
+						clientTempCachedEvent.createReference()
+						Router.go('pickLocation')
+					}
+					else{
+						notify("Minimum number of max registered is 2.", "danger", "center")
+					}
 				}
 				else {
 					// Validation failed
@@ -104,8 +107,8 @@ Template.createEventPage.events({
 
 	'click #resendEmailButton'(event, template) {
 		notify("Working...", "info", "right")		
-		Meteor.call('sendVerificationLink', (error, response) => {
- 			if (error) {
+		Meteor.call('sendVerificationLink', function(err){
+ 			if (err) {
 				$.notifyClose();
 				notify("Error: Could not send verification email", "danger", "center")
 			}

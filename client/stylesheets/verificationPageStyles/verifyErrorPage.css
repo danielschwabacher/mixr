@@ -1,0 +1,23 @@
+.errorPageMain{
+    height: 100%;
+    padding: 5%;
+    background-color: #A200FF;
+    font-weight: bold;
+    text-align: center;
+    font-size: 48px;
+    color: white;
+}
+#subtext{
+    font-size: 30px;
+}
+
+#verifyOverrideButton{
+	background-color: #282929;
+	margin-top: 10px;
+	padding: 10px;
+	border-radius: 8px;
+}
+#verifyOverrideButton:hover{
+  background-color: #75DBCD;
+  color: black;
+}
