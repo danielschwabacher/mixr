@@ -17,13 +17,13 @@ Lumberjack = function(level){
 
 Lumberjack.prototype.log = function(log_data){
     if (this.level == "INFO"){
-        console.log("---Log level: INFO---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "---END INFO LOG---")
+        console.log("---Log level: INFO---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "\n---END INFO LOG---")
     }
     if (this.level == "WARN"){
-        console.log("---Log level: WARN---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "---END WARNING LOG---")
+        console.log("---Log level: WARN---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "\n---END WARNING LOG---")
         
     }
     if (this.level == "ERR"){
-        console.error("---Log level: ERROR---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "---END ERROR LOG---")       
+        console.error("---Log level: ERROR---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "\n---END ERROR LOG---")       
     }
 }
