@@ -16,7 +16,7 @@ Meteor.startup(() => {
 	
 	process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp_creds.username) + ':' + encodeURIComponent(smtp_creds.password) + '@' + encodeURIComponent(smtp_creds.server) + ':' + smtp_creds.port;
 	
-	console.log(process.env.MAIL_URL)
+	server_logger.info(process.env.MAIL_URL)
 
 	Meteor.publish('events', function(){
 		return EventCollection.find({}, {fields: {'created_by': 0, 'users_attending': 0}});
