@@ -5,7 +5,7 @@ import "./lumberjack.js"
 import "./loggers.js"
 Meteor.methods({
 	insertEvent: function(eventToInsert, expiration){
-		server_info_logger.log("Inserting event: " + eventToInsert.eventName)
+		server_logger.info("Inserting event: " + eventToInsert.eventName)
 		expirationTime = moment((expiration*1000)).toDate()
 		EventCollection.insert({
 			"expireAt": new Date(expirationTime),
@@ -21,7 +21,7 @@ Meteor.methods({
 			number_of_users_attending: 1
 		}, function(err, eventId){
 			if (err){
-				server_error_logger.log("Error updating EventCollection")
+				server_logger.error("Error updating EventCollection")
 				return 0;
 			}
 			else{
@@ -38,7 +38,7 @@ Meteor.methods({
 					{upsert: true},
 					function(err, eventId){
 						if (err){
-							server_error_logger.log("Error updating CrossReferenceTable")
+							server_logger.error("Error updating CrossReferenceTable")
 							return 0;
 						}
 					}
@@ -47,11 +47,11 @@ Meteor.methods({
 		});	
 		Meteor.call('sendCreatedEventEmail', eventToInsert.eventName, function(err, result){
 			if (err){
-				server_error_logger.log("Error within sendCreatedEventEmail: " + err)				
+				server_logger.error("Error within sendCreatedEventEmail: " + err)				
 				return -2
 			}
 			else{
-				server_info_logger.log("Sent created event email!")
+				server_logger.info("Sent created event email!")
 			}
 		});								
 		return 1;
@@ -61,7 +61,7 @@ Meteor.methods({
 		// User must not own event and must not already be registered
 		// Event must be able to accomodate another person attending.
 		// eg. (current_attending < max_attending)
-		server_info_logger.log("Registering " + Meteor.userId() + " for event: " + eventToUpdate._id)			
+		server_logger.info("Registering user: " + Meteor.userId() + " for event: " + eventToUpdate._id)			
 		event_dateTime = eventToUpdate.eventDateTime
 		var isOwner = UserEventsCrossReferenceCollection.findOne(
 			{
@@ -91,7 +91,7 @@ Meteor.methods({
 			eventCanBeRegisteredFor = false
 		}
 		if (!eventCanBeRegisteredFor){
-			server_error_logger.log("User is not eligble to register to event")
+			server_logger.info("User is not eligble to register to event")
 			return -1
 		}
 		if (!isOwner && !isRegistered && eventCanBeRegisteredFor){
@@ -103,7 +103,7 @@ Meteor.methods({
 				},
 				function(err, eventId){
 					if (err){
-						server_error_logger.log("Error registering within EventCollection.update: " + err)
+						server_logger.error("Error registering within EventCollection.update: " + err)
 						return 0;
 					}
 				}
@@ -120,7 +120,7 @@ Meteor.methods({
 				{upsert: true},
 				function(err, eventId){
 					if (err){
-						server_error_logger.log("Error registering within UserEventsCrossReferenceCollection.update: " + err)
+						server_logger.error("Error registering within UserEventsCrossReferenceCollection.update: " + err)
 						console.log(err)
 						return 0;
 					}
@@ -130,18 +130,18 @@ Meteor.methods({
 			// IMPORTANT: this causes unexpected notify behavior (Error: you are already registered) when emailing accounts which aren't sandbox verified.
 			Meteor.call('sendRegisteredForEventEmail', eventToUpdate, function(err, result){
 				if (err){
-					server_error_logger.log("Error within sendRegisteredForEventEmail: " + err)				
+					server_logger.error("Error within sendRegisteredForEventEmail: " + err)				
 					return -2
 				}
 				else{
-					server_info_logger.log("Sent event registered email!")					
+					server_logger.info("Sent event registered email!")					
 				}
 			});
 			return 1;
 		}
 
 		else{
-			server_error_logger.log("Registration error -- user or event does not meet registration critiera.")				
+			server_logger.error("Registration error -- user or event does not meet registration critiera.")				
 			return 0
 		}
 	},
@@ -149,7 +149,7 @@ Meteor.methods({
 	// decrease the number attending by 1 in the big Events table
 	// remove reference to event in user's crossReference table
 	unregisterEvent: function(eventId){
-		server_info_logger.log("Unregistering " + Meteor.userId() + " from event: " + eventId)			
+		server_logger.info("Unregistering user: " + Meteor.userId() + " from event: " + eventId)			
 		EventCollection.update(
 			{_id: eventId},
 			{
@@ -157,7 +157,7 @@ Meteor.methods({
 			},
 			function(err, eventId){
 				if (err){
-					server_error_logger.log("Unregister error within EventCollection: " + err)
+					server_logger.error("Unregister error within EventCollection: " + err)
 					return 0;
 				}
 			}
@@ -172,12 +172,12 @@ Meteor.methods({
 			}},
 			function(err, eventId){
 				if (err){
-					server_error_logger.log("Unregister error within CrossReferenceTable: " + err)
+					server_logger.error("Unregister error within CrossReferenceTable: " + err)
 					return 0;
 				}
 			}
 		)
-		server_info_logger.log("Unregistration success!")			
+		server_logger.info("Unregistration success!")			
 		return 1
 	},
 	// deleting an event
@@ -185,7 +185,7 @@ Meteor.methods({
 	// remove EVERY reference to event in every users collection
 	deleteEvent: function(eventId){
 		// Call method to tell all registered users the event has been deleted
-		server_info_logger.log("Deleting event: " + eventId)		
+		server_logger.info("Deleting event: " + eventId)		
 		var delEvent = EventCollection.findOne(
 			{
 			  _id: eventId
@@ -220,7 +220,7 @@ Meteor.methods({
 					}
 					Meteor.call('sendEventDeletedEmail', currEmail, emailData, function(err) {
 						if (err){
-							server_error_logger.log("Error within sendEventDeletedEmail: " + err)	
+							server_logger.error("Error within sendEventDeletedEmail: " + err)	
 						}
 					});
 				}
@@ -243,12 +243,12 @@ Meteor.methods({
 			{multi: true},
 			function(err, eventId){
 				if (err){
-					server_error_logger.log("Error deleting event: " + err)	
+					server_logger.error("Error deleting event: " + err)	
 					return 0;
 				}
 			}
 		)
-		server_info_logger.log("Delete event success!")					
+		server_logger.info("Delete event success!")					
 		return 1
 	}
 });
