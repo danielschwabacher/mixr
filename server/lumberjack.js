@@ -20,22 +20,22 @@ Lumberjack.prototype.info = function(log_data){
 }
 
 
-Lumberjack.prototype.warn = function(trace_data){
+Lumberjack.prototype.warn = function(warn_data){
     /*
         Used to display information about stack traces.
     */
     var time = this.get_timestamp()
-    console.warn(time + "- WARN " + log_data)
+    console.warn(time + "- WARN " + warn_data)
     this.messages_logged += 1
 
 }
 
-Lumberjack.prototype.error = function(trace_data){
+Lumberjack.prototype.error = function(err_data){
     /*
         Used to display information about stack traces.
     */
     var time = this.get_timestamp()
-    console.error(time + "- ERROR " + log_data)
+    console.error(time + "- ERROR " + err_data)
     this.messages_logged += 1
 }
 
