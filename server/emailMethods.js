@@ -55,7 +55,6 @@ Meteor.methods({
             subject: emailSubject,
             html: SSR.render('createEventEmail', emailData)
           });
-          server_logger.info("Sent createdEventEmail!");
         }
         catch(e) {
           server_logger.error("Error in sendCreatedEventEmail: " + e);          
@@ -97,8 +96,7 @@ Meteor.methods({
             from: "Mixr Dev Team <notifications@mixrbeta.com>",
             subject: emailSubject,
             html: SSR.render('registerForEvent', emailData)
-          });
-          server_logger.info("Sent registeredForEventEmail!");          
+          });      
         }
         catch(e) {
           server_logger.error("Error in sendRegisteredForEventEmail: " + e);          
@@ -122,8 +120,7 @@ Meteor.methods({
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: "An event you registered for has been removed!",
           html: SSR.render('eventDeletedEmail', emailData)
-        });
-        server_logger.info("Sent sendEventDeletedEmail!");                  
+        });            
       }
       catch(e) {
         server_logger.error("Error in sendEventDeletedEmail: " + e);          
@@ -149,8 +146,7 @@ Meteor.methods({
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: emailSubject,
           text: emailText
-        });
-        server_logger.info("Sent feedback to mixr devs!");                          
+        });                       
       }
       catch(e) {
         server_logger.error("Error in sendUserFeedback to mixr devs: " + e);          
@@ -162,8 +158,7 @@ Meteor.methods({
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: returnSubject,
           text: returnText
-        });
-        server_logger.info("Sent success email to user who sent feedback!");                                  
+        });                              
       }
       catch(e) {
         server_logger.error("Error in sendUserFeedback to user: " + e);          
