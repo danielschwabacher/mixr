@@ -1,29 +1,43 @@
 /*
-    Lumberjack is mixr's log abstraction system.  
-    Lumberjack support 3 log levels:
-    -- INFO: Misc info. 
-    -- WARN: Possible issues.
-    -- ERR: Functions failures.
+    Lumberjack is mixr's logging system.  
 */
-Lumberjack = function(level){
-    if (level === "WARN" || level === "INFO" || level === "ERR"){
-        this.level = level
-    }
-    else{
-        console.log("Invalid logger level")
-        return -1
-    }
+Lumberjack = function(){
+    this.messages_logged = 0
 }
 
-Lumberjack.prototype.log = function(log_data){
-    if (this.level == "INFO"){
-        console.log("---Log level: INFO---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "\n---END INFO LOG---")
-    }
-    if (this.level == "WARN"){
-        console.log("---Log level: WARN---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "\n---END WARNING LOG---")
-        
-    }
-    if (this.level == "ERR"){
-        console.error("---Log level: ERROR---\nLog Timestamp: " + moment().unix() + "\n" + log_data + "\n---END ERROR LOG---")       
-    }
+Lumberjack.prototype.get_timestamp = function(){
+    var timestamp = moment().format("MM-D-YYYY H:mm:ss");
+    return "[" + timestamp + "] "
 }
+
+Lumberjack.prototype.info = function(log_data){
+    /*
+        Used to display information about stack traces.
+    */
+    var time = this.get_timestamp()
+    console.log(time + "- INFO " + log_data)
+    this.messages_logged += 1
+}
+
+
+Lumberjack.prototype.warn = function(trace_data){
+    /*
+        Used to display information about stack traces.
+    */
+    var time = this.get_timestamp()
+    console.warn(time + "- WARN " + log_data)
+    this.messages_logged += 1
+
+}
+
+Lumberjack.prototype.error = function(trace_data){
+    /*
+        Used to display information about stack traces.
+    */
+    var time = this.get_timestamp()
+    console.error(time + "- ERROR " + log_data)
+    this.messages_logged += 1
+}
+
+// [05-20-2014 11:00:00.000] - INFO This is the first message
+

@@ -8,8 +8,10 @@ Meteor.methods({
     let userId = Meteor.userId();
     if (userId) {
         Accounts.sendVerificationEmail(userId);
+        server_logger.info("Verifcation email sent to user: " + userId);          
         return true
     }
+
     return false
   },
 
@@ -19,6 +21,7 @@ Meteor.methods({
     userId = Accounts.findUserByEmail(userEmail)
     if (userId) {
         Accounts.sendResetPasswordEmail(userId);
+        server_logger.info("Reset password email sent to user: " + userId); 
         return true
     }
     return false
@@ -28,11 +31,8 @@ Meteor.methods({
   sendCreatedEventEmail: function(eventTitle) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    // this.unblock();
-    server_info_logger.log("In sendCreatedEventEmail");
     var currentUser = Meteor.user();
     var emailPreference = currentUser.profile.custom_email_preferences.create_event
-
     if (emailPreference) {
       var userEmail = currentUser.emails[0].address;
       var emailText = "'" + eventTitle + "' is now live on mixr!"
@@ -48,21 +48,28 @@ Meteor.methods({
       SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
       this.unblock();
       if (currentUser && userEmail) {
-        Email.send({
-          to: userEmail,
-          from: "Mixr Dev Team <notifications@mixrbeta.com>",
-          subject: emailSubject,
-          html: SSR.render('createEventEmail', emailData)
-        });
+        try{
+          Email.send({
+            to: userEmail,
+            from: "Mixr Dev Team <notifications@mixrbeta.com>",
+            subject: emailSubject,
+            html: SSR.render('createEventEmail', emailData)
+          });
+          server_logger.info("Sent createdEventEmail!");
+        }
+        catch(e) {
+          server_logger.error("Error in sendCreatedEventEmail: " + e);          
+          return
       }
     }
-  },
+  }
+},
 
   // Sends the user an email when they register for an event with event details
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    server_info_logger.log("In sendRegisteredForEventEmail");
+    server_logger.info("In sendRegisteredForEventEmail");
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
     if (emailPreference) {
@@ -84,31 +91,45 @@ Meteor.methods({
       if (currentUser && userEmail){
         var startTime = new Date();
         this.unblock()
-        Email.send({
-          to: userEmail,
-          from: "Mixr Dev Team <notifications@mixrbeta.com>",
-          subject: emailSubject,
-          html: SSR.render('registerForEvent', emailData)
-        });
+        try{
+          Email.send({
+            to: userEmail,
+            from: "Mixr Dev Team <notifications@mixrbeta.com>",
+            subject: emailSubject,
+            html: SSR.render('registerForEvent', emailData)
+          });
+          server_logger.info("Sent registeredForEventEmail!");          
+        }
+        catch(e) {
+          server_logger.error("Error in sendRegisteredForEventEmail: " + e);          
+          return
+        }
       }
-    }
+  }
     return 1;
-  },
+},
 
   // Sends the user an email when an event they're registered for is deleted
   sendEventDeletedEmail: function(currEmail, emailData) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-      server_info_logger.log("In sendEventDeletedEmail");
+      server_logger.info("In sendEventDeletedEmail");
       SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
       this.unblock()
+      try{
         Email.send({
           to: currEmail,
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
           subject: "An event you registered for has been removed!",
           html: SSR.render('eventDeletedEmail', emailData)
         });
-  },
+        server_logger.info("Sent sendEventDeletedEmail!");                  
+      }
+      catch(e) {
+        server_logger.error("Error in sendEventDeletedEmail: " + e);          
+        return
+    }
+},
 
   sendUserFeedback: function(feedback) {
     var currUser = Meteor.user()
@@ -122,21 +143,35 @@ Meteor.methods({
 
     if (currUser && userEmail){
       this.unblock();
-      Email.send({
-        to: sendAddress,
-        from: "Mixr Dev Team <notifications@mixrbeta.com>",
-        subject: emailSubject,
-        text: emailText
-      });
-      Email.send({
-        to: userEmail,
-        from: "Mixr Dev Team <notifications@mixrbeta.com>",
-        subject: returnSubject,
-        text: returnText
-      });
+      try{
+        Email.send({
+          to: sendAddress,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: emailSubject,
+          text: emailText
+        });
+        server_logger.info("Sent feedback to mixr devs!");                          
+      }
+      catch(e) {
+        server_logger.error("Error in sendUserFeedback to mixr devs: " + e);          
+        return
+      }
+      try{
+        Email.send({
+          to: userEmail,
+          from: "Mixr Dev Team <notifications@mixrbeta.com>",
+          subject: returnSubject,
+          text: returnText
+        });
+        server_logger.info("Sent success email to user who sent feedback!");                                  
+      }
+      catch(e) {
+        server_logger.error("Error in sendUserFeedback to user: " + e);          
+        return
+      }
     }
     return
-  },
+},
 
   updateUserEmailPreferences: function(userPrefs) {
     // userPrefs has 3 boolean fields defined as
