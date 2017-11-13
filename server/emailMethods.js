@@ -1,6 +1,6 @@
 // This file contains the methods used with sending emails for things
 // such as email verification, resetting password, and whatever else may come along
-
+import "./loggers.js"
 Meteor.methods({
   // Sends the user an email verification link
   sendVerificationLink: function() {
@@ -29,8 +29,8 @@ Meteor.methods({
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     // this.unblock();
+    server_info_logger.log("In sendCreatedEventEmail");
     var currentUser = Meteor.user();
-    console.log("Called sendCreatedEventEmail");
     var emailPreference = currentUser.profile.custom_email_preferences.create_event
 
     if (emailPreference) {
@@ -48,7 +48,6 @@ Meteor.methods({
       SSR.compileTemplate('createEventEmail', Assets.getText('createEventEmail.html'));
       this.unblock();
       if (currentUser && userEmail) {
-        console.log("Calling send in sendCreatedEventEmail");
         Email.send({
           to: userEmail,
           from: "Mixr Dev Team <notifications@mixrbeta.com>",
@@ -57,17 +56,15 @@ Meteor.methods({
         });
       }
     }
-    console.log("Reached end of the function: sendCreatedEventEmail");
   },
 
   // Sends the user an email when they register for an event with event details
   sendRegisteredForEventEmail: function(currentEvent) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-    console.log("Called sendRegisteredForEventEmail"); 
+    server_info_logger.log("In sendRegisteredForEventEmail");
     var currentUser = Meteor.user()
     var emailPreference = currentUser.profile.custom_email_preferences.register_event
-
     if (emailPreference) {
       var userEmail = currentUser.emails[0].address
       var link = Meteor.absoluteUrl() + "account"
@@ -95,7 +92,6 @@ Meteor.methods({
         });
       }
     }
-    console.log("Reached end of the function: sendCreatedEventEmail");    
     return 1;
   },
 
@@ -103,7 +99,7 @@ Meteor.methods({
   sendEventDeletedEmail: function(currEmail, emailData) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
-      console.log("Sending deleted event email");
+      server_info_logger.log("In sendEventDeletedEmail");
       SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
       this.unblock()
         Email.send({
