@@ -34,7 +34,7 @@ validateName = function(eventName) {
   var re = /^['a-zA-Z0-9\s ]{1,45}$/
   var result = re.test(eventName)
   if (!result) {
-    console.log("Error: Restricted characters in event name")
+    server_logger.error("Error: Restricted characters in event name")
   }
   return result
 }
@@ -45,7 +45,7 @@ validateLocation = function(eventLocation) {
   var re = /^[-,'a-zA-Z0-9\t ]{1,64}$/
   var result = re.test(eventLocation)
   if (!result) {
-    console.log("Error: restricted characters in event location")
+    server_logger.error("Error: restricted characters in event location")
   }
   return result
 }
@@ -56,7 +56,7 @@ validateDescription = function(eventDescription) {
   var re = /[.* ]{0,200}$/
   var result = re.test(eventDescription)
   if (!result) {
-    console.log("Error: The event description can only be 200 characters")
+    server_logger.error("Error: The event description can only be 200 characters")
   }
   return result
 }
