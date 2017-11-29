@@ -215,7 +215,7 @@ Meteor.methods({
 			
 				if (emailPreference) {
 					var link = Meteor.absoluteUrl() + "account"					
-					var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted. At the time of deletion, there were " + numRegistered + " people who RSVPed.\n\n\nAt mixr, we are actively working on better ways to handle deleted events, for now, however, we apologize for any inconvenience this may cause."
+					var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted. At the time of deletion, there were " + numRegistered + " people who RSVPed."
 					var memoText = "The event owner gave the following reason for deleting this event:\n" + memo
 					var emailData = {
 						message: emailText,
