@@ -106,7 +106,7 @@ Template.dynamicModalRegistered.events({
 });
 
 Template.dynamicModalCreated.events({
-	'click .deleteEventCreatedModal'(event, template){
+	'click #deleteEventModalButton'(event, template){
 		var self = this
 		notify("Working...", "info", "right")
 		Meteor.call('deleteEvent', self._id, function(error, result) {
@@ -119,6 +119,10 @@ Template.dynamicModalCreated.events({
 				notify("Error: Could not delete event, please try again.", "danger", "center")
 			}
 		});
+	},
+	'click #unregisterEventCreatedButton'(event, template){
+		var self = this
+		notify("Will implement...", "info", "right")
 	}
 });
 

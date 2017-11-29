@@ -25,6 +25,13 @@ html,body{
 	border-color: #A4D4B4;
 	color: #000000;
 }
+
+.btn-info-secondary:hover{
+	background-color: #4D6555;
+	border-color: #080B09;
+	color: #ffffff;
+}
+
 .btn-danger:hover {
 	background-color: #9e1c26;
 	border-color: #9e1c26;
