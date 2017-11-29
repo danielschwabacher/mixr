@@ -104,15 +104,34 @@ Template.dynamicModalRegistered.events({
 		});
 	}
 });
-
+var context;
 Template.dynamicModalCreated.events({
 	'click #deleteEventModalButton'(event, template){
-		var self = this
+		context = this
 		Modal.show("deleteEventMemoModal")
 	},
 	'click #unregisterEventCreatedButton'(event, template){
 		var self = this
 	}
+});
+
+
+Template.deleteEventMemoModal.events({
+	'click #confirmDeleteEventModalButton'(event, template){
+		notify("Working...", "info", "right")
+		var memo = document.getElementById("deleteEventMemo").value 
+		Meteor.call('deleteEvent', context._id, memo, function(error, result) {
+			if (result){
+				$.notifyClose();
+				notify("Event deleted successfully!", "success", "right")
+			}
+			else{
+				$.notifyClose();				
+				notify("Error: Could not delete event, please try again.", "danger", "center")
+			}
+			context = null
+		});
+	},
 });
 
 /*
