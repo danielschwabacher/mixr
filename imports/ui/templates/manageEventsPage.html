@@ -80,3 +80,23 @@
 		</div>
 	</div>
 </template>
+
+<template name="deleteEventMemoModal">
+		<div class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Please tell everyone registered why you're deleting the event</h4>
+					</div>
+					<div class="modal-body">
+							<textarea class="accountSettingsPageFeedbackForm" value="" placeholder="This memo will be sent to everyone registered for your event. You can explain why you're removing this event and perhaps tell them to expect an alternative time. Those registered will appreciate it if you fill out this section!"
+							id="feedbackArea" autofocus required></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteEventModalButton">Confirm Deletion</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal">Nevermind</button>					
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>

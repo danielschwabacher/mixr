@@ -108,6 +108,16 @@ Template.dynamicModalRegistered.events({
 Template.dynamicModalCreated.events({
 	'click #deleteEventModalButton'(event, template){
 		var self = this
+		Modal.show("deleteEventMemoModal")
+	},
+	'click #unregisterEventCreatedButton'(event, template){
+		var self = this
+	}
+});
+
+/*
+	'click #deleteEventModalButton'(event, template){
+		var self = this
 		notify("Working...", "info", "right")
 		Meteor.call('deleteEvent', self._id, function(error, result) {
 			if (result){
@@ -120,12 +130,7 @@ Template.dynamicModalCreated.events({
 			}
 		});
 	},
-	'click #unregisterEventCreatedButton'(event, template){
-		var self = this
-		notify("Will implement...", "info", "right")
-	}
-});
-
+*/
 
 Template.dynamicModalRegistered.helpers({
 	returnContextualEventName: function(){
