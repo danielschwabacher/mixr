@@ -5,25 +5,28 @@ html,body{
 	background-color: #DB2B39;
 	border-color: #DB2B39;
 	color: white;
-	float: left;
+	float: right;
 }
 
 .btn-success{
 	background-color: #279AF1;
 	border-color: #279AF1;
 	color: #000000;
-	float: right;
+	float: left;
 }
 .btn-info{
 	background-color: #FFBA08;
 	border-color: #FFBA08;
 	color: #000000;
+	float: left;
 }
 
 .btn-info-secondary{
 	background-color: #A4D4B4;
 	border-color: #A4D4B4;
 	color: #000000;
+	margin-right: 5px;
+	float: right;
 }
 
 .btn-info-secondary:hover{
@@ -81,4 +84,10 @@ html,body{
 
 .spinner-container{
 	background-color: #A0F;
+}
+.btn-float-right{
+	float: right !important;
+}
+.btn-float-left{
+	float: left !important;
 }

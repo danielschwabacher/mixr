@@ -50,8 +50,12 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteEventModalButton">Delete Event</button>
-					<button type="button" class="btn btn-info-secondary" data-dismiss="modal" id="unregisterEventCreatedButton">Unregister</button>	
-					<button type="button" class="btn btn-info" data-dismiss="modal">Nevermind</button>					
+					<button type="button" class="btn btn-info" data-dismiss="modal">Nevermind</button>										
+					{{#if isRegistered}}
+						<button type="button" class="btn btn-info-secondary" data-dismiss="modal" id="unregisterEventCreatedButton">Unregister</button>
+					{{else}}
+						<button type="button" class="btn btn-info-secondary btn-float-right" data-dismiss="modal" id="reregisterEventCreatedButton">Reregister!</button>	
+					{{/if}}
 				</div>
 			</div>
 		</div>

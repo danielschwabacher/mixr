@@ -33,11 +33,21 @@ Template.manageEventsPanel.helpers({
 			}
     },
 	'getRegisteredEventIds': function(){
+			var userEventsOwned = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'owned_events.eventId': 1}})	
+			function isOwnedByUser(id){
+				for (i = 0; i < userEventsOwned['owned_events'].length; i++){
+					if (id === userEventsOwned['owned_events'][i].eventId){
+						return true
+					}
+				}
+			}
 			var usersEventsRegistered = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'registered_events.eventId': 1}})
 			if (usersEventsRegistered.registered_events){
 				registeredEventIds = []
 				for (i = 0; i < usersEventsRegistered['registered_events'].length; i++){
-					registeredEventIds.push({eventId: usersEventsRegistered['registered_events'][i].eventId})
+					if (!isOwnedByUser(usersEventsRegistered['registered_events'][i].eventId)){
+						registeredEventIds.push({eventId: usersEventsRegistered['registered_events'][i].eventId})						
+					}
 				}
 				return registeredEventIds
 			}
@@ -112,6 +122,31 @@ Template.dynamicModalCreated.events({
 	},
 	'click #unregisterEventCreatedButton'(event, template){
 		var self = this
+		notify("Working...", "info", "right")				
+		Meteor.call('unregisterEvent', self._id, function(error, result){
+			if (result){
+				$.notifyClose()
+				notify("Unregistered successfully!", "success", "right")
+			}
+			else{
+				$.notifyClose()
+				notify("Error: Could not unregister from event, please try again.", "danger", "center")
+			}			
+		});
+	},
+	'click #reregisterEventCreatedButton'(event, template){
+		var self = this
+		notify("Working...", "info", "right")		
+		Meteor.call('registerEvent', self, function(error, result){
+			if (result){
+				$.notifyClose()
+				notify("Registered successfully!", "success", "right")
+			}
+			else{
+				$.notifyClose()
+				notify("Error: Could not reregister you to the event. It may be full now.", "danger", "center")
+			}			
+		});
 	}
 });
 
@@ -133,23 +168,6 @@ Template.deleteEventMemoModal.events({
 		});
 	},
 });
-
-/*
-	'click #deleteEventModalButton'(event, template){
-		var self = this
-		notify("Working...", "info", "right")
-		Meteor.call('deleteEvent', self._id, function(error, result) {
-			if (result){
-				$.notifyClose();
-				notify("Event deleted successfully!", "success", "right")
-			}
-			else{
-				$.notifyClose();				
-				notify("Error: Could not delete event, please try again.", "danger", "center")
-			}
-		});
-	},
-*/
 
 Template.dynamicModalRegistered.helpers({
 	returnContextualEventName: function(){
@@ -177,7 +195,7 @@ Template.dynamicModalRegistered.helpers({
 
 Template.dynamicModalCreated.helpers({
 	returnContextualEventName: function(){
-			return this.event_name
+		return this.event_name
 	},
 	returnContextualEventLocation: function(){
 		return this.event_location
@@ -196,5 +214,15 @@ Template.dynamicModalCreated.helpers({
 	},
 	returnMaxNumberAttending: function(){
 		return this.event_max_number
+	},
+	isRegistered: function(){
+		usersRegistedEvents = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()}, {fields: {'registered_events.eventId': 1}})
+		for (var i = 0; i < usersRegistedEvents.registered_events.length; i++) {
+			curr_item = usersRegistedEvents.registered_events[i].eventId
+			if (curr_item === this._id){
+				return true
+			}
+		}
+		return false
 	}
-})
+});
