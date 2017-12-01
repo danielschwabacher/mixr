@@ -76,11 +76,12 @@ Meteor.methods({
       var link = Meteor.absoluteUrl() + "account"
       var emailSubject = "You've registered for '" + currentEvent.event_name + "' on mixr!"
       var eventDescription = currentEvent.event_description
-      var eventLocation = "Event Location: " + currentEvent.event_location
+      var eventLocation = currentEvent.event_location
       var eventDate = currentEvent.event_dateTime
       var emailText = "\n" + eventDescription + "\n" + eventLocation + "\n" + eventDate
       var emailData = {
         event_name: currentEvent.event_name,
+        event_location: eventLocation,
         event_date: eventDate,
         event_desc: eventDescription,
         unsubscribeLink: link
@@ -111,6 +112,7 @@ Meteor.methods({
   sendEventDeletedEmail: function(currEmail, emailData) {
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
+    
       server_logger.info("In sendEventDeletedEmail");
       SSR.compileTemplate('eventDeletedEmail', Assets.getText('eventDeletedEmail.html'))
       this.unblock()

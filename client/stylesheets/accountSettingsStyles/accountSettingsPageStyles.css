@@ -58,5 +58,6 @@
 
 .accountSettingsPageFeedbackForm::-webkit-input-placeholder { /* WebKit, Blink, Edge */
 	color: white;
+	opacity: .8;
 	font-size: 18px;
 }

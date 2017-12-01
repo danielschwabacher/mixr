@@ -33,6 +33,10 @@ Meteor.methods({
 						owned_events:
 						{
 							eventId: eventId,
+						},
+						registered_events:
+						{
+							eventId: eventId,
 						}
 					}},
 					{upsert: true},
@@ -58,17 +62,11 @@ Meteor.methods({
 	},
 	registerEvent: function(eventToUpdate){
 		// REGISTER CONDITIONS:
-		// User must not own event and must not already be registered
+		// User must not already be registered
 		// Event must be able to accomodate another person attending.
 		// eg. (current_attending < max_attending)
 		server_logger.info("Registering user: " + Meteor.userId() + " for event: " + eventToUpdate._id)			
 		event_dateTime = eventToUpdate.eventDateTime
-		var isOwner = UserEventsCrossReferenceCollection.findOne(
-			{
-				user: Meteor.userId(),
-				'owned_events.eventId': eventToUpdate._id
-			}
-		)
 		// is true if owner is already registered to event
 		var isRegistered = UserEventsCrossReferenceCollection.findOne(
 			{
@@ -94,7 +92,7 @@ Meteor.methods({
 			server_logger.info("User is not eligble to register to event")
 			return -1
 		}
-		if (!isOwner && !isRegistered && eventCanBeRegisteredFor){
+		if (!isRegistered && eventCanBeRegisteredFor){
 			// Increment the number of users attending the associative event
 			EventCollection.update(
 				{_id: eventToUpdate._id},
@@ -183,7 +181,7 @@ Meteor.methods({
 	// deleting an event
 	// remove event from big Events collection
 	// remove EVERY reference to event in every users collection
-	deleteEvent: function(eventId){
+	deleteEvent: function(eventId, memo){
 		// Call method to tell all registered users the event has been deleted
 		server_logger.info("Deleting event: " + eventId)		
 		var delEvent = EventCollection.findOne(
@@ -214,9 +212,13 @@ Meteor.methods({
 				var emailPreference = currUser.profile.custom_email_preferences.event_deleted
 			
 				if (emailPreference) {
-					var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted.\n\n\nAt the time of deletion, there were " + numRegistered + " people who RSVPed.\n\n\nAt mixr, we are actively working on better ways to handle deleted events, for now, however, we apologize for any inconvenience this may cause."
+					var link = Meteor.absoluteUrl() + "account"					
+					var emailText = "The event " + eName + " scheduled for " + eDate + " at " + eLocation + " has been deleted. At the time of deletion, there were " + numRegistered + " people who RSVPed."
+					var memoText = "The event owner gave the following reason for deleting this event:\n" + memo
 					var emailData = {
-						message: emailText
+						message: emailText,
+						memo: memoText,
+ 						unsubscribeLink: link
 					}
 					Meteor.call('sendEventDeletedEmail', currEmail, emailData, function(err) {
 						if (err){
