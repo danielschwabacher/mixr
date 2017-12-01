@@ -19,7 +19,7 @@ notify = function(msg, notificationType, alignment){
 		offset: 20,
 		spacing: 10,
 		z_index: 1031,
-		delay: 1800,
+		delay: 3800,
 		timer: 100,
 		url_target: '_blank',
 		mouse_over: null,
