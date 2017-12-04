@@ -12,7 +12,7 @@ if (Meteor.isClient) {
 	// key = Meteor.settings.public.google_key;
 	Meteor.startup(function() {
 		GoogleMaps.load({
-			key: "AIzaSyDkJC5ICmw03I4vDp_cS75bflwg91FBTc4"
+			key: "AIzaSyDo5FICKH4_eCZCYbcpaaGpaNsom7NaY-8"
 			
 		});
 		Session.set('hasCachedEvent', false)
