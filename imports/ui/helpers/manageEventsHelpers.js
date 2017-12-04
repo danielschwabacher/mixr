@@ -34,11 +34,9 @@ Template.manageEventsPanel.helpers({
     },
 	'getRegisteredEventIds': function(){
 			var userEventsOwned = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'owned_events.eventId': 1}})		
-			function isOwnedByUser(id){
-				console.log("isOwnedByUser, recived ID: " + id)					
+			function isOwnedByUser(id){				
 				if (userEventsOwned['owned_events']){
 					for (x = 0; x < userEventsOwned['owned_events'].length; x++){
-						console.log("Checking " + id + " against ownedEvent " + x + " with id " + userEventsOwned['owned_events'][x].eventId)
 						if (id == userEventsOwned['owned_events'][x].eventId){
 							return true
 						}
@@ -57,7 +55,6 @@ Template.manageEventsPanel.helpers({
 					if (!isOwnedByUser(usersEventsRegistered['registered_events'][i].eventId)){
 						registeredEventIds.push({eventId: usersEventsRegistered['registered_events'][i].eventId})						
 					}
-					console.log("done with loop iteration: " + i)
 				}
 				return registeredEventIds
 			}
