@@ -147,6 +147,6 @@ Template.eventSectionSample.events({
 		}
 	},
 	"mouseleave .event-section-clickable-area"(event,template){
-		showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
+		showAllSampleEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
 	},
 });
