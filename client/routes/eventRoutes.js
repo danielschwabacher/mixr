@@ -2,6 +2,8 @@ import '../../imports/ui/helpers/geolocationErrorHelpers.js';
 import '../../imports/ui/helpers/mixrPrimaryMapHelpers.js';
 import '../../imports/ui/helpers/createEventHelpers.js';
 import '../../imports/ui/helpers/pickLocationHelpers.js';
+import '../../imports/ui/helpers/mixrSampleMapHelpers.js';
+
 import '../../imports/ui/templates/createEvent.html';
 
 Router.route('/events', {
@@ -13,6 +15,20 @@ Router.route('/events', {
 		}
 		else{
 			this.render('mixrEventMap');
+		}
+	}
+});
+
+
+Router.route('/around', {
+	onBeforeAction: function () {
+		if (!Meteor.user()) {
+			if (!Meteor.loggingIn()){
+				this.render("mixrSampleMap")
+			}
+		}
+		else{
+			Router.go("events")
 		}
 	}
 });

@@ -1,0 +1,55 @@
+<template name="mixrSampleMap">
+	<div class="container-fluid event-container">
+		<div class="row content">
+			<div class="col-sm-3 event-display-column">
+				<h4>Events Around You (unregistered)</h4>
+				<hr class="map-hr">
+				{{> eventDisplaySample}}
+			</div>
+			<div class="col-sm-9 map-display-column">
+				{{> googleMap name="mixrMap" options=initSampleEventMapOptions}}
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="eventDisplaySample">
+	<div class="eventDisplay">
+		{{#each getEvents returnSessionTags returnSessionTimes}}
+			{{> eventSectionSample }}
+		{{/each}}
+	</div>
+</template>
+
+<template name="eventSectionSample">
+	<div class="event-section-clickable-area">
+		<div class="row">
+			<div class="col-sm-4 event-name-holder">{{ event_name }}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 event-description-holder">{{ event_description }}</div>
+		</div>
+		<button class="btn btn-success btn-float-right" id="eventSectionSampleRegister">Signup to Register for this Event!</button>
+	</div>
+	<hr class="map-hr">
+</template>
+
+
+<template name="sampleEventInfoModal">
+	<div class="modal fade">
+	    <div class="modal-dialog">
+			 <div class="modal-content">
+ 	            <div class="modal-header">
+ 	                <h4 class="modal-title">Please Register for an Account</h4>
+ 	            </div>
+				<div class="huge">
+					Signing up will allow you to view the rest of this event's information (like the date and time) as well as register for events across the website! You need an account to be able to manage your events.
+				</div>
+	        	<div class="modal-footer">
+	            	<button type="button" class="btn btn-success btn-float-right" data-dismiss="modal" id="signupButton">Signup!</button>
+	        	</div>
+			</div>
+	    </div>
+	</div>
+</template>

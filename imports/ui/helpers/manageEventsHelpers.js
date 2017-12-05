@@ -50,7 +50,6 @@ Template.manageEventsPanel.helpers({
 			var usersEventsRegistered = UserEventsCrossReferenceCollection.findOne({user: Meteor.userId()},{fields: {'registered_events.eventId': 1}})
 			if (usersEventsRegistered.registered_events){
 				registeredEventIds = []
-				console.log("len of reg events: " + usersEventsRegistered['registered_events'].length)
 				for (i = 0; i < usersEventsRegistered['registered_events'].length; i++){
 					if (!isOwnedByUser(usersEventsRegistered['registered_events'][i].eventId)){
 						registeredEventIds.push({eventId: usersEventsRegistered['registered_events'][i].eventId})						
