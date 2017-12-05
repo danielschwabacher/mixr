@@ -205,7 +205,7 @@ Template.eventSection.events({
 		);
 		if (MAP != 0){
 			singleMarker.forEach(function(currentEvent){
-				temp_marker = new Marker(MAP, currentEvent)
+				temp_marker = new Marker(MAP, currentEvent, false)
 				temp_marker.createObjectMarker()
 			});
 		}
