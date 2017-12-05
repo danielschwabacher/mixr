@@ -36,8 +36,11 @@ Template.mixrSampleMap.onRendered(function(){
 		if (!BOULDER_BOUNDS.contains(MAP.getCenter())){
 			Router.go("error")
 		}
-
-        ALL_SHOWN_EVENTS = EventCollection.find();
+		
+		currentUnixTimeRange = moment().unix() + 259200
+        ALL_SHOWN_EVENTS = EventCollection.find({
+			event_timestamp: {$lte: unixTimeRange}								
+		});
 
         ALL_SHOWN_EVENTS.forEach(
             function(doc) {
@@ -107,16 +110,21 @@ Template.eventDisplaySample.helpers({
 		var eventsArray = []
 		currentUnixTime = moment().unix()
 		additionalSeconds = hoursToSeconds(time)
-		unixTimeRange = currentUnixTime + additionalSeconds
+		unixTimeRange = currentUnixTime + 259200
 		if (sidebarId){
 			displayEvents = EventCollection.find(
 				{
 					_id: sidebarId,
+					event_timestamp: {$lte: unixTimeRange}					
 				}
 			);
 		}
 		else{
-			displayEvents = EventCollection.find();
+			displayEvents = EventCollection.find(
+				{
+					event_timestamp: {$lte: unixTimeRange}										
+				}
+			);
 		}
 		displayEvents.forEach(function(currentDoc){
 			if (currentDoc.number_of_users_attending < currentDoc.event_max_number){
