@@ -1,6 +1,6 @@
 /* General Email Formatting */
 Accounts.emailTemplates.siteName = "Mixr";
-Accounts.emailTemplates.from = "Mixr Dev Team <notifications@emails.mixrbeta.com>";
+Accounts.emailTemplates.from = "Mixr Dev Team <notifications@mixrbeta.com>";
 
 /* Forgot password formatting */
 SSR.compileTemplate('passwordReset', Assets.getText('forgotPasswordEmailTemplate.html'));
@@ -10,7 +10,7 @@ Accounts.emailTemplates.resetPassword.subject = function(user) {
 };
 
 Accounts.emailTemplates.resetPassword.from = function() {
-  return "Mixr Dev Team <notifications@emails.mixrbeta.com>"
+  return "Mixr Dev Team <notifications@mixrbeta.com>"
 };
 
 Accounts.emailTemplates.resetPassword.html = function(user, url) {
@@ -28,5 +28,5 @@ Accounts.emailTemplates.verifyEmail.text = function(user, url) {
 };
 
 Accounts.emailTemplates.verifyEmail.from = function() {
-  return "Mixr Dev Team <notifications@emails.mixrbeta.com>"
+  return "Mixr Dev Team <notifications@mixrbeta.com>"
 };

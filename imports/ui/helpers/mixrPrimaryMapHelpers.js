@@ -13,7 +13,7 @@ ALL_SHOWN_EVENTS_SCRAPED = []
 // helper function to display all events in ALL_SHOWN_EVENTS
 showAllEvents = function(event_list, map_instance){
 	event_list.forEach(function(currentEvent){
-		temp_marker = new Marker(map_instance, currentEvent)
+		temp_marker = new Marker(map_instance, currentEvent, false)
 		temp_marker.createObjectMarker()
 	});
 }
@@ -205,7 +205,7 @@ Template.eventSection.events({
 		);
 		if (MAP != 0){
 			singleMarker.forEach(function(currentEvent){
-				temp_marker = new Marker(MAP, currentEvent)
+				temp_marker = new Marker(MAP, currentEvent, false)
 				temp_marker.createObjectMarker()
 			});
 		}
