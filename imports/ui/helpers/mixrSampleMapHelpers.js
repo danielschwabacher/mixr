@@ -129,3 +129,24 @@ Template.eventDisplaySample.helpers({
 		return Session.get('sidebarIds')
 	}
 });
+
+
+Template.eventSectionSample.events({
+	"mouseenter .event-section-clickable-area"(event, template) {
+		removeMarkers()
+		singleMarker = EventCollection.find(
+			{
+				_id: this._id
+			}
+		);
+		if (MAP != 0){
+			singleMarker.forEach(function(currentEvent){
+				temp_marker = new Marker(MAP, currentEvent, true)
+				temp_marker.createObjectMarker()
+			});
+		}
+	},
+	"mouseleave .event-section-clickable-area"(event,template){
+		showAllEvents(ALL_SHOWN_EVENTS_SCRAPED, MAP)
+	},
+});
